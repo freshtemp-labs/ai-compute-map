@@ -136,6 +136,9 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
       exit={{ x: 420, opacity: 0 }}
       transition={{ duration: 0.4, ease: easeOutExpo }}
       className="absolute top-0 right-0 bottom-0 w-[400px] sm:w-[420px] bg-[#111118] border-l border-[#1E1E28] z-30 flex flex-col overflow-hidden"
+      role="dialog"
+      aria-label={`${pin.name} - ${t('map:detailPanel.title')}`}
+      aria-modal="false"
       style={{ boxShadow: '-8px 0 32px rgba(0,0,0,0.4)' }}
     >
       {/* Header */}

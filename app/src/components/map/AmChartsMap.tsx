@@ -452,7 +452,14 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
     updateData();
   }, [updateData]);
 
-  return <div id="map-container" style={{ width: '100%', height: '100%' }} />;
+  return (
+    <div
+      id="map-container"
+      style={{ width: '100%', height: '100%' }}
+      role="img"
+      aria-label={`Interactive world map with ${pins.length} AI compute facility markers. Use zoom controls and layer toggles to explore.`}
+    />
+  );
 }
 
 // ── Helpers ────────────────────────────────────────────────────────

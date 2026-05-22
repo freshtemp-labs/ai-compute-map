@@ -28,9 +28,14 @@ import SearchOverlay from '@/components/map/SearchOverlay';
 import Legend from '@/components/map/Legend';
 import KeyboardHelp from '@/components/map/KeyboardHelp';
 import AmChartsMap from '@/components/map/AmChartsMap';
+import HeatmapLayer from '@/components/map/HeatmapLayer';
+import ScreenReaderDataTable from '@/components/map/ScreenReaderDataTable';
+import ExportPngButton from '@/components/ExportPngButton';
 import { MapPageSkeleton } from '@/components/PageSkeleton';
 
 const GlobeView = lazy(() => import('@/components/map/GlobeView'));
+
+type ViewMode = 'markers' | 'heatmap';
 
 export default function MapPage() {
   const { t } = useTranslation('map');
@@ -46,6 +51,7 @@ export default function MapPage() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [keyboardHelpOpen, setKeyboardHelpOpen] = useState(false);
   const [is3DView, setIs3DView] = useState(false);
+  const [viewMode, setViewMode] = useState<ViewMode>('markers');
   const chartRef = useRef<unknown>(null);
 
   // Pin counts per layer
@@ -155,10 +161,15 @@ export default function MapPage() {
 
   return (
     <div className="relative w-full" style={{ height: 'calc(100dvh - 3.5rem)', minHeight: 'calc(100dvh - 3.5rem)' }}>
+      {/* Screen-reader-only data table */}
+      <ScreenReaderDataTable pins={pins} />
+
       {/* Map Canvas */}
       <div
         className="absolute inset-0 z-10"
         style={{ backgroundColor: '#0A0A0F' }}
+        role="application"
+        aria-label={t('map:a11y.mapRegion', 'Interactive world map showing AI compute infrastructure')}
       >
         {is3DView ? (
           <Suspense fallback={<MapPageSkeleton />}>
@@ -168,6 +179,11 @@ export default function MapPage() {
               onPinClick={handlePinClick}
             />
           </Suspense>
+        ) : viewMode === 'heatmap' ? (
+          <HeatmapLayer
+            pins={pins}
+            activeLayers={activeLayers}
+          />
         ) : (
           <AmChartsMap
             pins={pins}
@@ -209,13 +225,34 @@ export default function MapPage() {
       </div>
 
       {/* Zoom Controls - Bottom right */}
-      <div className="absolute bottom-6 right-6 z-20 flex flex-col gap-1">
+      <div className="absolute bottom-6 right-6 z-20 flex flex-col gap-1" role="toolbar" aria-label={t('map:a11y.mapControls', 'Map controls')}>
         {/* 3D View Toggle */}
         <ZoomButton
-          onClick={() => setIs3DView(!is3DView)}
-          title={is3DView ? '切换到2D地图' : '切换到3D地球'}
+          onClick={() => { setIs3DView(!is3DView); if (!is3DView) setViewMode('markers'); }}
+          title={is3DView ? t('map:a11y.switchTo2D', 'Switch to 2D map') : t('map:a11y.switchTo3D', 'Switch to 3D globe')}
+          aria-pressed={is3DView}
+          aria-label={is3DView ? t('map:a11y.switchTo2D', 'Switch to 2D map') : t('map:a11y.switchTo3D', 'Switch to 3D globe')}
         >
           {is3DView ? <Map size={16} /> : <Globe size={16} />}
+        </ZoomButton>
+        {/* Heatmap Toggle */}
+        <ZoomButton
+          onClick={() => { setViewMode(viewMode === 'heatmap' ? 'markers' : 'heatmap'); setIs3DView(false); }}
+          title={viewMode === 'heatmap' ? t('map:a11y.switchToMarkers', 'Switch to markers view') : t('map:a11y.switchToHeatmap', 'Switch to heatmap view')}
+          aria-pressed={viewMode === 'heatmap'}
+          aria-label={viewMode === 'heatmap' ? t('map:a11y.switchToMarkers', 'Switch to markers view') : t('map:a11y.switchToHeatmap', 'Switch to heatmap view')}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="2" y="2" width="6" height="6" rx="1" />
+            <rect x="9" y="2" width="6" height="6" rx="1" opacity="0.6" />
+            <rect x="16" y="2" width="6" height="6" rx="1" opacity="0.3" />
+            <rect x="2" y="9" width="6" height="6" rx="1" opacity="0.4" />
+            <rect x="9" y="9" width="6" height="6" rx="1" opacity="0.8" />
+            <rect x="16" y="9" width="6" height="6" rx="1" opacity="0.5" />
+            <rect x="2" y="16" width="6" height="6" rx="1" opacity="0.2" />
+            <rect x="9" y="16" width="6" height="6" rx="1" opacity="0.6" />
+            <rect x="16" y="16" width="6" height="6" rx="1" />
+          </svg>
         </ZoomButton>
         <div className="h-1" />
         <ZoomButton onClick={() => {
@@ -247,11 +284,13 @@ export default function MapPage() {
       </div>
 
       {/* Help Button - Top right */}
-      <div className="absolute top-4 right-6 z-20">
+      <div className="absolute top-4 right-6 z-20 flex items-center gap-1.5">
+        <ExportPngButton />
         <button
           onClick={() => setKeyboardHelpOpen(true)}
-          className="w-8 h-8 flex items-center justify-center bg-[#111118] border border-[#1E1E28] rounded-lg text-[#6B6B80] hover:text-[#E8E8EC] hover:border-[#2A2A3A] transition-all duration-200 shadow-lg cursor-pointer"
-          title="Keyboard shortcuts (?)">
+          className="w-9 h-9 flex items-center justify-center bg-[#111118] border border-[#1E1E28] rounded-lg text-[#6B6B80] hover:text-[#E8E8EC] hover:border-[#2A2A3A] transition-all duration-200 shadow-lg cursor-pointer"
+          title="Keyboard shortcuts (?)"
+          aria-label={t('map:a11y.keyboardHelp', 'Keyboard shortcuts')}>
           <HelpCircle size={15} />
         </button>
       </div>
@@ -302,12 +341,13 @@ export default function MapPage() {
   );
 }
 
-function ZoomButton({ children, onClick, title }: { children: React.ReactNode; onClick: () => void; title: string }) {
+function ZoomButton({ children, onClick, title, ...rest }: { children: React.ReactNode; onClick: () => void; title: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       onClick={onClick}
       className="w-9 h-9 flex items-center justify-center bg-[#111118] border border-[#1E1E28] rounded-lg text-[#9A9AAF] hover:text-[#E8E8EC] hover:bg-[#181820] hover:border-[#2A2A3A] transition-all duration-200 shadow-md cursor-pointer"
       title={title}
+      {...rest}
     >
       {children}
     </button>

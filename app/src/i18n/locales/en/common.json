@@ -78,5 +78,14 @@
   },
   "breadcrumb": {
     "home": "Home"
+  },
+  "export": {
+    "title": "Export as PNG",
+    "fullpage": "Full Page",
+    "mapOnly": "Map Only",
+    "chartsOnly": "Charts Only"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content"
   }
 }

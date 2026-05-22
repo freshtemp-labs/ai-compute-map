@@ -87,5 +87,14 @@
     "metric": "指標",
     "type": "タイプ",
     "location": "所在地"
+  },
+  "a11y": {
+    "mapRegion": "AIコンピューティングインフラストラクチャを表示するインタラクティブな世界地図",
+    "mapControls": "地図コントロール",
+    "switchTo2D": "2D地図に切り替え",
+    "switchTo3D": "3D地球に切り替え",
+    "switchToHeatmap": "ヒートマップ表示に切り替え",
+    "switchToMarkers": "マーカー表示に切り替え",
+    "keyboardHelp": "キーボードショートカット"
   }
 }

@@ -56,10 +56,12 @@ export default function Legend({ counts }: LegendProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="bg-[#111118] border border-[#1E1E28] rounded-lg overflow-hidden shadow-lg" style={{ minWidth: collapsed ? 120 : 240 }}>
+    <div className="bg-[#111118] border border-[#1E1E28] rounded-lg overflow-hidden shadow-lg" style={{ minWidth: collapsed ? 120 : 240 }} role="region" aria-label={t('map:legend.title')}>
       <button
         onClick={() => setCollapsed(!collapsed)}
         className="w-full flex items-center justify-between px-3 py-2 text-[11px] font-mono uppercase tracking-wider text-[#6B6B80] hover:text-[#E8E8EC] transition-colors cursor-pointer"
+        aria-expanded={!collapsed}
+        aria-controls="legend-content"
       >
         <span>{t('map:legend.title')}</span>
         {collapsed ? <ChevronUp size={12} /> : <ChevronDown size={12} />}

@@ -87,5 +87,14 @@
     "metric": "지표",
     "type": "유형",
     "location": "위치"
+  },
+  "a11y": {
+    "mapRegion": "AI 컴퓨팅 인프라를 보여주는 인터랙티브 세계 지도",
+    "mapControls": "지도 컨트롤",
+    "switchTo2D": "2D 지도로 전환",
+    "switchTo3D": "3D 지구본으로 전환",
+    "switchToHeatmap": "히트맵 보기로 전환",
+    "switchToMarkers": "마커 보기로 전환",
+    "keyboardHelp": "키보드 단축키"
   }
 }

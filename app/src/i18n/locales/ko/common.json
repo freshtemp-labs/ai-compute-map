@@ -78,5 +78,14 @@
   },
   "breadcrumb": {
     "home": "홈"
+  },
+  "export": {
+    "title": "PNG 내보내기",
+    "fullpage": "전체 페이지",
+    "mapOnly": "지도만",
+    "chartsOnly": "차트만"
+  },
+  "a11y": {
+    "skipToContent": "메인 콘텐츠로 건너뛰기"
   }
 }

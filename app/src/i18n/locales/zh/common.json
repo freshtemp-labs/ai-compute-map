@@ -78,5 +78,14 @@
   },
   "breadcrumb": {
     "home": "首页"
+  },
+  "export": {
+    "title": "导出为 PNG",
+    "fullpage": "整页",
+    "mapOnly": "仅地图",
+    "chartsOnly": "仅图表"
+  },
+  "a11y": {
+    "skipToContent": "跳转到主内容"
   }
 }

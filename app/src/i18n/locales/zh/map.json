@@ -87,5 +87,14 @@
     "metric": "指标",
     "type": "类型",
     "location": "位置"
+  },
+  "a11y": {
+    "mapRegion": "展示全球AI算力基础设施的交互式世界地图",
+    "mapControls": "地图控制",
+    "switchTo2D": "切换到二维地图",
+    "switchTo3D": "切换到三维地球",
+    "switchToHeatmap": "切换到热力图视图",
+    "switchToMarkers": "切换到标记视图",
+    "keyboardHelp": "键盘快捷键帮助"
   }
 }

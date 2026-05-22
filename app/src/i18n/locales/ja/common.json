@@ -78,5 +78,14 @@
   },
   "breadcrumb": {
     "home": "ホーム"
+  },
+  "export": {
+    "title": "PNGエクスポート",
+    "fullpage": "ページ全体",
+    "mapOnly": "地図のみ",
+    "chartsOnly": "チャートのみ"
+  },
+  "a11y": {
+    "skipToContent": "メインコンテンツへスキップ"
   }
 }

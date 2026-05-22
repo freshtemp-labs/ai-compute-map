@@ -11,6 +11,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import SkipToContent from './SkipToContent';
 
 const pageTransition = {
   initial: { opacity: 0, y: 12 },
@@ -28,8 +29,9 @@ export default function Layout() {
 
   return (
     <div className="min-h-[100dvh] flex flex-col bg-bg-base">
+      <SkipToContent />
       <Navbar />
-      <main className="flex-1 pt-14">
+      <main id="main-content" className="flex-1 pt-14" tabIndex={-1}>
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}

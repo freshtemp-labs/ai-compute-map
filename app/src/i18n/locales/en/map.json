@@ -87,5 +87,14 @@
     "metric": "Metric",
     "type": "Type",
     "location": "Location"
+  },
+  "a11y": {
+    "mapRegion": "Interactive world map showing AI compute infrastructure",
+    "mapControls": "Map controls",
+    "switchTo2D": "Switch to 2D map",
+    "switchTo3D": "Switch to 3D globe",
+    "switchToHeatmap": "Switch to heatmap view",
+    "switchToMarkers": "Switch to markers view",
+    "keyboardHelp": "Keyboard shortcuts"
   }
 }
