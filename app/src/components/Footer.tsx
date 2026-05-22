@@ -21,6 +21,7 @@ export default function Footer() {
   const dataSources = [
     { label: t('nav.sources'), path: '/sources' },
     { label: t('nav.history'), path: '/history' },
+    { label: '时事动态', path: '/news' },
     { label: t('actions.viewAll'), path: '/sources' },
   ];
 

@@ -17,6 +17,8 @@ const SourcesPage = lazy(() => import('./pages/SourcesPage'))
 const HistoryPage = lazy(() => import('./pages/HistoryPage'))
 const DevelopersPage = lazy(() => import('./pages/DevelopersPage'))
 const ComparePage = lazy(() => import('./pages/ComparePage'))
+const CountryDetailPage = lazy(() => import('./pages/CountryDetailPage'))
+const NewsPage = lazy(() => import('./pages/NewsPage'))
 
 function LazyPage({ children }: { children: React.ReactNode }) {
   return (
@@ -43,6 +45,8 @@ export default function App() {
             <Route path="/sources" element={<LazyPage><SourcesPage /></LazyPage>} />
             <Route path="/history" element={<LazyPage><HistoryPage /></LazyPage>} />
             <Route path="/developers" element={<LazyPage><DevelopersPage /></LazyPage>} />
+            <Route path="/country/:code" element={<LazyPage><CountryDetailPage /></LazyPage>} />
+            <Route path="/news" element={<LazyPage><NewsPage /></LazyPage>} />
           </Route>
         </Routes>
       </HashRouter>

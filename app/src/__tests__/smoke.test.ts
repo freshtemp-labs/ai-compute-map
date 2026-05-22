@@ -48,6 +48,18 @@ describe('Component smoke tests', () => {
     expect(mod.default).toBeDefined();
     expect(typeof mod.default).toBe('function');
   });
+
+  it('CountryDetailPage module exports a function component', async () => {
+    const mod = await import('@/pages/CountryDetailPage');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('NewsPage module exports a function component', async () => {
+    const mod = await import('@/pages/NewsPage');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
 });
 
 describe('Data module smoke tests', () => {
@@ -63,6 +75,15 @@ describe('Data module smoke tests', () => {
     expect(mod.layers).toBeDefined();
     expect(mod.kpis).toBeDefined();
     expect(mod.companies).toBeDefined();
+  });
+
+  it('newsData exports expected datasets', async () => {
+    const mod = await import('@/data/newsData');
+    expect(mod.newsData).toBeDefined();
+    expect(Array.isArray(mod.newsData)).toBe(true);
+    expect(mod.newsData.length).toBeGreaterThan(0);
+    expect(mod.NEWS_TAGS).toBeDefined();
+    expect(Array.isArray(mod.NEWS_TAGS)).toBe(true);
   });
 });
 

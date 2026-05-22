@@ -90,6 +90,7 @@ export default function Navbar() {
     { label: t('nav.compare'), path: '/compare' },
     { label: t('nav.sources'), path: '/sources' },
     { label: t('nav.history'), path: '/history' },
+    { label: '动态', path: '/news' },
   ];
 
   const handleLangChange = useCallback((code: string) => {
