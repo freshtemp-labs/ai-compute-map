@@ -20,13 +20,13 @@ const layerLabels: Record<LayerType, string> = {
 };
 
 export default function LayerToggle({ activeLayers, onToggle }: LayerToggleProps) {
+  const { t } = useTranslation('map');
   return (
     <div className="flex items-center gap-1 bg-[#111118] border border-[#1E1E28] rounded-full px-2 py-1.5 shadow-lg">
       <span className="text-[11px] text-[#6B6B80] font-medium tracking-wide px-2 hidden sm:inline font-mono uppercase">
         Layers
       </span>
       {layerConfig.map(({ key, color }) => {
-        const { t } = useTranslation('map');
         const label = t(layerLabels[key]);
         const isActive = activeLayers[key];
         return (

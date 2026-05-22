@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { LayerType } from '@/types';
+import { LAYER_COLORS } from '@/constants/layerColors';
 import { useMapData } from '@/components/map/useMapData';
 import type { MapPin } from '@/components/map/useMapData';
 import LayerToggle from '@/components/map/LayerToggle';
@@ -17,12 +18,6 @@ import SearchOverlay from '@/components/map/SearchOverlay';
 import Legend from '@/components/map/Legend';
 import KeyboardHelp from '@/components/map/KeyboardHelp';
 import AmChartsMap from '@/components/map/AmChartsMap';
-
-const LAYER_COLORS: Record<LayerType, string> = {
-  supply: '#FFB84D',
-  foundry: '#00D4FF',
-  datacenter: '#A855F7',
-};
 
 export default function MapPage() {
   const { t } = useTranslation('map');
@@ -35,7 +30,6 @@ export default function MapPage() {
   const [selectedPin, setSelectedPin] = useState<MapPin | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [keyboardHelpOpen, setKeyboardHelpOpen] = useState(false);
-  const [zoomLevel, setZoomLevel] = useState(1.1);
   const chartRef = useRef<unknown>(null);
 
   // Pin counts per layer
@@ -108,13 +102,16 @@ export default function MapPage() {
       }
 
       if (e.key === '+' || e.key === '=') {
-        setZoomLevel((z) => Math.min(z * 1.3, 20));
+        const chart = chartRef.current as Record<string, unknown> | null;
+        if (chart?.zoomIn) (chart.zoomIn as () => void)();
       }
       if (e.key === '-') {
-        setZoomLevel((z) => Math.max(z / 1.3, 1));
+        const chart = chartRef.current as Record<string, unknown> | null;
+        if (chart?.zoomOut) (chart.zoomOut as () => void)();
       }
       if (e.key === '0') {
-        setZoomLevel(1.1);
+        const chart = chartRef.current as Record<string, unknown> | null;
+        if (chart?.goHome) (chart.goHome as () => void)();
       }
 
       // Cmd+K or Ctrl+K for search
@@ -174,16 +171,22 @@ export default function MapPage() {
 
       {/* Zoom Controls - Bottom right */}
       <div className="absolute bottom-6 right-6 z-20 flex flex-col gap-1">
-        <ZoomButton onClick={() => setZoomLevel((z) => Math.min(z * 1.3, 20))} title="Zoom in">
+        <ZoomButton onClick={() => {
+          const chart = chartRef.current as Record<string, unknown> | null;
+          if (chart?.zoomIn) (chart.zoomIn as () => void)();
+        }} title="Zoom in">
           <Plus size={16} />
         </ZoomButton>
-        <ZoomButton onClick={() => setZoomLevel((z) => Math.max(z / 1.3, 1))} title="Zoom out">
+        <ZoomButton onClick={() => {
+          const chart = chartRef.current as Record<string, unknown> | null;
+          if (chart?.zoomOut) (chart.zoomOut as () => void)();
+        }} title="Zoom out">
           <Minus size={16} />
         </ZoomButton>
-        <div className="flex items-center justify-center py-1">
-          <span className="text-[11px] font-mono text-[#6B6B80]">{zoomLevel.toFixed(1)}x</span>
-        </div>
-        <ZoomButton onClick={() => setZoomLevel(1.1)} title="Reset view">
+        <ZoomButton onClick={() => {
+          const chart = chartRef.current as Record<string, unknown> | null;
+          if (chart?.goHome) (chart.goHome as () => void)();
+        }} title="Reset view">
           <Home size={14} />
         </ZoomButton>
         <div className="mt-2">

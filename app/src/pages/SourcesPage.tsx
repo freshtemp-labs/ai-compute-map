@@ -1,49 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-// ─── Types ─────────────────────────────────────────────────────
-
-interface SourceEntry {
-  id: number;
-  name: string;
-  category: string;
-  tier: 'tier1' | 'tier2' | 'tier3';
-  layer: string;
-  dataPoints: number;
-  lastUpdated: string;
-  status: 'active' | 'pending' | 'stale';
-  url?: string;
-  description?: string;
-}
+import { sourcesTableData } from '@/data/mockData';
+import type { SourceEntry } from '@/types';
 
 // ─── Constants ─────────────────────────────────────────────────
 
-const SOURCES_DATA: SourceEntry[] = [
-  // Tier 1
-  { id: 1, name: 'TSMC Annual Report 2024', category: 'Financial', tier: 'tier1', layer: 'Foundry', dataPoints: 120, lastUpdated: '2025-01-15', status: 'active', url: 'https://investor.tsmc.com', description: 'Official audited financial statements from TSMC' },
-  { id: 2, name: 'ASML Q4 2024 Earnings', category: 'Financial', tier: 'tier1', layer: 'Supply Chain', dataPoints: 85, lastUpdated: '2025-01-29', status: 'active', url: 'https://asml.com/investors', description: 'ASML quarterly earnings and unit shipments' },
-  { id: 3, name: 'NVIDIA 10-K Filing 2024', category: 'Financial', tier: 'tier1', layer: 'Supply Chain', dataPoints: 95, lastUpdated: '2025-02-01', status: 'active', url: 'https://investor.nvidia.com', description: 'Annual SEC filing with detailed revenue breakdown' },
-  { id: 4, name: 'China MIIT Rare Earth Quota', category: 'Government', tier: 'tier1', layer: 'Supply Chain', dataPoints: 45, lastUpdated: '2025-01-10', status: 'active', description: 'Official rare earth production quotas from Ministry of Industry' },
-  { id: 5, name: 'Equinix ESG Report 2024', category: 'ESG', tier: 'tier1', layer: 'Data Center', dataPoints: 60, lastUpdated: '2024-12-20', status: 'active', description: 'Equinix environmental and energy data' },
-  { id: 6, name: 'Samsung Electronics IR', category: 'Financial', tier: 'tier1', layer: 'Foundry', dataPoints: 75, lastUpdated: '2025-01-31', status: 'active', description: 'Samsung quarterly investor relations data' },
-  { id: 7, name: 'Intel Foundry Update 2024', category: 'Financial', tier: 'tier1', layer: 'Foundry', dataPoints: 55, lastUpdated: '2025-01-25', status: 'active', description: 'Intel Foundry Services business updates' },
-  { id: 8, name: 'SMIC Annual Report 2024', category: 'Financial', tier: 'tier1', layer: 'Foundry', dataPoints: 40, lastUpdated: '2025-01-20', status: 'active', description: 'SMIC audited annual financial report' },
-  // Tier 2
-  { id: 9, name: 'TrendForce Foundry Report', category: 'Industry Analysis', tier: 'tier2', layer: 'Foundry', dataPoints: 200, lastUpdated: '2025-01-28', status: 'active', url: 'https://trendforce.com', description: 'Monthly foundry revenue and capacity tracking' },
-  { id: 10, name: 'Gartner Semiconductor Forecast', category: 'Forecast', tier: 'tier2', layer: 'Foundry', dataPoints: 80, lastUpdated: '2025-01-15', status: 'active', description: 'Gartner semiconductor market forecasts' },
-  { id: 11, name: 'IEA Data Centre Energy 2024', category: 'Energy', tier: 'tier2', layer: 'Data Center', dataPoints: 150, lastUpdated: '2024-11-30', status: 'active', description: 'International Energy Agency data centre energy tracking' },
-  { id: 12, name: 'Synergy Research DC Capacity', category: 'Market Research', tier: 'tier2', layer: 'Data Center', dataPoints: 120, lastUpdated: '2025-01-05', status: 'active', description: 'Quarterly cloud and DC infrastructure tracking' },
-  { id: 13, name: 'McKinsey AI Infrastructure', category: 'Consulting', tier: 'tier2', layer: 'Data Center', dataPoints: 70, lastUpdated: '2024-12-15', status: 'pending', description: 'McKinsey analysis of AI infrastructure buildout' },
-  { id: 14, name: 'SEMI Equipment Tracker', category: 'Industry', tier: 'tier2', layer: 'Supply Chain', dataPoints: 90, lastUpdated: '2025-01-20', status: 'active', description: 'Semiconductor equipment market data from SEMI' },
-  { id: 15, name: 'Uptime Institute Survey', category: 'Survey', tier: 'tier2', layer: 'Data Center', dataPoints: 65, lastUpdated: '2024-12-01', status: 'stale', description: 'Annual data center industry survey' },
-  { id: 16, name: 'BCG Supply Chain Report', category: 'Consulting', tier: 'tier2', layer: 'Supply Chain', dataPoints: 50, lastUpdated: '2024-10-30', status: 'stale', description: 'Boston Consulting Group semiconductor supply chain analysis' },
-  // Tier 3
-  { id: 17, name: 'Modeled: DC Power 2030', category: 'Model', tier: 'tier3', layer: 'Data Center', dataPoints: 30, lastUpdated: '2025-01-01', status: 'active', description: 'Regression model based on hyperscaler capex and server power curves' },
-  { id: 18, name: 'Estimated: China Fab Capacity', category: 'Estimate', tier: 'tier3', layer: 'Foundry', dataPoints: 40, lastUpdated: '2024-12-20', status: 'pending', description: 'Capacity estimates derived from equipment import data and satellite imagery' },
-  { id: 19, name: 'Projected: EUV Unit Sales', category: 'Forecast', tier: 'tier3', layer: 'Supply Chain', dataPoints: 25, lastUpdated: '2025-01-10', status: 'active', description: 'Forward projection based on fab construction announcements' },
-  { id: 20, name: 'Inferred: SMIC 7nm Yield', category: 'Inferred', tier: 'tier3', layer: 'Foundry', dataPoints: 15, lastUpdated: '2024-11-15', status: 'stale', description: 'Yield estimates from die analysis and supply chain sources' },
-];
+const SOURCES_DATA = sourcesTableData;
 
 const VERIFICATION_LOG = [
   { id: 1, dataPoint: 'TSMC Q4 2024 Revenue', sources: ['TSMC IR', 'TrendForce'], result: 'Verified', time: '2 min ago' },

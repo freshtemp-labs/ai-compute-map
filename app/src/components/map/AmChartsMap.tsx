@@ -5,6 +5,7 @@ import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import type { MapPin } from './useMapData';
 import type { LayerType } from '@/types';
+import { LAYER_COLORS } from '@/constants/layerColors';
 
 interface AmChartsMapProps {
   pins: MapPin[];
@@ -13,12 +14,6 @@ interface AmChartsMapProps {
   selectedPin: MapPin | null;
   onMapReady?: (chart: am5map.MapChart) => void;
 }
-
-const LAYER_COLORS: Record<LayerType, string> = {
-  supply: '#FFB84D',
-  foundry: '#00D4FF',
-  datacenter: '#A855F7',
-};
 
 export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPin, onMapReady }: AmChartsMapProps) {
   const chartRef = useRef<am5map.MapChart | null>(null);

@@ -1,4 +1,4 @@
-import type { DataPoint, Facility, DataCenter, KPI, SourceReference, LayerInfo, Company } from '@/types';
+import type { DataPoint, Facility, DataCenter, KPI, SourceReference, LayerInfo, Company, DataCenterEntry, SupplyChainEntry, SourceEntry } from '@/types';
 import { useLiveData } from '../hooks/useLiveData';
 
 export { useLiveData };
@@ -294,6 +294,71 @@ export const sourceReferences: SourceReference[] = [
   { id: 'sr8', name: 'Gartner Semiconductor Forecast', tier: 2, type: 'Industry Report', url: 'https://www.gartner.com', lastUpdated: '2024-02-28', description: 'Gartner semiconductor industry forecast and analysis' },
   { id: 'sr9', name: 'SMIC Annual Report', tier: 1, type: 'Annual Report', url: 'https://www.smics.com', lastUpdated: '2024-03-08', description: 'SMIC annual report with capacity and utilization data' },
   { id: 'sr10', name: 'Data Center Knowledge', tier: 2, type: 'Industry Publication', url: 'https://www.datacenterknowledge.com', lastUpdated: '2024-03-18', description: 'Data center industry news and facility tracking' },
+];
+
+// ─── Page-specific datasets (single source of truth) ────────────
+
+export const facilitiesData: DataCenterEntry[] = [
+  { id: 1, name: 'AWS US-East-1', provider: 'Amazon (AWS)', country: 'USA', region: 'North America', powerMW: 180, pue: 1.12, year: 2006, status: 'Operational', energyMix: '50% renewable', layer: 'dataCenter' },
+  { id: 2, name: 'Microsoft Boydton', provider: 'Microsoft', country: 'USA', region: 'North America', powerMW: 150, pue: 1.15, year: 2010, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
+  { id: 3, name: 'Google The Dalles', provider: 'Google', country: 'USA', region: 'North America', powerMW: 90, pue: 1.10, year: 2006, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
+  { id: 4, name: 'Meta Prineville', provider: 'Meta', country: 'USA', region: 'North America', powerMW: 85, pue: 1.13, year: 2010, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
+  { id: 5, name: 'AWS EU-West-1', provider: 'Amazon (AWS)', country: 'Ireland', region: 'Europe', powerMW: 75, pue: 1.14, year: 2007, status: 'Operational', energyMix: '95% renewable', layer: 'dataCenter' },
+  { id: 6, name: 'Chindata Huailai', provider: 'Chindata', country: 'China', region: 'China', powerMW: 220, pue: 1.18, year: 2018, status: 'Operational', energyMix: '60% renewable', layer: 'dataCenter' },
+  { id: 7, name: 'Tencent Qingyuan', provider: 'Tencent', country: 'China', region: 'China', powerMW: 120, pue: 1.20, year: 2019, status: 'Operational', energyMix: '45% renewable', layer: 'dataCenter' },
+  { id: 8, name: 'Equinix FR5', provider: 'Equinix', country: 'Germany', region: 'Europe', powerMW: 18, pue: 1.25, year: 2015, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
+  { id: 9, name: 'AWS ap-southeast-1', provider: 'Amazon (AWS)', country: 'Singapore', region: 'Asia Pacific', powerMW: 55, pue: 1.22, year: 2010, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
+  { id: 10, name: 'Microsoft San Antonio', provider: 'Microsoft', country: 'USA', region: 'North America', powerMW: 70, pue: 1.16, year: 2014, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
+  { id: 11, name: 'Alibaba Zhangjiakou', provider: 'Alibaba Cloud', country: 'China', region: 'China', powerMW: 95, pue: 1.19, year: 2019, status: 'Operational', energyMix: '70% renewable', layer: 'dataCenter' },
+  { id: 12, name: 'Google Eemshaven', provider: 'Google', country: 'Netherlands', region: 'Europe', powerMW: 50, pue: 1.11, year: 2016, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
+  { id: 13, name: 'AWS us-west-2', provider: 'Amazon (AWS)', country: 'USA', region: 'North America', powerMW: 110, pue: 1.13, year: 2011, status: 'Operational', energyMix: '95% renewable', layer: 'dataCenter' },
+  { id: 14, name: 'Meta Clonee', provider: 'Meta', country: 'Ireland', region: 'Europe', powerMW: 65, pue: 1.15, year: 2017, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
+  { id: 15, name: 'Apple Reno', provider: 'Apple', country: 'USA', region: 'North America', powerMW: 40, pue: 1.14, year: 2012, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
+  { id: 16, name: 'GDS Shanghai 6', provider: 'GDS', country: 'China', region: 'China', powerMW: 80, pue: 1.21, year: 2020, status: 'Operational', energyMix: '35% renewable', layer: 'dataCenter' },
+  { id: 17, name: 'Digital Realty LHR', provider: 'Digital Realty', country: 'UK', region: 'Europe', powerMW: 25, pue: 1.28, year: 2014, status: 'Operational', energyMix: '80% renewable', layer: 'dataCenter' },
+  { id: 18, name: 'NTT Tokyo 5', provider: 'NTT', country: 'Japan', region: 'Asia Pacific', powerMW: 35, pue: 1.24, year: 2018, status: 'Operational', energyMix: '30% renewable', layer: 'dataCenter' },
+  { id: 19, name: 'CyrusOne Aurora', provider: 'CyrusOne', country: 'USA', region: 'North America', powerMW: 48, pue: 1.23, year: 2016, status: 'Operational', energyMix: '60% renewable', layer: 'dataCenter' },
+  { id: 20, name: 'Switch LAS VEGAS 10', provider: 'Switch', country: 'USA', region: 'North America', powerMW: 55, pue: 1.20, year: 2015, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
+];
+
+export const supplyChainTableData: SupplyChainEntry[] = [
+  { id: 1, name: 'Inner Mongolia Rare Earth', type: 'rare-earth', country: 'China', keyMetric: 'Annual Production', value: '140,000 t', source: 'Ministry of Industry 2025', tier: 'tier1', updated: '2025-01' },
+  { id: 2, name: 'Lynas Rare Earths', type: 'rare-earth', country: 'Australia', keyMetric: 'Capacity', value: '35,000 t/year', source: 'Annual Report 2024', tier: 'tier1', updated: '2024-12' },
+  { id: 3, name: 'ASML EUV Systems', type: 'lithography', country: 'Netherlands', keyMetric: 'Systems Shipped (2024)', value: '53 EUV units', source: 'ASML Q4 2024 Report', tier: 'tier1', updated: '2025-01' },
+  { id: 4, name: 'Mountain Pass Mine', type: 'rare-earth', country: 'USA', keyMetric: 'Production', value: '50,000 t/year', source: 'MP Materials Corp', tier: 'tier1', updated: '2024-11' },
+  { id: 5, name: 'Nikon Precision', type: 'lithography', country: 'Japan', keyMetric: 'Market Share', value: 'ArF niche', source: 'Company Filings', tier: 'tier2', updated: '2024-10' },
+  { id: 6, name: 'Huawei HiSilicon', type: 'design', country: 'China', keyMetric: 'Design Capacity', value: '5nm (SMIC fab)', source: 'Industry Analysis', tier: 'tier2', updated: '2024-12' },
+  { id: 7, name: 'NVIDIA GPU Design', type: 'design', country: 'USA', keyMetric: 'Revenue (2024)', value: '$60.9B', source: 'Annual Report', tier: 'tier1', updated: '2025-01' },
+  { id: 8, name: 'ARM Holdings', type: 'design', country: 'UK', keyMetric: 'Licenses', value: '250B+ chips', source: 'IPO Filing 2023', tier: 'tier1', updated: '2024-09' },
+  { id: 9, name: 'Synopsys EDA', type: 'design', country: 'USA', keyMetric: 'Revenue (2024)', value: '$6.1B', source: 'Q4 2024 Earnings', tier: 'tier1', updated: '2024-12' },
+  { id: 10, name: 'Cadence EDA', type: 'design', country: 'USA', keyMetric: 'Revenue (2024)', value: '$4.5B', source: 'Q4 2024 Earnings', tier: 'tier1', updated: '2024-12' },
+  { id: 11, name: 'Anhui Mining Group', type: 'rare-earth', country: 'China', keyMetric: 'Reserve', value: 'Grade 0.8% TREO', source: 'Government Gazette', tier: 'tier2', updated: '2024-08' },
+  { id: 12, name: 'Clean Energy Partnership', type: 'energy', country: 'Global', keyMetric: 'Renewable %', value: '42% of DC power', source: 'IEA Report 2024', tier: 'tier2', updated: '2024-11' },
+  { id: 13, name: 'Myanmar Rare Earth', type: 'rare-earth', country: 'Myanmar', keyMetric: 'Output', value: '38,000 t (est.)', source: 'Trade estimates', tier: 'tier3', updated: '2024-12' },
+  { id: 14, name: 'Shanghai Micro Electronics', type: 'lithography', country: 'China', keyMetric: 'Node Demo', value: '90nm achieved', source: 'Industry sources', tier: 'tier3', updated: '2024-06' },
+];
+
+export const sourcesTableData: SourceEntry[] = [
+  { id: 1, name: 'TSMC Annual Report 2024', category: 'Financial', tier: 'tier1', layer: 'Foundry', dataPoints: 120, lastUpdated: '2025-01-15', status: 'active', url: 'https://investor.tsmc.com', description: 'Official audited financial statements from TSMC' },
+  { id: 2, name: 'ASML Q4 2024 Earnings', category: 'Financial', tier: 'tier1', layer: 'Supply Chain', dataPoints: 85, lastUpdated: '2025-01-29', status: 'active', url: 'https://asml.com/investors', description: 'ASML quarterly earnings and unit shipments' },
+  { id: 3, name: 'NVIDIA 10-K Filing 2024', category: 'Financial', tier: 'tier1', layer: 'Supply Chain', dataPoints: 95, lastUpdated: '2025-02-01', status: 'active', url: 'https://investor.nvidia.com', description: 'Annual SEC filing with detailed revenue breakdown' },
+  { id: 4, name: 'China MIIT Rare Earth Quota', category: 'Government', tier: 'tier1', layer: 'Supply Chain', dataPoints: 45, lastUpdated: '2025-01-10', status: 'active', description: 'Official rare earth production quotas from Ministry of Industry' },
+  { id: 5, name: 'Equinix ESG Report 2024', category: 'ESG', tier: 'tier1', layer: 'Data Center', dataPoints: 60, lastUpdated: '2024-12-20', status: 'active', description: 'Equinix environmental and energy data' },
+  { id: 6, name: 'Samsung Electronics IR', category: 'Financial', tier: 'tier1', layer: 'Foundry', dataPoints: 75, lastUpdated: '2025-01-31', status: 'active', description: 'Samsung quarterly investor relations data' },
+  { id: 7, name: 'Intel Foundry Update 2024', category: 'Financial', tier: 'tier1', layer: 'Foundry', dataPoints: 55, lastUpdated: '2025-01-25', status: 'active', description: 'Intel Foundry Services business updates' },
+  { id: 8, name: 'SMIC Annual Report 2024', category: 'Financial', tier: 'tier1', layer: 'Foundry', dataPoints: 40, lastUpdated: '2025-01-20', status: 'active', description: 'SMIC audited annual financial report' },
+  { id: 9, name: 'TrendForce Foundry Report', category: 'Industry Analysis', tier: 'tier2', layer: 'Foundry', dataPoints: 200, lastUpdated: '2025-01-28', status: 'active', url: 'https://trendforce.com', description: 'Monthly foundry revenue and capacity tracking' },
+  { id: 10, name: 'Gartner Semiconductor Forecast', category: 'Forecast', tier: 'tier2', layer: 'Foundry', dataPoints: 80, lastUpdated: '2025-01-15', status: 'active', description: 'Gartner semiconductor market forecasts' },
+  { id: 11, name: 'IEA Data Centre Energy 2024', category: 'Energy', tier: 'tier2', layer: 'Data Center', dataPoints: 150, lastUpdated: '2024-11-30', status: 'active', description: 'International Energy Agency data centre energy tracking' },
+  { id: 12, name: 'Synergy Research DC Capacity', category: 'Market Research', tier: 'tier2', layer: 'Data Center', dataPoints: 120, lastUpdated: '2025-01-05', status: 'active', description: 'Quarterly cloud and DC infrastructure tracking' },
+  { id: 13, name: 'McKinsey AI Infrastructure', category: 'Consulting', tier: 'tier2', layer: 'Data Center', dataPoints: 70, lastUpdated: '2024-12-15', status: 'pending', description: 'McKinsey analysis of AI infrastructure buildout' },
+  { id: 14, name: 'SEMI Equipment Tracker', category: 'Industry', tier: 'tier2', layer: 'Supply Chain', dataPoints: 90, lastUpdated: '2025-01-20', status: 'active', description: 'Semiconductor equipment market data from SEMI' },
+  { id: 15, name: 'Uptime Institute Survey', category: 'Survey', tier: 'tier2', layer: 'Data Center', dataPoints: 65, lastUpdated: '2024-12-01', status: 'stale', description: 'Annual data center industry survey' },
+  { id: 16, name: 'BCG Supply Chain Report', category: 'Consulting', tier: 'tier2', layer: 'Supply Chain', dataPoints: 50, lastUpdated: '2024-10-30', status: 'stale', description: 'Boston Consulting Group semiconductor supply chain analysis' },
+  { id: 17, name: 'Modeled: DC Power 2030', category: 'Model', tier: 'tier3', layer: 'Data Center', dataPoints: 30, lastUpdated: '2025-01-01', status: 'active', description: 'Regression model based on hyperscaler capex and server power curves' },
+  { id: 18, name: 'Estimated: China Fab Capacity', category: 'Estimate', tier: 'tier3', layer: 'Foundry', dataPoints: 40, lastUpdated: '2024-12-20', status: 'pending', description: 'Capacity estimates derived from equipment import data and satellite imagery' },
+  { id: 19, name: 'Projected: EUV Unit Sales', category: 'Forecast', tier: 'tier3', layer: 'Supply Chain', dataPoints: 25, lastUpdated: '2025-01-10', status: 'active', description: 'Forward projection based on fab construction announcements' },
+  { id: 20, name: 'Inferred: SMIC 7nm Yield', category: 'Inferred', tier: 'tier3', layer: 'Foundry', dataPoints: 15, lastUpdated: '2024-11-15', status: 'stale', description: 'Yield estimates from die analysis and supply chain sources' },
 ];
 
 

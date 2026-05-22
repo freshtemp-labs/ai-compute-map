@@ -95,7 +95,7 @@ export function useLiveData<T>(
         const cached = localStorage.getItem(`cached_${dataPath}`);
         if (cached) {
           setData(JSON.parse(cached));
-          console.warn(`[useLiveData] Loaded cached data for ${dataPath} due to error: ${message}`);
+          // Loaded cached data due to fetch error
         }
       } catch {
         // No cache available
@@ -112,7 +112,6 @@ export function useLiveData<T>(
     fetchData(false); // Initial load
 
     timerRef.current = setInterval(() => {
-      console.log(`[useLiveData] Auto-refreshing ${dataPath}...`);
       fetchData(true); // Background refresh
     }, intervalMs);
 

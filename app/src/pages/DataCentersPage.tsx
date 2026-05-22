@@ -1,26 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { facilitiesData } from '@/data/mockData';
+import type { DataCenterEntry } from '@/types';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as ReTooltip, Legend as ReLegend,
   ResponsiveContainer, AreaChart, Area,
 } from 'recharts';
-
-// ─── Types ─────────────────────────────────────────────────────
-
-interface DataCenterEntry {
-  id: number;
-  name: string;
-  provider: string;
-  country: string;
-  region: string;
-  powerMW: number;
-  pue: number;
-  year: number;
-  status: 'Operational' | 'Under Construction' | 'Planned';
-  energyMix: string;
-  layer: 'dataCenter';
-}
 
 // ─── Constants ─────────────────────────────────────────────────
 
@@ -56,28 +42,7 @@ const PROVIDER_DATA = [
   { provider: 'Equinix', power: 8, facilities: 248, keyRegions: 'Global (colocation)' },
 ];
 
-const FACILITIES_DATA: DataCenterEntry[] = [
-  { id: 1, name: 'AWS US-East-1', provider: 'Amazon (AWS)', country: 'USA', region: 'North America', powerMW: 180, pue: 1.12, year: 2006, status: 'Operational', energyMix: '50% renewable', layer: 'dataCenter' },
-  { id: 2, name: 'Microsoft Boydton', provider: 'Microsoft', country: 'USA', region: 'North America', powerMW: 150, pue: 1.15, year: 2010, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
-  { id: 3, name: 'Google The Dalles', provider: 'Google', country: 'USA', region: 'North America', powerMW: 90, pue: 1.10, year: 2006, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
-  { id: 4, name: 'Meta Prineville', provider: 'Meta', country: 'USA', region: 'North America', powerMW: 85, pue: 1.13, year: 2010, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
-  { id: 5, name: 'AWS EU-West-1', provider: 'Amazon (AWS)', country: 'Ireland', region: 'Europe', powerMW: 75, pue: 1.14, year: 2007, status: 'Operational', energyMix: '95% renewable', layer: 'dataCenter' },
-  { id: 6, name: 'Chindata Huailai', provider: 'Chindata', country: 'China', region: 'China', powerMW: 220, pue: 1.18, year: 2018, status: 'Operational', energyMix: '60% renewable', layer: 'dataCenter' },
-  { id: 7, name: 'Tencent Qingyuan', provider: 'Tencent', country: 'China', region: 'China', powerMW: 120, pue: 1.20, year: 2019, status: 'Operational', energyMix: '45% renewable', layer: 'dataCenter' },
-  { id: 8, name: 'Equinix FR5', provider: 'Equinix', country: 'Germany', region: 'Europe', powerMW: 18, pue: 1.25, year: 2015, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
-  { id: 9, name: 'AWS ap-southeast-1', provider: 'Amazon (AWS)', country: 'Singapore', region: 'Asia Pacific', powerMW: 55, pue: 1.22, year: 2010, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
-  { id: 10, name: 'Microsoft San Antonio', provider: 'Microsoft', country: 'USA', region: 'North America', powerMW: 70, pue: 1.16, year: 2014, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
-  { id: 11, name: 'Alibaba Zhangjiakou', provider: 'Alibaba Cloud', country: 'China', region: 'China', powerMW: 95, pue: 1.19, year: 2019, status: 'Operational', energyMix: '70% renewable', layer: 'dataCenter' },
-  { id: 12, name: 'Google Eemshaven', provider: 'Google', country: 'Netherlands', region: 'Europe', powerMW: 50, pue: 1.11, year: 2016, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
-  { id: 13, name: 'AWS us-west-2', provider: 'Amazon (AWS)', country: 'USA', region: 'North America', powerMW: 110, pue: 1.13, year: 2011, status: 'Operational', energyMix: '95% renewable', layer: 'dataCenter' },
-  { id: 14, name: 'Meta Clonee', provider: 'Meta', country: 'Ireland', region: 'Europe', powerMW: 65, pue: 1.15, year: 2017, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
-  { id: 15, name: 'Apple Reno', provider: 'Apple', country: 'USA', region: 'North America', powerMW: 40, pue: 1.14, year: 2012, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
-  { id: 16, name: 'GDS Shanghai 6', provider: 'GDS', country: 'China', region: 'China', powerMW: 80, pue: 1.21, year: 2020, status: 'Operational', energyMix: '35% renewable', layer: 'dataCenter' },
-  { id: 17, name: 'Digital Realty LHR', provider: 'Digital Realty', country: 'UK', region: 'Europe', powerMW: 25, pue: 1.28, year: 2014, status: 'Operational', energyMix: '80% renewable', layer: 'dataCenter' },
-  { id: 18, name: 'NTT Tokyo 5', provider: 'NTT', country: 'Japan', region: 'Asia Pacific', powerMW: 35, pue: 1.24, year: 2018, status: 'Operational', energyMix: '30% renewable', layer: 'dataCenter' },
-  { id: 19, name: 'CyrusOne Aurora', provider: 'CyrusOne', country: 'USA', region: 'North America', powerMW: 48, pue: 1.23, year: 2016, status: 'Operational', energyMix: '60% renewable', layer: 'dataCenter' },
-  { id: 20, name: 'Switch LAS VEGAS 10', provider: 'Switch', country: 'USA', region: 'North America', powerMW: 55, pue: 1.20, year: 2015, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
-];
+const FACILITIES_DATA = facilitiesData;
 
 const STATUS_COLORS = {
   'Operational': '#00e5b0',
@@ -272,15 +237,25 @@ export default function DataCentersPage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-section text-text-primary">{t('datacenters:dataset.title')}</h2>
+              <h2 className="text-section text-text-primary">{t('datacenters:sections.dataset')}</h2>
               <p className="text-sm text-text-secondary mt-2">Search and filter the full dataset of global data center facilities</p>
             </div>
             <div className="flex gap-2">
-              <button className="px-3 py-1.5 text-mono-sm text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors">
-                {t('datacenters:exportCSV')}
+              <button onClick={() => {
+                const headers = ['id','name','provider','country','region','powerMW','pue','year','status','energyMix'];
+                const csv = [headers.join(','), ...filteredFacilities.map((f) =>
+                  [f.id, `"${f.name}"`, `"${f.provider}"`, f.country, f.region, f.powerMW, f.pue, f.year, f.status, `"${f.energyMix}"`].join(',')
+                )].join('\n');
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'datacenters.csv'; a.click();
+              }} className="px-3 py-1.5 text-mono-sm text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors cursor-pointer">
+                {t('datacenters:sections.exportCSV')}
               </button>
-              <button className="px-3 py-1.5 text-mono-sm text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors">
-                {t('datacenters:exportJSON')}
+              <button onClick={() => {
+                const blob = new Blob([JSON.stringify(filteredFacilities, null, 2)], { type: 'application/json' });
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'datacenters.json'; a.click();
+              }} className="px-3 py-1.5 text-mono-sm text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors cursor-pointer">
+                {t('datacenters:sections.exportJSON')}
               </button>
             </div>
           </div>
@@ -314,14 +289,14 @@ export default function DataCentersPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border-subtle">
-                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:dataset.facility')}</th>
-                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:dataset.provider')}</th>
-                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:dataset.country')}</th>
-                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:dataset.region')}</th>
-                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:dataset.powerMW')}</th>
-                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:dataset.pueLabel')}</th>
-                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:dataset.year')}</th>
-                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:dataset.status')}</th>
+                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.facility')}</th>
+                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.provider')}</th>
+                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.country')}</th>
+                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.region')}</th>
+                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.powerMW')}</th>
+                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.pueLabel')}</th>
+                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.year')}</th>
+                  <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.status')}</th>
                 </tr>
               </thead>
               <tbody>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { X, MapPin as MapPinIcon, ExternalLink, Crosshair, Database } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import type { MapPin } from './useMapData';
 
 interface DetailPanelProps {
@@ -13,6 +14,7 @@ const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
   const { t } = useTranslation('map');
+  const navigate = useNavigate();
   function getTierBadge(tier: number) {
     const colors: Record<number, string> = {
       1: '#22C55E',
@@ -146,6 +148,11 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
           <button
             className="flex items-center gap-1.5 mt-1 text-[12px] font-medium transition-colors duration-200 hover:opacity-80 cursor-pointer"
             style={{ color }}
+            onClick={() => {
+              if (pin.sourceName) {
+                window.open(`https://www.google.com/search?q=${encodeURIComponent(pin.sourceName)}`, '_blank');
+              }
+            }}
           >
             <Crosshair size={12} />
             Cross-verify sources
@@ -159,7 +166,13 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
           <span className="text-mono-sm text-[#6B6B80]">
             {pin.sourceTier ? `${pin.sourceTier} source${pin.sourceTier > 1 ? 's' : ''}` : 'Unknown sources'}
           </span>
-          <button className="flex items-center gap-1 text-[11px] font-mono text-[#9A9AAF] hover:text-[#00D4FF] transition-colors duration-200 cursor-pointer">
+          <button
+            onClick={() => {
+              const route = pin.layer === 'supply' ? '/supply-chain' : pin.layer === 'foundry' ? '/foundries' : '/datacenters';
+              navigate(route);
+            }}
+            className="flex items-center gap-1 text-[11px] font-mono text-[#9A9AAF] hover:text-[#00D4FF] transition-colors duration-200 cursor-pointer"
+          >
             View Full Page
             <ExternalLink size={11} />
           </button>

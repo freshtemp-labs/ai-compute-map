@@ -38,7 +38,8 @@
     "exportCSV": "CSVエクスポート",
     "exportJSON": "JSONエクスポート",
     "viewApiDocs": "APIドキュメント",
-    "copy": "コピー"
+    "copy": "コピー",
+    "status": "ステータス"
   },
   "statusLabels": {
     "operational": "稼働中",

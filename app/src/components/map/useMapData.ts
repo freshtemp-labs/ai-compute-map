@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { supplyChainData, fabricationFacilities, dataCenters } from '@/data/mockData';
 import type { DataPoint, Facility, DataCenter, LayerType, SourceTier } from '@/types';
+import { LAYER_COLORS } from '@/constants/layerColors';
 
 export interface MapPin {
   id: string;
@@ -28,12 +29,6 @@ export interface MapPin {
   yearEstablished?: number;
   employees?: number;
 }
-
-const LAYER_COLORS: Record<LayerType, string> = {
-  supply: '#FFB84D',
-  foundry: '#00D4FF',
-  datacenter: '#A855F7',
-};
 
 export function useMapData() {
   const pins = useMemo<MapPin[]>(() => {

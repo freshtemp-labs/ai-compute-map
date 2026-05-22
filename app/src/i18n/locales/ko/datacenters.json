@@ -38,7 +38,8 @@
     "exportCSV": "CSV 납품",
     "exportJSON": "JSON 납품",
     "viewApiDocs": "API 문서",
-    "copy": "복사"
+    "copy": "복사",
+    "status": "상태"
   },
   "statusLabels": {
     "operational": "운영 중",

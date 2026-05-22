@@ -38,7 +38,8 @@
     "exportCSV": "Export CSV",
     "exportJSON": "Export JSON",
     "viewApiDocs": "View API Docs",
-    "copy": "Copy"
+    "copy": "Copy",
+    "status": "Status"
   },
   "statusLabels": {
     "operational": "Operational",

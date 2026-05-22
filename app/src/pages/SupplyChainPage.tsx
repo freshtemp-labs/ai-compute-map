@@ -1,21 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { supplyChainTableData } from '@/data/mockData';
+import type { SupplyChainEntry } from '@/types';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
-
-// ─── Types ─────────────────────────────────────────────────────
-
-interface SupplyChainEntry {
-  id: number;
-  name: string;
-  type: 'rare-earth' | 'lithography' | 'design' | 'energy';
-  country: string;
-  keyMetric: string;
-  value: string;
-  source: string;
-  tier: 'tier1' | 'tier2' | 'tier3';
-  updated: string;
-}
 
 // ─── Data ──────────────────────────────────────────────────────
 
@@ -36,22 +24,7 @@ const LITHOGRAPHY_DATA = [
 
 const PIE_COLORS = ['#00e5b0', '#38bdf8', '#fbbf24', '#f87171', '#a78bfa', '#fb923c'];
 
-const SUPPLY_CHAIN_DATA: SupplyChainEntry[] = [
-  { id: 1, name: 'Inner Mongolia Rare Earth', type: 'rare-earth', country: 'China', keyMetric: 'Annual Production', value: '140,000 t', source: 'Ministry of Industry 2025', tier: 'tier1', updated: '2025-01' },
-  { id: 2, name: 'Lynas Rare Earths', type: 'rare-earth', country: 'Australia', keyMetric: 'Capacity', value: '35,000 t/year', source: 'Annual Report 2024', tier: 'tier1', updated: '2024-12' },
-  { id: 3, name: 'ASML EUV Systems', type: 'lithography', country: 'Netherlands', keyMetric: 'Systems Shipped (2024)', value: '53 EUV units', source: 'ASML Q4 2024 Report', tier: 'tier1', updated: '2025-01' },
-  { id: 4, name: 'Mountain Pass Mine', type: 'rare-earth', country: 'USA', keyMetric: 'Production', value: '50,000 t/year', source: 'MP Materials Corp', tier: 'tier1', updated: '2024-11' },
-  { id: 5, name: 'Nikon Precision', type: 'lithography', country: 'Japan', keyMetric: 'Market Share', value: 'ArF niche', source: 'Company Filings', tier: 'tier2', updated: '2024-10' },
-  { id: 6, name: 'Huawei HiSilicon', type: 'design', country: 'China', keyMetric: 'Design Capacity', value: '5nm (SMIC fab)', source: 'Industry Analysis', tier: 'tier2', updated: '2024-12' },
-  { id: 7, name: 'NVIDIA GPU Design', type: 'design', country: 'USA', keyMetric: 'Revenue (2024)', value: '$60.9B', source: 'Annual Report', tier: 'tier1', updated: '2025-01' },
-  { id: 8, name: 'ARM Holdings', type: 'design', country: 'UK', keyMetric: 'Licenses', value: '250B+ chips', source: 'IPO Filing 2023', tier: 'tier1', updated: '2024-09' },
-  { id: 9, name: 'Synopsys EDA', type: 'design', country: 'USA', keyMetric: 'Revenue (2024)', value: '$6.1B', source: 'Q4 2024 Earnings', tier: 'tier1', updated: '2024-12' },
-  { id: 10, name: 'Cadence EDA', type: 'design', country: 'USA', keyMetric: 'Revenue (2024)', value: '$4.5B', source: 'Q4 2024 Earnings', tier: 'tier1', updated: '2024-12' },
-  { id: 11, name: 'Anhui Mining Group', type: 'rare-earth', country: 'China', keyMetric: 'Reserve', value: 'Grade 0.8% TREO', source: 'Government Gazette', tier: 'tier2', updated: '2024-08' },
-  { id: 12, name: 'Clean Energy Partnership', type: 'energy', country: 'Global', keyMetric: 'Renewable %', value: '42% of DC power', source: 'IEA Report 2024', tier: 'tier2', updated: '2024-11' },
-  { id: 13, name: 'Myanmar Rare Earth', type: 'rare-earth', country: 'Myanmar', keyMetric: 'Output', value: '38,000 t (est.)', source: 'Trade estimates', tier: 'tier3', updated: '2024-12' },
-  { id: 14, name: 'Shanghai Micro Electronics', type: 'lithography', country: 'China', keyMetric: 'Node Demo', value: '90nm achieved', source: 'Industry sources', tier: 'tier3', updated: '2024-06' },
-];
+const SUPPLY_CHAIN_DATA = supplyChainTableData;
 
 // ─── Components ────────────────────────────────────────────────
 
@@ -247,10 +220,20 @@ export default function SupplyChainPage() {
               <p className="text-sm text-text-secondary mt-2">{t('supplyChain:dataset.subtitle')}</p>
             </div>
             <div className="flex gap-2">
-              <button className="px-3 py-1.5 text-mono-sm text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors">
+              <button onClick={() => {
+                const headers = ['id','name','type','country','keyMetric','value','source','tier','updated'];
+                const csv = [headers.join(','), ...filteredData.map((e) =>
+                  [e.id, `"${e.name}"`, e.type, e.country, `"${e.keyMetric}"`, `"${e.value}"`, `"${e.source}"`, e.tier, e.updated].join(',')
+                )].join('\n');
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'supply-chain.csv'; a.click();
+              }} className="px-3 py-1.5 text-mono-sm text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors cursor-pointer">
                 {t('supplyChain:dataset.exportCSV')}
               </button>
-              <button className="px-3 py-1.5 text-mono-sm text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors">
+              <button onClick={() => {
+                const blob = new Blob([JSON.stringify(filteredData, null, 2)], { type: 'application/json' });
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'supply-chain.json'; a.click();
+              }} className="px-3 py-1.5 text-mono-sm text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors cursor-pointer">
                 {t('supplyChain:dataset.exportJSON')}
               </button>
             </div>

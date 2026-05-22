@@ -90,6 +90,45 @@ export interface SourceReference {
   description?: string;
 }
 
+export interface DataCenterEntry {
+  id: number;
+  name: string;
+  provider: string;
+  country: string;
+  region: string;
+  powerMW: number;
+  pue: number;
+  year: number;
+  status: 'Operational' | 'Under Construction' | 'Planned';
+  energyMix: string;
+  layer: 'dataCenter';
+}
+
+export interface SupplyChainEntry {
+  id: number;
+  name: string;
+  type: 'rare-earth' | 'lithography' | 'design' | 'energy';
+  country: string;
+  keyMetric: string;
+  value: string;
+  source: string;
+  tier: 'tier1' | 'tier2' | 'tier3';
+  updated: string;
+}
+
+export interface SourceEntry {
+  id: number;
+  name: string;
+  category: string;
+  tier: 'tier1' | 'tier2' | 'tier3';
+  layer: string;
+  dataPoints: number;
+  lastUpdated: string;
+  status: 'active' | 'pending' | 'stale';
+  url?: string;
+  description?: string;
+}
+
 export interface LayerInfo {
   type: LayerType;
   title: string;

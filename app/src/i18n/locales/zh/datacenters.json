@@ -38,7 +38,8 @@
     "exportCSV": "导出CSV",
     "exportJSON": "导出JSON",
     "viewApiDocs": "查看API文档",
-    "copy": "复制"
+    "copy": "复制",
+    "status": "状态"
   },
   "statusLabels": {
     "operational": "运行中",
