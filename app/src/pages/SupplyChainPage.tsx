@@ -32,6 +32,7 @@ export default function SupplyChainPage() {
   const { t } = useTranslation(['supplyChain', 'common']);
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
+  const [selectedCountry, setSelectedCountry] = useState('all');
   const [filteredData, setFilteredData] = useState<SupplyChainEntry[]>(SUPPLY_CHAIN_DATA);
 
   useEffect(() => {
@@ -48,8 +49,11 @@ export default function SupplyChainPage() {
     if (typeFilter !== 'all') {
       data = data.filter((d) => d.type === typeFilter);
     }
+    if (selectedCountry !== 'all') {
+      data = data.filter((d) => d.country === selectedCountry);
+    }
     setFilteredData(data);
-  }, [searchQuery, typeFilter]);
+  }, [searchQuery, typeFilter, selectedCountry]);
 
   // Rare earth pie chart data
   const pieData = RARE_EARTH_DATA.map((c) => ({ name: c.name, value: c.percent }));
@@ -259,16 +263,21 @@ export default function SupplyChainPage() {
               <option value="design">{t('supplyChain:dataset.typeDesign')}</option>
               <option value="energy">{t('supplyChain:dataset.typeEnergy')}</option>
             </select>
-            <select className="px-3 py-2 bg-[rgba(255,255,255,0.03)] border border-border-subtle rounded text-sm text-text-primary">
+            <select
+              value={selectedCountry}
+              onChange={(e) => setSelectedCountry(e.target.value)}
+              className="px-3 py-2 bg-[rgba(255,255,255,0.03)] border border-border-subtle rounded text-sm text-text-primary"
+            >
               <option value="all">{t('supplyChain:dataset.countryAll')}</option>
-              <option>China</option>
-              <option>USA</option>
-              <option>Netherlands</option>
-              <option>Japan</option>
-              <option>Australia</option>
-              <option>Taiwan</option>
-              <option>UK</option>
-              <option>Myanmar</option>
+              <option value="China">China</option>
+              <option value="USA">USA</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="Japan">Japan</option>
+              <option value="Australia">Australia</option>
+              <option value="Taiwan">Taiwan</option>
+              <option value="UK">UK</option>
+              <option value="Myanmar">Myanmar</option>
+              <option value="Global">Global</option>
             </select>
           </div>
 

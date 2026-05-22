@@ -22,13 +22,6 @@ vi.mock('@amcharts/amcharts5', () => ({
 
 vi.mock('@amcharts/amcharts5-geodata', () => ({}));
 
-// Mock useLiveData hook to return stable data
-vi.mock('@/hooks/useLiveData', () => ({
-  useLiveData: vi.fn(() => ({ data: null, loading: false, error: null, lastUpdated: null })),
-  formatRelativeTime: vi.fn(() => '2 min ago'),
-  formatTimeUntil: vi.fn(() => '5 min'),
-}));
-
 // ── Smoke Tests ──────────────────────────────────────────────────
 
 describe('Component smoke tests', () => {

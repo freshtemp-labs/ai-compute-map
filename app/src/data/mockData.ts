@@ -1,24 +1,6 @@
 import type { DataPoint, Facility, DataCenter, KPI, SourceReference, LayerInfo, Company, DataCenterEntry, SupplyChainEntry, SourceEntry } from '@/types';
-import { useLiveData } from '../hooks/useLiveData';
 
-export { useLiveData };
-export { formatRelativeTime, formatTimeUntil } from '../hooks/useLiveData';
-
-export function useDataCentersLive() {
-  return useLiveData<any[]>('/data/datacenters.json');
-}
-export function useFoundriesLive() {
-  return useLiveData<any[]>('/data/foundries.json');
-}
-export function useLithographyLive() {
-  return useLiveData<any[]>('/data/lithography.json');
-}
-export function useRareEarthLive() {
-  return useLiveData<any[]>('/data/rare-earth.json');
-}
-export function useDataMeta() {
-  return useLiveData<Record<string, any>>('/data/metadata.json', { intervalMs: 60000 });
-}
+// ─── Page-specific datasets (single source of truth) ────────────
 
 export const layers: LayerInfo[] = [
   {
