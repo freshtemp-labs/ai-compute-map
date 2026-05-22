@@ -1,0 +1,16 @@
+{
+  "name": "AI算力布局地图",
+  "short_name": "AI算力地图",
+  "description": "全球半导体供应链、晶圆代工、数据中心算力的交互式可视化平台",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0A0A0F",
+  "theme_color": "#0A0A0F",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0A0F'/%3E%3Ccircle cx='32' cy='28' r='14' fill='none' stroke='%2300D4FF' stroke-width='3'/%3E%3Ccircle cx='32' cy='28' r='4' fill='%2300D4FF'/%3E%3Cline x1='18' y1='46' x2='46' y2='46' stroke='%2300D4FF' stroke-width='3' stroke-linecap='round'/%3E%3Ctext x='32' y='58' text-anchor='middle' fill='%2300D4FF' font-family='monospace' font-size='8' font-weight='bold'%3EAI%3C/text%3E%3C/svg%3E",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

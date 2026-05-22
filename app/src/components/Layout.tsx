@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import SkipToContent from './SkipToContent';
+import OfflineBanner from './OfflineBanner';
 
 const pageTransition = {
   initial: { opacity: 0, y: 12 },
@@ -29,6 +30,7 @@ export default function Layout() {
 
   return (
     <div className="min-h-[100dvh] flex flex-col bg-bg-base">
+      <OfflineBanner />
       <SkipToContent />
       <Navbar />
       <main id="main-content" className="flex-1 pt-14" tabIndex={-1}>
