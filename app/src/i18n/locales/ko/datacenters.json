@@ -1,0 +1,54 @@
+{
+  "breadcrumb": "데이터센터 계층",
+  "pageTitle": "글로벌 AI 컴퓨팅 인프라",
+  "pageSubtitle": "전 세계 200+ 데이터센터——전력 소비, 용량 예측, AI 혁명을 위한 에너지 인프라",
+  "stats": {
+    "facilities": "200+ 시설",
+    "power2025": "485.4 TWh (2025)",
+    "projected2030": "945 TWh (2030)",
+    "liveUpdates": "실시간 업데이트"
+  },
+  "sections": {
+    "powerConsumption": "전력 소비 예측",
+    "regionalCapacity": "지역 용량(GW)",
+    "metrics": "주요 지표",
+    "regionalDeepDive": "지역 심층 분석",
+    "northAmerica": "북미",
+    "china": "중국",
+    "europe": "유럽",
+    "asiaPacific": "아시아 태평양",
+    "powerSustainability": "전력 및 지속가능성",
+    "pue": "PUE 대 전력 용량",
+    "energyMix": "에너지 믹스 비교",
+    "providerBreakdown": "큐드 프로바이더 분석",
+    "providerCapacity": "프로바이더 용량(MW)",
+    "capacityForecast": "용량 예측 모델(2025-2030)",
+    "aiGrowthRate": "AI 성장률 조정",
+    "modelParameters": "모델 매개변수",
+    "dataset": "전체 데이터셋",
+    "facilitiesTable": "주요 시설",
+    "facility": "시설",
+    "provider": "프로바이더",
+    "country": "국가",
+    "region": "지역",
+    "powerMW": "전력(MW)",
+    "pueLabel": "PUE",
+    "year": "연도",
+    "apiPreview": "API 미리보기",
+    "exportCSV": "CSV 납품",
+    "exportJSON": "JSON 납품",
+    "viewApiDocs": "API 문서",
+    "copy": "복사"
+  },
+  "statusLabels": {
+    "operational": "운영 중",
+    "underConstruction": "건설 중",
+    "planned": "계획 중"
+  },
+  "regions": {
+    "na": "북미",
+    "china": "중국",
+    "europe": "유럽",
+    "apac": "아시아 태평양"
+  }
+}

@@ -1,0 +1,102 @@
+name: Daily Data Update
+
+on:
+  # Run every 6 hours (conservative for free tier)
+  schedule:
+    - cron: '0 */6 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+  # Run on push to main that changes data or scripts
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/**'
+      - 'public/data/**'
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    name: Fetch and Validate Data
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache Python packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('scripts/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          pip install -r scripts/requirements.txt
+
+      - name: Run data pipeline
+        id: pipeline
+        run: |
+          python scripts/update_all.py
+        continue-on-error: true
+
+      - name: Upload validation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-reports
+          path: logs/validation_*.json
+          retention-days: 30
+
+      - name: Check for data changes
+        id: check_changes
+        run: |
+          if git diff --quiet public/data/; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No data changes detected."
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Data changes detected!"
+          fi
+
+      - name: Commit and push data updates
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "Data Bot"
+          git config user.email "data-bot@aicomputemap.org"
+          git add public/data/
+          git add logs/
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
+          git commit -m "data: auto-update $TIMESTAMP [pipeline:${{ steps.pipeline.outcome }}]"
+          git push
+
+      - name: Trigger Pages rebuild
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          # For GitHub Pages, push to the source branch triggers rebuild
+          echo "Pages rebuild will be triggered automatically"
+
+      - name: Pipeline summary
+        if: always()
+        run: |
+          echo "## Pipeline Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Step | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Data Fetch | ${{ steps.pipeline.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Data Changed | ${{ steps.check_changes.outputs.changed }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f public/data/metadata.json ]; then
+            echo "### Metadata" >> $GITHUB_STEP_SUMMARY
+            echo '```json' >> $GITHUB_STEP_SUMMARY
+            cat public/data/metadata.json >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi

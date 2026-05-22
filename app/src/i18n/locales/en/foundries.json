@@ -1,0 +1,51 @@
+{
+  "breadcrumb": "Foundry Layer",
+  "pageTitle": "Semiconductor Foundry Landscape",
+  "pageSubtitle": "Global fabrication capacity, process node leadership, and expansion dynamics across the world's chip manufacturers.",
+  "stats": {
+    "fabsTracked": "Fabs Tracked",
+    "tsmcShare": "TSMC Share",
+    "marketSize": "Market Size",
+    "updated": "Updated"
+  },
+  "sections": {
+    "marketOverview": "Market Overview",
+    "marketShare": "2024 Foundry Market Share",
+    "revenueTrend": "Revenue Trend ($B)",
+    "tsmcRevenue": "TSMC Revenue",
+    "samsungFoundry": "Samsung Foundry",
+    "intelTarget": "Intel Foundry (Target)",
+    "smicRevenue": "SMIC Revenue",
+    "tsmcDeepDive": "TSMC · Taiwan Semiconductor",
+    "tsmcSubtitle": "World's largest dedicated independent foundry",
+    "fabLocations": "Fab Locations",
+    "processTimeline": "Process Node Timeline",
+    "capacityByNode": "Capacity by Node",
+    "globalExpansion": "Global Expansion Plan",
+    "samsung": "Samsung Electronics · Foundry",
+    "gaaComparison": "GAA vs FinFET Comparison",
+    "intel": "Intel Foundry",
+    "smic": "SMIC",
+    "matureNode": "Mature Node Specialists",
+    "comparisonMatrix": "Comparison Matrix",
+    "capacityProjection": "Capacity Projection (K Wafers/Month)"
+  },
+  "tableHeaders": {
+    "company": "Company",
+    "revenue": "Revenue",
+    "share": "Share",
+    "node": "Advanced Node",
+    "fabs": "Fabs",
+    "usaFabs": "USA Fabs",
+    "chinaFabs": "China Fabs",
+    "europeFabs": "Europe Fabs",
+    "capacity": "Capacity/mo",
+    "customers": "Key Customers"
+  },
+  "status": {
+    "active": "Active",
+    "new": "New",
+    "building": "Building",
+    "planned": "Planned"
+  }
+}

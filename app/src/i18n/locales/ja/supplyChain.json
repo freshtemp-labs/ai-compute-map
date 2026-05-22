@@ -1,0 +1,40 @@
+{
+  "breadcrumb": "サプライチェーン",
+  "pageTitle": "AIサプライチェーン基盤",
+  "pageSubtitle": "レアアース元素、露光装置、半導体設計——すべてのAIコンピューティングを支える上流インフラ",
+  "stats": {
+    "dataPoints": "データポイント",
+    "countries": "対象国",
+    "tier1Sources": "一次ソース比率",
+    "lastUpdated": "最終更新"
+  },
+  "sections": {
+    "rareEarth": "レアアースダッシュボード",
+    "lithography": "露光装置",
+    "designFirms": "設計会社",
+    "energyLabor": "エネルギーと労働力"
+  },
+  "dataset": {
+    "title": "サプライチェーン完全データセット",
+    "subtitle": "サプライチェーンデータを検索・絞り込み——レアアース鉱山、露光装置、設計会社、エネルギー源",
+    "searchPlaceholder": "エンティティを検索...",
+    "typeAll": "すべての種類",
+    "typeRareEarth": "レアアース",
+    "typeLithography": "露光",
+    "typeDesign": "設計",
+    "typeEnergy": "エネルギー",
+    "countryAll": "すべての国",
+    "exportCSV": "CSVエクスポート",
+    "exportJSON": "JSONエクスポート",
+    "tableHeaders": {
+      "entity": "エンティティ名",
+      "type": "種類",
+      "country": "国",
+      "keyMetric": "主要指標",
+      "value": "数値",
+      "source": "ソース",
+      "tier": "層",
+      "updated": "更新日"
+    }
+  }
+}

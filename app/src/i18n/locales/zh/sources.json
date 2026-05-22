@@ -1,0 +1,73 @@
+{
+  "breadcrumb": "数据来源",
+  "pageTitle": "透明设计",
+  "pageSubtitle": "每个数据点都追溯到其来源。我们的验证方法论对同行评审开放。",
+  "trustStats": {
+    "tier1": "一级来源",
+    "avgSources": "平均来源/点",
+    "timestamped": "100%时间戳"
+  },
+  "liveBadge": "所有指标实时更新",
+  "sections": {
+    "sourceCatalog": "来源目录",
+    "tier1Label": "一级",
+    "tier2Label": "二级",
+    "tier3Label": "三级",
+    "tier1Desc": "官方报告、政府数据、经审计的财务报告",
+    "tier2Desc": "行业分析、知名研究公司",
+    "tier3Desc": "模型估算、预测、推断数据",
+    "searchPlaceholder": "搜索来源...",
+    "allTiers": "全部层级",
+    "allStatus": "全部状态",
+    "active": "活跃",
+    "pending": "待处理",
+    "stale": "陈旧",
+    "tableHeaders": {
+      "name": "来源名称",
+      "category": "类别",
+      "tier": "层级",
+      "layer": "图层",
+      "dataPoints": "数据点",
+      "lastUpdated": "最后更新",
+      "status": "状态"
+    },
+    "crossVerification": "交叉验证引擎",
+    "steps": {
+      "ingestion": "数据获取",
+      "sourceMatching": "来源匹配",
+      "discrepancy": "差异检测",
+      "publication": "发布"
+    },
+    "verificationStats": {
+      "pointsVerified": "今日验证点数",
+      "pendingReview": "待审核",
+      "discrepancies": "发现差异",
+      "avgTime": "平均验证时间",
+      "tier1Sources": "一级来源",
+      "avgSourcesPerPoint": "平均来源/点",
+      "discrepancyRate": "差异率"
+    },
+    "recentVerifications": "最近验证",
+    "methodology": "方法论",
+    "sectionsM": {
+      "powerConsumption": "电力消耗方法论",
+      "marketShare": "市场份额计算",
+      "geolocation": "地理坐标验证",
+      "capacityUtilization": "产能利用率估算",
+      "currencyConversion": "货币与单位换算",
+      "confidenceScoring": "置信度评分系统"
+    },
+    "historicalData": "历史数据存档",
+    "archiveStats": {
+      "firstSnapshot": "首次快照",
+      "totalSnapshots": "总快照数",
+      "dataPointsTracked": "追踪数据点",
+      "storageSize": "存储大小"
+    },
+    "accessOptions": {
+      "timeMachine": "时间机器",
+      "comparePeriods": "对比时期",
+      "bulkExport": "批量导出"
+    }
+  }
+}

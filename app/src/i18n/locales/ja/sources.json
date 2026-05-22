@@ -1,0 +1,73 @@
+{
+  "breadcrumb": "データソース",
+  "pageTitle": "透明性による設計",
+  "pageSubtitle": "すべてのデータポイントはその起源に遡ります。検証方法論はピアレビューに公開されています。",
+  "trustStats": {
+    "tier1": "一次ソース",
+    "avgSources": "平均ソース数/ポイント",
+    "timestamped": "100%タイムスタンプ付き"
+  },
+  "liveBadge": "すべての指標がリアルタイムで更新",
+  "sections": {
+    "sourceCatalog": "ソースカタログ",
+    "tier1Label": "一次",
+    "tier2Label": "二次",
+    "tier3Label": "三次",
+    "tier1Desc": "公式報告書、政府データ、監査済み財務",
+    "tier2Desc": "業界分析、信頼できる研究会社",
+    "tier3Desc": "モデル推定、予測、推測データ",
+    "searchPlaceholder": "ソースを検索...",
+    "allTiers": "すべての層",
+    "allStatus": "すべての状態",
+    "active": "アクティブ",
+    "pending": "保留中",
+    "stale": "古い",
+    "tableHeaders": {
+      "name": "ソース名",
+      "category": "カテゴリ",
+      "tier": "層",
+      "layer": "レイヤー",
+      "dataPoints": "データポイント",
+      "lastUpdated": "最終更新",
+      "status": "状態"
+    },
+    "crossVerification": "交叉検証エンジン",
+    "steps": {
+      "ingestion": "データ取り込み",
+      "sourceMatching": "ソース照合",
+      "discrepancy": "相違検出",
+      "publication": "公開"
+    },
+    "verificationStats": {
+      "pointsVerified": "今日検証されたポイント",
+      "pendingReview": "レビュー待ち",
+      "discrepancies": "発見された相違",
+      "avgTime": "平均検証時間",
+      "tier1Sources": "一次ソース",
+      "avgSourcesPerPoint": "平均ソース/ポイント",
+      "discrepancyRate": "相違率"
+    },
+    "recentVerifications": "最近の検証",
+    "methodology": "方法論",
+    "sectionsM": {
+      "powerConsumption": "電力消費方法論",
+      "marketShare": "市場シェア計算",
+      "geolocation": "地理座標検証",
+      "capacityUtilization": "キャパシティ利用率推定",
+      "currencyConversion": "通貨と単位換算",
+      "confidenceScoring": "信頼度スコアリング"
+    },
+    "historicalData": "履歴データアーカイブ",
+    "archiveStats": {
+      "firstSnapshot": "最初のスナップショット",
+      "totalSnapshots": "総スナップショット数",
+      "dataPointsTracked": "追跡データポイント",
+      "storageSize": "ストレージ容量"
+    },
+    "accessOptions": {
+      "timeMachine": "タイムマシン",
+      "comparePeriods": "期間比較",
+      "bulkExport": "一括エクスポート"
+    }
+  }
+}

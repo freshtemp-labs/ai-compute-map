@@ -1,0 +1,60 @@
+{
+  "search": {
+    "placeholder": "搜索工厂、地点、企业..."
+  },
+  "detailPanel": {
+    "title": "设施详情",
+    "location": "位置",
+    "coordinates": "坐标",
+    "layer": "图层",
+    "metrics": "关键指标",
+    "source": "数据来源"
+  },
+  "layerToggle": {
+    "supplyChain": "基础层",
+    "foundry": "封装工厂",
+    "dataCenter": "算力中心"
+  },
+  "legend": {
+    "title": "图例",
+    "pinSize": "图钉大小 = 重要性"
+  },
+  "keyboard": {
+    "title": "键盘快捷键",
+    "layer1": "切换基础层",
+    "layer2": "切换封装工厂",
+    "layer3": "切换算力中心",
+    "zoomIn": "放大",
+    "zoomOut": "缩小",
+    "close": "关闭面板",
+    "search": "搜索",
+    "reset": "重置视图",
+    "showHelp": "显示/隐藏帮助"
+  },
+  "status": {
+    "operational": "运行中",
+    "construction": "建设中",
+    "planned": "规划中",
+    "expansion": "扩建中"
+  },
+  "facility": {
+    "powerCapacity": "电力容量",
+    "capacity": "容量",
+    "production": "产量",
+    "pue": "PUE",
+    "processNode": "制程节点",
+    "powerMW": "电力(MW)",
+    "yearEst": "成立年份",
+    "yearOper": "运营年份",
+    "employees": "员工数",
+    "confidence": "置信度",
+    "category": "类别",
+    "status": "状态",
+    "provider": "提供商",
+    "company": "公司",
+    "dataSource": "数据来源",
+    "crossVerify": "交叉验证来源",
+    "viewFullPage": "查看完整页面",
+    "tier": "来源层级"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "breadcrumb": "封装工厂层",
+  "pageTitle": "半导体封装格局",
+  "pageSubtitle": "全球制造产能、制程节点领导力和世界芯片制造商的扩张动态",
+  "stats": {
+    "fabsTracked": "追踪工厂数",
+    "tsmcShare": "台积电份额",
+    "marketSize": "市场规模",
+    "updated": "更新于"
+  },
+  "sections": {
+    "marketOverview": "市场概览",
+    "marketShare": "2024代工厂市场份额",
+    "revenueTrend": "收入趋势($B)",
+    "tsmcRevenue": "台积电营收",
+    "samsungFoundry": "三星代工",
+    "intelTarget": "英特尔代工(目标)",
+    "smicRevenue": "中芯营收",
+    "tsmcDeepDive": "台积电·台湾半导体",
+    "tsmcSubtitle": "全球最大独立代工厂",
+    "fabLocations": "工厂位置",
+    "processTimeline": "制程节点路线图",
+    "capacityByNode": "按节点划分的产能",
+    "globalExpansion": "全球扩张计划",
+    "samsung": "三星电子·代工",
+    "gaaComparison": "GAA vs FinFET对比",
+    "intel": "英特尔代工",
+    "smic": "中芯国际",
+    "matureNode": "成熟节点专家",
+    "comparisonMatrix": "比较矩阵",
+    "capacityProjection": "产能预测(K晶圆/月)"
+  },
+  "tableHeaders": {
+    "company": "公司",
+    "revenue": "营收",
+    "share": "份额",
+    "node": "先进节点",
+    "fabs": "工厂数",
+    "usaFabs": "美国工厂",
+    "chinaFabs": "中国工厂",
+    "europeFabs": "欧洲工厂",
+    "capacity": "月产能",
+    "customers": "主要客户"
+  },
+  "status": {
+    "active": "运行中",
+    "new": "新建",
+    "building": "建设中",
+    "planned": "规划中"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "breadcrumb": "基础层",
+  "pageTitle": "AI供应链基础",
+  "pageSubtitle": "稀土元素、光刻机、半导体设计——支撑所有AI算力的上游基础设施",
+  "stats": {
+    "dataPoints": "数据点",
+    "countries": "覆盖国家",
+    "tier1Sources": "一级来源占比",
+    "lastUpdated": "最后更新"
+  },
+  "sections": {
+    "rareEarth": "稀土元素面板",
+    "lithography": "光刻设备",
+    "designFirms": "设计公司",
+    "energyLabor": "能源与劳动力"
+  },
+  "dataset": {
+    "title": "完整供应链数据集",
+    "subtitle": "搜索和筛选完整的供应链数据——稀土矿山、光刻设备、设计公司和能源来源",
+    "searchPlaceholder": "搜索实体...",
+    "typeAll": "全部类型",
+    "typeRareEarth": "稀土",
+    "typeLithography": "光刻",
+    "typeDesign": "设计",
+    "typeEnergy": "能源",
+    "countryAll": "全部国家",
+    "exportCSV": "导出CSV",
+    "exportJSON": "导出JSON",
+    "tableHeaders": {
+      "entity": "实体名称",
+      "type": "类型",
+      "country": "国家",
+      "keyMetric": "关键指标",
+      "value": "数值",
+      "source": "来源",
+      "tier": "层级",
+      "updated": "更新时间"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "breadcrumb": "データセンター層",
+  "pageTitle": "グローバルAIコンピューティングインフラ",
+  "pageSubtitle": "世界200+データセンター——電力消費、容量予測、AI革命を支えるエネルギーインフラ",
+  "stats": {
+    "facilities": "200+施設",
+    "power2025": "485.4 TWh (2025)",
+    "projected2030": "945 TWh (2030)",
+    "liveUpdates": "ライブ更新"
+  },
+  "sections": {
+    "powerConsumption": "電力消費予測",
+    "regionalCapacity": "地域別容量(GW)",
+    "metrics": "主要指標",
+    "regionalDeepDive": "地域別詳細分析",
+    "northAmerica": "北米",
+    "china": "中国",
+    "europe": "欧州",
+    "asiaPacific": "アジア太平洋",
+    "powerSustainability": "電力と持続可能性",
+    "pue": "PUEと電力容量",
+    "energyMix": "エネルギーミックス比較",
+    "providerBreakdown": "クラウドプロバイダー分析",
+    "providerCapacity": "プロバイダー容量(MW)",
+    "capacityForecast": "容量予測モデル(2025-2030)",
+    "aiGrowthRate": "AI成長率を調整",
+    "modelParameters": "モデルパラメータ",
+    "dataset": "完全データセット",
+    "facilitiesTable": "主要施設",
+    "facility": "施設",
+    "provider": "プロバイダー",
+    "country": "国",
+    "region": "地域",
+    "powerMW": "電力(MW)",
+    "pueLabel": "PUE",
+    "year": "年",
+    "apiPreview": "APIプレビュー",
+    "exportCSV": "CSVエクスポート",
+    "exportJSON": "JSONエクスポート",
+    "viewApiDocs": "APIドキュメント",
+    "copy": "コピー"
+  },
+  "statusLabels": {
+    "operational": "稼働中",
+    "underConstruction": "建設中",
+    "planned": "計画中"
+  },
+  "regions": {
+    "na": "北米",
+    "china": "中国",
+    "europe": "欧州",
+    "apac": "アジア太平洋"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "version": "1.0.0",
+  "pipeline": "ai-compute-map",
+  "updatedAt": "2026-05-20T06:46:21Z",
+  "environment": {
+    "python": "3.12.12",
+    "platform": "linux"
+  },
+  "datasets": {
+    "datacenter": {
+      "label": "Data Centers",
+      "records": 80,
+      "outputFile": "public/data/datacenters.json",
+      "validation": {
+        "pass": true,
+        "errors": 0,
+        "warnings": 6,
+        "errorRate": 0.0
+      }
+    },
+    "foundry": {
+      "label": "Foundries",
+      "records": 18,
+      "outputFile": "public/data/foundries.json",
+      "validation": {
+        "pass": true,
+        "errors": 0,
+        "warnings": 1,
+        "errorRate": 0.0
+      }
+    },
+    "lithography": {
+      "label": "Lithography Equipment",
+      "records": 4,
+      "outputFile": "public/data/lithography.json",
+      "validation": {
+        "pass": true,
+        "errors": 0,
+        "warnings": 1,
+        "errorRate": 0.0
+      }
+    },
+    "rare_earth": {
+      "label": "Rare Earth",
+      "records": 5,
+      "outputFile": "public/data/rare-earth.json",
+      "validation": {
+        "pass": true,
+        "errors": 0,
+        "warnings": 0,
+        "errorRate": 0.0
+      }
+    }
+  },
+  "summary": {
+    "totalRecords": 107,
+    "totalErrors": 0,
+    "totalWarnings": 8,
+    "fetchersPassed": 4,
+    "fetchersFailed": 0
+  }
+}

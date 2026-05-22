@@ -1,0 +1,70 @@
+{
+  "brand": "AI COMPUTE MAP",
+  "nav": {
+    "map": "マップ",
+    "supplyChain": "サプライチェーン",
+    "foundries": "ファウンドリ",
+    "dataCenters": "データセンター",
+    "sources": "データソース",
+    "history": "履歴",
+    "developers": "API & ドキュメント"
+  },
+  "status": {
+    "live": "ライブ",
+    "online": "オンライン",
+    "offline": "オフライン",
+    "syncing": "同期中"
+  },
+  "actions": {
+    "explore": "マップを探索",
+    "viewDocs": "ドキュメントを見る",
+    "search": "検索",
+    "filter": "絞り込み",
+    "export": "エクスポート",
+    "copy": "コピー",
+    "close": "閉じる",
+    "learnMore": "詳細を見る",
+    "viewAll": "すべて表示",
+    "refresh": "更新",
+    "switchLanguage": "言語を切り替え"
+  },
+  "layers": {
+    "supplyChain": "サプライチェーン",
+    "supplyChainDesc": "レアアース、露光装置、設計会社",
+    "foundry": "ファウンドリ",
+    "foundryDesc": "TSMC、サムスン、インテル",
+    "dataCenter": "データセンター",
+    "dataCenterDesc": "グローバルDC、電力消費"
+  },
+  "data": {
+    "lastSynced": "最終同期",
+    "nextRefresh": "次回更新",
+    "dataPoints": "データポイント",
+    "sources": "ソース",
+    "verified": "検証済み",
+    "pending": "保留中"
+  },
+  "footer": {
+    "tagline": "AIインフラ全球リアルタイム可視化",
+    "quickLinks": "クイックリンク",
+    "dataSources": "データソース",
+    "community": "コミュニティ",
+    "license": "CC BY-SA 4.0 ライセンス",
+    "github": "GitHub",
+    "contributors": "貢献者"
+  },
+  "time": {
+    "minutesAgo": "{{count}}分前",
+    "hoursAgo": "{{count}}時間前",
+    "daysAgo": "{{count}}日前",
+    "justNow": "たった今"
+  },
+  "sourceTiers": {
+    "tier1": "一次ソース",
+    "tier1Desc": "公式報告書",
+    "tier2": "二次ソース",
+    "tier2Desc": "業界分析",
+    "tier3": "三次ソース",
+    "tier3Desc": "モデル推定値"
+  }
+}

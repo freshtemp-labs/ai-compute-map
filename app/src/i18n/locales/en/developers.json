@@ -1,0 +1,68 @@
+{
+  "breadcrumb": "Developers",
+  "pageTitle": "Build on the Compute Map",
+  "pageSubtitle": "RESTful API, typed schemas, open data. Free for research and non-commercial use.",
+  "badges": {
+    "openapi": "OpenAPI 3.0",
+    "typescript": "TypeScript Types",
+    "noKey": "No API Key Required",
+    "license": "CC BY-SA 4.0"
+  },
+  "gettingStarted": {
+    "apiKey": "API Key",
+    "free": "Free, no key",
+    "rateLimits": "Rate Limits",
+    "perHour": "1,000 / hour",
+    "baseUrl": "Base URL",
+    "auth": "Authentication",
+    "bearer": "Bearer token"
+  },
+  "apiReference": {
+    "title": "API Reference",
+    "baseUrl": "Base URL"
+  },
+  "queryParams": "Query Parameters",
+  "required": "Required",
+  "optional": "Optional",
+  "noParams": "No query parameters required.",
+  "response": "Response",
+  "codeExamples": "Code Examples",
+  "typescriptTypes": "TypeScript Types",
+  "showTypes": "Show All Types",
+  "hideTypes": "Hide Types",
+  "sdks": "SDKs & Tools",
+  "pythonSdk": "Python SDK",
+  "jsSdk": "JavaScript / TypeScript SDK",
+  "cliTool": "CLI Tool",
+  "install": "Install",
+  "features": "Features",
+  "viewOnGithub": "View on GitHub",
+  "contributing": {
+    "title": "Contributing",
+    "subtitle": "This project welcomes both human and AI developers.",
+    "prWorkflow": "Pull Request Workflow",
+    "waysToContribute": "Ways to Contribute",
+    "data": "Data",
+    "code": "Code",
+    "docs": "Docs",
+    "issues": "Issues",
+    "aiAssisted": "AI-Assisted Contributions",
+    "setup": "Setup"
+  },
+  "systemArchitecture": "System Architecture",
+  "architectureDesc": "Data flows from raw sources through validation, storage, caching, and finally to the API and frontend layers.",
+  "components": {
+    "dataSources": "Data Sources",
+    "ingestion": "Ingestion Pipeline",
+    "verification": "Verification Engine",
+    "database": "PostgreSQL + TimescaleDB",
+    "cache": "Redis Cache",
+    "apiLayer": "API Layer",
+    "frontend": "Frontend (React)",
+    "mapEngine": "Map Engine",
+    "charts": "Charts (ECharts)",
+    "export": "Export Service"
+  },
+  "techStack": "Tech Stack",
+  "dataRefresh": "Data refresh cycle"
+}

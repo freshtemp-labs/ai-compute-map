@@ -1,0 +1,40 @@
+{
+  "breadcrumb": "공급망",
+  "pageTitle": "AI 공급망 기반",
+  "pageSubtitle": "희토류 원소, 노광장비, 반도체 설계——모든 AI 컴퓨팅을 가능하게 하는 상류 인프라",
+  "stats": {
+    "dataPoints": "데이터 포인트",
+    "countries": "대상 국가",
+    "tier1Sources": "1차 출처 비율",
+    "lastUpdated": "마지막 업데이트"
+  },
+  "sections": {
+    "rareEarth": "희토류 대시보드",
+    "lithography": "노광 장비",
+    "designFirms": "설계 회사",
+    "energyLabor": "에너지와 노동력"
+  },
+  "dataset": {
+    "title": "완전한 공급망 데이터셋",
+    "subtitle": "공급망 데이터를 검색하고 필터링——희토류 광산, 노광 장비, 설계 회사, 에너지 출처",
+    "searchPlaceholder": "엔티티 검색...",
+    "typeAll": "모든 유형",
+    "typeRareEarth": "희토류",
+    "typeLithography": "노광",
+    "typeDesign": "설계",
+    "typeEnergy": "에너지",
+    "countryAll": "모든 국가",
+    "exportCSV": "CSV 납품",
+    "exportJSON": "JSON 납품",
+    "tableHeaders": {
+      "entity": "엔티티명",
+      "type": "유형",
+      "country": "국가",
+      "keyMetric": "주요 지표",
+      "value": "수치",
+      "source": "출처",
+      "tier": "계층",
+      "updated": "업데이트"
+    }
+  }
+}

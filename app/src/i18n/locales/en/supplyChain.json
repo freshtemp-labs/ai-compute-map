@@ -1,0 +1,40 @@
+{
+  "breadcrumb": "Supply Chain",
+  "pageTitle": "AI Supply Chain Foundation",
+  "pageSubtitle": "Rare earth elements, lithography systems, and semiconductor design — the upstream infrastructure that enables all AI compute.",
+  "stats": {
+    "dataPoints": "Data Points",
+    "countries": "Countries",
+    "tier1Sources": "Tier 1 Sources",
+    "lastUpdated": "Last Updated"
+  },
+  "sections": {
+    "rareEarth": "Rare Earth Dashboard",
+    "lithography": "Lithography Equipment",
+    "designFirms": "Design Firms",
+    "energyLabor": "Energy & Labor"
+  },
+  "dataset": {
+    "title": "Complete Supply Chain Dataset",
+    "subtitle": "Search and filter the full dataset of supply chain data points — rare earth mines, lithography equipment, design firms, and energy sources.",
+    "searchPlaceholder": "Search entities...",
+    "typeAll": "All Types",
+    "typeRareEarth": "Rare Earth",
+    "typeLithography": "Lithography",
+    "typeDesign": "Design",
+    "typeEnergy": "Energy",
+    "countryAll": "All Countries",
+    "exportCSV": "Export CSV",
+    "exportJSON": "Export JSON",
+    "tableHeaders": {
+      "entity": "Entity Name",
+      "type": "Type",
+      "country": "Country",
+      "keyMetric": "Key Metric",
+      "value": "Value",
+      "source": "Source",
+      "tier": "Tier",
+      "updated": "Updated"
+    }
+  }
+}

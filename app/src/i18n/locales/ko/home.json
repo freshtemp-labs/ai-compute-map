@@ -1,0 +1,41 @@
+{
+  "hero": {
+    "title": "GLOBAL AI COMPUTE MAP",
+    "subtitle": "AI 공급망 인프라 실시간 인텔리전스",
+    "betaBadge": "v1.0 OPEN BETA"
+  },
+  "kpi": {
+    "globalDcPower": "글로벌 DC 전력",
+    "euvUnits": "EUV 노광장비 출하량",
+    "chinaReQuota": "중국 희토류 할당량",
+    "tsmcRevenue": "TSMC 매출",
+    "projected2030": "2030년 예측 DC 전력"
+  },
+  "layers": {
+    "title": "AI 인프라 3계층 아키텍처",
+    "subtitle": "원자재에서 세계 AI를 구동하는 칩까지",
+    "layer1Title": "공급망 계층",
+    "layer1Desc": "희토류, 노광장비, 칩 설계",
+    "layer2Title": "파운드리 계층",
+    "layer2Desc": "TSMC, 삼성, 인텔 파운드리",
+    "layer3Title": "데이터센터 계층",
+    "layer3Desc": "글로벌 DC, 전력 소비"
+  },
+  "livePreview": {
+    "title": "실시간 글로벌 커버리지",
+    "subtitle": "50개국 이상, 1,200개 시설 이상 추적",
+    "badge": "실시간 데이터"
+  },
+  "verification": {
+    "title": "검증됨. 상호 참조. 투명성.",
+    "subtitle": "모든 데이터 포인트는 원본 소스로 추적됩니다",
+    "point1": "1차 출처 검증",
+    "point2": "상호 참조 엔진",
+    "point3": "전체 소스 투명성"
+  },
+  "openSource": {
+    "title": "개발자가 개발자를 위해 구축",
+    "subtitle": "오픈 API, 오픈 소스 데이터, 연구원과 개발자를 위해",
+    "cta": "API 문서 보기"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "hero": {
+    "title": "GLOBAL AI COMPUTE MAP",
+    "subtitle": "AIサプライチェーンのリアルタイムインフラ情報",
+    "betaBadge": "v1.0 OPEN BETA"
+  },
+  "kpi": {
+    "globalDcPower": "グローバルDC電力",
+    "euvUnits": "EUV露光装置出荷台数",
+    "chinaReQuota": "中国レアアース配額",
+    "tsmcRevenue": "TSMC売上",
+    "projected2030": "2030年予測DC電力"
+  },
+  "layers": {
+    "title": "AIインフラの3層構造",
+    "subtitle": "原材料から世界のAIを動かすチップへ",
+    "layer1Title": "サプライチェーン層",
+    "layer1Desc": "レアアース、露光装置、チップ設計",
+    "layer2Title": "ファウンドリ層",
+    "layer2Desc": "TSMC、サムスン、インテル",
+    "layer3Title": "データセンター層",
+    "layer3Desc": "世界のDC、電力消費"
+  },
+  "livePreview": {
+    "title": "リアルタイムグローバルカバレッジ",
+    "subtitle": "50カ国以上、1,200施設以上を追跡",
+    "badge": "ライブデータ"
+  },
+  "verification": {
+    "title": "検証済み。相互参照。透明性。",
+    "subtitle": "すべてのデータポイントは元のソースに遡ります",
+    "point1": "一次ソース検証",
+    "point2": "相互参照エンジン",
+    "point3": "完全なソース透明性"
+  },
+  "openSource": {
+    "title": "開発者のために開発者が作る",
+    "subtitle": "オープンAPI、オープンデータ、研究者と開発者のために",
+    "cta": "APIドキュメントを見る"
+  }
+}

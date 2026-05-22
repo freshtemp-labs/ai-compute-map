@@ -1,0 +1,68 @@
+{
+  "breadcrumb": "개발자",
+  "pageTitle": "컴퓨트 맵 위에 구축",
+  "pageSubtitle": "RESTful API, 타입화된 스키마, 오픈 데이터. 연구 및 비상업적 사용은 물론 묵료입니다.",
+  "badges": {
+    "openapi": "OpenAPI 3.0",
+    "typescript": "TypeScript 타입",
+    "noKey": "API 키 불필요",
+    "license": "CC BY-SA 4.0"
+  },
+  "gettingStarted": {
+    "apiKey": "API 키",
+    "free": "묵료, 키 불필요",
+    "rateLimits": "속도 제한",
+    "perHour": "1,000 / 시간",
+    "baseUrl": "기본 URL",
+    "auth": "인증",
+    "bearer": "Bearer 토큰"
+  },
+  "apiReference": {
+    "title": "API 레퍼런스",
+    "baseUrl": "기본 URL"
+  },
+  "queryParams": "쿼리 매개변수",
+  "required": "필수",
+  "optional": "선택",
+  "noParams": "쿼리 매개변수가 필요하지 않습니다.",
+  "response": "응답",
+  "codeExamples": "코드 예시",
+  "typescriptTypes": "TypeScript 타입",
+  "showTypes": "모든 타입 표시",
+  "hideTypes": "타입 숨기기",
+  "sdks": "SDK 및 도구",
+  "pythonSdk": "Python SDK",
+  "jsSdk": "JavaScript / TypeScript SDK",
+  "cliTool": "CLI 도구",
+  "install": "설치",
+  "features": "기능",
+  "viewOnGithub": "GitHub에서 보기",
+  "contributing": {
+    "title": "기여",
+    "subtitle": "이 프로젝트는 인간 및 AI 개발자 모두를 환영합니다.",
+    "prWorkflow": "Pull Request 워크플로",
+    "waysToContribute": "기여 방법",
+    "data": "데이터",
+    "code": "코드",
+    "docs": "문서",
+    "issues": "이슈",
+    "aiAssisted": "AI 지원 기여",
+    "setup": "설정"
+  },
+  "systemArchitecture": "시스템 아키텍처",
+  "architectureDesc": "데이터는 원시 출처에서 검증, 스토리지, 캐싱을 거쳐 최종적으로 API 및 프론트엔드 레이어로 흐릅니다.",
+  "components": {
+    "dataSources": "데이터 출처",
+    "ingestion": "수집 파이프라인",
+    "verification": "검증 엔진",
+    "database": "PostgreSQL + TimescaleDB",
+    "cache": "Redis 캐시",
+    "apiLayer": "API 레이어",
+    "frontend": "프론트엔드 (React)",
+    "mapEngine": "맵 엔진",
+    "charts": "차트 (ECharts)",
+    "export": "납품 서비스"
+  },
+  "techStack": "기술 스택",
+  "dataRefresh": "데이터 갱신 주기"
+}

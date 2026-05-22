@@ -1,0 +1,68 @@
+{
+  "breadcrumb": "開発者",
+  "pageTitle": "コンピュートマップ上に構築",
+  "pageSubtitle": "RESTful API、型付きスキーマ、オープンデータ。研究および非商用利用は無料です。",
+  "badges": {
+    "openapi": "OpenAPI 3.0",
+    "typescript": "TypeScript型",
+    "noKey": "APIキー不要",
+    "license": "CC BY-SA 4.0"
+  },
+  "gettingStarted": {
+    "apiKey": "APIキー",
+    "free": "無料、キー不要",
+    "rateLimits": "レート制限",
+    "perHour": "1,000 / 時",
+    "baseUrl": "ベースURL",
+    "auth": "認証",
+    "bearer": "Bearerトークン"
+  },
+  "apiReference": {
+    "title": "APIリファレンス",
+    "baseUrl": "ベースURL"
+  },
+  "queryParams": "クエリパラメータ",
+  "required": "必須",
+  "optional": "オプション",
+  "noParams": "クエリパラメータは不要です。",
+  "response": "レスポンス",
+  "codeExamples": "コード例",
+  "typescriptTypes": "TypeScript型",
+  "showTypes": "すべての型を表示",
+  "hideTypes": "型を非表示",
+  "sdks": "SDKとツール",
+  "pythonSdk": "Python SDK",
+  "jsSdk": "JavaScript / TypeScript SDK",
+  "cliTool": "CLIツール",
+  "install": "インストール",
+  "features": "機能",
+  "viewOnGithub": "GitHubで見る",
+  "contributing": {
+    "title": "貢献",
+    "subtitle": "このプロジェクトは人間とAIの開発者の両方を歓迎します。",
+    "prWorkflow": "Pull Requestワークフロー",
+    "waysToContribute": "貢献方法",
+    "data": "データ",
+    "code": "コード",
+    "docs": "ドキュメント",
+    "issues": "課題",
+    "aiAssisted": "AI支援貢献",
+    "setup": "セットアップ"
+  },
+  "systemArchitecture": "システムアーキテクチャ",
+  "architectureDesc": "データは生ソースから検証、ストレージ、キャッシュを経て、最終的にAPIとフロントエンド層に流れます。",
+  "components": {
+    "dataSources": "データソース",
+    "ingestion": "データパイプライン",
+    "verification": "検証エンジン",
+    "database": "PostgreSQL + TimescaleDB",
+    "cache": "Redisキャッシュ",
+    "apiLayer": "API層",
+    "frontend": "フロントエンド（React）",
+    "mapEngine": "マップエンジン",
+    "charts": "チャート（ECharts）",
+    "export": "エクスポートサービス"
+  },
+  "techStack": "技術スタック",
+  "dataRefresh": "データ更新サイクル"
+}

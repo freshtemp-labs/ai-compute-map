@@ -1,0 +1,4 @@
+# AI Compute Map Data Pipeline Dependencies
+requests>=2.32.0
+beautifulsoup4>=4.13.0
+lxml>=5.0.0

@@ -1,0 +1,60 @@
+{
+  "search": {
+    "placeholder": "Search facilities, locations, companies..."
+  },
+  "detailPanel": {
+    "title": "Facility Details",
+    "location": "Location",
+    "coordinates": "Coordinates",
+    "layer": "Layer",
+    "metrics": "Key Metrics",
+    "source": "Data Source"
+  },
+  "layerToggle": {
+    "supplyChain": "Supply Chain",
+    "foundry": "Foundries",
+    "dataCenter": "Data Centers"
+  },
+  "legend": {
+    "title": "Legend",
+    "pinSize": "Pin size = importance"
+  },
+  "keyboard": {
+    "title": "Keyboard Shortcuts",
+    "layer1": "Toggle Supply Chain",
+    "layer2": "Toggle Foundry",
+    "layer3": "Toggle Data Center",
+    "zoomIn": "Zoom In",
+    "zoomOut": "Zoom Out",
+    "close": "Close Panel",
+    "search": "Search",
+    "reset": "Reset View",
+    "showHelp": "Show/Hide Help"
+  },
+  "status": {
+    "operational": "Operational",
+    "construction": "Under Construction",
+    "planned": "Planned",
+    "expansion": "Expansion"
+  },
+  "facility": {
+    "powerCapacity": "Power Capacity",
+    "capacity": "Capacity",
+    "production": "Production",
+    "pue": "PUE",
+    "processNode": "Process Node",
+    "powerMW": "Power (MW)",
+    "yearEst": "Year Est.",
+    "yearOper": "Year Oper.",
+    "employees": "Employees",
+    "confidence": "Confidence",
+    "category": "Category",
+    "status": "Status",
+    "provider": "Provider",
+    "company": "Company",
+    "dataSource": "Data Source",
+    "crossVerify": "Cross-verify sources",
+    "viewFullPage": "View Full Page",
+    "tier": "Source Tier"
+  }
+}

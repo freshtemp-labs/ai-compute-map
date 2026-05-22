@@ -1,0 +1,51 @@
+{
+  "breadcrumb": "ファウンドリ層",
+  "pageTitle": "半導体ファウンドリ展望",
+  "pageSubtitle": "世界のチップメーカーにおける製造能力、プロセスノードリーダーシップ、拡張ダイナミクス",
+  "stats": {
+    "fabsTracked": "追跡ファブ数",
+    "tsmcShare": "TSMCシェア",
+    "marketSize": "市場規模",
+    "updated": "更新"
+  },
+  "sections": {
+    "marketOverview": "市場概要",
+    "marketShare": "2024ファウンドリ市場シェア",
+    "revenueTrend": "売上推移($B)",
+    "tsmcRevenue": "TSMC売上",
+    "samsungFoundry": "サムスンファウンドリ",
+    "intelTarget": "インテルファウンドリ(目標)",
+    "smicRevenue": "SMIC売上",
+    "tsmcDeepDive": "TSMC · 台湾セミコンダクター",
+    "tsmcSubtitle": "世界最大の独立系専門ファウンドリ",
+    "fabLocations": "ファブ拠点",
+    "processTimeline": "プロセスノードロードマップ",
+    "capacityByNode": "ノード別生産能力",
+    "globalExpansion": "グローバル拡張計画",
+    "samsung": "サムスン電子 · ファウンドリ",
+    "gaaComparison": "GAA vs FinFET比較",
+    "intel": "インテルファウンドリ",
+    "smic": "SMIC",
+    "matureNode": "成熟ノード専門",
+    "comparisonMatrix": "比較マトリックス",
+    "capacityProjection": "生産予測(Kウェハー/月)"
+  },
+  "tableHeaders": {
+    "company": "企業",
+    "revenue": "売上",
+    "share": "シェア",
+    "node": "先進ノード",
+    "fabs": "ファブ数",
+    "usaFabs": "米国ファブ",
+    "chinaFabs": "中国ファブ",
+    "europeFabs": "欧州ファブ",
+    "capacity": "月産",
+    "customers": "主要顧客"
+  },
+  "status": {
+    "active": "稼働中",
+    "new": "新規",
+    "building": "建設中",
+    "planned": "計画中"
+  }
+}

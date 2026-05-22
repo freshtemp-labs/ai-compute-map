@@ -1,0 +1,38 @@
+import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import Navbar from './Navbar';
+import Footer from './Footer';
+
+const pageTransition = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -12 },
+  transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+};
+
+export default function Layout() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  return (
+    <div className="min-h-[100dvh] flex flex-col bg-bg-base">
+      <Navbar />
+      <main className="flex-1 pt-14">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            {...pageTransition}
+            className="min-h-[calc(100dvh-3.5rem)]"
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
+      </main>
+      <Footer />
+    </div>
+  );
+}

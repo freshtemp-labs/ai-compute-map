@@ -1,0 +1,54 @@
+{
+  "breadcrumb": "算力中心层",
+  "pageTitle": "全球AI算力基础设施",
+  "pageSubtitle": "全球200+数据中心——电力消耗、容量预测和驱动AI革命的能源基础设施",
+  "stats": {
+    "facilities": "200+设施",
+    "power2025": "485.4 TWh (2025)",
+    "projected2030": "945 TWh (2030)",
+    "liveUpdates": "实时更新"
+  },
+  "sections": {
+    "powerConsumption": "电力消耗预测",
+    "regionalCapacity": "区域容量(GW)",
+    "metrics": "关键指标",
+    "regionalDeepDive": "区域深度分析",
+    "northAmerica": "北美",
+    "china": "中国",
+    "europe": "欧洲",
+    "asiaPacific": "亚太",
+    "powerSustainability": "电力与可持续性",
+    "pue": "PUE与电力容量",
+    "energyMix": "能源组合对比",
+    "providerBreakdown": "云提供商分析",
+    "providerCapacity": "提供商容量(MW)",
+    "capacityForecast": "容量预测模型(2025-2030)",
+    "aiGrowthRate": "AI增长率调整",
+    "modelParameters": "模型参数",
+    "dataset": "完整数据集",
+    "facilitiesTable": "主要设施",
+    "facility": "设施",
+    "provider": "提供商",
+    "country": "国家",
+    "region": "区域",
+    "powerMW": "电力(MW)",
+    "pueLabel": "PUE",
+    "year": "年份",
+    "apiPreview": "API预览",
+    "exportCSV": "导出CSV",
+    "exportJSON": "导出JSON",
+    "viewApiDocs": "查看API文档",
+    "copy": "复制"
+  },
+  "statusLabels": {
+    "operational": "运行中",
+    "underConstruction": "建设中",
+    "planned": "规划中"
+  },
+  "regions": {
+    "na": "北美",
+    "china": "中国",
+    "europe": "欧洲",
+    "apac": "亚太"
+  }
+}

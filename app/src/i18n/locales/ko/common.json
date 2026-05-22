@@ -1,0 +1,70 @@
+{
+  "brand": "AI COMPUTE MAP",
+  "nav": {
+    "map": "지도",
+    "supplyChain": "공급망",
+    "foundries": "파운드리",
+    "dataCenters": "데이터센터",
+    "sources": "데이터 출처",
+    "history": "히스토리",
+    "developers": "API & 문서"
+  },
+  "status": {
+    "live": "실시간",
+    "online": "온라인",
+    "offline": "오프라인",
+    "syncing": "동기화 중"
+  },
+  "actions": {
+    "explore": "지도 탐색",
+    "viewDocs": "문서 보기",
+    "search": "검색",
+    "filter": "필터",
+    "export": "납품",
+    "copy": "복사",
+    "close": "닫기",
+    "learnMore": "자세히 알아보기",
+    "viewAll": "모두 보기",
+    "refresh": "새로고침",
+    "switchLanguage": "언어 전환"
+  },
+  "layers": {
+    "supplyChain": "공급망",
+    "supplyChainDesc": "희토류, 노광장비, 설계회사",
+    "foundry": "파운드리",
+    "foundryDesc": "TSMC, 삼성, 인텔",
+    "dataCenter": "데이터센터",
+    "dataCenterDesc": "글로벌 DC, 전력소비"
+  },
+  "data": {
+    "lastSynced": "마지막 동기화",
+    "nextRefresh": "다음 새로고침",
+    "dataPoints": "데이터 포인트",
+    "sources": "출처",
+    "verified": "검증됨",
+    "pending": "대기 중"
+  },
+  "footer": {
+    "tagline": "AI 인프라 글로벌 실시간 시각화",
+    "quickLinks": "빠른 링크",
+    "dataSources": "데이터 출처",
+    "community": "커뮤니티",
+    "license": "CC BY-SA 4.0 라이선스",
+    "github": "GitHub",
+    "contributors": "기여자"
+  },
+  "time": {
+    "minutesAgo": "{{count}}분 전",
+    "hoursAgo": "{{count}}시간 전",
+    "daysAgo": "{{count}}일 전",
+    "justNow": "방금"
+  },
+  "sourceTiers": {
+    "tier1": "1차 출처",
+    "tier1Desc": "공식 보고서",
+    "tier2": "2차 출처",
+    "tier2Desc": "산업 분석",
+    "tier3": "3차 출처",
+    "tier3Desc": "모델 추정치"
+  }
+}

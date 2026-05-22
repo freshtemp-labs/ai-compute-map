@@ -1,0 +1,41 @@
+{
+  "hero": {
+    "title": "GLOBAL AI COMPUTE MAP",
+    "subtitle": "实时AI供应链基础设施情报",
+    "betaBadge": "v1.0 OPEN BETA"
+  },
+  "kpi": {
+    "globalDcPower": "全球数据中心用电量",
+    "euvUnits": "EUV光刻机出货量",
+    "chinaReQuota": "中国稀土配额",
+    "tsmcRevenue": "台积电营收",
+    "projected2030": "2030年预测用电量"
+  },
+  "layers": {
+    "title": "AI基础设施三层架构",
+    "subtitle": "从原材料到驱动世界AI的芯片",
+    "layer1Title": "基础层：供应链",
+    "layer1Desc": "稀土元素、光刻胶、芯片设计",
+    "layer2Title": "封装工厂层",
+    "layer2Desc": "TSMC、三星、英特尔代工",
+    "layer3Title": "算力中心层",
+    "layer3Desc": "全球数据中心、电力消耗"
+  },
+  "livePreview": {
+    "title": "实时全球覆盖",
+    "subtitle": "追踪50+国家，1,200+设施",
+    "badge": "实时数据"
+  },
+  "verification": {
+    "title": "已验证。交叉引用。透明。",
+    "subtitle": "每个数据点都追溯到其原始来源",
+    "point1": "一级来源验证",
+    "point2": "交叉引用引擎",
+    "point3": "全来源透明"
+  },
+  "openSource": {
+    "title": "开发者共建",
+    "subtitle": "开放API，开源数据，为研究人员和开发者而建",
+    "cta": "查看API文档"
+  }
+}

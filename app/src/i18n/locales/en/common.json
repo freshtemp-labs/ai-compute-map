@@ -1,0 +1,70 @@
+{
+  "brand": "AI COMPUTE MAP",
+  "nav": {
+    "map": "Map",
+    "supplyChain": "Supply Chain",
+    "foundries": "Foundries",
+    "dataCenters": "Data Centers",
+    "sources": "Data Sources",
+    "history": "History",
+    "developers": "API & Docs"
+  },
+  "status": {
+    "live": "Live",
+    "online": "Online",
+    "offline": "Offline",
+    "syncing": "Syncing"
+  },
+  "actions": {
+    "explore": "Explore Map",
+    "viewDocs": "View Docs",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "copy": "Copy",
+    "close": "Close",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "refresh": "Refresh",
+    "switchLanguage": "Switch Language"
+  },
+  "layers": {
+    "supplyChain": "Supply Chain",
+    "supplyChainDesc": "Rare earth, lithography, design",
+    "foundry": "Foundry",
+    "foundryDesc": "TSMC, Samsung, Intel",
+    "dataCenter": "Data Center",
+    "dataCenterDesc": "Global DCs, power consumption"
+  },
+  "data": {
+    "lastSynced": "Last synced",
+    "nextRefresh": "Next refresh",
+    "dataPoints": "Data points",
+    "sources": "Sources",
+    "verified": "Verified",
+    "pending": "Pending"
+  },
+  "footer": {
+    "tagline": "Real-time Global AI Infrastructure Visualization",
+    "quickLinks": "Quick Links",
+    "dataSources": "Data Sources",
+    "community": "Community",
+    "license": "Licensed under CC BY-SA 4.0",
+    "github": "GitHub",
+    "contributors": "Contributors"
+  },
+  "time": {
+    "minutesAgo": "{{count}} min ago",
+    "hoursAgo": "{{count}} hr ago",
+    "daysAgo": "{{count}} days ago",
+    "justNow": "Just now"
+  },
+  "sourceTiers": {
+    "tier1": "Tier 1",
+    "tier1Desc": "Official reports",
+    "tier2": "Tier 2",
+    "tier2Desc": "Industry analysis",
+    "tier3": "Tier 3",
+    "tier3Desc": "Modeled estimates"
+  }
+}

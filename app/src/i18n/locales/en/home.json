@@ -1,0 +1,41 @@
+{
+  "hero": {
+    "title": "GLOBAL AI COMPUTE MAP",
+    "subtitle": "Real-time infrastructure intelligence across the AI supply chain",
+    "betaBadge": "v1.0 OPEN BETA"
+  },
+  "kpi": {
+    "globalDcPower": "Global Data Center Power",
+    "euvUnits": "EUV Lithography Units",
+    "chinaReQuota": "China Rare Earth Quota",
+    "tsmcRevenue": "TSMC Revenue",
+    "projected2030": "Projected 2030 DC Power"
+  },
+  "layers": {
+    "title": "Three Layers of AI Infrastructure",
+    "subtitle": "From raw materials to the chips that power the world's AI",
+    "layer1Title": "Supply Chain Layer",
+    "layer1Desc": "Rare earth, lithography, chip design",
+    "layer2Title": "Foundry Layer",
+    "layer2Desc": "TSMC, Samsung, Intel foundries",
+    "layer3Title": "Data Center Layer",
+    "layer3Desc": "Global DCs, power consumption"
+  },
+  "livePreview": {
+    "title": "Live Global Coverage",
+    "subtitle": "Tracking 50+ countries, 1,200+ facilities",
+    "badge": "Live Data"
+  },
+  "verification": {
+    "title": "Verified. Cross-Referenced. Transparent.",
+    "subtitle": "Every data point traces back to its original source",
+    "point1": "Tier-1 Source Verification",
+    "point2": "Cross-Reference Engine",
+    "point3": "Full Source Transparency"
+  },
+  "openSource": {
+    "title": "Built for Developers, by Developers",
+    "subtitle": "Open API, open-source data, built for researchers and developers",
+    "cta": "View API Docs"
+  }
+}

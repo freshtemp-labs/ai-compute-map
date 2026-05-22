@@ -1,0 +1,51 @@
+{
+  "breadcrumb": "파운드리 계층",
+  "pageTitle": "반도체 파운드리 현황",
+  "pageSubtitle": "세계 칩 제조사의 제조 용량, 공정 노드 리더십, 확장 역학",
+  "stats": {
+    "fabsTracked": "추적 파브 수",
+    "tsmcShare": "TSMC 점유율",
+    "marketSize": "시장 규모",
+    "updated": "업데이트"
+  },
+  "sections": {
+    "marketOverview": "시장 개요",
+    "marketShare": "2024 파운드리 시장 점유율",
+    "revenueTrend": "수익 추이($B)",
+    "tsmcRevenue": "TSMC 매출",
+    "samsungFoundry": "삼성 파운드리",
+    "intelTarget": "인텔 파운드리(목표)",
+    "smicRevenue": "SMIC 매출",
+    "tsmcDeepDive": "TSMC · 타이완 반도체",
+    "tsmcSubtitle": "세계 최대 독립 전문 파운드리",
+    "fabLocations": "파브 위치",
+    "processTimeline": "공정 노드 로드맵",
+    "capacityByNode": "노드별 용량",
+    "globalExpansion": "글로벌 확장 계획",
+    "samsung": "삼성전자 · 파운드리",
+    "gaaComparison": "GAA vs FinFET 비교",
+    "intel": "인텔 파운드리",
+    "smic": "SMIC",
+    "matureNode": "성숙 노드 전문가",
+    "comparisonMatrix": "비교 매트릭스",
+    "capacityProjection": "용량 예측(K 웨이퍼/월)"
+  },
+  "tableHeaders": {
+    "company": "회사",
+    "revenue": "매출",
+    "share": "점유율",
+    "node": "첨단 노드",
+    "fabs": "파브 수",
+    "usaFabs": "미국 파브",
+    "chinaFabs": "중국 파브",
+    "europeFabs": "유럽 파브",
+    "capacity": "월 용량",
+    "customers": "주요 고객"
+  },
+  "status": {
+    "active": "운영 중",
+    "new": "신규",
+    "building": "건설 중",
+    "planned": "계획 중"
+  }
+}

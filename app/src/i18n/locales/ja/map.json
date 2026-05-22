@@ -1,0 +1,60 @@
+{
+  "search": {
+    "placeholder": "施設、場所、企業を検索..."
+  },
+  "detailPanel": {
+    "title": "施設詳細",
+    "location": "所在地",
+    "coordinates": "座標",
+    "layer": "レイヤー",
+    "metrics": "主要指標",
+    "source": "データソース"
+  },
+  "layerToggle": {
+    "supplyChain": "サプライチェーン",
+    "foundry": "ファウンドリ",
+    "dataCenter": "データセンター"
+  },
+  "legend": {
+    "title": "凡例",
+    "pinSize": "ピンサイズ = 重要度"
+  },
+  "keyboard": {
+    "title": "キーボードショートカット",
+    "layer1": "サプライチェーン切替",
+    "layer2": "ファウンドリ切替",
+    "layer3": "データセンター切替",
+    "zoomIn": "ズームイン",
+    "zoomOut": "ズームアウト",
+    "close": "パネルを閉じる",
+    "search": "検索",
+    "reset": "表示をリセット",
+    "showHelp": "ヘルプ表示/非表示"
+  },
+  "status": {
+    "operational": "稼働中",
+    "construction": "建設中",
+    "planned": "計画中",
+    "expansion": "拡張中"
+  },
+  "facility": {
+    "powerCapacity": "電力容量",
+    "capacity": "容量",
+    "production": "生産量",
+    "pue": "PUE",
+    "processNode": "プロセスノード",
+    "powerMW": "電力(MW)",
+    "yearEst": "設立年",
+    "yearOper": "運用年",
+    "employees": "従業員数",
+    "confidence": "信頼度",
+    "category": "カテゴリ",
+    "status": "状態",
+    "provider": "プロバイダー",
+    "company": "企業",
+    "dataSource": "データソース",
+    "crossVerify": "ソースを相互検証",
+    "viewFullPage": "詳細ページを見る",
+    "tier": "ソース層"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "breadcrumb": "데이터 출처",
+  "pageTitle": "설계에 의한 투명성",
+  "pageSubtitle": "모든 데이터 포인트는 그 원점으로 추적됩니다. 검증 방법론은 동료 검토에 개방되어 있습니다.",
+  "trustStats": {
+    "tier1": "1차 출처",
+    "avgSources": "평균 출처/포인트",
+    "timestamped": "100% 타임스탬프"
+  },
+  "liveBadge": "모든 지표가 실시간으로 업데이트됨",
+  "sections": {
+    "sourceCatalog": "출처 카탈로그",
+    "tier1Label": "1차",
+    "tier2Label": "2차",
+    "tier3Label": "3차",
+    "tier1Desc": "공식 보고서, 정부 데이터, 감사된 재무",
+    "tier2Desc": "산업 분석, 평판 있는 연구 기관",
+    "tier3Desc": "모델 추정치, 예측, 추론 데이터",
+    "searchPlaceholder": "출처 검색...",
+    "allTiers": "모든 계층",
+    "allStatus": "모든 상태",
+    "active": "활성",
+    "pending": "대기 중",
+    "stale": "오래됨",
+    "tableHeaders": {
+      "name": "출처명",
+      "category": "카테고리",
+      "tier": "계층",
+      "layer": "레이어",
+      "dataPoints": "데이터 포인트",
+      "lastUpdated": "마지막 업데이트",
+      "status": "상태"
+    },
+    "crossVerification": "교차 검증 엔진",
+    "steps": {
+      "ingestion": "데이터 수집",
+      "sourceMatching": "출처 매칭",
+      "discrepancy": "불일치 탐지",
+      "publication": "게시"
+    },
+    "verificationStats": {
+      "pointsVerified": "오늘 검증된 포인트",
+      "pendingReview": "검토 대기",
+      "discrepancies": "발견된 불일치",
+      "avgTime": "평균 검증 시간",
+      "tier1Sources": "1차 출처",
+      "avgSourcesPerPoint": "평균 출처/포인트",
+      "discrepancyRate": "불일치율"
+    },
+    "recentVerifications": "최근 검증",
+    "methodology": "방법론",
+    "sectionsM": {
+      "powerConsumption": "전력 소비 방법론",
+      "marketShare": "시장 점유율 계산",
+      "geolocation": "지리 좌표 검증",
+      "capacityUtilization": "용량 활용률 추정",
+      "currencyConversion": "통화 및 단위 변환",
+      "confidenceScoring": "신뢰도 채점 시스템"
+    },
+    "historicalData": "역사 데이터 아카이브",
+    "archiveStats": {
+      "firstSnapshot": "첫 스냅샷",
+      "totalSnapshots": "총 스냅샷 수",
+      "dataPointsTracked": "추적 데이터 포인트",
+      "storageSize": "저장 용량"
+    },
+    "accessOptions": {
+      "timeMachine": "타임머신",
+      "comparePeriods": "기간 비교",
+      "bulkExport": "일괄 납품"
+    }
+  }
+}

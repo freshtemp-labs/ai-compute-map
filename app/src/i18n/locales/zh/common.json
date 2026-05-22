@@ -1,0 +1,70 @@
+{
+  "brand": "AI COMPUTE MAP",
+  "nav": {
+    "map": "地图",
+    "supplyChain": "基础层",
+    "foundries": "封装工厂",
+    "dataCenters": "算力中心",
+    "sources": "数据来源",
+    "history": "历史数据",
+    "developers": "API & 文档"
+  },
+  "status": {
+    "live": "实时",
+    "online": "在线",
+    "offline": "离线",
+    "syncing": "同步中"
+  },
+  "actions": {
+    "explore": "探索地图",
+    "viewDocs": "查看文档",
+    "search": "搜索",
+    "filter": "筛选",
+    "export": "导出",
+    "copy": "复制",
+    "close": "关闭",
+    "learnMore": "了解更多",
+    "viewAll": "查看全部",
+    "refresh": "刷新",
+    "switchLanguage": "切换语言"
+  },
+  "layers": {
+    "supplyChain": "基础层",
+    "supplyChainDesc": "稀土元素、光刻机、设计公司",
+    "foundry": "封装工厂层",
+    "foundryDesc": "TSMC、三星、英特尔",
+    "dataCenter": "算力中心层",
+    "dataCenterDesc": "全球数据中心、用电量"
+  },
+  "data": {
+    "lastSynced": "上次同步",
+    "nextRefresh": "下次刷新",
+    "dataPoints": "数据点",
+    "sources": "数据源",
+    "verified": "已验证",
+    "pending": "待验证"
+  },
+  "footer": {
+    "tagline": "AI基础设施全球实时可视化",
+    "quickLinks": "快速链接",
+    "dataSources": "数据来源",
+    "community": "社区",
+    "license": "CC BY-SA 4.0 开源协议",
+    "github": "GitHub",
+    "contributors": "贡献者"
+  },
+  "time": {
+    "minutesAgo": "{{count}}分钟前",
+    "hoursAgo": "{{count}}小时前",
+    "daysAgo": "{{count}}天前",
+    "justNow": "刚刚"
+  },
+  "sourceTiers": {
+    "tier1": "一级来源",
+    "tier1Desc": "官方报告/年报",
+    "tier2": "二级来源",
+    "tier2Desc": "行业分析报告",
+    "tier3": "三级来源",
+    "tier3Desc": "模型估算数据"
+  }
+}

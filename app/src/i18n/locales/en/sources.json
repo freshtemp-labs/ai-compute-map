@@ -1,0 +1,73 @@
+{
+  "breadcrumb": "Data Sources",
+  "pageTitle": "Transparency by Design",
+  "pageSubtitle": "Every data point traces to its origin. Our verification methodology is open for peer review.",
+  "trustStats": {
+    "tier1": "Tier 1 Sources",
+    "avgSources": "Avg Sources/Point",
+    "timestamped": "100% Timestamped"
+  },
+  "liveBadge": "All metrics updated in real-time",
+  "sections": {
+    "sourceCatalog": "Source Catalog",
+    "tier1Label": "Primary",
+    "tier2Label": "Secondary",
+    "tier3Label": "Tertiary",
+    "tier1Desc": "Official reports, government data, audited financials",
+    "tier2Desc": "Industry analysis, reputable research firms",
+    "tier3Desc": "Modeled estimates, projections, inferred data",
+    "searchPlaceholder": "Search sources...",
+    "allTiers": "All Tiers",
+    "allStatus": "All Status",
+    "active": "Active",
+    "pending": "Pending",
+    "stale": "Stale",
+    "tableHeaders": {
+      "name": "Source Name",
+      "category": "Category",
+      "tier": "Tier",
+      "layer": "Layer",
+      "dataPoints": "Data Points",
+      "lastUpdated": "Last Updated",
+      "status": "Status"
+    },
+    "crossVerification": "Cross-Verification Engine",
+    "steps": {
+      "ingestion": "Data Ingestion",
+      "sourceMatching": "Source Matching",
+      "discrepancy": "Discrepancy Detection",
+      "publication": "Publication"
+    },
+    "verificationStats": {
+      "pointsVerified": "Points Verified Today",
+      "pendingReview": "Pending Review",
+      "discrepancies": "Discrepancies Found",
+      "avgTime": "Avg Verification Time",
+      "tier1Sources": "Tier 1 Sources",
+      "avgSourcesPerPoint": "Avg Sources/Point",
+      "discrepancyRate": "Discrepancy Rate"
+    },
+    "recentVerifications": "Recent Verifications",
+    "methodology": "Methodology",
+    "sectionsM": {
+      "powerConsumption": "Power Consumption Methodology",
+      "marketShare": "Market Share Calculation",
+      "geolocation": "Geographic Coordinate Verification",
+      "capacityUtilization": "Capacity Utilization Estimation",
+      "currencyConversion": "Currency & Unit Conversion",
+      "confidenceScoring": "Confidence Scoring System"
+    },
+    "historicalData": "Historical Data Archive",
+    "archiveStats": {
+      "firstSnapshot": "First Snapshot",
+      "totalSnapshots": "Total Snapshots",
+      "dataPointsTracked": "Data Points Tracked",
+      "storageSize": "Storage Size"
+    },
+    "accessOptions": {
+      "timeMachine": "Time Machine",
+      "comparePeriods": "Compare Periods",
+      "bulkExport": "Bulk Export"
+    }
+  }
+}

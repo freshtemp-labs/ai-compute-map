@@ -1,0 +1,60 @@
+{
+  "search": {
+    "placeholder": "시설, 위치, 기업 검색..."
+  },
+  "detailPanel": {
+    "title": "시설 상세",
+    "location": "위치",
+    "coordinates": "좌표",
+    "layer": "레이어",
+    "metrics": "주요 지표",
+    "source": "데이터 출처"
+  },
+  "layerToggle": {
+    "supplyChain": "공급망",
+    "foundry": "파운드리",
+    "dataCenter": "데이터센터"
+  },
+  "legend": {
+    "title": "범례",
+    "pinSize": "핀 크기 = 중요도"
+  },
+  "keyboard": {
+    "title": "키보드 단축키",
+    "layer1": "공급망 전환",
+    "layer2": "파운드리 전환",
+    "layer3": "데이터센터 전환",
+    "zoomIn": "확대",
+    "zoomOut": "축소",
+    "close": "패널 닫기",
+    "search": "검색",
+    "reset": "보기 재설정",
+    "showHelp": "도움말 표시/숨기기"
+  },
+  "status": {
+    "operational": "운영 중",
+    "construction": "건설 중",
+    "planned": "계획 중",
+    "expansion": "확장 중"
+  },
+  "facility": {
+    "powerCapacity": "전력 용량",
+    "capacity": "용량",
+    "production": "생산량",
+    "pue": "PUE",
+    "processNode": "공정 노드",
+    "powerMW": "전력(MW)",
+    "yearEst": "설립 연도",
+    "yearOper": "운영 연도",
+    "employees": "직원 수",
+    "confidence": "신뢰도",
+    "category": "카테고리",
+    "status": "상태",
+    "provider": "제공자",
+    "company": "회사",
+    "dataSource": "데이터 출처",
+    "crossVerify": "출처 교차 검증",
+    "viewFullPage": "전체 페이지 보기",
+    "tier": "출처 계층"
+  }
+}

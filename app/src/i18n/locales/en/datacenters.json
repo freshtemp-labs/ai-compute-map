@@ -1,0 +1,54 @@
+{
+  "breadcrumb": "Data Center Layer",
+  "pageTitle": "Global AI Compute Infrastructure",
+  "pageSubtitle": "200+ data centers worldwide — power consumption, capacity forecasts, and the energy infrastructure powering the AI revolution.",
+  "stats": {
+    "facilities": "200+ Facilities",
+    "power2025": "485.4 TWh (2025)",
+    "projected2030": "945 TWh (2030)",
+    "liveUpdates": "Live Updates"
+  },
+  "sections": {
+    "powerConsumption": "Power Consumption Projection",
+    "regionalCapacity": "Regional Capacity (GW)",
+    "metrics": "Key Metrics",
+    "regionalDeepDive": "Regional Deep Dives",
+    "northAmerica": "North America",
+    "china": "China",
+    "europe": "Europe",
+    "asiaPacific": "Asia Pacific",
+    "powerSustainability": "Power & Sustainability",
+    "pue": "PUE vs Power Capacity",
+    "energyMix": "Energy Mix Comparison",
+    "providerBreakdown": "Cloud Provider Breakdown",
+    "providerCapacity": "Provider Capacity (MW)",
+    "capacityForecast": "Capacity Forecast Model (2025-2030)",
+    "aiGrowthRate": "Adjust AI Growth Rate",
+    "modelParameters": "Model Parameters",
+    "dataset": "Complete Dataset",
+    "facilitiesTable": "Major Facilities",
+    "facility": "Facility",
+    "provider": "Provider",
+    "country": "Country",
+    "region": "Region",
+    "powerMW": "Power (MW)",
+    "pueLabel": "PUE",
+    "year": "Year",
+    "apiPreview": "API Preview",
+    "exportCSV": "Export CSV",
+    "exportJSON": "Export JSON",
+    "viewApiDocs": "View API Docs",
+    "copy": "Copy"
+  },
+  "statusLabels": {
+    "operational": "Operational",
+    "underConstruction": "Under Construction",
+    "planned": "Planned"
+  },
+  "regions": {
+    "na": "North America",
+    "china": "China",
+    "europe": "Europe",
+    "apac": "Asia Pacific"
+  }
+}
