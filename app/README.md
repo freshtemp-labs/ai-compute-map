@@ -1,5 +1,7 @@
 # AI 算力地图 (AI Compute Map)
 
+> 🌐 **在线演示**: https://freshtemp-labs.github.io/ai-compute-map/
+
 一个交互式的全球 AI 算力基础设施可视化平台，追踪从稀土矿产到数据中心的完整半导体供应链。
 
 ## 🌐 项目简介

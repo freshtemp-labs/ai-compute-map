@@ -44,7 +44,7 @@ function getDonutOption() {
       backgroundColor: '#111118',
       borderColor: '#2A2A3A',
       textStyle: { color: '#E8E8EC', fontFamily: 'Inter' },
-      formatter: (p: any) =>
+      formatter: (p: { name: string; color: string; data: { units: number; share: number; revenue: number } }) =>
         `<div style="font-weight:600;margin-bottom:4px">${p.name}</div>
          <div>Units: <b style="color:${p.color}">${p.data.units.toLocaleString()}</b></div>
          <div>Share: <b>${p.data.share}%</b></div>

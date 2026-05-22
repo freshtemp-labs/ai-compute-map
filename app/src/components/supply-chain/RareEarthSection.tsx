@@ -44,7 +44,7 @@ function getTreemapOption() {
       backgroundColor: '#111118',
       borderColor: '#2A2A3A',
       textStyle: { color: '#E8E8EC', fontFamily: 'Inter' },
-      formatter: (p: any) => {
+      formatter: (p: { data: { name: string; value: number } }) => {
         const d = p.data;
         return `<div style="font-weight:600;margin-bottom:4px">${d.name}</div>
                 <div>Reserves: <b style="color:#FFB84D">${d.value.toLocaleString()}万吨</b></div>

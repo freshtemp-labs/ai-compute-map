@@ -22,9 +22,15 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
   const seriesRef = useRef<am5map.MapPointSeries | null>(null);
   const polygonSeriesRef = useRef<am5map.MapPolygonSeries | null>(null);
   const onPinClickRef = useRef(onPinClick);
-  onPinClickRef.current = onPinClick;
   const onMapReadyRef = useRef(onMapReady);
-  onMapReadyRef.current = onMapReady;
+
+  // Keep refs in sync with latest props
+  useEffect(() => {
+    onPinClickRef.current = onPinClick;
+  }, [onPinClick]);
+  useEffect(() => {
+    onMapReadyRef.current = onMapReady;
+  }, [onMapReady]);
 
   // Initialize chart once
   useEffect(() => {
@@ -276,7 +282,6 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
     return () => {
       root.dispose();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Update data when pins or active layers change
