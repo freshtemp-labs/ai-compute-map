@@ -12,10 +12,11 @@ interface AmChartsMapProps {
   activeLayers: Record<LayerType, boolean>;
   onPinClick: (pin: MapPin) => void;
   selectedPin: MapPin | null;
+  highlightedPinId?: string | null;
   onMapReady?: (chart: am5map.MapChart) => void;
 }
 
-export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPin, onMapReady }: AmChartsMapProps) {
+export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPin, highlightedPinId, onMapReady }: AmChartsMapProps) {
   const chartRef = useRef<am5map.MapChart | null>(null);
   const rootRef = useRef<am5.Root | null>(null);
   const seriesRef = useRef<am5map.MapPointSeries | null>(null);
@@ -119,6 +120,8 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
 
       const color = LAYER_COLORS[data.layer] || '#FFFFFF';
       const size = getPinSize(data);
+      const isHighlighted = data._highlighted;
+      const isSelected = data._selected;
 
       const container = am5.Container.new(_root, {
         width: size * 3,
@@ -133,69 +136,94 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
         fill: am5.color(color),
         fillOpacity: 0,
         stroke: am5.color(color),
-        strokeWidth: 1,
-        strokeOpacity: 0.3,
+        strokeWidth: isHighlighted ? 2.5 : 1,
+        strokeOpacity: isHighlighted ? 0.8 : 0.3,
         centerX: am5.percent(50),
         centerY: am5.percent(50),
       });
 
-      // Animate pulse ring
+      // Animate pulse ring - faster for highlighted
       pulseRing.animate({
         key: 'radius',
         from: size * 0.5,
-        to: size * 2,
-        duration: 2500,
+        to: isHighlighted ? size * 3.5 : size * 2,
+        duration: isHighlighted ? 1000 : 2500,
         loops: Infinity,
         easing: am5.ease.out(am5.ease.sine),
       });
       pulseRing.animate({
         key: 'strokeOpacity',
-        from: 0.4,
+        from: isHighlighted ? 0.9 : 0.4,
         to: 0,
-        duration: 2500,
+        duration: isHighlighted ? 1000 : 2500,
         loops: Infinity,
         easing: am5.ease.out(am5.ease.sine),
       });
 
       container.children.push(pulseRing);
 
+      // Extra highlight ring for search results
+      if (isHighlighted) {
+        const highlightRing = am5.Circle.new(_root, {
+          radius: size * 1.8,
+          fill: am5.color(color),
+          fillOpacity: 0,
+          stroke: am5.color(0xFFFFFF),
+          strokeWidth: 1.5,
+          strokeOpacity: 0.6,
+          centerX: am5.percent(50),
+          centerY: am5.percent(50),
+          strokeDasharray: [3, 3],
+        });
+        highlightRing.animate({
+          key: 'rotation',
+          from: 0,
+          to: 360,
+          duration: 3000,
+          loops: Infinity,
+          easing: am5.ease.linear,
+        });
+        container.children.push(highlightRing);
+      }
+
       // Main pin shape
       let pinShape: am5.Circle | am5.RoundedRectangle;
+      const actualSize = isHighlighted ? size * 1.4 : size;
       if (data.layer === 'datacenter') {
         pinShape = am5.Circle.new(_root, {
-          radius: size,
+          radius: actualSize,
           fill: am5.color(color),
-          fillOpacity: 0.85,
-          stroke: am5.color(color),
-          strokeWidth: 1.5,
-          strokeOpacity: 0.5,
+          fillOpacity: isHighlighted ? 1 : 0.85,
+          stroke: am5.color(isSelected ? 0xFFFFFF : am5.Color.fromString(color).toCSSHex() as unknown as number),
+          strokeWidth: isHighlighted ? 3 : isSelected ? 2.5 : 1.5,
+          strokeOpacity: isHighlighted ? 1 : 0.5,
           centerX: am5.percent(50),
           centerY: am5.percent(50),
           tooltipText: formatTooltip(data),
         });
       } else if (data.layer === 'foundry') {
         pinShape = am5.RoundedRectangle.new(_root, {
-          width: size * 2,
-          height: size * 2,
+          width: actualSize * 2,
+          height: actualSize * 2,
           fill: am5.color(color),
-          fillOpacity: 0.85,
-          stroke: am5.color(color),
-          strokeWidth: 1.5,
-          strokeOpacity: 0.5,
+          fillOpacity: isHighlighted ? 1 : 0.85,
+          stroke: am5.color(isSelected ? 0xFFFFFF : am5.Color.fromString(color).toCSSHex() as unknown as number),
+          strokeWidth: isHighlighted ? 3 : isSelected ? 2.5 : 1.5,
+          strokeOpacity: isHighlighted ? 1 : 0.5,
           centerX: am5.percent(50),
           centerY: am5.percent(50),
           tooltipText: formatTooltip(data),
         });
       } else {
-        // Supply chain - diamond shape using a small square rotated
+        // Supply chain - diamond shape
         pinShape = am5.RoundedRectangle.new(_root, {
-          width: size * 1.6,
-          height: size * 1.6,
+          width: actualSize * 1.6,
+          height: actualSize * 1.6,
           fill: am5.color(color),
-          fillOpacity: 0.85,
-          stroke: am5.color(color),
-          strokeWidth: 1.5,
-          strokeOpacity: 0.5,
+          fillOpacity: isHighlighted ? 1 : 0.85,
+          stroke: am5.color(isSelected ? 0xFFFFFF : am5.Color.fromString(color).toCSSHex() as unknown as number),
+          strokeWidth: isHighlighted ? 3 : isSelected ? 2.5 : 1.5,
+          strokeOpacity: isHighlighted ? 1 : 0.5,
           centerX: am5.percent(50),
           centerY: am5.percent(50),
           rotation: 45,
@@ -258,23 +286,18 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
     const visiblePins = pins.filter((pin) => activeLayers[pin.layer]);
     seriesRef.current.data.setAll(visiblePins.map((pin) => ({
       ...pin,
+      _highlighted: pin.id === highlightedPinId,
+      _selected: pin.id === selectedPin?.id,
       geometry: {
         type: 'Point' as const,
         coordinates: [pin.lng, pin.lat],
       },
     })));
-  }, [pins, activeLayers]);
+  }, [pins, activeLayers, highlightedPinId, selectedPin]);
 
   useEffect(() => {
     updateData();
   }, [updateData]);
-
-  // Update selected pin highlight
-  useEffect(() => {
-    if (!seriesRef.current || !selectedPin) return;
-    // Re-render bullets by re-setting data
-    updateData();
-  }, [selectedPin, updateData]);
 
   return <div id="map-container" style={{ width: '100%', height: '100%' }} />;
 }
@@ -306,9 +329,9 @@ function formatTooltip(pin: MapPin): string {
     : `${pin.value} ${pin.unit || ''}`;
   const location = [pin.city, pin.country].filter(Boolean).join(', ');
 
-  return `[fontFamily:Space Grotesk][fontSize:13px][bold][#E8E8EC]${pin.name}[/][/][/]\n`
-    + `[fontFamily:JetBrains Mono][fontSize:10px][#${color?.replace('#', '') || 'FFFFFF'}]${layerLabel}[/][/]\n`
-    + `[#6B6B80]${location}[/]\n`
-    + `[#9A9AAF]${pin.category || pin.provider || pin.company || ''}[/]\n`
+  return `[fontFamily:Space Grotesk][fontSize:13px][bold][#E8E8EC]${pin.name}[/][/][/]\\n`
+    + `[fontFamily:JetBrains Mono][fontSize:10px][#${color?.replace('#', '') || 'FFFFFF'}]${layerLabel}[/][/]\\n`
+    + `[#6B6B80]${location}[/]\\n`
+    + `[#9A9AAF]${pin.category || pin.provider || pin.company || ''}[/]\\n`
     + `[#E8E8EC][bold]${valueStr}[/][/]`;
 }

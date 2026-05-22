@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import ReactECharts from 'echarts-for-react';
 import * as echarts from 'echarts';
-import { layers, kpis } from '@/data/mockData';
+import { layers, kpis, supplyChainData, fabricationFacilities, dataCenters } from '@/data/mockData';
 import { ShieldCheck, SquareStack, Archive } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -232,13 +232,190 @@ function KPIBlock({ kpi, index }: { kpi: typeof kpis[0]; index: number }) {
 }
 
 function KPIDashboard() {
+  const { t } = usePageTranslation();
+
+  // Dynamically compute KPIs from mockData
+  const dynamicKpis = useMemo(() => {
+    const totalSupply = supplyChainData.length;
+    const totalFoundry = fabricationFacilities.length;
+    const totalDataCenters = dataCenters.length;
+    const totalPins = totalSupply + totalFoundry + totalDataCenters;
+    const totalPowerMW = dataCenters.reduce((sum, dc) => sum + (dc.powerCapacity || 0), 0);
+    const operationalDCs = dataCenters.filter((dc) => dc.status === 'operational').length;
+    const constructionDCs = dataCenters.filter((dc) => dc.status === 'construction').length;
+
+    return [
+      { label: t('home:kpi.totalPins', 'Total Data Points'), value: totalPins, unit: 'pts', color: '#00D4FF', icon: '📍' },
+      { label: t('home:kpi.supplyNodes', 'Supply Chain Nodes'), value: totalSupply, unit: '', color: '#FFB84D', icon: '⛓' },
+      { label: t('home:kpi.foundryFabs', 'Foundry Fabs'), value: totalFoundry, unit: '', color: '#00D4FF', icon: '🏭' },
+      { label: t('home:kpi.dataCenters', 'Data Centers'), value: totalDataCenters, unit: '', color: '#A855F7', icon: '🖥' },
+      { label: t('home:kpi.totalPower', 'Total DC Power'), value: totalPowerMW, unit: 'MW', color: '#22C55E', icon: '⚡' },
+      { label: t('home:kpi.operational', 'Operational DCs'), value: operationalDCs, unit: '', color: '#22C55E', icon: '✅' },
+      { label: t('home:kpi.construction', 'Under Construction'), value: constructionDCs, unit: '', color: '#F59E0B', icon: '🔨' },
+    ];
+  }, [t]);
+
+  // Region distribution for chart
+  const regionChartOption = useMemo(() => {
+    const regionMap: Record<string, number> = {};
+    dataCenters.forEach((dc) => {
+      regionMap[dc.region] = (regionMap[dc.region] || 0) + 1;
+    });
+    const regionColors: Record<string, string> = {
+      'North America': '#00D4FF',
+      'Europe': '#FFB84D',
+      'Asia Pacific': '#A855F7',
+      'Middle East': '#22C55E',
+      'South America': '#F59E0B',
+      'Africa': '#EF4444',
+    };
+
+    return {
+      backgroundColor: 'transparent',
+      tooltip: {
+        trigger: 'item',
+        backgroundColor: '#111118',
+        borderColor: '#2A2A3A',
+        textStyle: { color: '#E8E8EC', fontFamily: 'JetBrains Mono, monospace', fontSize: 11 },
+      },
+      series: [{
+        type: 'pie',
+        radius: ['40%', '68%'],
+        center: ['50%', '50%'],
+        data: Object.entries(regionMap).map(([name, value]) => ({
+          name,
+          value,
+          itemStyle: { color: regionColors[name] || '#6B6B80' },
+        })),
+        label: {
+          show: true,
+          position: 'outside',
+          formatter: '{b}\n{c}',
+          color: '#9A9AAF',
+          fontFamily: 'JetBrains Mono, monospace',
+          fontSize: 10,
+        },
+        emphasis: { itemStyle: { shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.5)' } },
+      }],
+    };
+  }, []);
+
+  // Category distribution bar chart
+  const categoryChartOption = useMemo(() => {
+    const catMap: Record<string, number> = {};
+    supplyChainData.forEach((item) => {
+      catMap[item.category] = (catMap[item.category] || 0) + 1;
+    });
+    const sorted = Object.entries(catMap).sort((a, b) => b[1] - a[1]).slice(0, 8);
+
+    return {
+      backgroundColor: 'transparent',
+      tooltip: {
+        trigger: 'axis',
+        backgroundColor: '#111118',
+        borderColor: '#2A2A3A',
+        textStyle: { color: '#E8E8EC', fontFamily: 'JetBrains Mono, monospace', fontSize: 11 },
+      },
+      grid: { left: 10, right: 10, top: 10, bottom: 24, containLabel: true },
+      xAxis: {
+        type: 'category' as const,
+        data: sorted.map(([k]) => k),
+        axisLine: { lineStyle: { color: '#2A2A3A' } },
+        axisLabel: { color: '#6B6B80', fontFamily: 'JetBrains Mono, monospace', fontSize: 9, rotate: 30 },
+      },
+      yAxis: {
+        type: 'value' as const,
+        axisLine: { show: false },
+        axisLabel: { color: '#6B6B80', fontFamily: 'JetBrains Mono, monospace', fontSize: 9 },
+        splitLine: { lineStyle: { color: '#1E1E28', type: 'dashed' as const } },
+      },
+      series: [{
+        type: 'bar',
+        data: sorted.map(([, v]) => v),
+        barWidth: '60%',
+        itemStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: '#FFB84D' },
+            { offset: 1, color: '#FFB84D33' },
+          ]),
+          borderRadius: [3, 3, 0, 0],
+        },
+      }],
+    };
+  }, []);
+
   return (
     <section className="bg-bg-base py-space-24">
       <div className="max-w-[1440px] mx-auto px-6">
+        {/* Original KPI cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 pb-space-16 border-b border-border-subtle">
           {kpis.map((kpi, i) => (
             <KPIBlock key={kpi.id} kpi={kpi} index={i} />
           ))}
+        </div>
+
+        {/* Dynamic Stats from mockData */}
+        <div className="pt-space-12">
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-15%' }}
+            transition={{ duration: 0.5 }}
+            className="text-heading-sm text-text-primary text-center mb-8"
+          >
+            {t('home:dashboard.title', 'Live Data Overview')}
+          </motion.h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4 mb-10">
+            {dynamicKpis.map((kpi, i) => (
+              <motion.div
+                key={kpi.label}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="bg-[#111118] border border-[#1E1E28] rounded-lg p-4 text-center"
+              >
+                <span className="text-2xl block mb-1">{kpi.icon}</span>
+                <span className="text-data-md font-mono block" style={{ color: kpi.color }}>
+                  {kpi.value.toLocaleString()}{kpi.unit ? ` ${kpi.unit}` : ''}
+                </span>
+                <span className="text-[10px] font-mono text-[#6B6B80] uppercase tracking-wider block mt-1">{kpi.label}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Charts Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="bg-[#111118] border border-[#1E1E28] rounded-lg p-5"
+            >
+              <h4 className="text-mono-sm text-[#6B6B80] uppercase tracking-wider mb-3">
+                {t('home:dashboard.regionDist', 'Data Center Distribution by Region')}
+              </h4>
+              <div style={{ height: 260 }}>
+                <ReactECharts option={regionChartOption} style={{ width: '100%', height: '100%' }} opts={{ renderer: 'canvas' }} />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="bg-[#111118] border border-[#1E1E28] rounded-lg p-5"
+            >
+              <h4 className="text-mono-sm text-[#6B6B80] uppercase tracking-wider mb-3">
+                {t('home:dashboard.categoryDist', 'Supply Chain by Category')}
+              </h4>
+              <div style={{ height: 260 }}>
+                <ReactECharts option={categoryChartOption} style={{ width: '100%', height: '100%' }} opts={{ renderer: 'canvas' }} />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

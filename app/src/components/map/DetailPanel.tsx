@@ -1,8 +1,10 @@
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { X, MapPin as MapPinIcon, ExternalLink, Crosshair, Database } from 'lucide-react';
+import { X, MapPin as MapPinIcon, ExternalLink, Crosshair, Database, GitBranch } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import type { MapPin } from './useMapData';
+import { supplyChainData, fabricationFacilities, dataCenters } from '@/data/mockData';
 
 interface DetailPanelProps {
   pin: MapPin | null;
@@ -12,9 +14,83 @@ interface DetailPanelProps {
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
+// Supply chain relationship map
+interface Relation {
+  type: 'upstream' | 'downstream' | 'peer';
+  name: string;
+  description: string;
+  layer: string;
+}
+
+function getSupplyChainRelations(pin: MapPin): Relation[] {
+  const relations: Relation[] = [];
+
+  if (pin.layer === 'supply') {
+    // Supply chain -> foundry (downstream)
+    const category = pin.category?.toLowerCase() || '';
+    if (category.includes('rare earth') || category.includes('silicon wafer') || category.includes('photoresist')) {
+      relations.push({ type: 'downstream', name: 'TSMC Fabs (Hsinchu, Tainan)', description: 'Primary foundry consumer', layer: 'foundry' });
+      relations.push({ type: 'downstream', name: 'Samsung Foundry (Hwaseong)', description: 'Major foundry customer', layer: 'foundry' });
+    }
+    if (category.includes('lithography') || category.includes('etch') || category.includes('deposition')) {
+      relations.push({ type: 'downstream', name: 'All 300mm Fabs Globally', description: 'Equipment deployed across 100+ fabs', layer: 'foundry' });
+    }
+    if (category.includes('eda') || category.includes('ip') || category.includes('design') || category.includes('isa')) {
+      relations.push({ type: 'downstream', name: 'Chip Design → TSMC/Samsung/Intel', description: 'Design IP used in fabrication', layer: 'foundry' });
+    }
+    if (category.includes('packaging') || category.includes('osat') || category.includes('substrate')) {
+      relations.push({ type: 'upstream', name: 'Foundry Wafer Output', description: 'Packaging receives wafers from fabs', layer: 'foundry' });
+      relations.push({ type: 'downstream', name: 'AI Data Centers', description: 'Packaged chips shipped to cloud providers', layer: 'datacenter' });
+    }
+    // Peers
+    const peers = supplyChainData.filter(
+      (s) => s.category === pin.category && s.id !== pin.id
+    ).slice(0, 2);
+    peers.forEach((p) => {
+      relations.push({ type: 'peer', name: p.name, description: `Same category: ${p.category}`, layer: 'supply' });
+    });
+  }
+
+  if (pin.layer === 'foundry') {
+    // Foundry -> upstream suppliers
+    relations.push({ type: 'upstream', name: 'ASML (EUV Lithography)', description: 'Critical equipment supplier', layer: 'supply' });
+    relations.push({ type: 'upstream', name: 'Shin-Etsu / SUMCO (Wafers)', description: 'Silicon wafer supplier', layer: 'supply' });
+    relations.push({ type: 'upstream', name: 'JSR / TOK (Photoresist)', description: 'Chemical materials supplier', layer: 'supply' });
+    // Foundry -> downstream (data centers)
+    relations.push({ type: 'downstream', name: 'AWS / Azure / Google Cloud', description: 'Major chip buyers', layer: 'datacenter' });
+    relations.push({ type: 'downstream', name: 'NVIDIA / AMD / Apple', description: 'Fabless design houses', layer: 'datacenter' });
+    // Peer fabs
+    const peers = fabricationFacilities.filter(
+      (f) => f.company === pin.company && f.id !== pin.id
+    ).slice(0, 2);
+    peers.forEach((p) => {
+      relations.push({ type: 'peer', name: p.name, description: `${p.city}, ${p.country} · ${p.processNode || ''}`, layer: 'foundry' });
+    });
+  }
+
+  if (pin.layer === 'datacenter') {
+    // Data center -> upstream foundry
+    relations.push({ type: 'upstream', name: 'TSMC / Samsung / Intel', description: 'GPU & chip suppliers', layer: 'foundry' });
+    relations.push({ type: 'upstream', name: 'NVIDIA (GPU clusters)', description: 'AI accelerator supplier', layer: 'supply' });
+    // Data center peers
+    const dcProvider = pin.provider || '';
+    const peerDCs = dataCenters.filter(
+      (dc) => dc.provider === dcProvider && dc.name !== pin.name
+    ).slice(0, 2);
+    peerDCs.forEach((p) => {
+      relations.push({ type: 'peer', name: p.name, description: `${p.city}, ${p.country} · ${p.powerCapacity}MW`, layer: 'datacenter' });
+    });
+  }
+
+  return relations;
+}
+
 export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
   const { t } = useTranslation('map');
   const navigate = useNavigate();
+
+  const relations = useMemo(() => pin ? getSupplyChainRelations(pin) : [], [pin]);
+
   function getTierBadge(tier: number) {
     const colors: Record<number, string> = {
       1: '#22C55E',
@@ -35,7 +111,7 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 420, opacity: 0 }}
       transition={{ duration: 0.4, ease: easeOutExpo }}
-      className="absolute top-0 right-0 bottom-0 w-[380px] sm:w-[400px] bg-[#111118] border-l border-[#1E1E28] z-30 flex flex-col overflow-hidden"
+      className="absolute top-0 right-0 bottom-0 w-[400px] sm:w-[420px] bg-[#111118] border-l border-[#1E1E28] z-30 flex flex-col overflow-hidden"
       style={{ boxShadow: '-8px 0 32px rgba(0,0,0,0.4)' }}
     >
       {/* Header */}
@@ -126,6 +202,38 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
               {pin.layer === 'datacenter' ? t('map:facility.provider') : t('map:facility.company')}
             </span>
             <p className="text-body-md text-[#E8E8EC] mt-1">{pin.provider || pin.company}</p>
+          </div>
+        )}
+
+        {/* Supply Chain Relationships */}
+        {relations.length > 0 && (
+          <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
+            <div className="flex items-center gap-1.5 mb-3">
+              <GitBranch size={13} className="text-[#6B6B80]" />
+              <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">
+                {t('map:facility.supplyChain', 'Supply Chain Relations')}
+              </span>
+            </div>
+            <div className="space-y-2.5">
+              {relations.map((rel, i) => {
+                const relColor = rel.type === 'upstream' ? '#FFB84D' : rel.type === 'downstream' ? '#00D4FF' : '#9A9AAF';
+                const relLabel = rel.type === 'upstream' ? t('map:facility.upstream', 'UPSTREAM') : rel.type === 'downstream' ? t('map:facility.downstream', 'DOWNSTREAM') : t('map:facility.peer', 'PEER');
+                return (
+                  <div key={i} className="flex items-start gap-2">
+                    <span
+                      className="text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded mt-0.5 flex-shrink-0"
+                      style={{ color: relColor, backgroundColor: relColor + '15', border: `1px solid ${relColor}30` }}
+                    >
+                      {relLabel}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-[12px] text-[#E8E8EC] truncate">{rel.name}</p>
+                      <p className="text-[10px] text-[#6B6B80]">{rel.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
 

@@ -9,7 +9,20 @@
     "euvUnits": "EUV光刻机出货量",
     "chinaReQuota": "中国稀土配额",
     "tsmcRevenue": "台积电营收",
-    "projected2030": "2030年预测用电量"
+    "projected2030": "2030年预测用电量",
+    "dataPoints": "数据点",
+    "totalPins": "总数据点",
+    "supplyNodes": "供应链节点",
+    "foundryFabs": "代工厂",
+    "dataCenters": "数据中心",
+    "totalPower": "总电力容量",
+    "operational": "运行中",
+    "construction": "建设中"
+  },
+  "dashboard": {
+    "title": "实时数据概览",
+    "regionDist": "数据中心地区分布",
+    "categoryDist": "供应链分类统计"
   },
   "layers": {
     "title": "AI基础设施三层架构",

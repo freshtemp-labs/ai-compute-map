@@ -1,6 +1,7 @@
 {
   "search": {
-    "placeholder": "搜索工厂、地点、企业..."
+    "placeholder": "搜索工厂、地点、企业...",
+    "highlighted": "已在地图上高亮标记"
   },
   "detailPanel": {
     "title": "设施详情",
@@ -17,7 +18,10 @@
   },
   "legend": {
     "title": "图例",
-    "pinSize": "图钉大小 = 重要性"
+    "pinSize": "图钉大小 = 重要性",
+    "supplyDesc": "稀土、光刻、材料、设计IP",
+    "foundryDesc": "台积电、三星、英特尔、中芯、格芯",
+    "dcDesc": "云数据中心、托管、超大规模设施"
   },
   "keyboard": {
     "title": "键盘快捷键",
@@ -60,6 +64,10 @@
     "updatedLabel": "更新于:",
     "unknownSources": "未知来源",
     "noResults": "未找到 \"{{query}}\" 的结果",
-    "typeToSearch": "在 {{count}} 个数据点中搜索"
+    "typeToSearch": "在 {{count}} 个数据点中搜索",
+    "supplyChain": "供应链关系",
+    "upstream": "上游",
+    "downstream": "下游",
+    "peer": "同行"
   }
 }

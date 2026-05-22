@@ -28,6 +28,9 @@ export interface MapPin {
   yearOperational?: number;
   yearEstablished?: number;
   employees?: number;
+  // Internal rendering flags (set during data preparation)
+  _highlighted?: boolean;
+  _selected?: boolean;
 }
 
 export function useMapData() {

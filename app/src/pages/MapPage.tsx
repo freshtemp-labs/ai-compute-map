@@ -30,6 +30,7 @@ export default function MapPage() {
     datacenter: true,
   });
   const [selectedPin, setSelectedPin] = useState<MapPin | null>(null);
+  const [highlightedPinId, setHighlightedPinId] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [keyboardHelpOpen, setKeyboardHelpOpen] = useState(false);
   const chartRef = useRef<unknown>(null);
@@ -49,6 +50,7 @@ export default function MapPage() {
   // Handle pin click
   const handlePinClick = useCallback((pin: MapPin) => {
     setSelectedPin(pin);
+    setHighlightedPinId(null); // Clear search highlight when clicking
   }, []);
 
   // Close panel
@@ -56,9 +58,10 @@ export default function MapPage() {
     setSelectedPin(null);
   }, []);
 
-  // Handle search result selection - fly to location
+  // Handle search result selection - fly to location and highlight
   const handleSearchSelect = useCallback((pin: MapPin) => {
     setSelectedPin(pin);
+    setHighlightedPinId(pin.id); // Highlight with blink animation
     // Fly to location
     if (chartRef.current) {
       const chart = chartRef.current as { zoomToGeoPoint?: (point: { latitude: number; longitude: number }, level: number) => void };
@@ -69,6 +72,10 @@ export default function MapPage() {
         );
       }
     }
+    // Clear highlight after 6 seconds
+    setTimeout(() => {
+      setHighlightedPinId((current) => current === pin.id ? null : current);
+    }, 6000);
   }, []);
 
   // Keyboard shortcuts
@@ -145,6 +152,7 @@ export default function MapPage() {
           activeLayers={activeLayers}
           onPinClick={handlePinClick}
           selectedPin={selectedPin}
+          highlightedPinId={highlightedPinId}
           onMapReady={(chart) => {
             chartRef.current = chart as unknown as Record<string, unknown>;
             setMapLoading(false);
@@ -216,6 +224,27 @@ export default function MapPage() {
           <HelpCircle size={15} />
         </button>
       </div>
+
+      {/* Highlight Indicator - shows when a pin is highlighted from search */}
+      {highlightedPinId && (
+        <div className="absolute top-14 left-1/2 -translate-x-1/2 z-20">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-[#111118]/90 border border-[#00D4FF]/40 rounded-full backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00D4FF] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00D4FF]" />
+            </span>
+            <span className="text-[11px] font-mono text-[#00D4FF]">
+              {t('map:search.highlighted', 'Location highlighted on map')}
+            </span>
+            <button
+              onClick={() => setHighlightedPinId(null)}
+              className="text-[#6B6B80] hover:text-[#E8E8EC] transition-colors cursor-pointer ml-1"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Side Detail Panel */}
       <AnimatePresence>

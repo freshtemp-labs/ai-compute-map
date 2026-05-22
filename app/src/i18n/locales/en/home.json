@@ -9,7 +9,20 @@
     "euvUnits": "EUV Lithography Units",
     "chinaReQuota": "China Rare Earth Quota",
     "tsmcRevenue": "TSMC Revenue",
-    "projected2030": "Projected 2030 DC Power"
+    "projected2030": "Projected 2030 DC Power",
+    "dataPoints": "data points",
+    "totalPins": "Total Data Points",
+    "supplyNodes": "Supply Chain Nodes",
+    "foundryFabs": "Foundry Fabs",
+    "dataCenters": "Data Centers",
+    "totalPower": "Total DC Power",
+    "operational": "Operational DCs",
+    "construction": "Under Construction"
+  },
+  "dashboard": {
+    "title": "Live Data Overview",
+    "regionDist": "Data Center Distribution by Region",
+    "categoryDist": "Supply Chain by Category"
   },
   "layers": {
     "title": "Three Layers of AI Infrastructure",

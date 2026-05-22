@@ -1,5 +1,13 @@
 {
   "pageTitle": "历史数据",
   "pageSubtitle": "历史数据时间线、对比工具，以及AI基础设施发展的时间回放。",
-  "comingSoon": "即将推出"
+  "comingSoon": "即将推出",
+  "timeline": {
+    "title": "时间线"
+  },
+  "compare": "对比模式",
+  "trendTitle": "AI基础设施增长趋势",
+  "dataNote": "数据来源：IEA全球能源回顾、TrendForce、公司报告。2026-2030年数据为预测值。",
+  "regionDist": "数据中心地区分布",
+  "yearlyData": "年度数据总览"
 }

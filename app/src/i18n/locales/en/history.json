@@ -1,5 +1,13 @@
 {
   "pageTitle": "History",
   "pageSubtitle": "Historical data timeline, comparison tools, and temporal playback of AI infrastructure development.",
-  "comingSoon": "Coming Soon"
+  "comingSoon": "Coming Soon",
+  "timeline": {
+    "title": "Timeline"
+  },
+  "compare": "Compare",
+  "trendTitle": "AI Infrastructure Growth Trend",
+  "dataNote": "Data: IEA Global Energy Review, TrendForce, company reports. 2026-2030 values are projected forecasts.",
+  "regionDist": "Data Center Distribution by Region",
+  "yearlyData": "Yearly Data Summary"
 }

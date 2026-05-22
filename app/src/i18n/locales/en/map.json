@@ -1,6 +1,7 @@
 {
   "search": {
-    "placeholder": "Search facilities, locations, companies..."
+    "placeholder": "Search facilities, locations, companies...",
+    "highlighted": "Location highlighted on map"
   },
   "detailPanel": {
     "title": "Facility Details",
@@ -17,7 +18,10 @@
   },
   "legend": {
     "title": "Legend",
-    "pinSize": "Pin size = importance"
+    "pinSize": "Pin size = importance",
+    "supplyDesc": "Rare earth, lithography, materials, design IP",
+    "foundryDesc": "TSMC, Samsung, Intel, SMIC, GlobalFoundries",
+    "dcDesc": "Cloud DCs, colocation, hyperscale facilities"
   },
   "keyboard": {
     "title": "Keyboard Shortcuts",
@@ -60,6 +64,10 @@
     "updatedLabel": "Updated:",
     "unknownSources": "Unknown sources",
     "noResults": "No results found for \"{{query}}\"",
-    "typeToSearch": "Type to search across {{count}} data points"
+    "typeToSearch": "Type to search across {{count}} data points",
+    "supplyChain": "Supply Chain Relations",
+    "upstream": "Upstream",
+    "downstream": "Downstream",
+    "peer": "Peer"
   }
 }
