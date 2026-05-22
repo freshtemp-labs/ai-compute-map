@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import ReactEChartsCore from 'echarts-for-react';
 import { foundryMarketData, revenueTrendData } from './data';
 
 /* ── Donut Chart ── */
-export function DonutChart() {
+export const DonutChart = memo(function DonutChart() {
   const option = {
     tooltip: {
       trigger: 'item' as const,
@@ -68,10 +69,10 @@ export function DonutChart() {
   };
 
   return <ReactEChartsCore option={option} style={{ height: 320 }} notMerge={true} lazyUpdate={true} />;
-}
+});
 
 /* ── Revenue Trend Chart ── */
-export function RevenueTrendChart() {
+export const RevenueTrendChart = memo(function RevenueTrendChart() {
   const option = {
     tooltip: {
       trigger: 'axis' as const,
@@ -110,10 +111,10 @@ export function RevenueTrendChart() {
   };
 
   return <ReactEChartsCore option={option} style={{ height: 280 }} notMerge={true} lazyUpdate={true} />;
-}
+});
 
 /* ── Capacity Projection Chart ── */
-export function CapacityProjectionChart() {
+export const CapacityProjectionChart = memo(function CapacityProjectionChart() {
   const option = {
     tooltip: {
       trigger: 'axis' as const,
@@ -152,10 +153,10 @@ export function CapacityProjectionChart() {
   };
 
   return <ReactEChartsCore option={option} style={{ height: 300 }} notMerge={true} lazyUpdate={true} />;
-}
+});
 
 /* ── GAA Comparison Radar Chart ── */
-export function GaaComparisonChart() {
+export const GaaComparisonChart = memo(function GaaComparisonChart() {
   const option = {
     tooltip: {
       trigger: 'axis' as const,
@@ -196,4 +197,4 @@ export function GaaComparisonChart() {
   };
 
   return <ReactEChartsCore option={option} style={{ height: 260 }} notMerge={true} lazyUpdate={true} />;
-}
+});

@@ -76,6 +76,29 @@
     color: var(--text-primary);
   }
 
+  /* ─── Mobile Responsive Utilities ───────────────── */
+  @media (max-width: 767px) {
+    /* Make tables scroll horizontally */
+    table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Smaller hero text on mobile */
+    .text-display-xl {
+      font-size: 36px !important;
+      line-height: 1.1 !important;
+    }
+
+    /* Reduce section padding on mobile */
+    section {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
   /* Dark scrollbar */
   ::-webkit-scrollbar {
     width: 8px;

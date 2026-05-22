@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { sourcesTableData } from '@/data/mockData';
-import type { SourceEntry } from '@/types';
+
 
 // ─── Constants ─────────────────────────────────────────────────
 
@@ -35,9 +35,8 @@ export default function SourcesPage() {
   const [tierFilter, setTierFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredSources, setFilteredSources] = useState<SourceEntry[]>(SOURCES_DATA);
 
-  useEffect(() => {
+  const filteredSources = useMemo(() => {
     let data = SOURCES_DATA;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
@@ -53,7 +52,7 @@ export default function SourcesPage() {
     if (statusFilter !== 'all') {
       data = data.filter((d) => d.status === statusFilter);
     }
-    setFilteredSources(data);
+    return data;
   }, [searchQuery, tierFilter, statusFilter]);
 
   const tierCounts = {

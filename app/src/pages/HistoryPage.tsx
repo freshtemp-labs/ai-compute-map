@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactECharts from 'echarts-for-react';
@@ -53,7 +53,7 @@ export default function HistoryPage() {
   const currentData = historicalData.find((d) => d.year === selectedYear);
   const compareData = compareMode ? historicalData.find((d) => d.year === compareYear) : null;
 
-  const toggleMetric = (key: MetricKey) => {
+  const toggleMetric = useCallback((key: MetricKey) => {
     setSelectedMetrics((prev) => {
       const next = new Set(prev);
       if (next.has(key)) next.delete(key);
@@ -61,7 +61,7 @@ export default function HistoryPage() {
       if (next.size === 0) next.add('dcCount');
       return next;
     });
-  };
+  }, []);
 
   // ─── ECharts Option ─────────────────────
   const chartOption = useMemo(() => {

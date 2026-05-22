@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { supplyChainTableData } from '@/data/mockData';
-import type { SupplyChainEntry } from '@/types';
+
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 // ─── Data ──────────────────────────────────────────────────────
@@ -33,9 +33,8 @@ export default function SupplyChainPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
   const [selectedCountry, setSelectedCountry] = useState('all');
-  const [filteredData, setFilteredData] = useState<SupplyChainEntry[]>(SUPPLY_CHAIN_DATA);
 
-  useEffect(() => {
+  const filteredData = useMemo(() => {
     let data = SUPPLY_CHAIN_DATA;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
@@ -52,7 +51,7 @@ export default function SupplyChainPage() {
     if (selectedCountry !== 'all') {
       data = data.filter((d) => d.country === selectedCountry);
     }
-    setFilteredData(data);
+    return data;
   }, [searchQuery, typeFilter, selectedCountry]);
 
   // Rare earth pie chart data

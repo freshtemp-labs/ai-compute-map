@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 import { comparisonData, type SortKey } from './data';
@@ -18,14 +18,14 @@ export function ComparisonMatrix() {
   const [sortKey, setSortKey] = useState<SortKey>('company');
   const [sortAsc, setSortAsc] = useState(true);
 
-  const handleSort = (key: SortKey) => {
+  const handleSort = useCallback((key: SortKey) => {
     if (sortKey === key) {
       setSortAsc(!sortAsc);
     } else {
       setSortKey(key);
       setSortAsc(true);
     }
-  };
+  }, [sortKey, sortAsc]);
 
   const sorted = [...comparisonData].sort((a, b) => {
     const aVal = a[sortKey];

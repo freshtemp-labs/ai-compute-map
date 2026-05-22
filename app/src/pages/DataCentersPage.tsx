@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { facilitiesData } from '@/data/mockData';
-import type { DataCenterEntry } from '@/types';
+
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as ReTooltip, Legend as ReLegend,
   ResponsiveContainer, AreaChart, Area,
@@ -57,9 +57,8 @@ export default function DataCentersPage() {
   const [regionFilter, setRegionFilter] = useState('all');
   const [providerFilter, setProviderFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredFacilities, setFilteredFacilities] = useState<DataCenterEntry[]>(FACILITIES_DATA);
 
-  useEffect(() => {
+  const filteredFacilities = useMemo(() => {
     let data = FACILITIES_DATA;
     if (regionFilter !== 'all') {
       data = data.filter((d) => d.region.toLowerCase().replace(/\s+/g, '') === regionFilter.toLowerCase());
@@ -75,14 +74,14 @@ export default function DataCentersPage() {
         d.provider.toLowerCase().includes(q)
       );
     }
-    setFilteredFacilities(data);
+    return data;
   }, [regionFilter, providerFilter, searchQuery]);
 
-  const chartData = PROVIDER_DATA.map((p) => ({
+  const chartData = useMemo(() => PROVIDER_DATA.map((p) => ({
     name: p.provider,
     power: p.power,
     facilities: p.facilities,
-  }));
+  })), []);
 
   return (
     <div className="min-h-screen">
