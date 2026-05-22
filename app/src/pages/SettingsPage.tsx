@@ -9,12 +9,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Settings, RotateCcw, Globe, Layers, Monitor, ZoomIn, Database, Activity, Trash2, RefreshCw } from 'lucide-react';
+import { Settings, RotateCcw, Globe, Layers, Monitor, ZoomIn, Database, Activity, Trash2, RefreshCw, ShieldCheck } from 'lucide-react';
 import { useSettings } from '@/context/SettingsContext';
 import type { LayerType } from '@/types';
 import { LAYER_COLORS } from '@/constants/layerColors';
 import { getCacheStats, clearAllCache, formatBytes, formatAge, type CacheStats } from '@/utils/dataCache';
 import { getPerformanceStats, clearMetrics, formatDuration, type PerformanceStats } from '@/utils/performanceMonitor';
+import DataQualityDashboard from '@/components/data-quality/DataQualityDashboard';
 
 const LAYER_LABELS: Record<LayerType, { zh: string; en: string }> = {
   supply: { zh: '供应链层', en: 'Supply Chain' },
@@ -341,6 +342,18 @@ export default function SettingsPage() {
                 )}
               </>
             )}
+          </section>
+
+          {/* Data Quality Monitoring */}
+          <section className="p-6 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
+            <div className="flex items-center gap-3 mb-4">
+              <ShieldCheck size={18} className="text-accent-cyan" />
+              <h2 className="text-lg font-semibold text-text-primary">数据质量监控</h2>
+            </div>
+            <p className="text-sm text-text-secondary mb-4">
+              实时监控数据完整性、一致性和时效性，确保数据来源可靠。
+            </p>
+            <DataQualityDashboard />
           </section>
 
           {/* Reset */}

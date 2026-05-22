@@ -30,6 +30,10 @@ import {
   companies,
 } from '@/data/mockData';
 
+import TrendChart from '@/components/charts/TrendChart';
+import FunnelChart from '@/components/charts/FunnelChart';
+import GaugeDashboard from '@/components/charts/GaugeDashboard';
+
 // ── Helpers ──────────────────────────────────────────────────────────
 
 interface RegionCapacity {
@@ -538,6 +542,26 @@ export default function InsightsPage() {
             </table>
           </div>
         </motion.div>
+      </div>
+
+      {/* ── Enhanced Data Visualizations ──────────────────────────── */}
+      <div className="max-w-6xl mx-auto px-6 pb-16 space-y-8">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
+          <h2 className="text-section text-text-primary flex items-center gap-2 mb-6">
+            <TrendingUp size={18} />
+            数据可视化增强
+          </h2>
+          <GaugeDashboard />
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
+            <TrendChart />
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}>
+            <FunnelChart />
+          </motion.div>
+        </div>
       </div>
     </div>
   );

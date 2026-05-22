@@ -5,6 +5,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 import { PageSkeleton } from './components/PageSkeleton'
 import { CompareProvider } from './context/CompareContext'
 import { SettingsProvider } from './context/SettingsContext'
+import { FavoritesProvider } from './context/FavoritesContext'
 
 // Eagerly load Home (landing page, small and first-visible)
 import Home from './pages/Home'
@@ -37,6 +38,7 @@ function LazyPage({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <SettingsProvider>
+      <FavoritesProvider>
       <CompareProvider>
         <HashRouter>
           <Routes>
@@ -59,6 +61,7 @@ export default function App() {
           </Routes>
         </HashRouter>
       </CompareProvider>
+      </FavoritesProvider>
     </SettingsProvider>
   )
 }

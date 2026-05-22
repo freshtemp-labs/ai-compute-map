@@ -1,19 +1,23 @@
 /**
  * @file DataCentersPage.tsx
  * @description Data center analysis page with facility listings, PUE comparison
- * charts, regional distribution, energy mix visualizations, and sortable tables.
+ * charts, regional distribution, energy mix visualizations, sortable tables,
+ * drag-to-reorder, batch selection, and favorites.
  *
- * @dependencies react-i18next, echarts-for-react, @/data/mockData
+ * @dependencies react-i18next, echarts-for-react, @/data/mockData, @/context/FavoritesContext
  */
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { facilitiesData } from '@/data/mockData';
+import { useFavorites } from '@/context/FavoritesContext';
 
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as ReTooltip, Legend as ReLegend,
   ResponsiveContainer, AreaChart, Area,
 } from 'recharts';
+
+import { Heart, CheckSquare, Square, GripVertical, Star } from 'lucide-react';
 
 // ─── Constants ─────────────────────────────────────────────────
 
@@ -49,8 +53,6 @@ const PROVIDER_DATA = [
   { provider: 'Equinix', power: 8, facilities: 248, keyRegions: 'Global (colocation)' },
 ];
 
-const FACILITIES_DATA = facilitiesData;
-
 const STATUS_COLORS = {
   'Operational': '#00e5b0',
   'Under Construction': '#fbbf24',
@@ -61,12 +63,21 @@ const STATUS_COLORS = {
 
 export default function DataCentersPage() {
   const { t } = useTranslation(['datacenters', 'common']);
+  const { isFavorite, toggleFavorite } = useFavorites();
   const [regionFilter, setRegionFilter] = useState('all');
   const [providerFilter, setProviderFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Batch selection state
+  const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
+
+  // Drag-to-reorder state
+  const [orderedData, setOrderedData] = useState(facilitiesData);
+  const dragItem = useRef<number | null>(null);
+  const dragOverItem = useRef<number | null>(null);
+
   const filteredFacilities = useMemo(() => {
-    let data = FACILITIES_DATA;
+    let data = orderedData;
     if (regionFilter !== 'all') {
       data = data.filter((d) => d.region.toLowerCase().replace(/\s+/g, '') === regionFilter.toLowerCase());
     }
@@ -82,13 +93,61 @@ export default function DataCentersPage() {
       );
     }
     return data;
-  }, [regionFilter, providerFilter, searchQuery]);
+  }, [orderedData, regionFilter, providerFilter, searchQuery]);
 
   const chartData = useMemo(() => PROVIDER_DATA.map((p) => ({
     name: p.provider,
     power: p.power,
     facilities: p.facilities,
   })), []);
+
+  // Batch selection handlers
+  const toggleSelect = useCallback((id: number) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }, []);
+
+  const selectAll = useCallback(() => {
+    setSelectedIds(new Set(filteredFacilities.map((f) => f.id)));
+  }, [filteredFacilities]);
+
+  const deselectAll = useCallback(() => {
+    setSelectedIds(new Set());
+  }, []);
+
+  // Drag handlers
+  const handleDragStart = (idx: number) => {
+    dragItem.current = idx;
+  };
+
+  const handleDragEnter = (idx: number) => {
+    dragOverItem.current = idx;
+  };
+
+  const handleDragEnd = () => {
+    if (dragItem.current === null || dragOverItem.current === null) return;
+    const newList = [...orderedData];
+    // Find actual indices in orderedData
+    const fromId = filteredFacilities[dragItem.current]?.id;
+    const toId = filteredFacilities[dragOverItem.current]?.id;
+    if (fromId == null || toId == null || fromId === toId) {
+      dragItem.current = null;
+      dragOverItem.current = null;
+      return;
+    }
+    const fromIdx = newList.findIndex((d) => d.id === fromId);
+    const toIdx = newList.findIndex((d) => d.id === toId);
+    if (fromIdx < 0 || toIdx < 0) return;
+    const [moved] = newList.splice(fromIdx, 1);
+    newList.splice(toIdx, 0, moved);
+    setOrderedData(newList);
+    dragItem.current = null;
+    dragOverItem.current = null;
+  };
 
   return (
     <div className="min-h-screen">
@@ -183,7 +242,7 @@ export default function DataCentersPage() {
             <div className="p-5 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
               <h3 className="text-sm font-medium text-text-primary mb-4">{t('datacenters:sections.pue')}</h3>
               <div className="space-y-2">
-                {FACILITIES_DATA.slice(0, 10).map((f) => (
+                {orderedData.slice(0, 10).map((f) => (
                   <div key={f.id} className="flex items-center gap-2">
                     <span className="text-mono-sm text-text-muted w-32 truncate">{f.name}</span>
                     <div className="flex-1 h-4 bg-[rgba(255,255,255,0.04)] rounded-full overflow-hidden">
@@ -244,7 +303,7 @@ export default function DataCentersPage() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-section text-text-primary">{t('datacenters:sections.dataset')}</h2>
-              <p className="text-sm text-text-secondary mt-2">Search and filter the full dataset of global data center facilities</p>
+              <p className="text-sm text-text-secondary mt-2">Search, filter, drag to reorder, batch select, and favorite facilities</p>
             </div>
             <div className="flex gap-2">
               <button onClick={() => {
@@ -284,10 +343,26 @@ export default function DataCentersPage() {
             </select>
             <select value={providerFilter} onChange={(e) => setProviderFilter(e.target.value)} className="px-3 py-2 bg-[rgba(255,255,255,0.03)] border border-border-subtle rounded text-sm text-text-primary">
               <option value="all">All Providers</option>
-              {Array.from(new Set(FACILITIES_DATA.map((f) => f.provider))).map((p) => (
+              {Array.from(new Set(facilitiesData.map((f) => f.provider))).map((p) => (
                 <option key={p} value={p}>{p}</option>
               ))}
             </select>
+          </div>
+
+          {/* Batch action bar */}
+          <div className="flex items-center gap-3 mb-3 p-2 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
+            <button onClick={selectAll} className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors cursor-pointer">
+              <CheckSquare size={14} /> 全选
+            </button>
+            <button onClick={deselectAll} className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors cursor-pointer">
+              <Square size={14} /> 取消全选
+            </button>
+            {selectedIds.size > 0 && (
+              <span className="text-xs text-accent-cyan">
+                已选择 {selectedIds.size} 项
+              </span>
+            )}
+            <span className="text-xs text-text-muted ml-auto">拖拽行首 ⠿ 可排序</span>
           </div>
 
           {/* Table */}
@@ -295,6 +370,9 @@ export default function DataCentersPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border-subtle">
+                  <th className="text-left px-1 py-3 w-8"></th>
+                  <th className="text-left px-1 py-3 w-8"></th>
+                  <th className="text-left px-1 py-3 w-8"></th>
                   <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.facility')}</th>
                   <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.provider')}</th>
                   <th className="text-left px-3 py-3 text-mono-sm text-text-muted font-medium">{t('datacenters:sections.country')}</th>
@@ -306,9 +384,47 @@ export default function DataCentersPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredFacilities.map((f) => (
-                  <tr key={f.id} className="border-b border-border-subtle/50 hover:bg-[rgba(255,255,255,0.02)] transition-colors">
-                    <td className="px-3 py-3 text-text-primary font-medium">{f.name}</td>
+                {filteredFacilities.map((f, idx) => (
+                  <tr
+                    key={f.id}
+                    draggable
+                    onDragStart={() => handleDragStart(idx)}
+                    onDragEnter={() => handleDragEnter(idx)}
+                    onDragEnd={handleDragEnd}
+                    onDragOver={(e) => e.preventDefault()}
+                    className={`border-b border-border-subtle/50 hover:bg-[rgba(255,255,255,0.02)] transition-colors cursor-grab active:cursor-grabbing ${
+                      selectedIds.has(f.id) ? 'bg-[rgba(0,212,255,0.04)]' : ''
+                    }`}
+                  >
+                    {/* Drag handle */}
+                    <td className="px-1 py-3 text-text-muted">
+                      <GripVertical size={14} />
+                    </td>
+                    {/* Checkbox */}
+                    <td className="px-1 py-3">
+                      <button onClick={() => toggleSelect(f.id)} className="cursor-pointer">
+                        {selectedIds.has(f.id) ? (
+                          <CheckSquare size={16} className="text-accent-cyan" />
+                        ) : (
+                          <Square size={16} className="text-text-muted" />
+                        )}
+                      </button>
+                    </td>
+                    {/* Favorite */}
+                    <td className="px-1 py-3">
+                      <button onClick={() => toggleFavorite(`dc-${f.id}`)} className="cursor-pointer">
+                        <Heart
+                          size={16}
+                          className={isFavorite(`dc-${f.id}`) ? 'text-[#F87171] fill-[#F87171]' : 'text-text-muted'}
+                        />
+                      </button>
+                    </td>
+                    <td className="px-3 py-3 text-text-primary font-medium">
+                      <div className="flex items-center gap-2">
+                        {isFavorite(`dc-${f.id}`) && <Star size={12} className="text-[#FFB84D] fill-[#FFB84D]" />}
+                        {f.name}
+                      </div>
+                    </td>
                     <td className="px-3 py-3 text-text-secondary">{f.provider}</td>
                     <td className="px-3 py-3 text-text-secondary">{f.country}</td>
                     <td className="px-3 py-3 text-text-secondary">{f.region}</td>
