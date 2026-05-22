@@ -1,0 +1,68 @@
+import { describe, it, expect, vi } from 'vitest';
+import React from 'react';
+
+// ── Mock heavy browser-only dependencies ──────────────────────────
+
+// Mock echarts-for-react (needs canvas / DOM measurement)
+vi.mock('echarts-for-react', () => ({
+  default: vi.fn(({ style }: { style?: Record<string, unknown> }) =>
+    React.createElement('div', { 'data-testid': 'echarts-mock', style }),
+  ),
+}));
+
+// Mock @amcharts/amcharts5 (requires complex setup)
+vi.mock('@amcharts/amcharts5', () => ({
+  Root: { new: vi.fn(() => ({ container: { children: { push: vi.fn() } } })) },
+  MapChart: { new: vi.fn() },
+  MapPolygonSeries: { new: vi.fn() },
+  color: vi.fn(),
+  percent: vi.fn((v: number) => v),
+  Theme: { new: vi.fn() },
+}));
+
+vi.mock('@amcharts/amcharts5-geodata', () => ({}));
+
+// Mock useLiveData hook to return stable data
+vi.mock('@/hooks/useLiveData', () => ({
+  useLiveData: vi.fn(() => ({ data: null, loading: false, error: null, lastUpdated: null })),
+  formatRelativeTime: vi.fn(() => '2 min ago'),
+  formatTimeUntil: vi.fn(() => '5 min'),
+}));
+
+// ── Smoke Tests ──────────────────────────────────────────────────
+
+describe('Component smoke tests', () => {
+  it('Home page module exports a function component', async () => {
+    const mod = await import('@/pages/Home');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('MapPage module exports a function component', async () => {
+    const mod = await import('@/pages/MapPage');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('App module exports a function component', async () => {
+    const mod = await import('@/App');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+});
+
+describe('Data module smoke tests', () => {
+  it('mockData exports all expected datasets', async () => {
+    const mod = await import('@/data/mockData');
+    expect(mod.supplyChainData).toBeDefined();
+    expect(mod.fabricationFacilities).toBeDefined();
+    expect(mod.dataCenters).toBeDefined();
+    expect(mod.sourceReferences).toBeDefined();
+    expect(mod.facilitiesData).toBeDefined();
+    expect(mod.supplyChainTableData).toBeDefined();
+    expect(mod.sourcesTableData).toBeDefined();
+    expect(mod.layers).toBeDefined();
+    expect(mod.kpis).toBeDefined();
+    expect(mod.companies).toBeDefined();
+  });
+});
