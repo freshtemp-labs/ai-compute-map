@@ -32,7 +32,7 @@ const LANGUAGES = [
 
 export default function SettingsPage() {
   const { settings, updateSettings, resetSettings } = useSettings();
-  const { t, i18n } = useTranslation(['common']);
+  const { t, i18n } = useTranslation(['common', 'settings']);
 
   const [cacheStats, setCacheStats] = useState<CacheStats | null>(null);
   const [perfStats, setPerfStats] = useState<PerformanceStats | null>(null);
@@ -81,15 +81,15 @@ export default function SettingsPage() {
           <nav className="flex items-center gap-2 text-mono-sm text-text-muted mb-6">
             <Link to="/" className="hover:text-accent-cyan transition-colors">{t('common:breadcrumb.home')}</Link>
             <span>/</span>
-            <span className="text-text-secondary">设置</span>
+            <span className="text-text-secondary">{t('settings:breadcrumb')}</span>
           </nav>
 
           <div className="flex items-center gap-3 mb-2">
             <Settings className="text-accent-cyan" size={28} />
-            <h1 className="text-title text-text-primary">用户偏好设置</h1>
+            <h1 className="text-title text-text-primary">{t('settings:pageTitle')}</h1>
           </div>
           <p className="text-body text-text-secondary mt-2">
-            配置地图默认视图、图层显示和界面偏好。设置将自动保存到本地浏览器。
+            {t('settings:pageSubtitle')}
           </p>
         </div>
       </header>
@@ -101,10 +101,10 @@ export default function SettingsPage() {
           <section className="p-6 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
             <div className="flex items-center gap-3 mb-4">
               <ZoomIn size={18} className="text-accent-cyan" />
-              <h2 className="text-lg font-semibold text-text-primary">默认地图缩放级别</h2>
+              <h2 className="text-lg font-semibold text-text-primary">{t('settings:sections.zoom')}</h2>
             </div>
             <p className="text-sm text-text-secondary mb-4">
-              设置地图页面加载时的默认缩放级别（1-10）
+              {t('settings:sections.zoomDesc')}
             </p>
             <div className="flex items-center gap-4">
               <input
@@ -126,10 +126,10 @@ export default function SettingsPage() {
           <section className="p-6 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
             <div className="flex items-center gap-3 mb-4">
               <Layers size={18} className="text-accent-cyan" />
-              <h2 className="text-lg font-semibold text-text-primary">默认显示图层</h2>
+              <h2 className="text-lg font-semibold text-text-primary">{t('settings:sections.layers')}</h2>
             </div>
             <p className="text-sm text-text-secondary mb-4">
-              选择地图加载时默认显示的图层
+              {t('settings:sections.layersDesc')}
             </p>
             <div className="space-y-3">
               {(Object.keys(settings.defaultLayers) as LayerType[]).map((layer) => (
@@ -169,10 +169,10 @@ export default function SettingsPage() {
           <section className="p-6 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
             <div className="flex items-center gap-3 mb-4">
               <Globe size={18} className="text-accent-cyan" />
-              <h2 className="text-lg font-semibold text-text-primary">语言偏好</h2>
+              <h2 className="text-lg font-semibold text-text-primary">{t('settings:sections.language')}</h2>
             </div>
             <p className="text-sm text-text-secondary mb-4">
-              选择界面显示语言
+              {t('settings:sections.languageDesc')}
             </p>
             <div className="grid grid-cols-2 gap-3">
               {LANGUAGES.map((lang) => (
@@ -195,15 +195,15 @@ export default function SettingsPage() {
           <section className="p-6 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
             <div className="flex items-center gap-3 mb-4">
               <Monitor size={18} className="text-accent-cyan" />
-              <h2 className="text-lg font-semibold text-text-primary">主题模式</h2>
+              <h2 className="text-lg font-semibold text-text-primary">{t('settings:sections.theme')}</h2>
             </div>
             <p className="text-sm text-text-secondary mb-4">
-              选择界面颜色主题
+              {t('settings:sections.themeDesc')}
             </p>
             <div className="grid grid-cols-2 gap-3">
               {[
-                { value: 'dark' as const, label: '深色模式', icon: '🌙' },
-                { value: 'light' as const, label: '浅色模式', icon: '☀️' },
+                { value: 'dark' as const, label: t('settings:theme.dark'), icon: '🌙' },
+                { value: 'light' as const, label: t('settings:theme.light'), icon: '☀️' },
               ].map((theme) => (
                 <button
                   key={theme.value}
@@ -226,7 +226,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <Database size={18} className="text-accent-cyan" />
-                <h2 className="text-lg font-semibold text-text-primary">数据缓存状态</h2>
+                <h2 className="text-lg font-semibold text-text-primary">{t('settings:sections.cache')}</h2>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -241,26 +241,26 @@ export default function SettingsPage() {
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#F87171]/30 text-[#F87171] hover:bg-[#F87171]/10 transition-all duration-200 cursor-pointer text-sm"
                 >
                   <Trash2 size={14} />
-                  清除缓存
+                  {t('settings:actions.clearCache')}
                 </button>
               </div>
             </div>
             <p className="text-sm text-text-secondary mb-4">
-              localStorage 缓存数据，24小时自动过期。缓存命中时跳过重新解析。
+              {t('settings:sections.cacheDesc')}
             </p>
             {cacheStats && (
               <div className="grid grid-cols-3 gap-3">
                 <div className="p-3 rounded-lg bg-[#1E1E28] text-center">
                   <div className="text-lg font-bold text-accent-cyan">{cacheStats.totalEntries}</div>
-                  <div className="text-xs text-text-muted mt-1">缓存条目</div>
+                  <div className="text-xs text-text-muted mt-1">{t('settings:cache.entries')}</div>
                 </div>
                 <div className="p-3 rounded-lg bg-[#1E1E28] text-center">
                   <div className="text-lg font-bold text-accent-cyan">{formatBytes(cacheStats.totalSize)}</div>
-                  <div className="text-xs text-text-muted mt-1">缓存大小</div>
+                  <div className="text-xs text-text-muted mt-1">{t('settings:cache.size')}</div>
                 </div>
                 <div className="p-3 rounded-lg bg-[#1E1E28] text-center">
                   <div className="text-lg font-bold text-accent-cyan">{(cacheStats.hitRate * 100).toFixed(0)}%</div>
-                  <div className="text-xs text-text-muted mt-1">命中率</div>
+                  <div className="text-xs text-text-muted mt-1">{t('settings:cache.hitRate')}</div>
                 </div>
               </div>
             )}
@@ -284,7 +284,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <Activity size={18} className="text-accent-cyan" />
-                <h2 className="text-lg font-semibold text-text-primary">性能监控</h2>
+                <h2 className="text-lg font-semibold text-text-primary">{t('settings:sections.performance')}</h2>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -299,36 +299,36 @@ export default function SettingsPage() {
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#F87171]/30 text-[#F87171] hover:bg-[#F87171]/10 transition-all duration-200 cursor-pointer text-sm"
                 >
                   <Trash2 size={14} />
-                  清除记录
+                  {t('settings:actions.clearMetrics')}
                 </button>
               </div>
             </div>
             <p className="text-sm text-text-secondary mb-4">
-              使用 Performance API 监控页面加载和关键操作的执行时间。
+              {t('settings:sections.performanceDesc')}
             </p>
             {perfStats && (
               <>
                 <div className="grid grid-cols-2 gap-3 mb-4">
                   <div className="p-3 rounded-lg bg-[#1E1E28] text-center">
                     <div className="text-lg font-bold text-accent-cyan">{formatDuration(perfStats.pageLoadTime)}</div>
-                    <div className="text-xs text-text-muted mt-1">页面加载时间</div>
+                    <div className="text-xs text-text-muted mt-1">{t('settings:performance.pageLoad')}</div>
                   </div>
                   <div className="p-3 rounded-lg bg-[#1E1E28] text-center">
                     <div className="text-lg font-bold text-accent-cyan">{formatDuration(perfStats.domContentLoaded)}</div>
-                    <div className="text-xs text-text-muted mt-1">DOM 加载完成</div>
+                    <div className="text-xs text-text-muted mt-1">{t('settings:performance.domLoaded')}</div>
                   </div>
                   <div className="p-3 rounded-lg bg-[#1E1E28] text-center">
                     <div className="text-lg font-bold text-accent-cyan">{formatDuration(perfStats.firstContentfulPaint)}</div>
-                    <div className="text-xs text-text-muted mt-1">首次内容绘制</div>
+                    <div className="text-xs text-text-muted mt-1">{t('settings:performance.fcp')}</div>
                   </div>
                   <div className="p-3 rounded-lg bg-[#1E1E28] text-center">
                     <div className="text-lg font-bold text-accent-cyan">{formatDuration(perfStats.largestContentfulPaint)}</div>
-                    <div className="text-xs text-text-muted mt-1">最大内容绘制</div>
+                    <div className="text-xs text-text-muted mt-1">{t('settings:performance.lcp')}</div>
                   </div>
                 </div>
                 {perfStats.customMetrics.length > 0 && (
                   <div className="space-y-2">
-                    <div className="text-xs text-text-muted font-medium mb-1">自定义操作记录</div>
+                    <div className="text-xs text-text-muted font-medium mb-1">{t('settings:performance.customMetrics')}</div>
                     {perfStats.customMetrics.slice(-10).reverse().map((metric, idx) => (
                       <div key={idx} className="flex items-center justify-between text-xs text-text-secondary px-3 py-2 rounded bg-[#1E1E28]/50">
                         <span className="truncate mr-2">{metric.name}</span>
@@ -348,10 +348,10 @@ export default function SettingsPage() {
           <section className="p-6 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
             <div className="flex items-center gap-3 mb-4">
               <ShieldCheck size={18} className="text-accent-cyan" />
-              <h2 className="text-lg font-semibold text-text-primary">数据质量监控</h2>
+              <h2 className="text-lg font-semibold text-text-primary">{t('settings:sections.dataQuality')}</h2>
             </div>
             <p className="text-sm text-text-secondary mb-4">
-              实时监控数据完整性、一致性和时效性，确保数据来源可靠。
+              {t('settings:sections.dataQualityDesc')}
             </p>
             <DataQualityDashboard />
           </section>
@@ -360,9 +360,9 @@ export default function SettingsPage() {
           <section className="p-6 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-semibold text-text-primary">重置设置</h2>
+                <h2 className="text-lg font-semibold text-text-primary">{t('settings:sections.reset')}</h2>
                 <p className="text-sm text-text-secondary mt-1">
-                  将所有设置恢复为默认值
+                  {t('settings:sections.resetDesc')}
                 </p>
               </div>
               <button
@@ -370,7 +370,7 @@ export default function SettingsPage() {
                 className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#F87171]/30 text-[#F87171] hover:bg-[#F87171]/10 transition-all duration-200 cursor-pointer text-sm"
               >
                 <RotateCcw size={14} />
-                重置
+                {t('settings:actions.reset')}
               </button>
             </div>
           </section>

@@ -95,6 +95,19 @@
     "switchTo3D": "3D 지구본으로 전환",
     "switchToHeatmap": "히트맵 보기로 전환",
     "switchToMarkers": "마커 보기로 전환",
-    "keyboardHelp": "키보드 단축키"
+    "keyboardHelp": "키보드 단축키",
+    "dataTableSection": "스크린 리더용 데이터 테이블",
+    "dataTableTitle": "AI 컴퓨트 맵 시설 데이터",
+    "dataTableDesc": "이 테이블에는 공급망, 파운드리, 데이터센터 전반에 걸친 {{count}}개 시설이 포함되어 있습니다.",
+    "dataTableLabel": "AI 컴퓨트 시설 전체 목록",
+    "dataTableCaption": "AI 컴퓨트 인프라 시설 — {{count}}개 항목",
+    "colName": "이름",
+    "colCategory": "카테고리",
+    "colLayer": "레이어",
+    "colLocation": "위치",
+    "colValue": "값",
+    "colStatus": "상태",
+    "colSource": "데이터 출처",
+    "colUpdated": "최종 업데이트"
   }
 }

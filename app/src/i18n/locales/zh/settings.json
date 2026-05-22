@@ -12,13 +12,34 @@
     "theme": "主题模式",
     "themeDesc": "选择界面颜色主题",
     "reset": "重置设置",
-    "resetDesc": "将所有设置恢复为默认值"
+    "resetDesc": "将所有设置恢复为默认值",
+    "cache": "数据缓存状态",
+    "cacheDesc": "localStorage 缓存数据，24小时自动过期。缓存命中时跳过重新解析。",
+    "performance": "性能监控",
+    "performanceDesc": "使用 Performance API 监控页面加载和关键操作的执行时间。",
+    "dataQuality": "数据质量监控",
+    "dataQualityDesc": "实时监控数据完整性、一致性和时效性，确保数据来源可靠。"
   },
   "theme": {
     "dark": "深色模式",
     "light": "浅色模式"
   },
   "actions": {
-    "reset": "重置"
+    "reset": "重置",
+    "clearCache": "清除缓存",
+    "clearMetrics": "清除记录",
+    "refresh": "刷新"
+  },
+  "cache": {
+    "entries": "缓存条目",
+    "size": "缓存大小",
+    "hitRate": "命中率"
+  },
+  "performance": {
+    "pageLoad": "页面加载时间",
+    "domLoaded": "DOM 加载完成",
+    "fcp": "首次内容绘制",
+    "lcp": "最大内容绘制",
+    "customMetrics": "自定义操作记录"
   }
 }

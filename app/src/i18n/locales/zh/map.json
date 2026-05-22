@@ -95,6 +95,19 @@
     "switchTo3D": "切换到三维地球",
     "switchToHeatmap": "切换到热力图视图",
     "switchToMarkers": "切换到标记视图",
-    "keyboardHelp": "键盘快捷键帮助"
+    "keyboardHelp": "键盘快捷键帮助",
+    "dataTableSection": "屏幕阅读器数据表格",
+    "dataTableTitle": "AI算力地图设施数据",
+    "dataTableDesc": "此表格包含 {{count}} 个设施，涵盖供应链、代工厂和数据中心类别。",
+    "dataTableLabel": "AI算力设施完整列表",
+    "dataTableCaption": "AI算力基础设施设施 — {{count}} 条记录",
+    "colName": "名称",
+    "colCategory": "类别",
+    "colLayer": "图层",
+    "colLocation": "位置",
+    "colValue": "数值",
+    "colStatus": "状态",
+    "colSource": "数据来源",
+    "colUpdated": "最后更新"
   }
 }

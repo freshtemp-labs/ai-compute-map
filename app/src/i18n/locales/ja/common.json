@@ -8,7 +8,9 @@
     "compare": "施設比較",
     "sources": "データソース",
     "history": "履歴",
-    "developers": "API & ドキュメント"
+    "developers": "API & ドキュメント",
+    "news": "ニュース",
+    "settings": "設定"
   },
   "status": {
     "live": "ライブ",
@@ -86,6 +88,9 @@
     "chartsOnly": "チャートのみ"
   },
   "a11y": {
-    "skipToContent": "メインコンテンツへスキップ"
+    "skipToContent": "メインコンテンツへスキップ",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "chartDesc": "チャート：{{title}}"
   }
 }

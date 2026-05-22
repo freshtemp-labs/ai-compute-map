@@ -9,10 +9,14 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import SkipToContent from './SkipToContent';
 import OfflineBanner from './OfflineBanner';
+
+/** Languages that use right-to-left text direction */
+const RTL_LANGUAGES = new Set(['ar', 'he', 'fa', 'ur']);
 
 const pageTransition = {
   initial: { opacity: 0, y: 12 },
@@ -23,10 +27,18 @@ const pageTransition = {
 
 export default function Layout() {
   const location = useLocation();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  // Set document direction for RTL support
+  useEffect(() => {
+    const dir = RTL_LANGUAGES.has(i18n.language) ? 'rtl' : 'ltr';
+    document.documentElement.dir = dir;
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
 
   return (
     <div className="min-h-[100dvh] flex flex-col bg-bg-base">

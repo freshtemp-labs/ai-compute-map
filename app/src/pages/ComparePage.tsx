@@ -8,7 +8,7 @@
  *               @/context/CompareContext, @/components/map/useMapData,
  *               @/constants/layerColors
  */
-import { useState, useMemo } from 'react';
+import { useState, useMemo, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import ReactECharts from 'echarts-for-react';
@@ -247,6 +247,8 @@ export default function ComparePage() {
                       option={chartOption}
                       style={{ height: 380, width: '100%' }}
                       opts={{ renderer: 'canvas' }}
+                      role="img"
+                      aria-label={t('compare.radarTitle', { ns: 'map', defaultValue: 'Performance Comparison' })}
                     />
                   </motion.div>
                 )}
@@ -345,7 +347,7 @@ export default function ComparePage() {
   );
 }
 
-function CompareRow({ label, values }: { label: string; values: string[] }) {
+const CompareRow = memo(function CompareRow({ label, values }: { label: string; values: string[] }) {
   return (
     <tr className="border-b border-[#1E1E28] last:border-0 hover:bg-[#181820] transition-colors">
       <td className="p-3 text-[11px] font-mono text-[#6B6B80] uppercase tracking-wider">
@@ -358,4 +360,4 @@ function CompareRow({ label, values }: { label: string; values: string[] }) {
       ))}
     </tr>
   );
-}
+});

@@ -12,13 +12,34 @@
     "theme": "テーマモード",
     "themeDesc": "インターフェースのカラーテーマを選択",
     "reset": "設定リセット",
-    "resetDesc": "すべての設定をデフォルト値に戻す"
+    "resetDesc": "すべての設定をデフォルト値に戻す",
+    "cache": "データキャッシュ状態",
+    "cacheDesc": "localStorageがデータをキャッシュし、24時間で自動期限切れ。キャッシュヒット時は再解析をスキップ。",
+    "performance": "パフォーマンス監視",
+    "performanceDesc": "Performance APIを使用してページ読み込みと主要操作の実行時間を監視。",
+    "dataQuality": "データ品質監視",
+    "dataQualityDesc": "データの整合性、一貫性、適時性をリアルタイムで監視し、信頼できるデータソースを保証。"
   },
   "theme": {
     "dark": "ダークモード",
     "light": "ライトモード"
   },
   "actions": {
-    "reset": "リセット"
+    "reset": "リセット",
+    "clearCache": "キャッシュクリア",
+    "clearMetrics": "記録クリア",
+    "refresh": "更新"
+  },
+  "cache": {
+    "entries": "キャッシュエントリ",
+    "size": "キャッシュサイズ",
+    "hitRate": "ヒット率"
+  },
+  "performance": {
+    "pageLoad": "ページ読み込み時間",
+    "domLoaded": "DOMコンテンツ読み込み完了",
+    "fcp": "初回コンテンツ描画",
+    "lcp": "最大コンテンツ描画",
+    "customMetrics": "カスタム操作記録"
   }
 }

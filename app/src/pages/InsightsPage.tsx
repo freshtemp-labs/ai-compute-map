@@ -390,6 +390,8 @@ export default function InsightsPage() {
               option={regionalChartOption}
               style={{ height: 320, width: '100%' }}
               opts={{ renderer: 'canvas' }}
+              role="img"
+              aria-label="Bar chart showing regional installed power capacity in MW"
             />
           </motion.div>
 
@@ -411,6 +413,8 @@ export default function InsightsPage() {
               option={techPieOption}
               style={{ height: 320, width: '100%' }}
               opts={{ renderer: 'canvas' }}
+              role="img"
+              aria-label="Pie chart showing lithography technology generation distribution"
             />
           </motion.div>
         </div>
@@ -433,6 +437,8 @@ export default function InsightsPage() {
             option={heatmapChartOption}
             style={{ height: 360, width: '100%' }}
             opts={{ renderer: 'canvas' }}
+            role="img"
+            aria-label="Bar chart showing data center power by country, top 15 countries ranked by total MW"
           />
         </motion.div>
 

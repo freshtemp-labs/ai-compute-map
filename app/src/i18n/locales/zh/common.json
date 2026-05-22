@@ -8,7 +8,9 @@
     "compare": "设施对比",
     "sources": "数据来源",
     "history": "历史数据",
-    "developers": "API & 文档"
+    "developers": "API & 文档",
+    "news": "时事动态",
+    "settings": "设置"
   },
   "status": {
     "live": "实时",
@@ -86,6 +88,9 @@
     "chartsOnly": "仅图表"
   },
   "a11y": {
-    "skipToContent": "跳转到主内容"
+    "skipToContent": "跳转到主内容",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "chartDesc": "图表：{{title}}"
   }
 }

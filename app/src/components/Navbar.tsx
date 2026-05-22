@@ -90,7 +90,7 @@ export default function Navbar() {
     { label: t('nav.compare'), path: '/compare' },
     { label: t('nav.sources'), path: '/sources' },
     { label: t('nav.history'), path: '/history' },
-    { label: '动态', path: '/news' },
+    { label: t('nav.news'), path: '/news' },
   ];
 
   const handleLangChange = useCallback((code: string) => {
@@ -161,7 +161,7 @@ export default function Navbar() {
             <Link
               to="/settings"
               className="hidden sm:flex items-center justify-center w-8 h-8 text-text-secondary hover:text-text-primary transition-colors duration-200"
-              title="设置"
+              title={t('nav.settings')}
             >
               <Settings size={16} />
             </Link>
@@ -226,7 +226,7 @@ export default function Navbar() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden flex items-center justify-center w-9 h-9 text-text-secondary hover:text-text-primary transition-colors"
-              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={mobileMenuOpen ? t('a11y.closeMenu') : t('a11y.openMenu')}
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -314,7 +314,7 @@ export default function Navbar() {
                     className="flex items-center gap-2 px-4 py-3 rounded-lg text-body-md text-text-secondary hover:text-text-primary hover:bg-[rgba(255,255,255,0.04)] transition-colors"
                   >
                     <Settings size={14} />
-                    设置
+                    {t('nav.settings')}
                   </Link>
                   <Link
                     to="/developers"

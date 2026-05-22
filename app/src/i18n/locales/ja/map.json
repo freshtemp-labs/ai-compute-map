@@ -95,6 +95,19 @@
     "switchTo3D": "3D地球に切り替え",
     "switchToHeatmap": "ヒートマップ表示に切り替え",
     "switchToMarkers": "マーカー表示に切り替え",
-    "keyboardHelp": "キーボードショートカット"
+    "keyboardHelp": "キーボードショートカット",
+    "dataTableSection": "スクリーンリーダー用データテーブル",
+    "dataTableTitle": "AIコンピュートマップ施設データ",
+    "dataTableDesc": "このテーブルにはサプライチェーン、ファウンドリ、データセンターの{{count}}施設が含まれています。",
+    "dataTableLabel": "AIコンピュート施設の完全リスト",
+    "dataTableCaption": "AIコンピュートインフラ施設 — {{count}}件",
+    "colName": "名称",
+    "colCategory": "カテゴリ",
+    "colLayer": "レイヤー",
+    "colLocation": "所在地",
+    "colValue": "値",
+    "colStatus": "ステータス",
+    "colSource": "データソース",
+    "colUpdated": "最終更新"
   }
 }

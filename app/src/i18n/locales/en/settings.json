@@ -12,13 +12,34 @@
     "theme": "Theme Mode",
     "themeDesc": "Choose the interface color theme",
     "reset": "Reset Settings",
-    "resetDesc": "Restore all settings to their default values"
+    "resetDesc": "Restore all settings to their default values",
+    "cache": "Data Cache Status",
+    "cacheDesc": "localStorage caches data with 24-hour auto-expiry. Cache hits skip re-parsing.",
+    "performance": "Performance Monitoring",
+    "performanceDesc": "Monitor page load and key operation execution times using the Performance API.",
+    "dataQuality": "Data Quality Monitoring",
+    "dataQualityDesc": "Real-time monitoring of data integrity, consistency, and timeliness to ensure reliable data sources."
   },
   "theme": {
     "dark": "Dark Mode",
     "light": "Light Mode"
   },
   "actions": {
-    "reset": "Reset"
+    "reset": "Reset",
+    "clearCache": "Clear Cache",
+    "clearMetrics": "Clear Records",
+    "refresh": "Refresh"
+  },
+  "cache": {
+    "entries": "Cache Entries",
+    "size": "Cache Size",
+    "hitRate": "Hit Rate"
+  },
+  "performance": {
+    "pageLoad": "Page Load Time",
+    "domLoaded": "DOM Content Loaded",
+    "fcp": "First Contentful Paint",
+    "lcp": "Largest Contentful Paint",
+    "customMetrics": "Custom Operation Records"
   }
 }

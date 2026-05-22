@@ -12,13 +12,34 @@
     "theme": "테마 모드",
     "themeDesc": "인터페이스 색상 테마 선택",
     "reset": "설정 초기화",
-    "resetDesc": "모든 설정을 기본값으로 복원"
+    "resetDesc": "모든 설정을 기본값으로 복원",
+    "cache": "데이터 캐시 상태",
+    "cacheDesc": "localStorage가 데이터를 캐시하며, 24시간 후 자동 만료됩니다. 캐시 히트 시 재분석을 건너뜁니다.",
+    "performance": "성능 모니터링",
+    "performanceDesc": "Performance API를 사용하여 페이지 로드 및 주요 작업 실행 시간을 모니터링합니다.",
+    "dataQuality": "데이터 품질 모니터링",
+    "dataQualityDesc": "데이터 무결성, 일관성 및 적시성을 실시간으로 모니터링하여 신뢰할 수 있는 데이터 소스를 보장합니다."
   },
   "theme": {
     "dark": "다크 모드",
     "light": "라이트 모드"
   },
   "actions": {
-    "reset": "초기화"
+    "reset": "초기화",
+    "clearCache": "캐시 삭제",
+    "clearMetrics": "기록 삭제",
+    "refresh": "새로고침"
+  },
+  "cache": {
+    "entries": "캐시 항목",
+    "size": "캐시 크기",
+    "hitRate": "히트율"
+  },
+  "performance": {
+    "pageLoad": "페이지 로드 시간",
+    "domLoaded": "DOM 콘텐츠 로드 완료",
+    "fcp": "첫 번째 콘텐츠 페인트",
+    "lcp": "최대 콘텐츠 페인트",
+    "customMetrics": "사용자 정의 작업 기록"
   }
 }

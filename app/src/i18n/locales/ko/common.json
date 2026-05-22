@@ -8,7 +8,9 @@
     "compare": "시설 비교",
     "sources": "데이터 출처",
     "history": "히스토리",
-    "developers": "API & 문서"
+    "developers": "API & 문서",
+    "news": "뉴스",
+    "settings": "설정"
   },
   "status": {
     "live": "실시간",
@@ -86,6 +88,9 @@
     "chartsOnly": "차트만"
   },
   "a11y": {
-    "skipToContent": "메인 콘텐츠로 건너뛰기"
+    "skipToContent": "메인 콘텐츠로 건너뛰기",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기",
+    "chartDesc": "차트: {{title}}"
   }
 }

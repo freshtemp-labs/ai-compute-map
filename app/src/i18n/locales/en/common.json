@@ -8,7 +8,9 @@
     "compare": "Compare",
     "sources": "Data Sources",
     "history": "History",
-    "developers": "API & Docs"
+    "developers": "API & Docs",
+    "news": "News",
+    "settings": "Settings"
   },
   "status": {
     "live": "Live",
@@ -86,6 +88,9 @@
     "chartsOnly": "Charts Only"
   },
   "a11y": {
-    "skipToContent": "Skip to main content"
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "chartDesc": "Chart: {{title}}"
   }
 }

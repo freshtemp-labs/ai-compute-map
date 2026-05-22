@@ -6,7 +6,7 @@
  * @dependencies react-i18next, framer-motion, echarts-for-react,
  *               @/data/mockData, @/components/map/useMapData
  */
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState, useMemo, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import ReactECharts from 'echarts-for-react';
@@ -69,6 +69,7 @@ function HeroSection() {
         <img
           src="/earth-wireframe.png"
           alt=""
+          loading="lazy"
           className="w-[600px] h-[600px] object-contain animate-globe-rotate opacity-60"
         />
       </motion.div>
@@ -202,7 +203,7 @@ function formatKPIValue(val: number, unit: string): string {
   return val.toFixed(0);
 }
 
-function KPIBlock({ kpi, index }: { kpi: typeof kpis[0]; index: number }) {
+const KPIBlock = memo(function KPIBlock({ kpi, index }: { kpi: typeof kpis[0]; index: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-20% 0px' });
   const count = useCountUp(kpi.value, 800, inView);
@@ -237,7 +238,7 @@ function KPIBlock({ kpi, index }: { kpi: typeof kpis[0]; index: number }) {
       </div>
     </motion.div>
   );
-}
+});
 
 function KPIDashboard() {
   const { t } = usePageTranslation();
@@ -405,7 +406,7 @@ function KPIDashboard() {
                 {t('home:dashboard.regionDist', 'Data Center Distribution by Region')}
               </h4>
               <div style={{ height: 260 }}>
-                <ReactECharts option={regionChartOption} style={{ width: '100%', height: '100%' }} opts={{ renderer: 'canvas' }} />
+                <ReactECharts option={regionChartOption} style={{ width: '100%', height: '100%' }} opts={{ renderer: 'canvas' }} role="img" aria-label={t('home:dashboard.regionDist', 'Data Center Distribution by Region')} />
               </div>
             </motion.div>
 
@@ -420,7 +421,7 @@ function KPIDashboard() {
                 {t('home:dashboard.categoryDist', 'Supply Chain by Category')}
               </h4>
               <div style={{ height: 260 }}>
-                <ReactECharts option={categoryChartOption} style={{ width: '100%', height: '100%' }} opts={{ renderer: 'canvas' }} />
+                <ReactECharts option={categoryChartOption} style={{ width: '100%', height: '100%' }} opts={{ renderer: 'canvas' }} role="img" aria-label={t('home:dashboard.categoryDist', 'Supply Chain by Category')} />
               </div>
             </motion.div>
           </div>
@@ -433,7 +434,7 @@ function KPIDashboard() {
 /* ================================================================
    Section 3: Three Layers Overview
    ================================================================ */
-function SparklineChart({ color, data }: { color: string; data: number[] }) {
+const SparklineChart = memo(function SparklineChart({ color, data }: { color: string; data: number[] }) {
   const option = useMemo(() => ({
     grid: { left: 0, right: 0, top: 2, bottom: 2 },
     xAxis: { type: 'category' as const, show: false, data: Array.from({ length: data.length }, (_, i) => i) },
@@ -454,7 +455,7 @@ function SparklineChart({ color, data }: { color: string; data: number[] }) {
   }), [color, data]);
 
   return <ReactECharts option={option} style={{ width: 120, height: 40 }} opts={{ renderer: 'svg' }} />;
-}
+});
 
 function LayerCard({ layer, index }: { layer: typeof layers[0]; index: number }) {
   const { t } = usePageTranslation();
@@ -487,7 +488,7 @@ function LayerCard({ layer, index }: { layer: typeof layers[0]; index: number })
         style={{ background: layer.glowGradient }}
       />
       <div className="relative z-10">
-        <img src={layer.icon} alt={layer.title} className="w-12 h-12 mb-4" />
+        <img src={layer.icon} alt={layer.title} className="w-12 h-12 mb-4" loading="lazy" />
         <h3 className="text-heading-md text-text-primary">{layer.title}</h3>
         <span className="text-mono-sm" style={{ color: layer.accentColor }}>
           {layer.chineseLabel}

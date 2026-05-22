@@ -95,6 +95,19 @@
     "switchTo3D": "Switch to 3D globe",
     "switchToHeatmap": "Switch to heatmap view",
     "switchToMarkers": "Switch to markers view",
-    "keyboardHelp": "Keyboard shortcuts"
+    "keyboardHelp": "Keyboard shortcuts",
+    "dataTableSection": "Facility data table for screen readers",
+    "dataTableTitle": "AI Compute Map Facility Data",
+    "dataTableDesc": "This table contains {{count}} facilities across supply chain, foundry, and data center categories.",
+    "dataTableLabel": "Complete list of AI compute facilities",
+    "dataTableCaption": "AI Compute Infrastructure Facilities — {{count}} entries",
+    "colName": "Name",
+    "colCategory": "Category",
+    "colLayer": "Layer",
+    "colLocation": "Location",
+    "colValue": "Value",
+    "colStatus": "Status",
+    "colSource": "Data Source",
+    "colUpdated": "Last Updated"
   }
 }
