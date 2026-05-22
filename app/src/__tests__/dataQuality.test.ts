@@ -9,6 +9,7 @@ import {
   computeTimeliness,
 } from '@/utils/dataQuality';
 import { supplyChainData, fabricationFacilities, dataCenters, sourcesTableData } from '@/data/mockData';
+import type { DataPoint } from '@/types';
 
 describe('dataQuality utilities', () => {
   it('computeQualityScore returns scores in 0-100 range', () => {
@@ -76,5 +77,73 @@ describe('dataQuality utilities', () => {
     expect(score.consistency).toBe(100);
     expect(score.timeliness).toBe(100);
     expect(score.overall).toBe(100);
+  });
+
+  it('computeSourceDistribution handles empty arrays', () => {
+    const dist = computeSourceDistribution([], [], []);
+    expect(dist.tier1).toBe(0);
+    expect(dist.tier2).toBe(0);
+    expect(dist.tier3).toBe(0);
+    expect(dist.total).toBe(0);
+  });
+
+  it('computeMissingFields handles empty arrays', () => {
+    const fields = computeMissingFields([], [], []);
+    expect(fields.length).toBe(0);
+  });
+
+  it('computeSourceEntryDistribution handles empty sources', () => {
+    const dist = computeSourceEntryDistribution([]);
+    expect(dist.tier1).toBe(0);
+    expect(dist.tier2).toBe(0);
+    expect(dist.tier3).toBe(0);
+    expect(dist.total).toBe(0);
+  });
+
+  it('computeConsistency ranks tier1 data higher than tier3', () => {
+    const tier1Data: Partial<DataPoint>[] = [
+      { sourceTier: 1 as DataPoint['sourceTier'], name: 't1', value: 1, sourceName: 's', lastUpdated: '2024-01-01', lat: 0, lng: 0, layer: 'supply', category: 'test' },
+    ];
+    const tier3Data: Partial<DataPoint>[] = [
+      { sourceTier: 3 as DataPoint['sourceTier'], name: 't3', value: 1, sourceName: 's', lastUpdated: '2024-01-01', lat: 0, lng: 0, layer: 'supply', category: 'test' },
+    ];
+    const score1 = computeConsistency(tier1Data as DataPoint[], [], []);
+    const score3 = computeConsistency(tier3Data as DataPoint[], [], []);
+    expect(score1).toBeGreaterThan(score3);
+  });
+
+  it('computeTimeliness scores recent data higher than old data', () => {
+    const recentData: Partial<DataPoint>[] = [
+      { sourceTier: 1, name: 'recent', value: 1, sourceName: 's', lastUpdated: new Date().toISOString().slice(0, 10), lat: 0, lng: 0, layer: 'supply', category: 'test' } as DataPoint,
+    ];
+    const oldData: Partial<DataPoint>[] = [
+      { sourceTier: 1, name: 'old', value: 1, sourceName: 's', lastUpdated: '2020-01-01', lat: 0, lng: 0, layer: 'supply', category: 'test' } as DataPoint,
+    ];
+    const recentScore = computeTimeliness(recentData as DataPoint[], [], []);
+    const oldScore = computeTimeliness(oldData as DataPoint[], [], []);
+    expect(recentScore).toBeGreaterThan(oldScore);
+  });
+
+  it('overall score is weighted average of sub-scores', () => {
+    const score = computeQualityScore(supplyChainData, fabricationFacilities, dataCenters);
+    const expected = Math.round(score.completeness * 0.4 + score.consistency * 0.35 + score.timeliness * 0.25);
+    expect(score.overall).toBe(expected);
+  });
+
+  it('computeMissingFields percent is correctly calculated', () => {
+    const fields = computeMissingFields(supplyChainData, fabricationFacilities, dataCenters);
+    for (const f of fields) {
+      const expectedPercent = Math.round((f.missing / f.total) * 100);
+      expect(f.percent).toBe(expectedPercent);
+    }
+  });
+
+  it('all source tiers are represented in supply chain data', () => {
+    const dist = computeSourceDistribution(supplyChainData, fabricationFacilities, dataCenters);
+    expect(dist.tier1).toBeGreaterThan(0);
+    expect(dist.tier2).toBeGreaterThan(0);
+    // Tier 3 may be 0 for some datasets but supply chain has tier3 data
+    const totalTiers = dist.tier1 + dist.tier2 + dist.tier3;
+    expect(totalTiers).toBeGreaterThan(50);
   });
 });

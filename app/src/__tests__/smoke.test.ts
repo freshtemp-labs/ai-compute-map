@@ -99,6 +99,64 @@ describe('Data module smoke tests', () => {
   });
 });
 
+describe('Chart component smoke tests', () => {
+  it('TrendChart module exports a function component', async () => {
+    const mod = await import('@/components/charts/TrendChart');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('FunnelChart module exports a function component', async () => {
+    const mod = await import('@/components/charts/FunnelChart');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('GaugeDashboard module exports a function component', async () => {
+    const mod = await import('@/components/charts/GaugeDashboard');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('SupplyChainSankey module exports a function component', async () => {
+    const mod = await import('@/components/supply-chain/SupplyChainSankey');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('DataQualityDashboard module exports a function component', async () => {
+    const mod = await import('@/components/data-quality/DataQualityDashboard');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+});
+
+describe('Page smoke tests for enhanced features', () => {
+  it('DataCentersPage module exports a function component', async () => {
+    const mod = await import('@/pages/DataCentersPage');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('SupplyChainPage module exports a function component', async () => {
+    const mod = await import('@/pages/SupplyChainPage');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('SettingsPage module exports a function component', async () => {
+    const mod = await import('@/pages/SettingsPage');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('FoundriesPage module exports a function component', async () => {
+    const mod = await import('@/pages/FoundriesPage');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+});
+
 describe('CompareContext smoke tests', () => {
   it('CompareProvider and useCompare exports exist', async () => {
     const mod = await import('@/context/CompareContext');
