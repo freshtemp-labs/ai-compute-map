@@ -122,7 +122,7 @@ export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: Searc
                 <div ref={resultsRef} className="max-h-[360px] overflow-y-auto">
                   {results.length === 0 ? (
                     <div className="px-4 py-8 text-center text-body-sm text-[#6B6B80]">
-                      {t('map:facility.noResults', 'No results found')} for &ldquo;{query}&rdquo;
+                      {t('map:facility.noResults', { query })}
                     </div>
                   ) : (
                     results.map((pin, index) => {
@@ -146,7 +146,7 @@ export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: Searc
                             <div className="flex items-center gap-1.5 mt-0.5">
                               <MapPinIcon size={11} className="text-[#6B6B80] flex-shrink-0" />
                               <span className="text-[11px] font-mono text-[#6B6B80] truncate">
-                                {[pin.city, pin.country].filter(Boolean).join(', ') || 'Unknown'}
+                                {[pin.city, pin.country].filter(Boolean).join(', ') || t('map:facility.unknown')}
                               </span>
                             </div>
                           </div>
@@ -165,7 +165,7 @@ export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: Searc
               {/* Hint */}
               {query.trim() === '' && (
                 <div className="px-4 py-6 text-center text-[12px] text-[#6B6B80] font-mono">
-                  Type to search across {pins.length} data points
+                  {t('map:facility.typeToSearch', { count: pins.length })}
                 </div>
               )}
             </div>

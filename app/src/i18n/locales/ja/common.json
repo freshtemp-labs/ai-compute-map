@@ -66,5 +66,8 @@
     "tier2Desc": "業界分析",
     "tier3": "三次ソース",
     "tier3Desc": "モデル推定値"
+  },
+  "breadcrumb": {
+    "home": "ホーム"
   }
 }

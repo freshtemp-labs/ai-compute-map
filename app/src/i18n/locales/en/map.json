@@ -55,6 +55,11 @@
     "dataSource": "Data Source",
     "crossVerify": "Cross-verify sources",
     "viewFullPage": "View Full Page",
-    "tier": "Source Tier"
+    "tier": "Source Tier",
+    "unknown": "Unknown",
+    "updatedLabel": "Updated:",
+    "unknownSources": "Unknown sources",
+    "noResults": "No results found for \"{{query}}\"",
+    "typeToSearch": "Type to search across {{count}} data points"
   }
 }

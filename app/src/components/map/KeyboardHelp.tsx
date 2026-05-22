@@ -41,7 +41,7 @@ export default function KeyboardHelp({ isOpen, onClose }: KeyboardHelpProps) {
           >
             <div className="bg-[#111118] border border-[#2A2A3A] rounded-lg shadow-[0_24px_80px_rgba(0,0,0,0.6)] overflow-hidden">
               <div className="flex items-center justify-between px-4 py-3 border-b border-[#1E1E28]">
-                <h3 className="text-heading-sm text-[#E8E8EC] font-display">Keyboard Shortcuts</h3>
+                <h3 className="text-heading-sm text-[#E8E8EC] font-display">{t('map:keyboard.title')}</h3>
                 <button
                   onClick={onClose}
                   className="p-1 rounded-md text-[#6B6B80] hover:text-[#E8E8EC] hover:bg-[#181820] transition-colors cursor-pointer"

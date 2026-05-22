@@ -66,5 +66,8 @@
     "tier2Desc": "行业分析报告",
     "tier3": "三级来源",
     "tier3Desc": "模型估算数据"
+  },
+  "breadcrumb": {
+    "home": "首页"
   }
 }

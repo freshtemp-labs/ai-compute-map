@@ -55,6 +55,11 @@
     "dataSource": "データソース",
     "crossVerify": "ソースを相互検証",
     "viewFullPage": "詳細ページを見る",
-    "tier": "ソース層"
+    "tier": "ソース層",
+    "unknown": "不明",
+    "updatedLabel": "更新:",
+    "unknownSources": "不明なソース",
+    "noResults": "\"{{query}}\" の結果が見つかりません",
+    "typeToSearch": "{{count}}件のデータポイントを検索"
   }
 }

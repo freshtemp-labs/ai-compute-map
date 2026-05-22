@@ -105,7 +105,7 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
         {/* Category / Type */}
         {pin.category && (
           <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
-            <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">Category</span>
+            <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">{t('map:facility.category')}</span>
             <p className="text-body-md text-[#E8E8EC] mt-1">{pin.category}</p>
           </div>
         )}
@@ -113,7 +113,7 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
         {pin.status && (
           <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">Status</span>
+              <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">{t('map:facility.status')}</span>
               <StatusBadge status={pin.status} />
             </div>
           </div>
@@ -123,7 +123,7 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
         {(pin.provider || pin.company) && (
           <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
             <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">
-              {pin.layer === 'datacenter' ? 'Provider' : 'Company'}
+              {pin.layer === 'datacenter' ? t('map:facility.provider') : t('map:facility.company')}
             </span>
             <p className="text-body-md text-[#E8E8EC] mt-1">{pin.provider || pin.company}</p>
           </div>
@@ -132,7 +132,7 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
         {/* Source Info */}
         <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28] space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">Data Source</span>
+            <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">{t('map:facility.dataSource')}</span>
             <span
               className="text-[10px] font-mono px-1.5 py-0.5 rounded border"
               style={{ color: tier.color, borderColor: tier.color }}
@@ -143,7 +143,7 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
           <p className="text-body-sm text-[#9A9AAF]">{pin.sourceName}</p>
           <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#6B6B80]">
             <Database size={11} />
-            <span>Updated: {pin.lastUpdated}</span>
+            <span>{t('map:facility.updatedLabel')} {pin.lastUpdated}</span>
           </div>
           <button
             className="flex items-center gap-1.5 mt-1 text-[12px] font-medium transition-colors duration-200 hover:opacity-80 cursor-pointer"
@@ -155,7 +155,7 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
             }}
           >
             <Crosshair size={12} />
-            Cross-verify sources
+            {t('map:facility.crossVerify')}
           </button>
         </div>
       </div>
@@ -164,7 +164,7 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
       <div className="flex-shrink-0 p-4 border-t border-[#1E1E28] bg-[#111118]">
         <div className="flex items-center justify-between">
           <span className="text-mono-sm text-[#6B6B80]">
-            {pin.sourceTier ? `${pin.sourceTier} source${pin.sourceTier > 1 ? 's' : ''}` : 'Unknown sources'}
+            {pin.sourceTier ? `${pin.sourceTier} source${pin.sourceTier > 1 ? 's' : ''}` : t('map:facility.unknownSources')}
           </span>
           <button
             onClick={() => {
@@ -173,7 +173,7 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
             }}
             className="flex items-center gap-1 text-[11px] font-mono text-[#9A9AAF] hover:text-[#00D4FF] transition-colors duration-200 cursor-pointer"
           >
-            View Full Page
+            {t('map:facility.viewFullPage')}
             <ExternalLink size={11} />
           </button>
         </div>
@@ -195,11 +195,12 @@ function MetricCard({ label, value, unit, color }: { label: string; value: strin
 }
 
 function StatusBadge({ status }: { status: string }) {
+  const { t } = useTranslation('map');
   const statusConfig: Record<string, { color: string; bg: string; label: string }> = {
-    operational: { color: '#22C55E', bg: 'rgba(34,197,94,0.15)', label: 'Operational' },
-    construction: { color: '#F59E0B', bg: 'rgba(245,158,11,0.15)', label: 'Construction' },
-    planned: { color: '#3B82F6', bg: 'rgba(59,130,246,0.15)', label: 'Planned' },
-    expansion: { color: '#A855F7', bg: 'rgba(168,85,247,0.15)', label: 'Expansion' },
+    operational: { color: '#22C55E', bg: 'rgba(34,197,94,0.15)', label: t('map:status.operational') },
+    construction: { color: '#F59E0B', bg: 'rgba(245,158,11,0.15)', label: t('map:status.construction') },
+    planned: { color: '#3B82F6', bg: 'rgba(59,130,246,0.15)', label: t('map:status.planned') },
+    expansion: { color: '#A855F7', bg: 'rgba(168,85,247,0.15)', label: t('map:status.expansion') },
   };
   const cfg = statusConfig[status] || { color: '#6B6B80', bg: 'rgba(107,107,128,0.15)', label: status };
   return (

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export default function HistoryPage() {
-  const { t } = useTranslation('history');
+  const { t } = useTranslation(['history', 'common']);
 
   return (
     <div className="min-h-screen">
@@ -10,7 +10,7 @@ export default function HistoryPage() {
       <header className="pt-28 pb-12 px-6">
         <div className="max-w-6xl mx-auto">
           <nav className="flex items-center gap-2 text-mono-sm text-text-muted mb-6">
-            <Link to="/" className="hover:text-accent-cyan transition-colors">Home</Link>
+            <Link to="/" className="hover:text-accent-cyan transition-colors">{t('common:breadcrumb.home')}</Link>
             <span>/</span>
             <span className="text-text-secondary">{t('history:pageTitle')}</span>
           </nav>

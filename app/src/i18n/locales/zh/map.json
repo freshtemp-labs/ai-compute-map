@@ -55,6 +55,11 @@
     "dataSource": "数据来源",
     "crossVerify": "交叉验证来源",
     "viewFullPage": "查看完整页面",
-    "tier": "来源层级"
+    "tier": "来源层级",
+    "unknown": "未知",
+    "updatedLabel": "更新于:",
+    "unknownSources": "未知来源",
+    "noResults": "未找到 \"{{query}}\" 的结果",
+    "typeToSearch": "在 {{count}} 个数据点中搜索"
   }
 }

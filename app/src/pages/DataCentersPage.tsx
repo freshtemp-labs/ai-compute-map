@@ -90,7 +90,7 @@ export default function DataCentersPage() {
       <header className="pt-28 pb-12 px-6">
         <div className="max-w-6xl mx-auto">
           <nav className="flex items-center gap-2 text-mono-sm text-text-muted mb-6">
-            <Link to="/" className="hover:text-accent-cyan transition-colors">Home</Link>
+            <Link to="/" className="hover:text-accent-cyan transition-colors">{t('common:breadcrumb.home')}</Link>
             <span>/</span>
             <span className="text-text-secondary">{t('datacenters:breadcrumb')}</span>
           </nav>

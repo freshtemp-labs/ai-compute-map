@@ -75,6 +75,10 @@ export default function MapPage() {
       // Don't trigger shortcuts when typing in search
       if (searchOpen && e.key !== 'Escape') return;
 
+      // Don't trigger shortcuts when typing in input/textarea
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) return;
+
       if (e.key === '?') {
         e.preventDefault();
         setKeyboardHelpOpen((prev) => !prev);

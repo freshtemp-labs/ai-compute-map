@@ -66,5 +66,8 @@
     "tier2Desc": "Industry analysis",
     "tier3": "Tier 3",
     "tier3Desc": "Modeled estimates"
+  },
+  "breadcrumb": {
+    "home": "Home"
   }
 }

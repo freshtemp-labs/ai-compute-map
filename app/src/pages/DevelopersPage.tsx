@@ -330,7 +330,7 @@ curl "https://api.aicomputemap.org/api/v1/export?format=csv" \\
 // ─── Component ─────────────────────────────────────────────────
 
 export default function DevelopersPage() {
-  const { t } = useTranslation('developers');
+  const { t } = useTranslation(['developers', 'common']);
   const [expandedEndpoint, setExpandedEndpoint] = useState<number | null>(null);
   const [showTypes, setShowTypes] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
@@ -347,7 +347,7 @@ export default function DevelopersPage() {
       <header className="pt-28 pb-12 px-6">
         <div className="max-w-6xl mx-auto">
           <nav className="flex items-center gap-2 text-mono-sm text-text-muted mb-6">
-            <Link to="/" className="hover:text-accent-cyan transition-colors">Home</Link>
+            <Link to="/" className="hover:text-accent-cyan transition-colors">{t('common:breadcrumb.home')}</Link>
             <span>/</span>
             <span className="text-text-secondary">{t('developers:breadcrumb')}</span>
           </nav>

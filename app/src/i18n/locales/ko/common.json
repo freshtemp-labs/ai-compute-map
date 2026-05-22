@@ -66,5 +66,8 @@
     "tier2Desc": "산업 분석",
     "tier3": "3차 출처",
     "tier3Desc": "모델 추정치"
+  },
+  "breadcrumb": {
+    "home": "홈"
   }
 }

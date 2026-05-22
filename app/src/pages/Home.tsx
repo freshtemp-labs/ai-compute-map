@@ -278,8 +278,10 @@ function LayerCard({ layer, index }: { layer: typeof layers[0]; index: number })
 
   const sparkData = useMemo(() => {
     const base = [42, 48, 45, 52, 58, 55, 62, 68, 65, 72, 78, 85];
-    return base.map((v) => v + Math.floor(Math.random() * 10 - 5));
-  }, []);
+    // Deterministic pseudo-random based on layer index (no Math.random)
+    const seed = (index + 1) * 7;
+    return base.map((v, i) => v + ((seed * (i + 3) * 17) % 10) - 5);
+  }, [index]);
 
   return (
     <motion.div
