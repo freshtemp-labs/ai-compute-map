@@ -1,3 +1,11 @@
+/**
+ * @file ErrorBoundary.tsx
+ * @description React error boundary that catches rendering errors and displays
+ * a user-friendly fallback UI with error message and retry button.
+ * Wraps page content to prevent full-app crashes from component errors.
+ *
+ * @dependencies react
+ */
 import React from 'react';
 
 interface Props {

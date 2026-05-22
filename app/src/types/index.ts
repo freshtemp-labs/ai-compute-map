@@ -1,3 +1,10 @@
+/**
+ * @file types/index.ts
+ * @description Central type definitions for the AI Compute Map application.
+ * Defines all data interfaces used across map pins, supply chain entries,
+ * foundry facilities, data centers, KPIs, companies, and source references.
+ */
+
 export type LayerType = 'supply' | 'foundry' | 'datacenter';
 
 export type SourceTier = 1 | 2 | 3;

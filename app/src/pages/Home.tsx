@@ -1,3 +1,11 @@
+/**
+ * @file Home.tsx
+ * @description Landing page / dashboard showing KPI cards, layer overview,
+ * animated hero section, and quick navigation to map and data pages.
+ *
+ * @dependencies react-i18next, framer-motion, echarts-for-react,
+ *               @/data/mockData, @/components/map/useMapData
+ */
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';

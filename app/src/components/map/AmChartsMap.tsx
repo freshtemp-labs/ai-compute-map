@@ -1,3 +1,13 @@
+/**
+ * @file AmChartsMap.tsx
+ * @description Main map component using AmCharts 5 for rendering an interactive
+ * world map with clustered facility pins. Features grid-based clustering,
+ * zoom-dependent pin rendering, custom tooltips, and layer-specific shapes
+ * (circle=datacenter, rounded rect=foundry, diamond=supply chain).
+ *
+ * @dependencies @amcharts/amcharts5, @amcharts/amcharts5-geodata,
+ *               @/components/map/useMapData, @/constants/layerColors
+ */
 import { useEffect, useRef, useCallback } from 'react';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5map from '@amcharts/amcharts5/map';

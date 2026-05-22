@@ -1,3 +1,11 @@
+/**
+ * @file DevelopersPage.tsx
+ * @description Developer documentation page with API reference, code examples
+ * using Prism.js syntax highlighting, data format specifications, and
+ * contribution guidelines.
+ *
+ * @dependencies react-i18next, react-syntax-highlighter, prismjs
+ */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

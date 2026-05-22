@@ -1,3 +1,4 @@
+/** @file RareEarthSection.tsx - Rare earth elements mining & production data section. */
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import ReactEChartsCore from 'echarts-for-react';

@@ -1,3 +1,10 @@
+/**
+ * @file DetailPanel.tsx
+ * @description Slide-out detail panel for a selected map pin, showing facility
+ * information, supply chain relations, and data source attribution.
+ *
+ * @dependencies react, @/components/map/useMapData, @/constants/layerColors
+ */
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { X, MapPin as MapPinIcon, ExternalLink, Crosshair, Database, GitBranch, GitCompareArrows, Check } from 'lucide-react';

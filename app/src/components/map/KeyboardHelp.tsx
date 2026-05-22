@@ -1,3 +1,9 @@
+/**
+ * @file KeyboardHelp.tsx
+ * @description Keyboard shortcuts help dialog showing available map navigation shortcuts.
+ *
+ * @dependencies framer-motion, react-i18next
+ */
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

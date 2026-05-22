@@ -1,3 +1,11 @@
+/**
+ * @file Layout.tsx
+ * @description Root layout component that wraps all pages with a consistent
+ * Navbar, Footer, and animated page transitions. Uses Framer Motion for
+ * smooth enter/exit animations between routes.
+ *
+ * @dependencies react-router-dom, framer-motion, Navbar, Footer
+ */
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';

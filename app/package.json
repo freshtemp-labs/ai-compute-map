@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "validate-data": "tsx scripts/validate-data.ts"
   },
   "dependencies": {
     "@amcharts/amcharts5": "^5.17.2",

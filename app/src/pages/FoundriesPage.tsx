@@ -1,3 +1,11 @@
+/**
+ * @file FoundriesPage.tsx
+ * @description Foundry analysis page showing semiconductor fabrication facilities,
+ * process node comparisons, capacity utilization charts, and comparison matrices.
+ *
+ * @dependencies framer-motion, react-i18next, @/components/foundries/*,
+ *               @/data/mockData
+ */
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import {

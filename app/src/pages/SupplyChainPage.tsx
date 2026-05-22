@@ -1,3 +1,11 @@
+/**
+ * @file SupplyChainPage.tsx
+ * @description Supply chain analysis page showing rare earth, lithography,
+ * design firms, energy/labor data with interactive tables and charts.
+ *
+ * @dependencies react-i18next, echarts-for-react, @/data/mockData,
+ *               @/components/supply-chain/*
+ */
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

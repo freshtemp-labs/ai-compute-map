@@ -1,3 +1,4 @@
+/** @file LithographySection.tsx - Semiconductor lithography equipment section. */
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ReactEChartsCore from 'echarts-for-react';

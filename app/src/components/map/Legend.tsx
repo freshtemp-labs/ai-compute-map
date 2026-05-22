@@ -1,3 +1,7 @@
+/**
+ * @file Legend.tsx
+ * @description Map legend component showing layer colors and counts with expand/collapse.
+ */
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp, ChevronDown } from 'lucide-react';

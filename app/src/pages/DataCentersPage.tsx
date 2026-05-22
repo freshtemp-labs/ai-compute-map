@@ -1,3 +1,10 @@
+/**
+ * @file DataCentersPage.tsx
+ * @description Data center analysis page with facility listings, PUE comparison
+ * charts, regional distribution, energy mix visualizations, and sortable tables.
+ *
+ * @dependencies react-i18next, echarts-for-react, @/data/mockData
+ */
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

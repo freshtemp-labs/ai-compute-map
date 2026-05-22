@@ -1,3 +1,10 @@
+/**
+ * @file LayerToggle.tsx
+ * @description Toggle buttons for showing/hiding supply chain, foundry,
+ * and data center layers on the map.
+ *
+ * @dependencies framer-motion, react-i18next, @/types, @/constants/layerColors
+ */
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import type { LayerType } from '@/types';

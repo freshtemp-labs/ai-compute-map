@@ -1,8 +1,17 @@
+/**
+ * @file useMapData.ts
+ * @description Custom hook and helpers for transforming raw mock data into
+ * unified MapPin objects for rendering on the AmCharts map. Includes
+ * pin importance calculation and value formatting utilities.
+ *
+ * @dependencies @/data/mockData, @/types, @/constants/layerColors
+ */
 import { useMemo } from 'react';
 import { supplyChainData, fabricationFacilities, dataCenters } from '@/data/mockData';
 import type { DataPoint, Facility, DataCenter, LayerType, SourceTier } from '@/types';
 import { LAYER_COLORS } from '@/constants/layerColors';
 
+/** Unified pin data structure representing any facility on the map */
 export interface MapPin {
   id: string;
   name: string;
@@ -33,6 +42,11 @@ export interface MapPin {
   _selected?: boolean;
 }
 
+/**
+ * Main hook that transforms supply chain, foundry, and data center datasets
+ * into a unified array of MapPin objects for map rendering.
+ * @returns Object containing the pins array, getPinColor helper, and layerColors
+ */
 export function useMapData() {
   const pins = useMemo<MapPin[]>(() => {
     const supplyPins: MapPin[] = supplyChainData.map((item: DataPoint) => ({
@@ -98,6 +112,13 @@ export function useMapData() {
   return { pins, getPinColor, layerColors: LAYER_COLORS };
 }
 
+/**
+ * Calculate visual importance (0-1) of a pin for sizing purposes.
+ * Supply: based on value magnitude. Foundry: based on company prestige.
+ * DataCenter: based on power capacity.
+ * @param pin - The map pin to evaluate
+ * @returns Importance score from 0 (least) to 1 (most important)
+ */
 export function getPinImportance(pin: MapPin): number {
   switch (pin.layer) {
     case 'supply':
@@ -112,6 +133,12 @@ export function getPinImportance(pin: MapPin): number {
   }
 }
 
+/**
+ * Format a pin's value and unit into a human-readable string.
+ * Numbers >= 1000 are displayed with "K" suffix.
+ * @param pin - The map pin whose value to format
+ * @returns Formatted string like "15.0K tonnes" or "53 EUV units"
+ */
 export function formatPinValue(pin: MapPin): string {
   if (typeof pin.value === 'number') {
     if (pin.value >= 1000) return `${(pin.value / 1000).toFixed(1)}K ${pin.unit || ''}`;

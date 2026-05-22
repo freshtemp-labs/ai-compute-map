@@ -1,7 +1,16 @@
+/**
+ * @file CompareContext.tsx
+ * @description React Context for managing the facility comparison feature.
+ * Allows users to select up to MAX_COMPARE (3) facilities for side-by-side
+ * comparison on the /compare page. Persists selections to localStorage.
+ *
+ * @dependencies react, @/components/map/useMapData
+ */
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import type { MapPin } from '@/components/map/useMapData';
 
+/** Type alias for pins that can be compared */
 export type ComparePin = MapPin;
 
 interface CompareContextValue {
@@ -17,6 +26,7 @@ const MAX_COMPARE = 3;
 
 const CompareContext = createContext<CompareContextValue | null>(null);
 
+/** Context provider that manages compare pin state and localStorage sync */
 export function CompareProvider({ children }: { children: ReactNode }) {
   const [comparePins, setComparePins] = useState<ComparePin[]>(() => {
     try {
@@ -66,6 +76,7 @@ export function CompareProvider({ children }: { children: ReactNode }) {
   );
 }
 
+/** Hook to access the compare context. Must be used within a CompareProvider. */
 export function useCompare() {
   const ctx = useContext(CompareContext);
   if (!ctx) throw new Error('useCompare must be used within CompareProvider');

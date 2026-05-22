@@ -1,3 +1,4 @@
+/** @file FoundryCharts.tsx - ECharts visualizations for foundry capacity and revenue data. */
 import { memo } from 'react';
 import ReactEChartsCore from 'echarts-for-react';
 import { foundryMarketData, revenueTrendData } from './data';

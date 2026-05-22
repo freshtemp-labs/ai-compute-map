@@ -1,3 +1,4 @@
+/** @file FoundryUtils.tsx - Foundry utility components (animated counters, color helpers). */
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { CheckCircle2, Clock, AlertCircle } from 'lucide-react';

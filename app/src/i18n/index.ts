@@ -1,3 +1,11 @@
+/**
+ * @file i18n/index.ts
+ * @description i18next configuration supporting 4 languages (zh, en, ja, ko)
+ * with 9 namespaces (common, home, map, supplyChain, foundries, datacenters,
+ * sources, history, developers). Default language is Chinese (zh).
+ *
+ * @dependencies i18next, react-i18next, i18next-browser-languagedetector
+ */
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';

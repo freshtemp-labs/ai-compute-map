@@ -1,3 +1,4 @@
+/** @file EnergyLaborSection.tsx - Energy supply and labor data section for supply chain. */
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 

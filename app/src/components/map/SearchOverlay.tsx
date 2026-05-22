@@ -1,3 +1,10 @@
+/**
+ * @file SearchOverlay.tsx
+ * @description Full-screen search overlay for finding facilities across all layers.
+ * Supports keyboard navigation, debounced search, and highlighting matching pins on the map.
+ *
+ * @dependencies react, lucide-react, @/components/map/useMapData
+ */
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, MapPin as MapPinIcon } from 'lucide-react';

@@ -1,3 +1,11 @@
+/**
+ * @file MapPage.tsx
+ * @description Interactive map page using AmCharts 5 for rendering supply chain,
+ * foundry, and data center pins on a world map. Features layer toggles,
+ * search overlay, keyboard shortcuts, and detail panel for selected pins.
+ *
+ * @dependencies @amcharts/amcharts5, @/components/map/*, react-i18next
+ */
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import {

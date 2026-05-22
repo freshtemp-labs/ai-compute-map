@@ -1,3 +1,10 @@
+/**
+ * @file SourcesPage.tsx
+ * @description Data sources reference page listing all data sources with tier
+ * classification, status indicators, category filters, and source detail cards.
+ *
+ * @dependencies react-i18next, @/data/mockData
+ */
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

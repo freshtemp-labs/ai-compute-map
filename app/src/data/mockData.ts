@@ -1,3 +1,12 @@
+/**
+ * @file data/mockData.ts
+ * @description Single source of truth for all mock data used in the application.
+ * Contains supply chain data points, fabrication facilities, data centers,
+ * source references, page-specific table data, KPIs, companies, and layer info.
+ * All coordinates use WGS84 (EPSG:4326) lat/lng.
+ *
+ * @dependencies @/types
+ */
 import type { DataPoint, Facility, DataCenter, KPI, SourceReference, LayerInfo, Company, DataCenterEntry, SupplyChainEntry, SourceEntry } from '@/types';
 
 // ─── Page-specific datasets (single source of truth) ────────────

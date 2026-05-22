@@ -1,3 +1,10 @@
+/**
+ * @file Footer.tsx
+ * @description Global footer component with quick links, data source links,
+ * community links, and license information. Supports i18n for all text.
+ *
+ * @dependencies react-router-dom, react-i18next
+ */
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 

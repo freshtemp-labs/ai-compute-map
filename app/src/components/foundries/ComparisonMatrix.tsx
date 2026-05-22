@@ -1,3 +1,4 @@
+/** @file ComparisonMatrix.tsx - Foundry comparison matrix with sortable columns. */
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronUp, ChevronDown } from 'lucide-react';

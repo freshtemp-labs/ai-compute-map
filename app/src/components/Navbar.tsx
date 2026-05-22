@@ -1,3 +1,12 @@
+/**
+ * @file Navbar.tsx
+ * @description Top navigation bar with responsive design, language switcher
+ * (zh/en/ja/ko), data freshness status banner, compare badge counter,
+ * and mobile hamburger menu. Includes data staleness detection logic.
+ *
+ * @dependencies react-router-dom, framer-motion, react-i18next, lucide-react,
+ *               @/context/CompareContext
+ */
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';

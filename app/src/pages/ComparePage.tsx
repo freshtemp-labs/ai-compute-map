@@ -1,3 +1,13 @@
+/**
+ * @file ComparePage.tsx
+ * @description Facility comparison page allowing users to select 2-3 facilities
+ * for side-by-side analysis. Features a search sidebar, ECharts radar chart
+ * for multi-dimensional comparison, and a detailed comparison table.
+ *
+ * @dependencies react-i18next, echarts-for-react, lucide-react,
+ *               @/context/CompareContext, @/components/map/useMapData,
+ *               @/constants/layerColors
+ */
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';

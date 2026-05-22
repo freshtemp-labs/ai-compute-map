@@ -1,3 +1,10 @@
+/**
+ * @file HistoryPage.tsx
+ * @description Changelog and data history page showing versioned updates,
+ * data pipeline changes, and historical milestones for the platform.
+ *
+ * @dependencies react-i18next
+ */
 import { useState, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

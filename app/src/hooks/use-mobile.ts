@@ -1,3 +1,4 @@
+/** @file use-mobile.ts - Custom hook for detecting mobile viewport (< 768px). */
 import * as React from "react"
 
 const MOBILE_BREAKPOINT = 768

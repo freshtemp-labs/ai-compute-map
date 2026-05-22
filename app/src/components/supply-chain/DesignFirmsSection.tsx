@@ -1,3 +1,4 @@
+/** @file DesignFirmsSection.tsx - Semiconductor design firms and EDA tools section. */
 import { motion } from 'framer-motion';
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
