@@ -60,6 +60,18 @@ describe('Component smoke tests', () => {
     expect(mod.default).toBeDefined();
     expect(typeof mod.default).toBe('function');
   });
+
+  it('CountryComparePage module exports a function component', async () => {
+    const mod = await import('@/pages/CountryComparePage');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('InsightsPage module exports a function component', async () => {
+    const mod = await import('@/pages/InsightsPage');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
 });
 
 describe('Data module smoke tests', () => {
