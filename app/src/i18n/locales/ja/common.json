@@ -5,6 +5,7 @@
     "supplyChain": "サプライチェーン",
     "foundries": "ファウンドリ",
     "dataCenters": "データセンター",
+    "compare": "施設比較",
     "sources": "データソース",
     "history": "履歴",
     "developers": "API & ドキュメント"
@@ -43,6 +44,14 @@
     "sources": "ソース",
     "verified": "検証済み",
     "pending": "保留中"
+  },
+  "dataStatus": {
+    "banner": "データソース: IEA / ASML / 企業年報 / USGS | 最終更新: 2024-Q4",
+    "sources": "データソース: IEA / ASML / 企業年報 / USGS",
+    "lastUpdate": "最終更新: 2024-Q4",
+    "freshness": "データ鮮度",
+    "fresh": "データは最新です",
+    "stale": "データが古い可能性があります"
   },
   "footer": {
     "tagline": "AIインフラ全球リアルタイム可視化",

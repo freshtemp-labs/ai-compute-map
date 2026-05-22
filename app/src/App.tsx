@@ -3,6 +3,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
 import { PageSkeleton } from './components/PageSkeleton'
+import { CompareProvider } from './context/CompareContext'
 
 // Eagerly load Home (landing page, small and first-visible)
 import Home from './pages/Home'
@@ -15,6 +16,7 @@ const DataCentersPage = lazy(() => import('./pages/DataCentersPage'))
 const SourcesPage = lazy(() => import('./pages/SourcesPage'))
 const HistoryPage = lazy(() => import('./pages/HistoryPage'))
 const DevelopersPage = lazy(() => import('./pages/DevelopersPage'))
+const ComparePage = lazy(() => import('./pages/ComparePage'))
 
 function LazyPage({ children }: { children: React.ReactNode }) {
   return (
@@ -28,19 +30,22 @@ function LazyPage({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/map" element={<LazyPage><MapPage /></LazyPage>} />
-          <Route path="/supply-chain" element={<LazyPage><SupplyChainPage /></LazyPage>} />
-          <Route path="/foundries" element={<LazyPage><FoundriesPage /></LazyPage>} />
-          <Route path="/datacenters" element={<LazyPage><DataCentersPage /></LazyPage>} />
-          <Route path="/sources" element={<LazyPage><SourcesPage /></LazyPage>} />
-          <Route path="/history" element={<LazyPage><HistoryPage /></LazyPage>} />
-          <Route path="/developers" element={<LazyPage><DevelopersPage /></LazyPage>} />
-        </Route>
-      </Routes>
-    </HashRouter>
+    <CompareProvider>
+      <HashRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/map" element={<LazyPage><MapPage /></LazyPage>} />
+            <Route path="/supply-chain" element={<LazyPage><SupplyChainPage /></LazyPage>} />
+            <Route path="/foundries" element={<LazyPage><FoundriesPage /></LazyPage>} />
+            <Route path="/datacenters" element={<LazyPage><DataCentersPage /></LazyPage>} />
+            <Route path="/compare" element={<LazyPage><ComparePage /></LazyPage>} />
+            <Route path="/sources" element={<LazyPage><SourcesPage /></LazyPage>} />
+            <Route path="/history" element={<LazyPage><HistoryPage /></LazyPage>} />
+            <Route path="/developers" element={<LazyPage><DevelopersPage /></LazyPage>} />
+          </Route>
+        </Routes>
+      </HashRouter>
+    </CompareProvider>
   )
 }

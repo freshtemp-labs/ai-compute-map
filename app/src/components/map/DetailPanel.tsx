@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { X, MapPin as MapPinIcon, ExternalLink, Crosshair, Database, GitBranch } from 'lucide-react';
+import { X, MapPin as MapPinIcon, ExternalLink, Crosshair, Database, GitBranch, GitCompareArrows, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import type { MapPin } from './useMapData';
 import { supplyChainData, fabricationFacilities, dataCenters } from '@/data/mockData';
+import { useCompare, MAX_COMPARE } from '@/context/CompareContext';
 
 interface DetailPanelProps {
   pin: MapPin | null;
@@ -88,6 +90,7 @@ function getSupplyChainRelations(pin: MapPin): Relation[] {
 export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
   const { t } = useTranslation('map');
   const navigate = useNavigate();
+  const { addComparePin, isInCompare } = useCompare();
 
   const relations = useMemo(() => pin ? getSupplyChainRelations(pin) : [], [pin]);
 
@@ -103,6 +106,20 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
 
   const tier = getTierBadge(pin.sourceTier);
   const layerLabel = pin.layer === 'supply' ? t('map:layerToggle.supplyChain') : pin.layer === 'foundry' ? t('map:layerToggle.foundry') : t('map:layerToggle.dataCenter');
+  const inCompare = isInCompare(pin.id);
+
+  const handleAddToCompare = () => {
+    if (inCompare) {
+      toast.info(t('map:compare.alreadyInCompare'));
+      return;
+    }
+    const added = addComparePin(pin);
+    if (added) {
+      toast.success(t('map:compare.addedSuccess'));
+    } else {
+      toast.warning(t('map:compare.maxReached', { count: MAX_COMPARE }));
+    }
+  };
 
   return (
     <motion.div
@@ -269,7 +286,20 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
       </div>
 
       {/* Footer */}
-      <div className="flex-shrink-0 p-4 border-t border-[#1E1E28] bg-[#111118]">
+      <div className="flex-shrink-0 p-4 border-t border-[#1E1E28] bg-[#111118] space-y-2">
+        {/* Compare Button */}
+        <button
+          onClick={handleAddToCompare}
+          className={`w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-[12px] font-mono transition-all duration-200 cursor-pointer ${
+            inCompare
+              ? 'bg-[#00D4FF15] border border-[#00D4FF30] text-[#00D4FF]'
+              : 'bg-[#181820] border border-[#2A2A3A] text-[#9A9AAF] hover:text-[#E8E8EC] hover:border-[#00D4FF]'
+          }`}
+        >
+          {inCompare ? <Check size={14} /> : <GitCompareArrows size={14} />}
+          {inCompare ? t('map:compare.alreadyInCompare') : t('map:compare.addToCompare')}
+        </button>
+
         <div className="flex items-center justify-between">
           <span className="text-mono-sm text-[#6B6B80]">
             {pin.sourceTier ? `${pin.sourceTier} source${pin.sourceTier > 1 ? 's' : ''}` : t('map:facility.unknownSources')}

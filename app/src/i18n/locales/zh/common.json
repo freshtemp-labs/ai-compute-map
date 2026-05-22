@@ -5,6 +5,7 @@
     "supplyChain": "基础层",
     "foundries": "封装工厂",
     "dataCenters": "算力中心",
+    "compare": "设施对比",
     "sources": "数据来源",
     "history": "历史数据",
     "developers": "API & 文档"
@@ -43,6 +44,14 @@
     "sources": "数据源",
     "verified": "已验证",
     "pending": "待验证"
+  },
+  "dataStatus": {
+    "banner": "数据来源: IEA / ASML / 公司年报 / USGS | 最后更新: 2024-Q4",
+    "sources": "数据来源: IEA / ASML / 公司年报 / USGS",
+    "lastUpdate": "最后更新: 2024-Q4",
+    "freshness": "数据新鲜度",
+    "fresh": "数据在季度内",
+    "stale": "数据可能过期"
   },
   "footer": {
     "tagline": "AI基础设施全球实时可视化",

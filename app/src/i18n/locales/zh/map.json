@@ -69,5 +69,23 @@
     "upstream": "上游",
     "downstream": "下游",
     "peer": "同行"
+  },
+  "compare": {
+    "addToCompare": "加入对比",
+    "alreadyInCompare": "已在对比列表中",
+    "maxReached": "最多对比 {{count}} 个设施",
+    "addedSuccess": "已加入对比列表",
+    "cluster": {
+      "title": "设施群组",
+      "items": "包含 {{count}} 个设施",
+      "zoomIn": "点击缩放到该区域"
+    },
+    "selectTitle": "选择 2-3 个设施进行对比",
+    "selectDesc": "从侧边栏选择设施，查看容量、技术、位置等多维度对比。",
+    "radarTitle": "性能对比",
+    "tableTitle": "详细对比",
+    "metric": "指标",
+    "type": "类型",
+    "location": "位置"
   }
 }

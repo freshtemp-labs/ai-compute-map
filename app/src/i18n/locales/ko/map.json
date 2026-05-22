@@ -69,5 +69,23 @@
     "upstream": "상류",
     "downstream": "하류",
     "peer": "동종 업체"
+  },
+  "compare": {
+    "addToCompare": "비교에 추가",
+    "alreadyInCompare": "비교 목록에 포함됨",
+    "maxReached": "최대 {{count}}개 시설까지 비교 가능",
+    "addedSuccess": "비교 목록에 추가됨",
+    "cluster": {
+      "title": "클러스터",
+      "items": "{{count}}개 시설",
+      "zoomIn": "클릭하여 확대"
+    },
+    "selectTitle": "비교할 시설 2-3개 선택",
+    "selectDesc": "사이드바에서 시설을 선택하여 용량, 기술, 위치 등 다각적 비교를 확인하세요.",
+    "radarTitle": "성능 비교",
+    "tableTitle": "상세 비교",
+    "metric": "지표",
+    "type": "유형",
+    "location": "위치"
   }
 }

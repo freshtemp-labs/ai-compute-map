@@ -69,5 +69,23 @@
     "upstream": "Upstream",
     "downstream": "Downstream",
     "peer": "Peer"
+  },
+  "compare": {
+    "addToCompare": "Add to Compare",
+    "alreadyInCompare": "Already in compare list",
+    "maxReached": "Max {{count}} facilities for comparison",
+    "addedSuccess": "Added to compare list",
+    "cluster": {
+      "title": "Cluster",
+      "items": "{{count}} facilities",
+      "zoomIn": "Click to zoom in"
+    },
+    "selectTitle": "Select 2-3 Facilities to Compare",
+    "selectDesc": "Choose facilities from the sidebar to see a side-by-side comparison of capacity, technology, location, and more.",
+    "radarTitle": "Performance Comparison",
+    "tableTitle": "Detailed Comparison",
+    "metric": "Metric",
+    "type": "Type",
+    "location": "Location"
   }
 }

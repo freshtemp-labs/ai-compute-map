@@ -5,6 +5,7 @@
     "supplyChain": "Supply Chain",
     "foundries": "Foundries",
     "dataCenters": "Data Centers",
+    "compare": "Compare",
     "sources": "Data Sources",
     "history": "History",
     "developers": "API & Docs"
@@ -43,6 +44,14 @@
     "sources": "Sources",
     "verified": "Verified",
     "pending": "Pending"
+  },
+  "dataStatus": {
+    "banner": "Sources: IEA / ASML / Company Reports / USGS | Last update: 2024-Q4",
+    "sources": "Sources: IEA / ASML / Company Reports / USGS",
+    "lastUpdate": "Last update: 2024-Q4",
+    "freshness": "Data freshness",
+    "fresh": "Data is up to date",
+    "stale": "Data may be outdated"
   },
   "footer": {
     "tagline": "Real-time Global AI Infrastructure Visualization",

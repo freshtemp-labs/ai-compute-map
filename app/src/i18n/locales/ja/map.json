@@ -69,5 +69,23 @@
     "upstream": "上流",
     "downstream": "下流",
     "peer": "同業他社"
+  },
+  "compare": {
+    "addToCompare": "比較に追加",
+    "alreadyInCompare": "比較リストに含まれています",
+    "maxReached": "最大{{count}}施設まで比較可能",
+    "addedSuccess": "比較リストに追加しました",
+    "cluster": {
+      "title": "クラスター",
+      "items": "{{count}}施設",
+      "zoomIn": "クリックでズームイン"
+    },
+    "selectTitle": "比較する施設を2〜3つ選択",
+    "selectDesc": "サイドバーから施設を選択して、容量、技術、立地などの多角的な比較を表示します。",
+    "radarTitle": "性能比較",
+    "tableTitle": "詳細比較",
+    "metric": "指標",
+    "type": "タイプ",
+    "location": "所在地"
   }
 }

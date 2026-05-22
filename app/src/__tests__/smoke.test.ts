@@ -37,6 +37,12 @@ describe('Component smoke tests', () => {
     expect(typeof mod.default).toBe('function');
   });
 
+  it('ComparePage module exports a function component', async () => {
+    const mod = await import('@/pages/ComparePage');
+    expect(mod.default).toBeDefined();
+    expect(typeof mod.default).toBe('function');
+  });
+
   it('App module exports a function component', async () => {
     const mod = await import('@/App');
     expect(mod.default).toBeDefined();
@@ -57,5 +63,16 @@ describe('Data module smoke tests', () => {
     expect(mod.layers).toBeDefined();
     expect(mod.kpis).toBeDefined();
     expect(mod.companies).toBeDefined();
+  });
+});
+
+describe('CompareContext smoke tests', () => {
+  it('CompareProvider and useCompare exports exist', async () => {
+    const mod = await import('@/context/CompareContext');
+    expect(mod.CompareProvider).toBeDefined();
+    expect(typeof mod.CompareProvider).toBe('function');
+    expect(mod.useCompare).toBeDefined();
+    expect(typeof mod.useCompare).toBe('function');
+    expect(mod.MAX_COMPARE).toBe(3);
   });
 });
