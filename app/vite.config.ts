@@ -15,6 +15,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-echarts': ['echarts', 'echarts-for-react'],
+          'vendor-amcharts': ['@amcharts/amcharts5', '@amcharts/amcharts5-geodata'],
+          'vendor-syntax': ['react-syntax-highlighter', 'prismjs'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1100,
+  },
   test: {
     globals: true,
     environment: 'jsdom',

@@ -9,7 +9,20 @@
     "euvUnits": "EUV露光装置出荷台数",
     "chinaReQuota": "中国レアアース配額",
     "tsmcRevenue": "TSMC売上",
-    "projected2030": "2030年予測DC電力"
+    "projected2030": "2030年予測DC電力",
+    "dataPoints": "データポイント",
+    "totalPins": "総データポイント",
+    "supplyNodes": "サプライチェーンノード",
+    "foundryFabs": "ファウンドリ",
+    "dataCenters": "データセンター",
+    "totalPower": "総電力容量",
+    "operational": "稼働中",
+    "construction": "建設中"
+  },
+  "dashboard": {
+    "title": "リアルタイムデータ概要",
+    "regionDist": "データセンター地域分布",
+    "categoryDist": "サプライチェーンカテゴリ統計"
   },
   "layers": {
     "title": "AIインフラの3層構造",

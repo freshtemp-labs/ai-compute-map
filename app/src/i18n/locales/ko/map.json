@@ -1,6 +1,7 @@
 {
   "search": {
-    "placeholder": "시설, 위치, 기업 검색..."
+    "placeholder": "시설, 위치, 기업 검색...",
+    "highlighted": "지도에서 하이라이트 표시"
   },
   "detailPanel": {
     "title": "시설 상세",
@@ -17,7 +18,10 @@
   },
   "legend": {
     "title": "범례",
-    "pinSize": "핀 크기 = 중요도"
+    "pinSize": "핀 크기 = 중요도",
+    "supplyDesc": "희토류, 노광장비, 소재, 설계 IP",
+    "foundryDesc": "TSMC, 삼성, 인텔, SMIC, GlobalFoundries",
+    "dcDesc": "클라우드 DC, 코로케이션, 하이퍼스케일 시설"
   },
   "keyboard": {
     "title": "키보드 단축키",
@@ -60,6 +64,10 @@
     "updatedLabel": "업데이트:",
     "unknownSources": "알 수 없는 출처",
     "noResults": "\"{{query}}\"에 대한 결과를 찾을 수 없습니다",
-    "typeToSearch": "{{count}}개 데이터 포인트에서 검색"
+    "typeToSearch": "{{count}}개 데이터 포인트에서 검색",
+    "supplyChain": "공급망 관계",
+    "upstream": "상류",
+    "downstream": "하류",
+    "peer": "동종 업체"
   }
 }

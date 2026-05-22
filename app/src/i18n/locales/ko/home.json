@@ -9,7 +9,20 @@
     "euvUnits": "EUV 노광장비 출하량",
     "chinaReQuota": "중국 희토류 할당량",
     "tsmcRevenue": "TSMC 매출",
-    "projected2030": "2030년 예측 DC 전력"
+    "projected2030": "2030년 예측 DC 전력",
+    "dataPoints": "데이터 포인트",
+    "totalPins": "총 데이터 포인트",
+    "supplyNodes": "공급망 노드",
+    "foundryFabs": "파운드리",
+    "dataCenters": "데이터센터",
+    "totalPower": "총 전력 용량",
+    "operational": "운영 중",
+    "construction": "건설 중"
+  },
+  "dashboard": {
+    "title": "실시간 데이터 개요",
+    "regionDist": "데이터센터 지역 분포",
+    "categoryDist": "공급망 카테고리 통계"
   },
   "layers": {
     "title": "AI 인프라 3계층 아키텍처",

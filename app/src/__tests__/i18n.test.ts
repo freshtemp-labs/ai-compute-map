@@ -43,30 +43,31 @@ const namespaces = fs
 
 // ── Key consistency between zh and en ────────────────────────────
 
-describe('i18n: zh vs en key parity', () => {
+describe('i18n: all languages key parity (vs zh reference)', () => {
   for (const ns of namespaces) {
-    it(`${ns}.json: zh and en have the same keys`, () => {
+    it(`${ns}.json: all languages have the same keys as zh`, () => {
       const zhData = JSON.parse(
         fs.readFileSync(path.join(LOCALES_DIR, 'zh', `${ns}.json`), 'utf-8'),
       );
-      const enData = JSON.parse(
-        fs.readFileSync(path.join(LOCALES_DIR, 'en', `${ns}.json`), 'utf-8'),
-      );
-
       const zhKeys = getLeafKeys(zhData);
-      const enKeys = getLeafKeys(enData);
 
-      const missingInEn = zhKeys.filter((k) => !enKeys.includes(k));
-      const missingInZh = enKeys.filter((k) => !zhKeys.includes(k));
+      for (const lang of languages.filter((l) => l !== 'zh')) {
+        const langData = JSON.parse(
+          fs.readFileSync(path.join(LOCALES_DIR, lang, `${ns}.json`), 'utf-8'),
+        );
+        const langKeys = getLeafKeys(langData);
 
-      if (missingInEn.length > 0) {
-        throw new Error(`Keys in zh but missing in en: ${missingInEn.join(', ')}`);
+        const missingInLang = zhKeys.filter((k) => !langKeys.includes(k));
+        const missingInZh = langKeys.filter((k) => !zhKeys.includes(k));
+
+        if (missingInLang.length > 0) {
+          throw new Error(`Keys in zh but missing in ${lang}: ${missingInLang.join(', ')}`);
+        }
+        if (missingInZh.length > 0) {
+          throw new Error(`Keys in ${lang} but missing in zh: ${missingInZh.join(', ')}`);
+        }
+        expect(zhKeys).toEqual(langKeys);
       }
-      if (missingInZh.length > 0) {
-        throw new Error(`Keys in en but missing in zh: ${missingInZh.join(', ')}`);
-      }
-
-      expect(zhKeys).toEqual(enKeys);
     });
   }
 });
@@ -74,7 +75,7 @@ describe('i18n: zh vs en key parity', () => {
 // ── No empty values ──────────────────────────────────────────────
 
 describe('i18n: no empty values', () => {
-  for (const lang of ['zh', 'en']) {
+  for (const lang of languages) {
     for (const ns of namespaces) {
       it(`${lang}/${ns}.json should have no empty string values`, () => {
         const data = JSON.parse(

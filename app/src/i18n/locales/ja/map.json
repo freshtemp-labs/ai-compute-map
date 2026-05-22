@@ -1,6 +1,7 @@
 {
   "search": {
-    "placeholder": "施設、場所、企業を検索..."
+    "placeholder": "施設、場所、企業を検索...",
+    "highlighted": "地図上でハイライト表示"
   },
   "detailPanel": {
     "title": "施設詳細",
@@ -17,7 +18,10 @@
   },
   "legend": {
     "title": "凡例",
-    "pinSize": "ピンサイズ = 重要度"
+    "pinSize": "ピンサイズ = 重要度",
+    "supplyDesc": "レアアース、露光装置、材料、設計IP",
+    "foundryDesc": "TSMC、サムスン、インテル、SMIC、GlobalFoundries",
+    "dcDesc": "クラウドDC、コロケーション、ハイパースケール施設"
   },
   "keyboard": {
     "title": "キーボードショートカット",
@@ -60,6 +64,10 @@
     "updatedLabel": "更新:",
     "unknownSources": "不明なソース",
     "noResults": "\"{{query}}\" の結果が見つかりません",
-    "typeToSearch": "{{count}}件のデータポイントを検索"
+    "typeToSearch": "{{count}}件のデータポイントを検索",
+    "supplyChain": "サプライチェーン関係",
+    "upstream": "上流",
+    "downstream": "下流",
+    "peer": "同業他社"
   }
 }

@@ -1,5 +1,13 @@
 {
   "pageTitle": "히스토리",
   "pageSubtitle": "역사 데이터 타임라인, 비교 도구, AI 인프라 개발의 시간 재생。",
-  "comingSoon": "곧 출시"
+  "comingSoon": "곧 출시",
+  "timeline": {
+    "title": "타임라인"
+  },
+  "compare": "비교 모드",
+  "trendTitle": "AI 인프라 성장 추세",
+  "dataNote": "데이터 출처: IEA 세계 에너지 전망, TrendForce, 기업 보고서. 2026-2030년은 예측치입니다.",
+  "regionDist": "데이터센터 지역 분포",
+  "yearlyData": "연간 데이터 요약"
 }
