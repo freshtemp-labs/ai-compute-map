@@ -18,10 +18,12 @@ import SearchOverlay from '@/components/map/SearchOverlay';
 import Legend from '@/components/map/Legend';
 import KeyboardHelp from '@/components/map/KeyboardHelp';
 import AmChartsMap from '@/components/map/AmChartsMap';
+import { MapPageSkeleton } from '@/components/PageSkeleton';
 
 export default function MapPage() {
   const { t } = useTranslation('map');
   const { pins } = useMapData();
+  const [mapLoading, setMapLoading] = useState(true);
   const [activeLayers, setActiveLayers] = useState<Record<LayerType, boolean>>({
     supply: true,
     foundry: true,
@@ -145,8 +147,10 @@ export default function MapPage() {
           selectedPin={selectedPin}
           onMapReady={(chart) => {
             chartRef.current = chart as unknown as Record<string, unknown>;
+            setMapLoading(false);
           }}
         />
+        {mapLoading && <MapPageSkeleton />}
       </div>
 
       {/* Search Bar - Floating at top */}
