@@ -1,0 +1,24 @@
+{
+  "pageTitle": "User Preferences",
+  "pageSubtitle": "Configure default map view, layer visibility, and interface preferences. Settings are automatically saved to local browser.",
+  "breadcrumb": "Settings",
+  "sections": {
+    "zoom": "Default Map Zoom Level",
+    "zoomDesc": "Set the default zoom level when the map page loads (1-10)",
+    "layers": "Default Visible Layers",
+    "layersDesc": "Choose which layers are visible when the map loads",
+    "language": "Language Preference",
+    "languageDesc": "Select the interface display language",
+    "theme": "Theme Mode",
+    "themeDesc": "Choose the interface color theme",
+    "reset": "Reset Settings",
+    "resetDesc": "Restore all settings to their default values"
+  },
+  "theme": {
+    "dark": "Dark Mode",
+    "light": "Light Mode"
+  },
+  "actions": {
+    "reset": "Reset"
+  }
+}

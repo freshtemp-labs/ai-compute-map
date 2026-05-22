@@ -20,6 +20,7 @@ import zhDatacenters from './locales/zh/datacenters.json';
 import zhSources from './locales/zh/sources.json';
 import zhHistory from './locales/zh/history.json';
 import zhDevelopers from './locales/zh/developers.json';
+import zhSettings from './locales/zh/settings.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -31,6 +32,7 @@ import enDatacenters from './locales/en/datacenters.json';
 import enSources from './locales/en/sources.json';
 import enHistory from './locales/en/history.json';
 import enDevelopers from './locales/en/developers.json';
+import enSettings from './locales/en/settings.json';
 
 // Japanese
 import jaCommon from './locales/ja/common.json';
@@ -42,6 +44,7 @@ import jaDatacenters from './locales/ja/datacenters.json';
 import jaSources from './locales/ja/sources.json';
 import jaHistory from './locales/ja/history.json';
 import jaDevelopers from './locales/ja/developers.json';
+import jaSettings from './locales/ja/settings.json';
 
 // Korean
 import koCommon from './locales/ko/common.json';
@@ -53,6 +56,7 @@ import koDatacenters from './locales/ko/datacenters.json';
 import koSources from './locales/ko/sources.json';
 import koHistory from './locales/ko/history.json';
 import koDevelopers from './locales/ko/developers.json';
+import koSettings from './locales/ko/settings.json';
 
 const resources = {
   zh: {
@@ -65,6 +69,7 @@ const resources = {
     sources: zhSources,
     history: zhHistory,
     developers: zhDevelopers,
+    settings: zhSettings,
   },
   en: {
     common: enCommon,
@@ -76,6 +81,7 @@ const resources = {
     sources: enSources,
     history: enHistory,
     developers: enDevelopers,
+    settings: enSettings,
   },
   ja: {
     common: jaCommon,
@@ -87,6 +93,7 @@ const resources = {
     sources: jaSources,
     history: jaHistory,
     developers: jaDevelopers,
+    settings: jaSettings,
   },
   ko: {
     common: koCommon,
@@ -98,6 +105,7 @@ const resources = {
     sources: koSources,
     history: koHistory,
     developers: koDevelopers,
+    settings: koSettings,
   },
 };
 
@@ -115,7 +123,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-    ns: ['common', 'home', 'map', 'supplyChain', 'foundries', 'datacenters', 'sources', 'history', 'developers'],
+    ns: ['common', 'home', 'map', 'supplyChain', 'foundries', 'datacenters', 'sources', 'history', 'developers', 'settings'],
     defaultNS: 'common',
   });
 

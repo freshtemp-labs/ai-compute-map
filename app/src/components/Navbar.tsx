@@ -11,7 +11,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, GitCompareArrows, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Menu, X, GitCompareArrows, CheckCircle, AlertTriangle, Settings } from 'lucide-react';
 import { useCompare } from '@/context/CompareContext';
 
 const languages = [
@@ -159,6 +159,13 @@ export default function Navbar() {
           {/* Right Side */}
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
+              to="/settings"
+              className="hidden sm:flex items-center justify-center w-8 h-8 text-text-secondary hover:text-text-primary transition-colors duration-200"
+              title="设置"
+            >
+              <Settings size={16} />
+            </Link>
+            <Link
               to="/developers"
               className="hidden sm:flex items-center px-3 py-1.5 text-nav text-text-secondary border border-border-active rounded transition-colors duration-200 hover:text-text-primary hover:border-accent-cyan"
             >
@@ -302,6 +309,13 @@ export default function Navbar() {
                 })}
 
                 <div className="pt-4 mt-4 border-t border-border-subtle">
+                  <Link
+                    to="/settings"
+                    className="flex items-center gap-2 px-4 py-3 rounded-lg text-body-md text-text-secondary hover:text-text-primary hover:bg-[rgba(255,255,255,0.04)] transition-colors"
+                  >
+                    <Settings size={14} />
+                    设置
+                  </Link>
                   <Link
                     to="/developers"
                     className="block px-4 py-3 rounded-lg text-body-md text-text-secondary hover:text-text-primary hover:bg-[rgba(255,255,255,0.04)] transition-colors"

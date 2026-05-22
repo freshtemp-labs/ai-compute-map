@@ -6,7 +6,7 @@
  *
  * @dependencies @amcharts/amcharts5, @/components/map/*, react-i18next
  */
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import {
   Plus,
@@ -14,6 +14,8 @@ import {
   Home,
   Search,
   HelpCircle,
+  Globe,
+  Map,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { LayerType } from '@/types';
@@ -28,6 +30,8 @@ import KeyboardHelp from '@/components/map/KeyboardHelp';
 import AmChartsMap from '@/components/map/AmChartsMap';
 import { MapPageSkeleton } from '@/components/PageSkeleton';
 
+const GlobeView = lazy(() => import('@/components/map/GlobeView'));
+
 export default function MapPage() {
   const { t } = useTranslation('map');
   const { pins } = useMapData();
@@ -41,6 +45,7 @@ export default function MapPage() {
   const [highlightedPinId, setHighlightedPinId] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [keyboardHelpOpen, setKeyboardHelpOpen] = useState(false);
+  const [is3DView, setIs3DView] = useState(false);
   const chartRef = useRef<unknown>(null);
 
   // Pin counts per layer
@@ -155,18 +160,28 @@ export default function MapPage() {
         className="absolute inset-0 z-10"
         style={{ backgroundColor: '#0A0A0F' }}
       >
-        <AmChartsMap
-          pins={pins}
-          activeLayers={activeLayers}
-          onPinClick={handlePinClick}
-          selectedPin={selectedPin}
-          highlightedPinId={highlightedPinId}
-          onMapReady={(chart) => {
-            chartRef.current = chart as unknown as Record<string, unknown>;
-            setMapLoading(false);
-          }}
-        />
-        {mapLoading && <MapPageSkeleton />}
+        {is3DView ? (
+          <Suspense fallback={<MapPageSkeleton />}>
+            <GlobeView
+              pins={pins}
+              activeLayers={activeLayers}
+              onPinClick={handlePinClick}
+            />
+          </Suspense>
+        ) : (
+          <AmChartsMap
+            pins={pins}
+            activeLayers={activeLayers}
+            onPinClick={handlePinClick}
+            selectedPin={selectedPin}
+            highlightedPinId={highlightedPinId}
+            onMapReady={(chart) => {
+              chartRef.current = chart as unknown as Record<string, unknown>;
+              setMapLoading(false);
+            }}
+          />
+        )}
+        {mapLoading && !is3DView && <MapPageSkeleton />}
       </div>
 
       {/* Search Bar - Floating at top */}
@@ -195,6 +210,14 @@ export default function MapPage() {
 
       {/* Zoom Controls - Bottom right */}
       <div className="absolute bottom-6 right-6 z-20 flex flex-col gap-1">
+        {/* 3D View Toggle */}
+        <ZoomButton
+          onClick={() => setIs3DView(!is3DView)}
+          title={is3DView ? '切换到2D地图' : '切换到3D地球'}
+        >
+          {is3DView ? <Map size={16} /> : <Globe size={16} />}
+        </ZoomButton>
+        <div className="h-1" />
         <ZoomButton onClick={() => {
           const chart = chartRef.current as Record<string, unknown> | null;
           if (chart?.zoomIn) (chart.zoomIn as () => void)();

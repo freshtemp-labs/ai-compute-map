@@ -10,6 +10,7 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { supplyChainTableData } from '@/data/mockData';
+import SupplyChainSankey from '@/components/supply-chain/SupplyChainSankey';
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
@@ -138,6 +139,19 @@ export default function SupplyChainPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Supply Chain Sankey Diagram */}
+      <section className="px-6 py-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-section text-text-primary">供应链流向 — Supply Chain Flow</h2>
+          <p className="text-sm text-text-secondary mt-2">
+            可视化从原材料到最终算力中心的完整供应链路径
+          </p>
+          <div className="mt-6">
+            <SupplyChainSankey />
           </div>
         </div>
       </section>

@@ -1,0 +1,24 @@
+{
+  "pageTitle": "用户偏好设置",
+  "pageSubtitle": "配置地图默认视图、图层显示和界面偏好。设置将自动保存到本地浏览器。",
+  "breadcrumb": "设置",
+  "sections": {
+    "zoom": "默认地图缩放级别",
+    "zoomDesc": "设置地图页面加载时的默认缩放级别（1-10）",
+    "layers": "默认显示图层",
+    "layersDesc": "选择地图加载时默认显示的图层",
+    "language": "语言偏好",
+    "languageDesc": "选择界面显示语言",
+    "theme": "主题模式",
+    "themeDesc": "选择界面颜色主题",
+    "reset": "重置设置",
+    "resetDesc": "将所有设置恢复为默认值"
+  },
+  "theme": {
+    "dark": "深色模式",
+    "light": "浅色模式"
+  },
+  "actions": {
+    "reset": "重置"
+  }
+}
