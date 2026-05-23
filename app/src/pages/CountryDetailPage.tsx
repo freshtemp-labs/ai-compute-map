@@ -114,9 +114,8 @@ export default function CountryDetailPage() {
   const { code } = useParams<{ code: string }>();
   const pageRef = useRef<HTMLDivElement>(null);
 
-  if (!code) return null;
-
-  const data = useCountryData(code);
+  // Hooks must be called unconditionally — call them before any early return
+  const data = useCountryData(code ?? '');
 
   // Pie chart: layer distribution
   const layerPieOption = useMemo(() => ({
@@ -229,6 +228,8 @@ export default function CountryDetailPage() {
       }],
     };
   }, [data.dataCenters]);
+
+  if (!code) return null;
 
   return (
     <div className="min-h-screen" ref={pageRef}>

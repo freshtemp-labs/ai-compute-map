@@ -132,10 +132,41 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
   const onMapReadyRef = useRef(onMapReady);
   const zoomLevelRef = useRef(1.1);
   const currentDataRef = useRef<(MapPin | ClusterData)[]>([]);
+  const updateDataRef = useRef<() => void>(() => {});
 
   // Keep refs in sync with latest props
   useEffect(() => { onPinClickRef.current = onPinClick; }, [onPinClick]);
   useEffect(() => { onMapReadyRef.current = onMapReady; }, [onMapReady]);
+
+  // Update data when pins or active layers change
+  const updateData = useCallback(() => {
+    if (!seriesRef.current) return;
+
+    const visiblePins = pins.filter((pin) => activeLayers[pin.layer]);
+    const processedData = calculateClusters(visiblePins, zoomLevelRef.current);
+    currentDataRef.current = processedData;
+
+    seriesRef.current.data.setAll(
+      processedData.map((item) => ({
+        ...item,
+        _highlighted: 'isCluster' in item ? false : (item as MapPin).id === highlightedPinId,
+        _selected: 'isCluster' in item ? false : (item as MapPin).id === selectedPin?.id,
+        geometry: {
+          type: 'Point' as const,
+          coordinates: [item.lng, item.lat],
+        },
+      }))
+    );
+  }, [pins, activeLayers, highlightedPinId, selectedPin]);
+
+  // Keep ref in sync so the chart zoom handler always has the latest
+  useEffect(() => {
+    updateDataRef.current = updateData;
+  });
+
+  useEffect(() => {
+    updateData();
+  }, [updateData]);
 
   // Initialize chart once
   useEffect(() => {
@@ -452,7 +483,7 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
       const zl = chart.get('zoomLevel') ?? 1;
       if (Math.abs(zl - zoomLevelRef.current) > 0.3) {
         zoomLevelRef.current = zl;
-        updateData();
+        updateDataRef.current();
       }
     });
 
@@ -461,33 +492,7 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
     return () => {
       root.dispose();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Update data when pins or active layers change
-  const updateData = useCallback(() => {
-    if (!seriesRef.current) return;
-
-    const visiblePins = pins.filter((pin) => activeLayers[pin.layer]);
-    const processedData = calculateClusters(visiblePins, zoomLevelRef.current);
-    currentDataRef.current = processedData;
-
-    seriesRef.current.data.setAll(
-      processedData.map((item) => ({
-        ...item,
-        _highlighted: 'isCluster' in item ? false : (item as MapPin).id === highlightedPinId,
-        _selected: 'isCluster' in item ? false : (item as MapPin).id === selectedPin?.id,
-        geometry: {
-          type: 'Point' as const,
-          coordinates: [item.lng, item.lat],
-        },
-      }))
-    );
-  }, [pins, activeLayers, highlightedPinId, selectedPin]);
-
-  useEffect(() => {
-    updateData();
-  }, [updateData]);
 
   return (
     <div

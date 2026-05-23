@@ -37,14 +37,7 @@ interface ValidationError {
   message: string;
 }
 
-interface ValidationReport {
-  totalRecords: number;
-  totalErrors: number;
-  errors: ValidationError[];
-  datasetSummary: Record<string, { count: number; errors: number }>;
-}
-
-// ── Helpers ──────────────────────────────────────────────────────────
+// ── Helpers
 
 const errors: ValidationError[] = [];
 
@@ -411,13 +404,6 @@ for (const err of errors) {
 }
 
 const totalRecords = Object.values(datasetSummary).reduce((sum, d) => sum + d.count, 0);
-
-const report: ValidationReport = {
-  totalRecords,
-  totalErrors: errors.length,
-  errors,
-  datasetSummary,
-};
 
 // ── Print Report ─────────────────────────────────────────────────────
 

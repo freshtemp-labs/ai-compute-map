@@ -19,11 +19,9 @@ vi.mock('xlsx', () => ({
 // Provide URL.createObjectURL / revokeObjectURL if missing (jsdom)
 beforeAll(() => {
   if (!URL.createObjectURL) {
-    // @ts-ignore mock for jsdom
     URL.createObjectURL = vi.fn(() => 'blob:mock');
   }
   if (!URL.revokeObjectURL) {
-    // @ts-ignore mock for jsdom
     URL.revokeObjectURL = vi.fn();
   }
 });
