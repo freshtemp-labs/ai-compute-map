@@ -33,6 +33,23 @@ import { tsmcFabs, tsmcNodes, samsungFabs, smicFabs, processTimeline } from '@/c
    MAIN PAGE - 晶圆代工分析主页
    展示全球半导体制造设施、工艺节点比较、产能利用率和对比矩阵
    ═══════════════════════════════════════════════ */
+
+/**
+ * FoundriesPage — 晶圆代工分析页面主组件
+ *
+ * 页面分为六个主要 Section：
+ *   1. Page Header       — 面包屑导航 + 页面标题 + 关键统计
+ *   2. Market Overview   — 市场份额饼图 + 营收趋势 + KPI 网格
+ *   3. TSMC Deep Dive    — 台积电深度分析（晶圆厂位置、工艺节点时间线、产能表、扩张计划）
+ *   4. Samsung Foundry   — 三星代工（晶圆厂、GAA vs FinFET 对比）
+ *   5. Intel + Others    — 英特尔代工、中芯国际、成熟制程专家（格芯/联电）
+ *   6. Comparison Matrix — 代工厂对比矩阵 + 产能预测图
+ *
+ * 动画策略：所有卡片使用 framer-motion 的 fadeUp variants，配合 whileInView
+ * 实现滚动触发渐入效果。列表项使用 index-based delay 实现级联动画。
+ *
+ * @returns {JSX.Element} 完整的代工厂分析页面
+ */
 export default function FoundriesPage() {
   const navigate = useNavigate();
 
@@ -40,10 +57,11 @@ export default function FoundriesPage() {
     <div className="min-h-[100dvh] bg-bg-base">
       {/* ── Section 1: Page Header ── */}
       <section className="relative pt-24 pb-12 px-6 border-b-[3px] border-accent-cyan overflow-hidden">
+        {/* 背景层：渐变底色 + 点阵纹理装饰 */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, #0A0A0F 0%, #0F0F1A 40%, #0A0A0F 100%)' }} />
         <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, #00D4FF 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
         <div className="relative max-w-[1440px] mx-auto">
-          {/* Breadcrumb */}
+          {/* Breadcrumb — 面包屑导航：使用基础 fade-in 动画，无需 y 位移 */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -55,7 +73,7 @@ export default function FoundriesPage() {
             <span className="text-mono-sm text-accent-cyan">Foundry Layer</span>
           </motion.div>
 
-          {/* Layer Badge */}
+          {/* Layer Badge — 标题弹出动画：y 方向从 10px 上移至原位 */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -66,7 +84,7 @@ export default function FoundriesPage() {
             <span className="text-mono-sm text-accent-cyan">封装工厂层 · FOUNDRY</span>
           </motion.div>
 
-          {/* Title */}
+          {/* Title — 主标题动画：y 从 30px 滑入，延迟 0.15s */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -76,7 +94,7 @@ export default function FoundriesPage() {
             Semiconductor Foundry Landscape
           </motion.h1>
 
-          {/* Subtitle */}
+          {/* Subtitle — 副标题动画：y 从 20px 滑入，延迟 0.2s */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -86,7 +104,7 @@ export default function FoundriesPage() {
             Global fabrication capacity, process node leadership, and expansion dynamics across the world's chip manufacturers.
           </motion.p>
 
-          {/* Stats Row */}
+          {/* Stats Row — 关键统计行：KPI 组件使用 index 控制级联动画顺序 */}
           <div className="flex flex-wrap gap-8 items-center">
             <KpiStat label="Fabs Tracked" value={18} index={3} />
             <KpiStat label="TSMC Share" value={62} suffix="%" index={4} />
@@ -94,6 +112,7 @@ export default function FoundriesPage() {
               <div className="text-data-md text-text-primary font-mono">$230B+</div>
               <div className="text-mono-sm text-text-muted uppercase tracking-[0.04em] mt-1">Market Size</div>
             </div>
+            {/* 实时状态指示器：呼吸灯动画 + 更新时间 */}
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="animate-live-pulse absolute inline-flex h-full w-full rounded-full bg-live-pulse opacity-75" />
@@ -111,7 +130,7 @@ export default function FoundriesPage() {
           <SectionLabel text="Market Overview" />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            {/* Donut Chart */}
+            {/* Donut Chart — 市场份额环形图：TSMC 62%, Samsung 13%, UMC 6%, GF 6%, SMIC 5%, Others 8% */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -126,7 +145,7 @@ export default function FoundriesPage() {
               <DonutChart />
             </motion.div>
 
-            {/* Revenue Trend */}
+            {/* Revenue Trend — 营收趋势折线图：展示 TSMC/Samsung/Intel 等代工厂历年营收变化 */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -142,7 +161,7 @@ export default function FoundriesPage() {
             </motion.div>
           </div>
 
-          {/* KPI Grid */}
+          {/* KPI Grid — 四大代工厂营收卡片网格，使用 map 遍历渲染，custom=i 传递 stagger index */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { label: 'TSMC Revenue', value: '$90B', color: 'text-accent-cyan', icon: <Zap size={16} /> },
@@ -172,7 +191,7 @@ export default function FoundriesPage() {
         <div className="max-w-[1440px] mx-auto">
           <SectionLabel text="TSMC · TAIWAN SEMICONDUCTOR" />
 
-          {/* Company Header Card */}
+          {/* Company Header Card — TSMC 公司概览卡片，左侧青色边框 (#00D4FF) 标识品牌色 */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -189,14 +208,16 @@ export default function FoundriesPage() {
                 </div>
                 <p className="text-body-md text-text-secondary">Hsinchu, Taiwan · World's largest dedicated independent semiconductor foundry</p>
               </div>
+              {/* TSMC 标签徽章：市场领导者、3nm 量产、2nm 2025 */}
               <div className="flex flex-wrap gap-3">
                 {['Market Leader', '3nm Shipping', '2nm 2025'].map((badge) => (
-                  <span key={badge} className="px-2.5 py-1 bg-accent-cyan/10 border border-accent-cyan/30 rounded text-mono-sm text-accent-cyan">
-                    {badge}
-                  </span>
-                ))}
+                    <span key={badge} className="px-2.5 py-1 bg-accent-cyan/10 border border-accent-cyan/30 rounded text-mono-sm text-accent-cyan">
+                      {badge}
+                    </span>
+                  ))}
               </div>
             </div>
+            {/* TSMC 关键财务与运营指标 */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-4 border-t border-border-subtle">
               {[
                 { label: 'Revenue', value: '$90B' },
@@ -212,9 +233,9 @@ export default function FoundriesPage() {
             </div>
           </motion.div>
 
-          {/* Fab Locations + Timeline Row */}
+          {/* Fab Locations + Timeline Row — 左右双栏布局：晶圆厂卡片列表 + 工艺节点时间线 */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            {/* Fab Cards */}
+            {/* Fab Cards — 渲染 tsmcFabs 数据，每个卡片含名称、角色、制程节点、产能 */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -253,7 +274,7 @@ export default function FoundriesPage() {
               </div>
             </motion.div>
 
-            {/* Process Timeline */}
+            {/* Process Timeline — 渲染 processTimeline 数据，纵向时间线含节点名称和领先厂商 */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -295,7 +316,7 @@ export default function FoundriesPage() {
             </motion.div>
           </div>
 
-          {/* Capacity by Node Table */}
+          {/* Capacity by Node Table — 渲染 tsmcNodes 数据表，含节点/地点/产能/状态/营收贡献五列 */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -310,6 +331,7 @@ export default function FoundriesPage() {
               </h3>
             </div>
             <div className="overflow-x-auto">
+              {/* 表头：固定五列布局，使用 uppercase tracking 样式 */}
               <table className="w-full">
                 <thead>
                   <tr className="bg-bg-surface">
@@ -318,6 +340,7 @@ export default function FoundriesPage() {
                     ))}
                   </tr>
                 </thead>
+                {/* 表体：每行动画 delay 基于 index * 0.04s，实现逐行渐入 */}
                 <tbody>
                   {tsmcNodes.map((row, i) => (
                     <motion.tr
@@ -340,7 +363,7 @@ export default function FoundriesPage() {
             </div>
           </motion.div>
 
-          {/* Expansion Plan */}
+          {/* Expansion Plan — TSMC 全球扩张计划：日本熊本、亚利桑那凤凰城、德国德累斯顿、高雄 */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -354,6 +377,7 @@ export default function FoundriesPage() {
               Global Expansion Plan
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {/* 四大扩张项目数据，每项含 arrow 图标和渐变滑入动画 */}
               {[
                 'Kumamoto, Japan (JASM): 28nm/12nm/16nm, operational 2024',
                 'Phoenix, Arizona: 4nm/3nm, Phase 1 2025, Phase 2 2028',
@@ -382,7 +406,7 @@ export default function FoundriesPage() {
         <div className="max-w-[1440px] mx-auto">
           <SectionLabel text="SAMSUNG ELECTRONICS · FOUNDRY" />
 
-          {/* Samsung Header Card */}
+          {/* Samsung Header Card — 与 TSMC 布局一致，左侧青色边框；徽章突出 GAA 3nm 和 2nm 路线图 */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -399,12 +423,14 @@ export default function FoundriesPage() {
                 </div>
                 <p className="text-body-md text-text-secondary">Suwon, South Korea · Integrated device manufacturer with foundry services</p>
               </div>
+              {/* Samsung 标签徽章：3nm GAA、2nm 2025、Taylor 工厂建设中 */}
               <div className="flex flex-wrap gap-3">
                 {['3nm GAA', '2nm 2025', 'Taylor Fab Under Construction'].map((badge) => (
                   <span key={badge} className="px-2.5 py-1 bg-accent-cyan/10 border border-accent-cyan/30 rounded text-mono-sm text-accent-cyan">{badge}</span>
                 ))}
               </div>
             </div>
+            {/* Samsung 代工关键指标：营收 $12B，毛利率 ~15%，市占 13%，GAA 领先 */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-4 border-t border-border-subtle">
               {[
                 { label: 'Foundry Revenue', value: '$12B' },
@@ -421,7 +447,7 @@ export default function FoundriesPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Fab Locations */}
+            {/* Fab Locations — 渲染 samsungFabs 数据，每个 Fab 含名称、角色、状态 */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -434,6 +460,7 @@ export default function FoundriesPage() {
                 Fab Locations
               </h3>
               <div className="space-y-3">
+                {/* samsungFabs 数据源，水平滑入动画，delay = i * 0.08s */}
                 {samsungFabs.map((fab, i) => (
                   <motion.div
                     key={fab.name}
@@ -453,7 +480,7 @@ export default function FoundriesPage() {
               </div>
             </motion.div>
 
-            {/* GAA Comparison */}
+            {/* GAA Comparison — GAA vs FinFET 技术对比图，含三星/台积电各自优势说明 */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -469,6 +496,7 @@ export default function FoundriesPage() {
                 Samsung is the only foundry shipping GAA (Gate-All-Around) transistors at 3nm, while TSMC uses FinFET at 3nm.
               </p>
               <GaaComparisonChart />
+              {/* 对比摘要：三星 GAA 静电控制优势 vs 台积电良率及生态锁定 */}
               <div className="mt-3 p-3 bg-bg-surface rounded border border-border-subtle">
                 <div className="text-body-sm text-text-secondary">
                   <span className="text-accent-cyan font-semibold">Samsung advantage:</span> GAA architecture offers better electrostatic control
@@ -488,7 +516,7 @@ export default function FoundriesPage() {
           <SectionLabel text="OTHER FOUNDRIES" />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Intel Foundry */}
+            {/* Intel Foundry — IDM 2.0 战略转型卡片，左侧黄色边框 (#F59E0B)，含关键指标和全球工厂列表 */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -503,6 +531,7 @@ export default function FoundriesPage() {
               </div>
               <p className="text-body-sm text-text-secondary mb-4">IDM 2.0 strategy — transitioning from internal-only to external foundry services.</p>
 
+              {/* Intel 关键指标：营收目标、领先节点 18A、工厂数量 */}
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between text-body-sm">
                   <span className="text-text-muted">Revenue Target</span>
@@ -521,6 +550,7 @@ export default function FoundriesPage() {
               <div className="border-t border-border-subtle pt-3 mb-4">
                 <div className="text-mono-sm text-text-muted uppercase tracking-[0.04em] mb-2">Key Locations</div>
                 <div className="space-y-1">
+                  {/* 英特尔全球六大制造基地 */}
                   {['Ocotillo, AZ', 'Ronler Acres, OR', 'New Albany, OH', 'Leixlip, Ireland', 'Kiryat Gat, Israel', 'Magdeburg, Germany'].map((loc) => (
                     <div key={loc} className="flex items-center gap-1.5 text-body-sm text-text-secondary">
                       <MapPin size={10} className="text-warning" />
@@ -530,12 +560,13 @@ export default function FoundriesPage() {
                 </div>
               </div>
 
+              {/* 节点路线图提示框：20A → 18A (2025) → 14A (2026) */}
               <div className="p-2.5 bg-warning/5 border border-warning/20 rounded">
                 <span className="text-mono-sm text-warning">Node Roadmap: 20A → 18A (2025) → 14A (2026)</span>
               </div>
             </motion.div>
 
-            {/* SMIC */}
+            {/* SMIC — 中芯国际卡片，左侧灰色边框，显示制裁背景下的中国市场聚焦 */}
             <motion.div
               variants={fadeUp}
               custom={1}
@@ -551,6 +582,7 @@ export default function FoundriesPage() {
               </div>
               <p className="text-body-sm text-text-secondary mb-4">China's largest foundry. Domestic market focus under US sanctions context.</p>
 
+              {/* SMIC 关键指标：营收 $8B，领先节点 7nm (N+2)，市占 5% */}
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between text-body-sm">
                   <span className="text-text-muted">Revenue</span>
@@ -569,6 +601,7 @@ export default function FoundriesPage() {
               <div className="border-t border-border-subtle pt-3">
                 <div className="text-mono-sm text-text-muted uppercase tracking-[0.04em] mb-2">Fab Locations</div>
                 <div className="space-y-1">
+                  {/* smicFabs 数据源，展示各厂区名称和角色 */}
                   {smicFabs.map((fab) => (
                     <div key={fab.name} className="flex items-center justify-between text-body-sm">
                       <span className="flex items-center gap-1.5 text-text-secondary">
@@ -582,7 +615,7 @@ export default function FoundriesPage() {
               </div>
             </motion.div>
 
-            {/* GF + UMC */}
+            {/* GF + UMC — 成熟制程专家卡片，左侧灰色边框 (#9A9AAF)，含格芯和联电两家公司的关键数据 */}
             <motion.div
               variants={fadeUp}
               custom={2}
@@ -597,7 +630,7 @@ export default function FoundriesPage() {
                 <h3 className="text-heading-sm font-display text-text-primary">Mature Node Specialists</h3>
               </div>
 
-              {/* GlobalFoundries */}
+              {/* GlobalFoundries 区块：营收 $7B，Feature-Rich 策略，四大制造基地 */}
               <div className="mb-4">
                 <h4 className="text-body-md font-semibold text-text-primary mb-2">GlobalFoundries</h4>
                 <div className="flex justify-between text-body-sm mb-1">
@@ -616,6 +649,7 @@ export default function FoundriesPage() {
               </div>
 
               <div className="border-t border-border-subtle pt-3">
+                {/* UMC 联电区块：营收 $5B，聚焦 22nm/28nm */}
                 <h4 className="text-body-md font-semibold text-text-primary mb-2">UMC 联电</h4>
                 <div className="flex justify-between text-body-sm mb-1">
                   <span className="text-text-muted">Revenue</span>
@@ -637,6 +671,7 @@ export default function FoundriesPage() {
       </section>
 
       {/* ── Section 6: Comparison Matrix ── */}
+      {/* 代工厂综合对比矩阵 + 产能预测图 */}
       <section className="py-16 px-6" style={{ background: 'linear-gradient(180deg, #111118 0%, #161620 100%)' }}>
         <div className="max-w-[1440px] mx-auto">
           <SectionLabel text="COMPARISON MATRIX" />
@@ -652,7 +687,7 @@ export default function FoundriesPage() {
 
           <ComparisonMatrix />
 
-          {/* Capacity Projection */}
+          {/* Capacity Projection — 产能预测折线图：千片晶圆/月 */}
           <motion.div
             variants={fadeUp}
             initial="hidden"

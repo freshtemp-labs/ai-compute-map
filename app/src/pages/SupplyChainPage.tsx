@@ -16,6 +16,10 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 // ─── Data ──────────────────────────────────────────────────────
 
+/**
+ * 稀土生产配额数据
+ * 各国2023/2024年稀土开采配额及全球产量占比，含主要矿区和加工能力详情
+ */
 const RARE_EARTH_DATA = [
   { name: 'China', quota2023: '240,000', quota2024: '270,000', percent: 61, details: { mining: 'Bayan Obo (Inner Mongolia)', processing: '85% global processing', military: 'Strategic reserve' } },
   { name: 'USA', quota2023: '42,000', quota2024: '50,000', percent: 12, details: { mining: 'Mountain Pass (California)', processing: 'MP Materials (building)', military: 'Pentagon priority' } },
@@ -24,6 +28,11 @@ const RARE_EARTH_DATA = [
   { name: 'Others', quota2023: '38,000', quota2024: '42,000', percent: 10, details: { mining: 'Various', processing: 'Limited', military: 'Various' } },
 ];
 
+/**
+ * 光刻设备供应商数据
+ * 全球主要光刻机厂商的市场份额、核心产品、营收及客户信息
+ * 光刻是半导体制造的关键瓶颈，当前仅 ASML 具备 EUV 生产能力
+ */
 const LITHOGRAPHY_DATA = [
   { company: 'ASML', units: 'NA', marketShare: 'EUV monopoly', keyProducts: 'EUV, DUV immersion', revenue2024: '$27.6B', customers: 'TSMC, Samsung, Intel', note: 'Only EUV supplier globally' },
   { company: 'Nikon', units: 'NA', marketShare: 'ArF i-line niche', keyProducts: 'ArF, i-line, NSR-S635E', revenue2024: '$5.2B (total)', customers: 'Specialty fabs', note: 'Focus on mature nodes, inspection' },
@@ -31,8 +40,10 @@ const LITHOGRAPHY_DATA = [
   { company: 'Shanghai Micro', units: 'NA', marketShare: '<1%', keyProducts: 'SSA600/20, 90nm demo', revenue2024: 'Private', customers: 'SMIC (testing)', note: '90nm demo; 28nm under development' },
 ];
 
+/** 饼图颜色调色板 — 用于稀土产量占比可视化的各扇区颜色序列 */
 const PIE_COLORS = ['#00e5b0', '#38bdf8', '#fbbf24', '#f87171', '#a78bfa', '#fb923c'];
 
+/** 供应链完整数据集 — 从 mockData 导入，用于表格展示和搜索过滤 */
 const SUPPLY_CHAIN_DATA = supplyChainTableData;
 
 // ─── Components ────────────────────────────────────────────────
@@ -43,13 +54,19 @@ const SUPPLY_CHAIN_DATA = supplyChainTableData;
  */
 export default function SupplyChainPage() {
   const { t } = useTranslation(['supplyChain', 'common']);
+  // 搜索/过滤状态：搜索关键词、供应链类型、目标国家
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
   const [selectedCountry, setSelectedCountry] = useState('all');
 
-  // 按搜索/类型/国家三重过滤
+  /**
+   * 按搜索/类型/国家三重过滤
+   * 使用 useMemo 缓存过滤结果，仅在 searchQuery / typeFilter / selectedCountry
+   * 变化时重新计算，避免每次渲染都遍历整个数据集
+   */
   const filteredData = useMemo(() => {
     let data = SUPPLY_CHAIN_DATA;
+    // 第一步：按搜索关键词在名称、国家、类型、指标中模糊匹配
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       data = data.filter((d) =>
@@ -59,16 +76,18 @@ export default function SupplyChainPage() {
         d.keyMetric.toLowerCase().includes(q)
       );
     }
+    // 第二步：按供应链类型筛选（稀土/光刻/设计/能源）
     if (typeFilter !== 'all') {
       data = data.filter((d) => d.type === typeFilter);
     }
+    // 第三步：按国家筛选
     if (selectedCountry !== 'all') {
       data = data.filter((d) => d.country === selectedCountry);
     }
     return data;
   }, [searchQuery, typeFilter, selectedCountry]);
 
-  // Rare earth pie chart data
+  // 将稀土数据转换为饼图所需格式：提取名称和百分比作为数据键
   const pieData = RARE_EARTH_DATA.map((c) => ({ name: c.name, value: c.percent }));
 
   return (
@@ -87,7 +106,7 @@ export default function SupplyChainPage() {
             {t('supplyChain:pageSubtitle')}
           </p>
 
-          {/* Stats */}
+          {/* 顶部统计卡片：数据点数量、覆盖国家、Tier-1 数据来源占比、数据时效 */}
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { value: '1,200+', label: t('supplyChain:stats.dataPoints') },
@@ -110,6 +129,7 @@ export default function SupplyChainPage() {
           <h2 className="text-section text-text-primary">{t('supplyChain:sections.rareEarth')}</h2>
           <p className="text-sm text-text-secondary mt-2">2025 global rare earth production quotas and reserves</p>
 
+          {/* 稀土产量饼图 + 各国详情对比（左图右表布局） */}
           <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Pie Chart */}
             <div className="p-5 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
@@ -156,6 +176,7 @@ export default function SupplyChainPage() {
             可视化从原材料到最终算力中心的完整供应链路径
           </p>
           <div className="mt-6">
+            {/* 桑基图组件：展示从原材料→制造→算力中心的供应链流向 */}
             <SupplyChainSankey />
           </div>
         </div>
@@ -192,6 +213,7 @@ export default function SupplyChainPage() {
           <h2 className="text-section text-text-primary">{t('supplyChain:sections.designFirms')}</h2>
           <p className="text-sm text-text-secondary mt-2">Fabless semiconductor companies and EDA tool vendors</p>
 
+          {/* 芯片设计公司卡片网格：展示各公司市场定位、营收和总部信息 */}
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               { name: 'NVIDIA', market: 'GPU / AI', revenue: '$60.9B', hq: 'USA', share: '80% AI training' },
@@ -218,6 +240,7 @@ export default function SupplyChainPage() {
           <h2 className="text-section text-text-primary">{t('supplyChain:sections.energyLabor')}</h2>
           <p className="text-sm text-text-secondary mt-2">Power infrastructure and skilled labor supporting the AI supply chain</p>
 
+          {/* 能源与人力数据面板：数据中心电力消耗 + 芯片行业人才储备 */}
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-5 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
               <h3 className="text-sm font-medium text-text-primary mb-3">Electricity for AI Infrastructure</h3>
@@ -250,7 +273,9 @@ export default function SupplyChainPage() {
               <p className="text-sm text-text-secondary mt-2">{t('supplyChain:dataset.subtitle')}</p>
             </div>
             <div className="flex gap-2">
+              {/* 导出 CSV：将过滤后的数据转为逗号分隔文件并通过 Blob 触发浏览器下载 */}
               <button onClick={() => {
+                // 构建 CSV 列头
                 const headers = ['id','name','type','country','keyMetric','value','source','tier','updated'];
                 const csv = [headers.join(','), ...filteredData.map((e) =>
                   [e.id, `"${e.name}"`, e.type, e.country, `"${e.keyMetric}"`, `"${e.value}"`, `"${e.source}"`, e.tier, e.updated].join(',')
@@ -260,6 +285,7 @@ export default function SupplyChainPage() {
               }} className="px-3 py-1.5 text-mono-sm text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors cursor-pointer">
                 {t('supplyChain:dataset.exportCSV')}
               </button>
+              {/* 导出 JSON：将过滤后的数据格式化为 JSON 并通过 Blob 触发浏览器下载 */}
               <button onClick={() => {
                 const blob = new Blob([JSON.stringify(filteredData, null, 2)], { type: 'application/json' });
                 const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'supply-chain.json'; a.click();
@@ -269,7 +295,7 @@ export default function SupplyChainPage() {
             </div>
           </div>
 
-          {/* Filters */}
+          {/* 过滤器栏：搜索框 + 类型下拉 + 国家下拉，组合过滤表格数据 */}
           <div className="flex flex-wrap gap-3 mb-4">
             <input
               type="text"
@@ -307,7 +333,7 @@ export default function SupplyChainPage() {
             </select>
           </div>
 
-          {/* Table */}
+          {/* 数据表格：展示过滤后的供应链条目，含类型和层级颜色标签 */}
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -323,10 +349,12 @@ export default function SupplyChainPage() {
                 </tr>
               </thead>
               <tbody>
+                {/* 遍历过滤后的数据，为每个条目渲染一行，含类型和层级颜色标签 */}
                 {filteredData.map((entry) => (
                   <tr key={entry.id} className="border-b border-border-subtle/50 hover:bg-[rgba(255,255,255,0.02)] transition-colors">
                     <td className="px-3 py-3 text-text-primary font-medium">{entry.name}</td>
                     <td className="px-3 py-3">
+                      {/* 根据数据类型渲染对应颜色标签：稀土-琥珀色、光刻-天蓝、设计-祖母绿、能源-玫红 */}
                       <span className={`inline-flex px-2 py-0.5 rounded text-mono-sm ${
                         entry.type === 'rare-earth' ? 'bg-amber-500/10 text-amber-400' :
                         entry.type === 'lithography' ? 'bg-sky-500/10 text-sky-400' :
@@ -341,6 +369,7 @@ export default function SupplyChainPage() {
                     <td className="px-3 py-3 text-mono-sm text-accent-cyan">{entry.value}</td>
                     <td className="px-3 py-3 text-mono-sm text-text-muted">{entry.source}</td>
                     <td className="px-3 py-3">
+                      {/* 根据数据层级渲染颜色标签：tier1 绿色（高可信度）、tier2 蓝色、其他灰色 */}
                       <span className={`inline-flex px-2 py-0.5 rounded text-mono-sm ${
                         entry.tier === 'tier1' ? 'bg-emerald-500/10 text-emerald-400' :
                         entry.tier === 'tier2' ? 'bg-sky-500/10 text-sky-400' :
@@ -356,6 +385,7 @@ export default function SupplyChainPage() {
             </table>
           </div>
 
+          {/* 空状态提示：过滤结果为零时展示搜索关键词和匹配数 */}
           {filteredData.length === 0 && (
             <div className="text-center py-12">
               <p className="text-text-muted">{t('common:actions.search')} &ldquo;{searchQuery}&rdquo; — 0 {t('common:data.dataPoints')}</p>

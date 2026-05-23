@@ -28,6 +28,11 @@ export default function ComparePage() {
   const { pins } = useMapData();
   const [searchQuery, setSearchQuery] = useState('');
 
+  /**
+   * 搜索过滤逻辑：根据 searchQuery 在设施名称、公司、供应商、
+   * 城市、国家字段中进行模糊匹配。空查询时展示前50个设施以避免
+   * 渲染过多 DOM 节点。
+   */
   const filteredPins = useMemo(() => {
     if (!searchQuery.trim()) return pins.slice(0, 50);
     const q = searchQuery.toLowerCase();
@@ -41,16 +46,22 @@ export default function ComparePage() {
     );
   }, [pins, searchQuery]);
 
-  // Normalize values for radar chart
+  /**
+   * 雷达图数据标准化：定义5个对比维度（容量、电力、PUE、员工、建成年份），
+   * 计算每个维度的最大值用于归一化。PUE 越低越好，后续在图表配置中会反转。
+   * 需要至少2个对比设施才会生成雷达数据。
+   */
   const radarData = useMemo(() => {
     if (comparePins.length < 2) return null;
     const dims = [
+      // 5个对比维度：产能、电力容量、PUE、员工数、建成年份
       { key: 'value', label: t('map:facility.capacity', 'Capacity') },
       { key: 'powerCapacity', label: t('map:facility.powerMW', 'Power (MW)') },
       { key: 'pue', label: t('map:facility.pue', 'PUE') },
       { key: 'employees', label: t('map:facility.employees', 'Employees') },
       { key: 'yearEstablished', label: t('map:facility.yearEst', 'Year Est.') },
     ];
+    // 计算每个维度的最大值（至少为1，避免除以零），用于后续归一化
     const maxVals: Record<string, number> = {};
     dims.forEach((d) => {
       maxVals[d.key] = Math.max(
@@ -64,6 +75,11 @@ export default function ComparePage() {
     return { dims, maxVals };
   }, [comparePins, t]);
 
+  /**
+   * ECharts 雷达图配置：采用暗色主题，多边形雷达形状。
+   * 每个设施按维度归一化到 0-100，PUE 维度反转（低 PUE = 高分）。
+   * 图例、提示框、轴线颜色均为暗色系以匹配深色页面风格。
+   */
   const chartOption = useMemo(() => {
     if (!radarData) return null;
     const { dims, maxVals } = radarData;
@@ -93,9 +109,11 @@ export default function ComparePage() {
       series: [
         {
           type: 'radar',
+          // 为每个对比设施生成一条雷达折线，颜色按其图层类型着色
           data: comparePins.map((pin) => ({
             value: dims.map((d) => {
               const raw = d.key === 'value' ? (typeof pin.value === 'number' ? pin.value : 0) : (pin[d.key as keyof ComparePin] as number) || 0;
+              // 归一化到 0-100；PUE 维度反转（越低越好，归一化后高分＝低 PUE）
               const normalized = (Math.abs(raw) / maxVals[d.key]) * 100;
               return d.key === 'pue' ? Math.max(0, 100 - normalized) : normalized;
             }),
@@ -143,6 +161,7 @@ export default function ComparePage() {
               <h3 className="text-[13px] font-mono text-[#9A9AAF] uppercase tracking-wider mb-3">
                 {t('search.placeholder', { ns: 'map' })}
               </h3>
+              {/* 搜索输入框：实时过滤设施列表，支持名称/公司/城市/国家匹配 */}
               <div className="relative mb-4">
                 <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6B6B80]" />
                 <input
@@ -154,7 +173,7 @@ export default function ComparePage() {
                 />
               </div>
 
-              {/* Selected Pins */}
+              {/* 已选设施列表：展示已加入对比的设施，支持点击 X 移除 */}
               {comparePins.length > 0 && (
                 <div className="mb-4 space-y-2">
                   {comparePins.map((pin) => (
@@ -180,7 +199,7 @@ export default function ComparePage() {
                 </div>
               )}
 
-              {/* Available Pins */}
+              {/* 可选设施列表：点击添加至对比（最多3个），已选的置灰并显示 ✓ */}
               <div className="max-h-[400px] overflow-y-auto space-y-1.5 pr-1">
                 {filteredPins.map((pin) => {
                   const selected = comparePins.some((p) => p.id === pin.id);
@@ -213,6 +232,7 @@ export default function ComparePage() {
                     </button>
                   );
                 })}
+                {/* 无匹配结果时的空状态提示 */}
                 {filteredPins.length === 0 && (
                   <p className="text-[12px] text-[#6B6B80] text-center py-4">
                     {t('map:facility.noResults', { query: searchQuery })}
@@ -222,9 +242,10 @@ export default function ComparePage() {
             </div>
           </div>
 
-          {/* Main Content - Comparison */}
+          {/* 主内容区 - 对比视图：雷达图 + 对比表格，选足2个设施后显示 */}
           <div className="flex-1 min-w-0">
             {comparePins.length < 2 ? (
+              /* 空状态：提示用户至少选择2个设施进行对比 */
               <div className="flex flex-col items-center justify-center py-20 text-center">
                 <BarChart3 size={48} className="text-[#2A2A3A] mb-4" />
                 <h3 className="text-heading-sm text-[#6B6B80] mb-2">
@@ -236,7 +257,7 @@ export default function ComparePage() {
               </div>
             ) : (
               <div className="space-y-6">
-                {/* Radar Chart */}
+                {/* 雷达图：多维度对比可视化（容量/电力/PUE/员工/年份），PUE 反转显示 */}
                 {chartOption && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -257,7 +278,7 @@ export default function ComparePage() {
                   </motion.div>
                 )}
 
-                {/* Comparison Table */}
+                {/* 对比表格：按行展示各维度数据，每行为一个指标，每列为对比的设施 */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -271,6 +292,7 @@ export default function ComparePage() {
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full">
+                      {/* 表头：第一列为"指标"标签，其余列为各对比设施名称（带颜色圆点标识图层） */}
                       <thead>
                         <tr className="border-b border-[#1E1E28]">
                           <th className="text-left p-3 text-[11px] font-mono text-[#6B6B80] uppercase tracking-wider w-36">
@@ -291,17 +313,21 @@ export default function ComparePage() {
                           ))}
                         </tr>
                       </thead>
+                      {/* 表体：每行展示一个对比维度，第一列为指标名称，后续列为各设施对应值 */}
                       <tbody>
+                        {/* 设施类型（数据中心 / 晶圆厂 / 供应链） */}
                         <CompareRow
                           label={t('compare.type', { ns: 'map', defaultValue: 'Type' })}
                           values={comparePins.map((p) =>
                             p.layer === 'supply' ? t('layerToggle.supplyChain', { ns: 'map' }) : p.layer === 'foundry' ? t('layerToggle.foundry', { ns: 'map' }) : t('layerToggle.dataCenter', { ns: 'map' })
                           )}
                         />
+                        {/* 公司 / 供应商 */}
                         <CompareRow
                           label={t('map:facility.company', 'Company')}
                           values={comparePins.map((p) => p.company || p.provider || '-')}
                         />
+                        {/* 产能（含单位） */}
                         <CompareRow
                           label={t('map:facility.capacity', 'Capacity')}
                           values={comparePins.map((p) =>
@@ -310,30 +336,37 @@ export default function ComparePage() {
                               : `${p.value} ${p.unit || ''}`
                           )}
                         />
+                        {/* 制程节点（仅晶圆厂相关） */}
                         <CompareRow
                           label={t('map:facility.processNode', 'Process Node')}
                           values={comparePins.map((p) => p.processNode || '-')}
                         />
+                        {/* 电力容量 (MW) */}
                         <CompareRow
                           label={t('map:facility.powerMW', 'Power (MW)')}
                           values={comparePins.map((p) => (p.powerCapacity ? `${p.powerCapacity} MW` : '-'))}
                         />
+                        {/* PUE（能效指标，越低越好） */}
                         <CompareRow
                           label={t('map:facility.pue', 'PUE')}
                           values={comparePins.map((p) => (p.pue ? p.pue.toFixed(2) : '-'))}
                         />
+                        {/* 员工数量 */}
                         <CompareRow
                           label={t('map:facility.employees', 'Employees')}
                           values={comparePins.map((p) => (p.employees ? p.employees.toLocaleString() : '-'))}
                         />
+                        {/* 地理位置（城市, 国家） */}
                         <CompareRow
                           label={t('compare.location', { ns: 'map', defaultValue: 'Location' })}
                           values={comparePins.map((p) => [p.city, p.country].filter(Boolean).join(', ') || '-')}
                         />
+                        {/* 运营状态 */}
                         <CompareRow
                           label={t('map:facility.status', 'Status')}
                           values={comparePins.map((p) => p.status || '-')}
                         />
+                        {/* 建成年份 / 运营年份：优先使用 yearEstablished，fallback 到 yearOperational */}
                         <CompareRow
                           label={t('map:facility.yearEst', 'Year Est.')}
                           values={comparePins.map((p) => (p.yearEstablished ? String(p.yearEstablished) : p.yearOperational ? String(p.yearOperational) : '-'))}
@@ -351,6 +384,15 @@ export default function ComparePage() {
   );
 }
 
+/**
+ * 对比表格行组件（已 memo 优化）
+ * 渲染对比表格中的单行数据，第一列为指标名称（大写等宽字体），
+ * 后续列为各设施的对应值。使用 React.memo 避免无关状态变更
+ * 导致的重渲染。
+ *
+ * @param label  - 第一列显示的指标名称
+ * @param values - 各设施对应的值数组，与对比设施一一对应
+ */
 const CompareRow = memo(function CompareRow({ label, values }: { label: string; values: string[] }) {
   return (
     <tr className="border-b border-[#1E1E28] last:border-0 hover:bg-[#181820] transition-colors">

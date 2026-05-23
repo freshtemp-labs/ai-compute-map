@@ -13,8 +13,10 @@ import { sourcesTableData } from '@/data/mockData';
 
 // ─── Constants ─────────────────────────────────────────────────
 
+// 数据源表格数据：从 mockData 导入，作为页面展示和筛选的原始数据
 const SOURCES_DATA = sourcesTableData;
 
+// 交叉验证日志：模拟自动多源验证流水线的最近验证记录
 const VERIFICATION_LOG = [
   { id: 1, dataPoint: 'TSMC Q4 2024 Revenue', sources: ['TSMC IR', 'TrendForce'], result: 'Verified', time: '2 min ago' },
   { id: 2, dataPoint: 'ASML EUV Shipments 2024', sources: ['ASML Report', 'SEMI'], result: 'Verified', time: '5 min ago' },
@@ -23,12 +25,14 @@ const VERIFICATION_LOG = [
   { id: 5, dataPoint: 'Samsung 3nm Yield', sources: ['Industry Sources'], result: 'Pending', time: '25 min ago' },
 ];
 
+// 数据源分级(Tier)对应的颜色样式映射：Tier1-权威、Tier2-可靠、Tier3-参考
 const TIER_COLORS = {
   tier1: 'bg-emerald-500/10 text-emerald-400',
   tier2: 'bg-sky-500/10 text-sky-400',
   tier3: 'bg-text-muted/10 text-text-muted',
 };
 
+// 数据源状态对应的颜色样式映射：active-活跃、pending-待验证、stale-过期
 const STATUS_COLORS = {
   active: 'bg-emerald-500/10 text-emerald-400',
   pending: 'bg-amber-500/10 text-amber-400',
@@ -43,10 +47,12 @@ const STATUS_COLORS = {
  */
 export default function SourcesPage() {
   const { t } = useTranslation(['sources', 'common']);
+  // 筛选状态：分级过滤、状态过滤、搜索关键词
   const [tierFilter, setTierFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // 筛选后的数据源列表：依次按搜索关键词 → 分级 → 状态进行过滤，使用 useMemo 缓存结果避免不必要的重计算
   const filteredSources = useMemo(() => {
     let data = SOURCES_DATA;
     if (searchQuery) {
@@ -66,6 +72,7 @@ export default function SourcesPage() {
     return data;
   }, [searchQuery, tierFilter, statusFilter]);
 
+  // 各分级(Tier)的数据源数量统计：用于顶部信任统计卡片和分级卡片展示
   const tierCounts = {
     tier1: SOURCES_DATA.filter((s) => s.tier === 'tier1').length,
     tier2: SOURCES_DATA.filter((s) => s.tier === 'tier2').length,
@@ -74,9 +81,10 @@ export default function SourcesPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
+      {/* ─── Header：页面标题、面包屑导航、信任统计和实时状态指示 ─── */}
       <header className="pt-28 pb-12 px-6">
         <div className="max-w-6xl mx-auto">
+          {/* 面包屑导航 */}
           <nav className="flex items-center gap-2 text-mono-sm text-text-muted mb-6">
             <Link to="/" className="hover:text-accent-cyan transition-colors">{t('common:breadcrumb.home')}</Link>
             <span>/</span>
@@ -88,7 +96,7 @@ export default function SourcesPage() {
             {t('sources:pageSubtitle')}
           </p>
 
-          {/* Trust Stats */}
+          {/* 信任统计卡片：展示 Tier1 数量、平均来源数、时间戳认证 */}
           <div className="mt-8 flex flex-wrap gap-4">
             {[
               { value: tierCounts.tier1, label: t('sources:trustStats.tier1') },
@@ -102,7 +110,7 @@ export default function SourcesPage() {
             ))}
           </div>
 
-          {/* Live Badge */}
+          {/* 实时状态徽章：脉冲动画圆点 + 文本，表示数据源实时更新中 */}
           <div className="mt-4 flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="animate-live-pulse absolute inline-flex h-full w-full rounded-full bg-live-pulse opacity-75" />
@@ -113,12 +121,12 @@ export default function SourcesPage() {
         </div>
       </header>
 
-      {/* Source Catalog */}
+      {/* ─── Source Catalog：数据源目录，含分级卡片、筛选器和表格 ─── */}
       <section className="px-6 py-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-section text-text-primary">{t('sources:sections.sourceCatalog')}</h2>
 
-          {/* Tier Cards */}
+          {/* 分级概览卡片：Tier1/Tier2/Tier3 三种分级，含说明和数量统计 */}
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               { tier: 'tier1' as const, label: t('sources:sections.tier1Label'), desc: t('sources:sections.tier1Desc'), count: tierCounts.tier1, color: 'border-emerald-500/30' },
@@ -135,7 +143,7 @@ export default function SourcesPage() {
             ))}
           </div>
 
-          {/* Filters */}
+          {/* 筛选器：搜索框(按名称/类别/描述模糊匹配) + 分级下拉 + 状态下拉 */}
           <div className="flex flex-wrap gap-3 mt-6 mb-4">
             <input
               type="text"
@@ -158,7 +166,7 @@ export default function SourcesPage() {
             </select>
           </div>
 
-          {/* Table */}
+          {/* 数据源表格：展示名称、类别、分级、层级、数据点、更新时间、状态 */}
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -195,6 +203,7 @@ export default function SourcesPage() {
             </table>
           </div>
 
+          {/* 空状态提示：当筛选条件无匹配数据源时显示 */}
           {filteredSources.length === 0 && (
             <div className="text-center py-12">
               <p className="text-text-muted">No sources match your filters.</p>
@@ -203,12 +212,13 @@ export default function SourcesPage() {
         </div>
       </section>
 
-      {/* Cross-Verification Engine */}
+      {/* ─── Cross-Verification Engine：交叉验证引擎，多源自动验证流水线 ─── */}
       <section className="px-6 py-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-section text-text-primary">{t('sources:sections.crossVerification')}</h2>
           <p className="text-sm text-text-secondary mt-2">Automated multi-source verification pipeline</p>
 
+          {/* 验证流程步骤：数据摄入 → 交叉引用 → 差异标记 → 数据发布 */}
           <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { step: t('sources:sections.steps.ingestion'), icon: '↓', desc: 'Sources ingested' },
@@ -224,7 +234,7 @@ export default function SourcesPage() {
             ))}
           </div>
 
-          {/* Verification Stats */}
+          {/* 验证统计：已验证数据点数、待审核数、差异数、平均验证时间 */}
           <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { value: '1,247', label: t('sources:sections.verificationStats.pointsVerified') },
@@ -239,7 +249,7 @@ export default function SourcesPage() {
             ))}
           </div>
 
-          {/* Recent Verifications */}
+          {/* 最近验证记录：展示 VERIFICATION_LOG 中每条验证的数据点、来源、结果和时间 */}
           <div className="mt-6">
             <h3 className="text-sm font-medium text-text-primary mb-4">{t('sources:sections.recentVerifications')}</h3>
             <div className="space-y-2">
@@ -257,12 +267,13 @@ export default function SourcesPage() {
         </div>
       </section>
 
-      {/* Methodology */}
+      {/* ─── Methodology：方法论，说明数据采集、验证和评分的流程 ─── */}
       <section className="px-6 py-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-section text-text-primary">{t('sources:sections.methodology')}</h2>
           <p className="text-sm text-text-secondary mt-2">How we collect, verify, and score data</p>
 
+          {/* 方法论条目列表：能耗、市场份额、地理位置、产能利用率、货币转换、置信度评分 */}
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               t('sources:sections.sectionsM.powerConsumption'),
@@ -283,12 +294,13 @@ export default function SourcesPage() {
         </div>
       </section>
 
-      {/* Historical Data */}
+      {/* ─── Historical Data：历史数据归档，趋势分析和快照访问 ─── */}
       <section className="px-6 py-8 pb-16">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-section text-text-primary">{t('sources:sections.historicalData')}</h2>
           <p className="text-sm text-text-secondary mt-2">Archive of historical data snapshots for trend analysis</p>
 
+          {/* 归档统计卡片：首次快照时间、总快照数、追踪数据点、存储大小 */}
           <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { value: '2024-01-01', label: t('sources:sections.archiveStats.firstSnapshot') },
@@ -303,6 +315,7 @@ export default function SourcesPage() {
             ))}
           </div>
 
+          {/* 历史数据访问入口：时间机器、周期对比、批量导出，链接至对应页面 */}
           <div className="mt-6 flex flex-wrap gap-3">
             {[
               { label: t('sources:sections.accessOptions.timeMachine'), path: '/history' },
