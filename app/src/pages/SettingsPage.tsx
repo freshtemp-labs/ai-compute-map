@@ -30,6 +30,10 @@ const LANGUAGES = [
   { code: 'ko', label: '한국어' },
 ];
 
+/**
+ * 用户偏好设置页面组件
+ * 管理默认缩放、可见图层、语言和主题，含缓存状态和性能监控
+ */
 export default function SettingsPage() {
   const { settings, updateSettings, resetSettings } = useSettings();
   const { t, i18n } = useTranslation(['common', 'settings']);
@@ -50,16 +54,19 @@ export default function SettingsPage() {
     refreshPerfStats();
   }, [refreshCacheStats, refreshPerfStats]);
 
+  /** 清除缓存并刷新统计 */
   const handleClearCache = () => {
     clearAllCache();
     refreshCacheStats();
   };
 
+  /** 清除性能指标并刷新统计 */
   const handleClearMetrics = () => {
     clearMetrics();
     refreshPerfStats();
   };
 
+  /** 切换语言并持久化 */
   const handleLanguageChange = (lang: string) => {
     updateSettings({ language: lang });
     i18n.changeLanguage(lang);

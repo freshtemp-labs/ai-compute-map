@@ -37,6 +37,11 @@ const GlobeView = lazy(() => import('@/components/map/GlobeView'));
 
 type ViewMode = 'markers' | 'heatmap';
 
+/**
+ * 交互地图页面组件
+ * 使用AmCharts 5渲染全球供应链、芯片厂和数据中心标记点
+ * 支持图层切换、搜索、键盘快捷键和3D地球视图
+ */
 export default function MapPage() {
   const { t } = useTranslation('map');
   const { pins } = useMapData();
@@ -61,12 +66,12 @@ export default function MapPage() {
     datacenter: pins.filter((p) => p.layer === 'datacenter').length,
   }), [pins]);
 
-  // Toggle layer
+  // 切换图层可见性
   const toggleLayer = useCallback((layer: LayerType) => {
     setActiveLayers((prev) => ({ ...prev, [layer]: !prev[layer] }));
   }, []);
 
-  // Handle pin click
+  // 处理标记点点击：选中并清除搜索高亮
   const handlePinClick = useCallback((pin: MapPin) => {
     setSelectedPin(pin);
     setHighlightedPinId(null); // Clear search highlight when clicking
@@ -77,7 +82,7 @@ export default function MapPage() {
     setSelectedPin(null);
   }, []);
 
-  // Handle search result selection - fly to location and highlight
+  // 搜索结果选择：飞行到位置并高亮6秒
   const handleSearchSelect = useCallback((pin: MapPin) => {
     setSelectedPin(pin);
     setHighlightedPinId(pin.id); // Highlight with blink animation
@@ -97,22 +102,24 @@ export default function MapPage() {
     }, 6000);
   }, []);
 
-  // Keyboard shortcuts
+  // 键盘快捷键处理器
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't trigger shortcuts when typing in search
+      // 搜索框打开时不触发快捷键(除Escape外)
       if (searchOpen && e.key !== 'Escape') return;
 
-      // Don't trigger shortcuts when typing in input/textarea
+      // 输入框/文本域内不触发快捷键
       const target = e.target as HTMLElement;
       if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) return;
 
+      // ? 键切换键盘帮助面板
       if (e.key === '?') {
         e.preventDefault();
         setKeyboardHelpOpen((prev) => !prev);
         return;
       }
 
+      // Escape关闭面板/搜索
       if (e.key === 'Escape') {
         setKeyboardHelpOpen(false);
         if (searchOpen) {
@@ -125,6 +132,7 @@ export default function MapPage() {
         }
       }
 
+      // 数字键1/2/3切换图层
       if (e.key === '1') {
         toggleLayer('supply');
       } else if (e.key === '2') {
@@ -133,6 +141,7 @@ export default function MapPage() {
         toggleLayer('datacenter');
       }
 
+      // +/-缩放, 0重置视图
       if (e.key === '+' || e.key === '=') {
         const chart = chartRef.current as Record<string, unknown> | null;
         if (chart?.zoomIn) (chart.zoomIn as () => void)();

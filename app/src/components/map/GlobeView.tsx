@@ -11,17 +11,36 @@ import 'echarts-gl';
 import type { MapPin } from '@/components/map/useMapData';
 import { LAYER_COLORS } from '@/constants/layerColors';
 
+/**
+ * GlobeView 组件属性
+ */
 interface GlobeViewProps {
+  /** 所有地图标注点数据 */
   pins: MapPin[];
+  /** 各图层激活状态 */
   activeLayers: Record<string, boolean>;
+  /** 标注点点击回调 */
   onPinClick?: (pin: MapPin) => void;
 }
 
+/**
+ * 3D 地球视图组件
+ * 使用 ECharts GL 在可旋转交互地球仪上渲染设施标注点
+ * @param pins - 所有标注点数据
+ * @param activeLayers - 各图层激活状态
+ * @param onPinClick - 标注点点击回调
+ * @returns 3D 地球视图 canvas 容器
+ */
 export default function GlobeView({ pins, activeLayers, onPinClick }: GlobeViewProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const instanceRef = useRef<echarts.ECharts | null>(null);
   const pinsMapRef = useRef<Map<string, MapPin>>(new Map());
 
+  /**
+   * 初始化 ECharts 3D 地球实例
+   * 配置地球渲染选项、散点数据系列和点击事件处理
+   * @returns 清理函数，用于移除 resize 事件监听器
+   */
   const initChart = useCallback(() => {
     if (!chartRef.current) return;
 

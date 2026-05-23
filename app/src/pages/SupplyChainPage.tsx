@@ -37,12 +37,17 @@ const SUPPLY_CHAIN_DATA = supplyChainTableData;
 
 // ─── Components ────────────────────────────────────────────────
 
+/**
+ * 供应链分析页面组件
+ * 展示稀土配额、光刻设备、设计公司和供应链流向桑基图
+ */
 export default function SupplyChainPage() {
   const { t } = useTranslation(['supplyChain', 'common']);
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
   const [selectedCountry, setSelectedCountry] = useState('all');
 
+  // 按搜索/类型/国家三重过滤
   const filteredData = useMemo(() => {
     let data = SUPPLY_CHAIN_DATA;
     if (searchQuery) {

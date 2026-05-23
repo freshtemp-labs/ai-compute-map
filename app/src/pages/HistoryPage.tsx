@@ -12,13 +12,14 @@ import ReactECharts from 'echarts-for-react';
 import * as echarts from 'echarts';
 
 // ─── Historical Data (IEA & industry forecasts) ────────────────
+/** 年度历史数据接口 (IEA与行业预测) */
 interface YearlyData {
   year: number;
-  dcCount: number;         // Global data center count
-  capacityGW: number;      // Total installed compute capacity (GW)
-  powerTWh: number;        // Total DC power consumption (TWh)
-  foundryRevenueB: number; // Global foundry revenue ($B)
-  euvUnits: number;        // Cumulative EUV units shipped
+  dcCount: number;         // 全球数据中心数量
+  capacityGW: number;      // 总算力装机容量(GW)
+  powerTWh: number;        // 数据中心总功耗(TWh)
+  foundryRevenueB: number; // 全球晶圆代工收入($B)
+  euvUnits: number;        // EUV累计出货量
 }
 
 const historicalData: YearlyData[] = [
@@ -46,6 +47,10 @@ const metrics = [
 
 type MetricKey = typeof metrics[number]['key'];
 
+/**
+ * 数据历史/变更日志页面组件
+ * 展示2019-2030年历史数据趋势图、多指标选择和年份对比功能
+ */
 export default function HistoryPage() {
   const { t } = useTranslation(['history', 'common']);
   const [selectedYear, setSelectedYear] = useState(2025);
@@ -60,6 +65,10 @@ export default function HistoryPage() {
   const currentData = historicalData.find((d) => d.year === selectedYear);
   const compareData = compareMode ? historicalData.find((d) => d.year === compareYear) : null;
 
+  /**
+   * 切换指标选中状态，至少保留一个
+   * @param key - 指标键名
+   */
   const toggleMetric = useCallback((key: MetricKey) => {
     setSelectedMetrics((prev) => {
       const next = new Set(prev);

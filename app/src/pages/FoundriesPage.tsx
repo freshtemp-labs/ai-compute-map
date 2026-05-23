@@ -30,7 +30,8 @@ import { ComparisonMatrix } from '@/components/foundries/ComparisonMatrix';
 import { tsmcFabs, tsmcNodes, samsungFabs, smicFabs, processTimeline } from '@/components/foundries/data';
 
 /* ═══════════════════════════════════════════════
-   MAIN PAGE
+   MAIN PAGE - 晶圆代工分析主页
+   展示全球半导体制造设施、工艺节点比较、产能利用率和对比矩阵
    ═══════════════════════════════════════════════ */
 export default function FoundriesPage() {
   const navigate = useNavigate();

@@ -13,12 +13,14 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // ─── Types ─────────────────────────────────────────────────────
-
+/** API端点文档接口 */
 interface EndpointDoc {
   method: string;
   path: string;
   description: string;
+  /** 查询参数列表 */
   params?: { name: string; type: string; required: boolean; description: string }[];
+  /** JSON响应示例 */
   response?: string;
 }
 
@@ -336,13 +338,21 @@ curl "https://api.aicomputemap.org/api/v1/export?format=csv" \\
 `;
 
 // ─── Component ─────────────────────────────────────────────────
-
+/**
+ * 开发者文档页面组件
+ * 展示API参考文档、代码示例(Python/JS/cURL)、TypeScript类型定义和贡献指南
+ */
 export default function DevelopersPage() {
   const { t } = useTranslation(['developers', 'common']);
   const [expandedEndpoint, setExpandedEndpoint] = useState<number | null>(null);
   const [showTypes, setShowTypes] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
+  /**
+   * 复制文本到剪贴板并显示短暂反馈
+   * @param text - 要复制的文本
+   * @param index - 标识哪个端点被复制(用于显示反馈)
+   */
   const copyToClipboard = (text: string, index: number) => {
     navigator.clipboard.writeText(text).catch(() => {});
     setCopiedIndex(index);

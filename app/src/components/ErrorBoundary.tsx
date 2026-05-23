@@ -1,36 +1,43 @@
 /**
  * @file ErrorBoundary.tsx
- * @description React error boundary that catches rendering errors and displays
- * a user-friendly fallback UI with error message and retry button.
- * Wraps page content to prevent full-app crashes from component errors.
- *
+ * @description React 错误边界组件。在渲染阶段捕获子组件异常，防止单个组件错误
+ *   导致整个应用白屏。展示友好的错误提示 UI 和重试按钮。
  * @dependencies react
  */
 import React from 'react';
 
+/** 组件 Props */
 interface Props {
+  /** 子节点 */
   children: React.ReactNode;
 }
 
+/** 组件 State */
 interface State {
+  /** 是否发生错误 */
   hasError: boolean;
+  /** 错误对象 */
   error: Error | null;
 }
 
+/** React 错误边界组件，捕获渲染异常并提供恢复能力 */
 export default class ErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { hasError: false, error: null };
   }
 
+  /** 从子组件错误中派生状态 */
   static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
+  /** 记录错误日志（可选接入监控服务） */
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('[ErrorBoundary] Caught error:', error, errorInfo);
   }
 
+  /** 重置错误状态，尝试重新渲染 */
   handleRetry = () => {
     this.setState({ hasError: false, error: null });
   };

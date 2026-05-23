@@ -1,39 +1,53 @@
 /**
  * @file components/ExportDataButton.tsx
- * @description Reusable data export button with dropdown for selecting
- * export format (CSV, JSON, Excel) and optional scope filtering (all/region/layer).
- *
+ * @description 可复用的数据导出按钮组件。提供下拉菜单选择导出格式（CSV/JSON/Excel）
+ *   和可选的范围过滤（全部/区域/图层）。
  * @dependencies lucide-react, @/utils/exportData
  */
 import { useState, useCallback, useRef } from 'react';
 import { Download, FileSpreadsheet, FileText, FileJson, ChevronDown, Loader2 } from 'lucide-react';
 import { exportData, type ExportFormat, type ExportScope } from '@/utils/exportData';
 
+/** ExportDataButton 组件 Props */
 interface ExportDataButtonProps<T extends Record<string, unknown>> {
-  /** Data array to export */
+  /** 要导出的数据数组 */
   data: T[];
-  /** Default filename (without extension) */
+  /** 默认文件名（不含扩展名） */
   filename?: string;
-  /** Sheet name for Excel */
+  /** Excel 工作表名称 */
   sheetName?: string;
-  /** Available scope filter options */
+  /** 可选的范围过滤选项 */
   scopeOptions?: { label: string; value: string }[];
-  /** Scope type for filtering */
+  /** 过滤范围类型 */
   scopeType?: ExportScope;
-  /** Available fields to export (defaults to all) */
+  /** 可导出字段（默认全部） */
   fields?: (keyof T)[];
-  /** Button label */
+  /** 按钮标签文本 */
   label?: string;
-  /** Additional CSS classes */
+  /** 额外 CSS 类名 */
   className?: string;
 }
 
+/** 可选的导出格式列表 */
 const FORMAT_OPTIONS: { format: ExportFormat; icon: React.ReactNode; label: string }[] = [
   { format: 'csv', icon: <FileText size={14} />, label: 'CSV' },
   { format: 'json', icon: <FileJson size={14} />, label: 'JSON' },
   { format: 'excel', icon: <FileSpreadsheet size={14} />, label: 'Excel' },
 ];
 
+/**
+ * 数据导出按钮组件
+ * 支持 CSV/JSON/Excel 三种格式导出，可组合范围过滤器
+ * @param data - 待导出的数据数组
+ * @param filename - 导出文件名（不含扩展名）
+ * @param sheetName - Excel 工作表名
+ * @param scopeOptions - 范围过滤选项
+ * @param scopeType - 过滤范围类型
+ * @param fields - 可导出字段列表
+ * @param label - 按钮标签
+ * @param className - 额外样式类名
+ * @returns 带下拉菜单的导出按钮
+ */
 export default function ExportDataButton<T extends Record<string, unknown>>({
   data,
   filename = 'ai-compute-map-export',

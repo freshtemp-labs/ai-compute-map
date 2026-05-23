@@ -35,7 +35,7 @@ import FunnelChart from '@/components/charts/FunnelChart';
 import GaugeDashboard from '@/components/charts/GaugeDashboard';
 
 // ── Helpers ──────────────────────────────────────────────────────────
-
+/** 区域装机容量统计接口 */
 interface RegionCapacity {
   region: string;
   totalMW: number;
@@ -43,14 +43,17 @@ interface RegionCapacity {
   avgPue: number;
 }
 
+/** 供应链瓶颈分析条目 */
 interface BottleneckItem {
   category: string;
   country: string;
+  /** 依赖度评分(百分比) */
   dependencyScore: number;
   description: string;
   severity: 'high' | 'medium' | 'low';
 }
 
+/** 芯片制造技术世代分布 */
 interface TechGeneration {
   generation: string;
   count: number;
@@ -60,6 +63,10 @@ interface TechGeneration {
 
 // ── Compute insights ─────────────────────────────────────────────────
 
+/**
+ * 计算各区域装机容量排名
+ * 按总功率从高到低排序
+ */
 function computeRegionalCapacity(): RegionCapacity[] {
   const map = new Map<string, { totalMW: number; dcCount: number; totalPue: number; pueCount: number }>();
   for (const dc of dataCenters) {
@@ -85,6 +92,10 @@ function computeRegionalCapacity(): RegionCapacity[] {
     .sort((a, b) => b.totalMW - a.totalMW);
 }
 
+/**
+ * 计算全球数据中心热力图数据
+ * 按国家汇总装机功率
+ */
 function computeHeatmapData(): { name: string; value: number }[] {
   const countryMap = new Map<string, number>();
   for (const dc of dataCenters) {
@@ -95,6 +106,10 @@ function computeHeatmapData(): { name: string; value: number }[] {
     .sort((a, b) => b.value - a.value);
 }
 
+/**
+ * 分析供应链瓶颈和依赖集中度
+ * 检查单一国家/地区控制超过50%供应链节点的情况
+ */
 function computeBottlenecks(): BottleneckItem[] {
   const bottlenecks: BottleneckItem[] = [];
 
@@ -146,6 +161,10 @@ function computeBottlenecks(): BottleneckItem[] {
   return bottlenecks.sort((a, b) => b.dependencyScore - a.dependencyScore);
 }
 
+/**
+ * 计算光刻技术世代分布(EUV/ArFi/KrF)
+ * 从供应链数据中推断各世代占比
+ */
 function computeTechGenerations(): TechGeneration[] {
   let euvCount = 0;
   let arfiCount = 0;
@@ -187,6 +206,12 @@ function computeTechGenerations(): TechGeneration[] {
   ];
 }
 
+/**
+ * 根据名称关键词推断所属国家
+ * 通过硬编码的关键词映射进行国家匹配
+ * @param name - 实体名称
+ * @returns 推断的国家名称或 'Other'
+ */
 function inferCountry(name: string): string {
   const lower = name.toLowerCase();
   if (lower.includes('china') || lower.includes('inner mongolia') || lower.includes('sichuan') || lower.includes('anhui') || lower.includes('beijing') || lower.includes('shanghai') || lower.includes('shenzhen') || lower.includes('huawei')) return 'China';
@@ -206,6 +231,10 @@ function inferCountry(name: string): string {
 
 // ── Component ────────────────────────────────────────────────────────
 
+/**
+ * 数据洞察页面组件
+ * 自动从mockData生成数据驱动的洞察: 区域容量排名、热力图、瓶颈分析、技术世代分布
+ */
 export default function InsightsPage() {
   const regionalCapacity = useMemo(() => computeRegionalCapacity(), []);
   const heatmapData = useMemo(() => computeHeatmapData(), []);
@@ -330,12 +359,12 @@ export default function InsightsPage() {
     ],
   }), [techGenerations]);
 
-  // ── Summary stats ──────────────────────────────────────────────
-
+  // ── 汇总统计数据 ──
   const totalPower = dataCenters.reduce((sum, dc) => sum + (dc.powerCapacity ?? 0), 0);
   const totalDCs = dataCenters.length;
   const totalFabs = fabricationFacilities.length;
   const totalCompanies = companies.length;
+  // 计算平均PUE
   const avgPue = dataCenters.reduce((sum, dc) => sum + (dc.pue ?? 1.2), 0) / dataCenters.length;
 
   return (

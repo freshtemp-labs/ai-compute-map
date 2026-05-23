@@ -1,20 +1,26 @@
 /**
  * @file ExportPngButton.tsx
- * @description Export button with dropdown for selecting export scope.
- * Supports exporting full page, map only, or charts only as PNG.
- *
- * @dependencies html2canvas (via @/utils/exportPng), lucide-react
+ * @description PNG 导出按钮组件，支持下拉菜单选择导出范围。
+ *   支持全页导出、仅地图导出、仅图表导出三种模式。
+ * @dependencies html2canvas (via @/utils/exportPng), lucide-react, react-i18next
  */
 import { useState, useCallback, useRef } from 'react';
 import { Download, Camera, Map, BarChart3, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { exportToPng, type ExportScope } from '@/utils/exportPng';
 
+/** ExportPngButton 组件 Props */
 interface ExportPngButtonProps {
-  /** Optional override element for map-only export */
+  /** 地图导出时可额外指定的地图元素 */
   mapElement?: HTMLElement | null;
 }
 
+/**
+ * PNG 导出按钮组件
+ * 支持三种导出范围：整页 fullpage / 仅地图 map-only / 仅图表 charts-only
+ * @param mapElement - 地图导出模式下的目标 DOM 元素
+ * @returns 带下拉菜单的 PNG 导出按钮
+ */
 export default function ExportPngButton({ mapElement }: ExportPngButtonProps) {
   const { t } = useTranslation('common');
   const [open, setOpen] = useState(false);

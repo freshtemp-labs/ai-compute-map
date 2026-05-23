@@ -36,11 +36,23 @@ Object.entries(COUNTRY_NAMES).forEach(([code, name]) => {
   NAME_TO_CODE[name.toUpperCase()] = code;
 });
 
+/**
+ * 国家编码映射函数
+ * 将完整国家名转换为两位大写代码
+ * @param country - 国家名称
+ * @returns 两位大写国家代码
+ */
 function getCountryCode(country: string): string {
   return NAME_TO_CODE[country] || country.slice(0, 2).toUpperCase();
 }
 
 // Build country data from all datasets
+/**
+ * 国家数据聚合Hook
+ * 根据国家代码从所有数据集中匹配相关设施并计算统计指标
+ * @param countryCode - 两位大写国家代码
+ * @returns 包含该国家所有设施和统计的数据对象
+ */
 function useCountryData(countryCode: string) {
   return useMemo(() => {
     const code = countryCode.toUpperCase();
@@ -94,6 +106,10 @@ function useCountryData(countryCode: string) {
   }, [countryCode]);
 }
 
+/**
+ * 国家/地区详情页面组件
+ * 显示指定国家的所有设施(数据中心、芯片厂、供应链)分布和统计
+ */
 export default function CountryDetailPage() {
   const { code } = useParams<{ code: string }>();
   const pageRef = useRef<HTMLDivElement>(null);

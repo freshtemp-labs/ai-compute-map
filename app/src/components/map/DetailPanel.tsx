@@ -15,22 +15,40 @@ import type { MapPin } from './useMapData';
 import { supplyChainData, fabricationFacilities, dataCenters } from '@/data/mockData';
 import { useCompare, MAX_COMPARE } from '@/context/CompareContext';
 
+/**
+ * DetailPanel 组件属性
+ */
 interface DetailPanelProps {
+  /** 选中的地图标注点（null 时面板不显示） */
   pin: MapPin | null;
+  /** 关闭面板回调 */
   onClose: () => void;
+  /** 标注点颜色标识 */
   color: string;
 }
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
-// Supply chain relationship map
+/**
+ * 供应链关系数据结构
+ * 表示设施与上下游/同级的供应链关系
+ */
 interface Relation {
+  /** 关系类型：上游/下游/同级 */
   type: 'upstream' | 'downstream' | 'peer';
+  /** 关联设施名称 */
   name: string;
+  /** 关系描述说明 */
   description: string;
+  /** 关联设施所属图层 */
   layer: string;
 }
 
+/**
+ * 根据标注点的图层类型和类别分析其供应链上下游关系
+ * @param pin - 地图标注点
+ * @returns 与该设施相关的供应链关系列表
+ */
 function getSupplyChainRelations(pin: MapPin): Relation[] {
   const relations: Relation[] = [];
 
@@ -94,6 +112,14 @@ function getSupplyChainRelations(pin: MapPin): Relation[] {
   return relations;
 }
 
+/**
+ * 详情面板组件
+ * 从右侧滑入显示选中设施的详细信息，包括关键指标、供应商链关系和数据来源
+ * @param pin - 当前选中的标注点
+ * @param onClose - 关闭面板回调
+ * @param color - 标注点颜色标识
+ * @returns 详情面板 JSX 元素，pin 为 null 时返回 null
+ */
 export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
   const { t } = useTranslation('map');
   const navigate = useNavigate();
@@ -101,6 +127,10 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
 
   const relations = useMemo(() => pin ? getSupplyChainRelations(pin) : [], [pin]);
 
+  /**
+   * 根据数据来源层级获取对应的徽章颜色和标签
+   * Tier 1-绿色（官方报告）、Tier 2-蓝色（行业分析）、Tier 3-橙色（模型估算）
+   */
   function getTierBadge(tier: number) {
     const colors: Record<number, string> = {
       1: '#22C55E',
@@ -115,6 +145,10 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
   const layerLabel = pin.layer === 'supply' ? t('map:layerToggle.supplyChain') : pin.layer === 'foundry' ? t('map:layerToggle.foundry') : t('map:layerToggle.dataCenter');
   const inCompare = isInCompare(pin.id);
 
+  /**
+   * 将当前设施添加到比较列表
+   * 已达上限时显示警告提示
+   */
   const handleAddToCompare = () => {
     if (inCompare) {
       toast.info(t('map:compare.alreadyInCompare'));
@@ -330,6 +364,10 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
   );
 }
 
+/**
+ * 指标卡片子组件
+ * 在详情面板中展示单个关键指标的数值和单位
+ */
 function MetricCard({ label, value, unit, color }: { label: string; value: string; unit?: string; color: string }) {
   return (
     <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
@@ -342,6 +380,10 @@ function MetricCard({ label, value, unit, color }: { label: string; value: strin
   );
 }
 
+/**
+ * 状态徽章子组件
+ * 根据设施状态（运营/建设中/规划中）显示对应颜色的标签
+ */
 function StatusBadge({ status }: { status: string }) {
   const { t } = useTranslation('map');
   const statusConfig: Record<string, { color: string; bg: string; label: string }> = {

@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
+/** 获取页面翻译hook，加载 home 和 common 命名空间 */
 function usePageTranslation() {
   return useTranslation(['home', 'common']);
 }
@@ -24,6 +25,11 @@ function usePageTranslation() {
 /* ================================================================
    Section 1: Hero
    ================================================================ */
+/**
+ * 首页Hero区域组件
+ * 包含标题动画、数据刷新状态栏、进度条和CTA按钮
+ * @returns 全屏Hero section，含线框地球背景和动画入场效果
+ */
 function HeroSection() {
   const { t } = usePageTranslation();
   const [timeAgo, setTimeAgo] = useState({ minutes: 2, seconds: 34 });
@@ -175,6 +181,14 @@ function HeroSection() {
 /* ================================================================
    Section 2: Global KPI Dashboard
    ================================================================ */
+/**
+ * 数字滚动动画Hook
+ * 当元素进入视口时，从0平滑滚动到目标数值
+ * @param target - 目标数值
+ * @param duration - 动画持续时间(ms)，默认800
+ * @param inView - 是否在视口内
+ * @returns 当前动画计数值
+ */
 function useCountUp(target: number, duration: number = 800, inView: boolean = false) {
   const [value, setValue] = useState(0);
   const hasAnimated = useRef(false);
@@ -186,6 +200,7 @@ function useCountUp(target: number, duration: number = 800, inView: boolean = fa
     const animate = (now: number) => {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
+      // 缓出三次方 easing: 1 - (1-t)^3
       const eased = 1 - Math.pow(1 - progress, 3);
       setValue(target * eased);
       if (progress < 1) requestAnimationFrame(animate);
@@ -196,6 +211,12 @@ function useCountUp(target: number, duration: number = 800, inView: boolean = fa
   return value;
 }
 
+/**
+ * 格式化KPI数值用于显示
+ * @param val - 原始数值
+ * @param unit - 单位类型(TWh, tonnes, $B等)
+ * @returns 格式化后的字符串
+ */
 function formatKPIValue(val: number, unit: string): string {
   if (unit === 'TWh') return val.toFixed(1);
   if (unit === 'tonnes') return val >= 1000 ? `${(val / 1000).toFixed(0)}K` : val.toFixed(0);
@@ -203,6 +224,12 @@ function formatKPIValue(val: number, unit: string): string {
   return val.toFixed(0);
 }
 
+/**
+ * KPI数字卡片组件(备忘录优化)
+ * 显示单个KPI指标，含数字滚动动画、增量趋势和进度条
+ * @param kpi - KPI数据对象
+ * @param index - 动画延迟索引
+ */
 const KPIBlock = memo(function KPIBlock({ kpi, index }: { kpi: typeof kpis[0]; index: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-20% 0px' });
@@ -240,15 +267,21 @@ const KPIBlock = memo(function KPIBlock({ kpi, index }: { kpi: typeof kpis[0]; i
   );
 });
 
+/**
+ * KPI仪表盘区域组件
+ * 从mockData动态计算KPI指标，包含区域分布饼图和供应链分类柱状图
+ * @returns KPI卡片网格 + 动态统计 + ECharts图表区域
+ */
 function KPIDashboard() {
   const { t } = usePageTranslation();
 
-  // Dynamically compute KPIs from mockData
+  // 动态从mockData计算KPI指标
   const dynamicKpis = useMemo(() => {
     const totalSupply = supplyChainData.length;
     const totalFoundry = fabricationFacilities.length;
     const totalDataCenters = dataCenters.length;
     const totalPins = totalSupply + totalFoundry + totalDataCenters;
+    // 计算总装机功率和运营/建设中的数据中心数量
     const totalPowerMW = dataCenters.reduce((sum, dc) => sum + (dc.powerCapacity || 0), 0);
     const operationalDCs = dataCenters.filter((dc) => dc.status === 'operational').length;
     const constructionDCs = dataCenters.filter((dc) => dc.status === 'construction').length;
@@ -264,7 +297,7 @@ function KPIDashboard() {
     ];
   }, [t]);
 
-  // Region distribution for chart
+  // 区域分布饼图：按区域统计数据中心数量
   const regionChartOption = useMemo(() => {
     const regionMap: Record<string, number> = {};
     dataCenters.forEach((dc) => {
@@ -309,7 +342,7 @@ function KPIDashboard() {
     };
   }, []);
 
-  // Category distribution bar chart
+  // 供应链分类柱状图：按类别统计数量(Top 8)
   const categoryChartOption = useMemo(() => {
     const catMap: Record<string, number> = {};
     supplyChainData.forEach((item) => {
@@ -434,6 +467,12 @@ function KPIDashboard() {
 /* ================================================================
    Section 3: Three Layers Overview
    ================================================================ */
+/**
+ * 迷你折线图组件
+ * 用于层卡片中展示趋势缩略图
+ * @param color - 线条颜色
+ * @param data - 数据点数组
+ */
 const SparklineChart = memo(function SparklineChart({ color, data }: { color: string; data: number[] }) {
   const option = useMemo(() => ({
     grid: { left: 0, right: 0, top: 2, bottom: 2 },
@@ -457,6 +496,12 @@ const SparklineChart = memo(function SparklineChart({ color, data }: { color: st
   return <ReactECharts option={option} style={{ width: 120, height: 40 }} opts={{ renderer: 'svg' }} />;
 });
 
+/**
+ * 层级展示卡片组件
+ * 显示单个数据层(供应链/芯片厂/数据中心)的概览信息
+ * @param layer - 层数据对象(含标题、描述、路由等)
+ * @param index - 动画延迟索引
+ */
 function LayerCard({ layer, index }: { layer: typeof layers[0]; index: number }) {
   const { t } = usePageTranslation();
   const ref = useRef(null);
@@ -512,6 +557,10 @@ function LayerCard({ layer, index }: { layer: typeof layers[0]; index: number })
   );
 }
 
+/**
+ * 三层层级总览区域组件
+ * 展示供应链、芯片制造、数据中心的三个卡片网格
+ */
 function ThreeLayersSection() {
   const { t } = usePageTranslation();
   return (
@@ -553,6 +602,10 @@ function ThreeLayersSection() {
 /* ================================================================
    Section 4: Live Data Preview (Mini Map)
    ================================================================ */
+/**
+ * 迷你地图预览区域组件
+ * 使用ECharts世界地图展示全球数据点分布，含涟漪动效标记
+ */
 function MiniMapSection() {
   const { t } = usePageTranslation();
   const ref = useRef(null);
@@ -683,6 +736,10 @@ function MiniMapSection() {
 /* ================================================================
    Section 5: Data Quality & Verification
    ================================================================ */
+/**
+ * 数据质量与验证区域组件
+ * 展示三级来源体系、交叉验证引擎和时间序列存档三个信任支柱
+ */
 function DataQualitySection() {
   const { t } = usePageTranslation();
   const verificationColumns = [
@@ -758,6 +815,10 @@ function DataQualitySection() {
 /* ================================================================
    Section 6: Open Source CTA
    ================================================================ */
+/**
+ * 开源社区CTA区域组件
+ * 展示开源许可、GitHub链接和开发者API文档入口
+ */
 function OpenSourceCTASection() {
   return (
     <section
@@ -834,6 +895,10 @@ function OpenSourceCTASection() {
 /* ================================================================
    Section 7: Footer Stats Bar
    ================================================================ */
+/**
+ * 页脚统计条组件
+ * 显示关键全局数据摘要: 功耗、EUV、稀土、TSMC份额
+ */
 function FooterStatsBar() {
   return (
     <div className="bg-bg-base py-space-8 border-b border-border-subtle">
@@ -847,7 +912,8 @@ function FooterStatsBar() {
 }
 
 /* ================================================================
-   Home Page
+   Home Page - 首页组件
+   组合Hero、KPI仪表盘、三层层级、迷你地图、数据质量、开源CTA和页脚统计条
    ================================================================ */
 export default function Home() {
   return (

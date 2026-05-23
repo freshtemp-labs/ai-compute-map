@@ -1,7 +1,8 @@
 /**
  * @file DataQualityDashboard.tsx
- * @description Data quality monitoring dashboard showing completeness,
- * consistency, timeliness scores, source distribution, and missing fields.
+ * @description 数据质量监控仪表盘。展示完整性、一致性、时效性评分，
+ *   来源分布饼图和缺失字段柱状图。使用 ECharts 渲染可视化。
+ * @dependencies react, echarts-for-react, @/data/mockData, @/utils/dataQuality
  */
 import { useMemo } from 'react';
 import ReactECharts from 'echarts-for-react';
@@ -13,6 +14,14 @@ import {
   computeSourceEntryDistribution,
 } from '@/utils/dataQuality';
 
+/**
+ * 评分环形图子组件
+ * 以环形饼图展示单一质量评分（如完整性、一致性）
+ * @param label - 评分名称
+ * @param score - 评分值（0-100）
+ * @param color - 环形颜色
+ * @returns 评分环形图
+ */
 function ScoreRing({ label, score, color }: { label: string; score: number; color: string }) {
   const ringOption = {
     backgroundColor: 'transparent',
@@ -54,6 +63,11 @@ function ScoreRing({ label, score, color }: { label: string; score: number; colo
   );
 }
 
+/**
+ * 数据质量仪表盘主组件
+ * 计算并展示综合质量评分、来源分布和缺失字段统计
+ * @returns 数据质量仪表盘
+ */
 export default function DataQualityDashboard() {
   const scores = useMemo(
     () => computeQualityScore(supplyChainData, fabricationFacilities, dataCenters),

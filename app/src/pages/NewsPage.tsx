@@ -26,12 +26,17 @@ const TAG_COLORS: Record<string, string> = {
   '全部': '#6B6B80',
 };
 
+/**
+ * AI算力动态/新闻页面组件
+ * 展示全球AI算力基础设施相关新闻，支持标签筛选、搜索和日期排序
+ */
 export default function NewsPage() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [activeTag, setActiveTag] = useState<NewsTag>('全部');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
 
+  // 新闻筛选：按标签、搜索词过滤，按日期排序
   const filteredNews = useMemo(() => {
     let items = [...newsData];
 

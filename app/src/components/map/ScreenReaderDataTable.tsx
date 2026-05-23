@@ -9,10 +9,20 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { MapPin } from './useMapData';
 
+/**
+ * ScreenReaderDataTable 组件属性
+ */
 interface ScreenReaderDataTableProps {
+  /** 所有设施标注点数据 */
   pins: MapPin[];
 }
 
+/**
+ * 格式化设施数值显示
+ * 大于1000的数值显示为 K 格式
+ * @param pin - 地图标注点
+ * @returns 格式化后的数值字符串
+ */
 function formatValue(pin: MapPin): string {
   if (typeof pin.value === 'number') {
     if (pin.value >= 1000) return `${(pin.value / 1000).toFixed(1)}K ${pin.unit || ''}`;
@@ -21,6 +31,13 @@ function formatValue(pin: MapPin): string {
   return `${pin.value} ${pin.unit || ''}`;
 }
 
+/**
+ * 屏幕阅读器数据表组件
+ * 在视觉上隐藏（sr-only）但对屏幕阅读器可访问的 HTML 表格，
+ * 为无法使用可视地图的用户提供等效的数据体验
+ * @param pins - 所有设施标注点数据
+ * @returns 无障碍数据表格 JSX 元素
+ */
 export default function ScreenReaderDataTable({ pins }: ScreenReaderDataTableProps) {
   const { t } = useTranslation(['map', 'common']);
   const sortedPins = useMemo(

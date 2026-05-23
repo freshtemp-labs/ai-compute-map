@@ -8,6 +8,7 @@
  * @dependencies @amcharts/amcharts5, @amcharts/amcharts5-geodata,
  *               @/components/map/useMapData, @/constants/layerColors
  */
+// ── 依赖 ───────────────────────────────────────────────────────────
 import { useEffect, useRef, useCallback } from 'react';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5map from '@amcharts/amcharts5/map';
@@ -17,29 +18,54 @@ import type { MapPin } from './useMapData';
 import type { LayerType } from '@/types';
 import { LAYER_COLORS } from '@/constants/layerColors';
 
-// ── Cluster data structure ─────────────────────────────────────────
+/**
+ * 聚合点数据结构
+ * 当地图缩放到较小级别时，将多个设施点聚合为单个聚类点
+ */
 interface ClusterData {
+  /** 聚类唯一标识 */
   id: string;
+  /** 聚类显示名称（如 "5 facilities"） */
   name: string;
+  /** 聚类中心纬度 */
   lat: number;
+  /** 聚类中心经度 */
   lng: number;
+  /** 聚类内包含的设施数量 */
   count: number;
+  /** 聚类的地理边界范围 */
   bounds: { minLat: number; maxLat: number; minLng: number; maxLng: number };
+  /** 标记为聚类点 */
   isCluster: true;
+  /** 所属图层类型 */
   layer: LayerType;
 }
 
-// ── Component props ────────────────────────────────────────────────
+/**
+ * AmChartsMap 组件属性
+ */
 interface AmChartsMapProps {
+  /** 所有地图标注点数据 */
   pins: MapPin[];
+  /** 当前激活的图层状态 */
   activeLayers: Record<LayerType, boolean>;
+  /** 点击标注点的回调 */
   onPinClick: (pin: MapPin) => void;
+  /** 当前选中的标注点 */
   selectedPin: MapPin | null;
+  /** 当前高亮的标注点ID（搜索匹配） */
   highlightedPinId?: string | null;
+  /** 地图实例就绪回调 */
   onMapReady?: (chart: am5map.MapChart) => void;
 }
 
-// ── Grid-based clustering algorithm ────────────────────────────────
+/**
+ * 基于网格的聚类算法
+ * 根据当前缩放级别将可见标注点分组到网格单元中
+ * @param visiblePins - 当前图层可见的标注点列表
+ * @param zoomLevel - 当前地图缩放级别
+ * @returns 聚类后的数据（单个点或聚合点混合数组）
+ */
 function calculateClusters(visiblePins: MapPin[], zoomLevel: number): (MapPin | ClusterData)[] {
   if (zoomLevel >= 4) return visiblePins;
 
@@ -85,7 +111,18 @@ function calculateClusters(visiblePins: MapPin[], zoomLevel: number): (MapPin | 
   return result;
 }
 
-// ── Main component ─────────────────────────────────────────────────
+/**
+ * 交互式世界地图主组件
+ * 使用 AmCharts 5 渲染带有聚类设施标注点的可交互世界地图。
+ * 支持网格聚类、缩放相关标注点渲染、自定义提示框和按图层类型区分的形状。
+ * @param pins - 所有地图标注点数据
+ * @param activeLayers - 各图层激活状态
+ * @param onPinClick - 标注点点击回调
+ * @param selectedPin - 当前选中标注点
+ * @param highlightedPinId - 搜索高亮的标注点ID
+ * @param onMapReady - 地图实例就绪回调
+ * @returns 地图容器 JSX 元素
+ */
 export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPin, highlightedPinId, onMapReady }: AmChartsMapProps) {
   const chartRef = useRef<am5map.MapChart | null>(null);
   const rootRef = useRef<am5.Root | null>(null);
@@ -462,13 +499,24 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
   );
 }
 
-// ── Helpers ────────────────────────────────────────────────────────
+// ── 辅助函数 ────────────────────────────────────────────────────────
 
+/**
+ * 根据标注点的数据重要性计算其渲染尺寸
+ * @param pin - 地图标注点
+ * @returns 标注点渲染半径（4-12之间）
+ */
 function getPinSize(pin: MapPin): number {
   const importance = getPinImportance(pin);
-  return 4 + importance * 8; // Range from 4 to 12
+  return 4 + importance * 8; // 范围从 4 到 12
 }
 
+/**
+ * 根据标注点的图层类型和属性值计算其重要性分数
+ * 不同图层有不同评分策略：供应链按产值、晶圆厂按公司、数据中心按功率
+ * @param pin - 地图标注点
+ * @returns 重要性分数（0-1之间）
+ */
 function getPinImportance(pin: MapPin): number {
   switch (pin.layer) {
     case 'supply':
@@ -483,6 +531,12 @@ function getPinImportance(pin: MapPin): number {
   }
 }
 
+/**
+ * 格式化标注点的提示框内容
+ * 生成包含设施名称、图层类型、位置和数值的富文本提示框
+ * @param pin - 地图标注点
+ * @returns AmCharts 格式的提示框文本字符串
+ */
 function formatTooltip(pin: MapPin): string {
   const layerLabel = pin.layer === 'supply' ? 'Supply Chain' : pin.layer === 'foundry' ? 'Foundry' : 'Data Center';
   const color = LAYER_COLORS[pin.layer];

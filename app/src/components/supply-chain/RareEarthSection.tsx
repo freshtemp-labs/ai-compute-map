@@ -1,12 +1,20 @@
-/** @file RareEarthSection.tsx - Rare earth elements mining & production data section. */
+/**
+ * @file RareEarthSection.tsx
+ * @description 稀土元素开采与生产数据展示区域。
+ * 包含全球稀土储量树图(Treemap)、各国储量表格、
+ * 中国稀土生产配额堆叠柱状图、关键指标卡片及出口管制预警。
+ *
+ * @dependencies react, framer-motion, echarts-for-react, lucide-react
+ */
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import ReactEChartsCore from 'echarts-for-react';
 import { AlertTriangle } from 'lucide-react';
 
+/** 缓出动画贝塞尔曲线配置 */
 const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
-/* ── animation variants ── */
+/** 淡入上升动画变体配置 */
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
@@ -15,8 +23,9 @@ const fadeUp = {
   }),
 };
 
-/* ── data ── */
+/** 全球稀土储量数据（万吨） */
 const reservesData = [
+  /** 名称、储量(万吨)、全球份额(%)、主要矿区、政策现状 */
   { name: 'China', value: 4400, share: 38.0, mines: 'Bayan Obo, Sichuan, Jiangxi', policy: 'Export controls active' },
   { name: 'Brazil', value: 2200, share: 19.0, mines: 'Serra Verde', policy: 'Expanding' },
   { name: 'India', value: 690, share: 6.0, mines: 'Odisha, Kerala', policy: 'Limited production' },
@@ -27,6 +36,7 @@ const reservesData = [
   { name: 'Greenland', value: 150, share: 1.3, mines: 'Kvanefjeld', policy: 'Exploration' },
 ];
 
+/** 中国稀土生产配额年度数据（light=轻稀土, heavy=中重稀土，单位：吨） */
 const quotaData = [
   { year: '2020', light: 120350, heavy: 10150 },
   { year: '2021', light: 148850, heavy: 19150 },
@@ -35,9 +45,14 @@ const quotaData = [
   { year: '2024', light: 250850, heavy: 19150 },
 ];
 
+/** 全球稀土总储量（万吨） */
 const totalGlobal = reservesData.reduce((s, d) => s + d.value, 0);
 
-/* ── ECharts option: treemap ── */
+/**
+ * 生成全球稀土储量树图(Treemap)配置
+ * 按各国储量大小展示色阶分布
+ * @returns ECharts treemap 配置对象
+ */
 function getTreemapOption() {
   return {
     backgroundColor: 'transparent',
@@ -88,7 +103,11 @@ function getTreemapOption() {
   };
 }
 
-/* ── ECharts option: stacked bar (quota) ── */
+/**
+ * 生成中国稀土配额堆叠柱状图配置
+ * 展示 2020-2024 年轻稀土与中重稀土的年度配额趋势
+ * @returns ECharts 堆叠柱状图配置对象
+ */
 function getQuotaOption() {
   const years = quotaData.map((d) => d.year);
   const light = quotaData.map((d) => (d.light / 10000).toFixed(1));
@@ -144,14 +163,20 @@ function getQuotaOption() {
   };
 }
 
-/* ── sort helpers ── */
+/** 表格排序字段类型 */
 type SortKey = 'name' | 'value' | 'share';
+/** 排序方向 */
 type SortDir = 'asc' | 'desc';
 
+/**
+ * RareEarthSection 稀土元素区域组件
+ * 展示全球稀土储量、中国配额趋势、关键指标和出口管制预警
+ */
 export default function RareEarthSection() {
   const [sortKey, setSortKey] = useState<SortKey>('value');
   const [sortDir, setSortDir] = useState<SortDir>('desc');
 
+  /** 处理表格排序切换：同一列点击切换升/降序，不同列切换为降序 */
   const handleSort = useCallback((key: SortKey) => {
     setSortKey((prev) => {
       if (prev === key) { setSortDir((d) => (d === 'asc' ? 'desc' : 'asc')); return prev; }
@@ -170,7 +195,7 @@ export default function RareEarthSection() {
     <section id="rare-earth" className="w-full py-16 px-4 sm:px-6 lg:px-8"
       style={{ background: 'linear-gradient(180deg, #111118 0%, #161620 100%)' }}>
 
-      {/* Section label */}
+      {/* Section label — 稀土元素区域标签 */}
       <motion.div
         initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -182,14 +207,14 @@ export default function RareEarthSection() {
 
       <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-        {/* ── Left: Treemap + Table ── */}
+        {/* 左侧：储量树图 + 可排序明细表格 */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.5, ease: easeOutExpo }}
           className="space-y-6"
         >
-          {/* Treemap */}
+          {/* Treemap — 全球稀土储量矩形树图 */}
           <div className="bg-bg-elevated border border-border-subtle rounded-lg p-5 transition-all duration-200 hover:border-border-active"
             style={{ boxShadow: '0 0 40px rgba(255,184,77,0.06)' }}>
             <h3 className="text-heading-sm text-text-primary font-display mb-4">Global Rare Earth Reserves</h3>
@@ -198,7 +223,7 @@ export default function RareEarthSection() {
             </div>
           </div>
 
-          {/* Reserves table */}
+          {/* Reserves table — 各国储量可排序明细表 */}
           <div className="bg-bg-elevated border border-border-subtle rounded-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left">
@@ -237,14 +262,14 @@ export default function RareEarthSection() {
           </div>
         </motion.div>
 
-        {/* ── Right: Quota chart + metrics + alert ── */}
+        {/* 右侧：配额柱状图 + 关键指标卡片 + 出口管制预警 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.5, ease: easeOutExpo, delay: 0.1 }}
           className="space-y-6"
         >
-          {/* Quota bar chart */}
+          {/* Quota bar chart — 中国稀土年度配额柱状图 */}
           <div className="bg-bg-elevated border border-border-subtle rounded-lg p-5 transition-all duration-200 hover:border-border-active"
             style={{ boxShadow: '0 0 40px rgba(255,184,77,0.06)' }}>
             <h3 className="text-heading-sm text-text-primary font-display mb-2">China Rare Earth Production Quota</h3>
@@ -254,7 +279,7 @@ export default function RareEarthSection() {
             </div>
           </div>
 
-          {/* Key metrics */}
+          {/* Key metrics — 关键数据指标卡片 */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { label: '2024 China Quota', value: '270,000', unit: 'tonnes', color: 'text-accent-amber' },
@@ -271,7 +296,7 @@ export default function RareEarthSection() {
             ))}
           </div>
 
-          {/* Policy alert card */}
+          {/* Policy alert card — 出口管制政策预警卡片 */}
           <motion.div
             initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.5, ease: easeOutExpo, delay: 0.2 }}

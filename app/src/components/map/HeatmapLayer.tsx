@@ -13,13 +13,22 @@ import type { EChartsOption } from 'echarts';
 import type { MapPin } from './useMapData';
 import type { LayerType } from '@/types';
 
+/**
+ * HeatmapLayer 组件属性
+ */
 interface HeatmapLayerProps {
+  /** 所有标注点数据 */
   pins: MapPin[];
+  /** 各图层激活状态 */
   activeLayers: Record<LayerType, boolean>;
+  /** 国家点击回调 */
   onCountryClick?: (country: string, count: number) => void;
 }
 
-// ISO-3166 short name → common name mapping for ECharts geo
+/**
+ * ISO-3166 短名称到 ECharts 地理常见名称的映射表
+ * 用于修正部分国家/地区名称在 ECharts 地图中的匹配问题
+ */
 const COUNTRY_NAME_MAP: Record<string, string> = {
   'United States': 'United States of America',
   'South Korea': 'Korea',
@@ -33,7 +42,13 @@ const COUNTRY_NAME_MAP: Record<string, string> = {
   'Solomon Is.': 'Solomon Islands',
 };
 
-/** Aggregate pins into country-level counts */
+/**
+ * 按国家聚合设施数量
+ * 根据激活的图层过滤标注点，按国家统计设施数量并映射为 ECharts 地理名称
+ * @param pins - 所有标注点
+ * @param activeLayers - 激活的图层状态
+ * @returns 国家名称与设施计数的数据对列表
+ */
 function aggregateByCountry(
   pins: MapPin[],
   activeLayers: Record<LayerType, boolean>
@@ -53,6 +68,15 @@ function aggregateByCountry(
   }));
 }
 
+/**
+ * 热力图图层组件
+ * 基于 ECharts 在国家级别按计算密度渲染 choropleth 热力图
+ * 使用蓝到红渐变（低密度→高密度），作为标准 AmCharts 标注点视图的替代方案
+ * @param pins - 所有标注点数据
+ * @param activeLayers - 激活的图层状态
+ * @param onCountryClick - 国家点击回调
+ * @returns 热力图覆盖层 JSX 元素
+ */
 export default function HeatmapLayer({
   pins,
   activeLayers,

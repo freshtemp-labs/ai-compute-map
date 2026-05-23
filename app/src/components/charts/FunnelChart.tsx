@@ -1,20 +1,29 @@
 /**
  * @file FunnelChart.tsx
- * @description Funnel chart showing technology node distribution across foundries.
- * Uses ECharts funnel series.
+ * @description 漏斗图组件，展示晶圆代工厂制程节点产能占比分布。
+ * 使用 ECharts funnel 系列从先进制程到成熟制程逐级展示。
+ *
+ * @dependencies echarts-for-react
  */
 import ReactECharts from 'echarts-for-react';
 
+/** 漏斗图数据项 */
 interface FunnelDataItem {
+  /** 制程节点名称 */
   name: string;
+  /** 产能占比值 */
   value: number;
 }
 
+/** 漏斗图组件属性 */
 interface FunnelChartProps {
+  /** 图表标题 */
   title?: string;
+  /** 漏斗数据数组 */
   data?: FunnelDataItem[];
 }
 
+/** 默认制程节点分布数据（产能占比%） */
 const DEFAULT_DATA: FunnelDataItem[] = [
   { name: '3nm 及以下', value: 15 },
   { name: '5nm', value: 25 },
@@ -25,8 +34,13 @@ const DEFAULT_DATA: FunnelDataItem[] = [
   { name: '90nm+', value: 30 },
 ];
 
+/** 漏斗图各层级色板（从先进到成熟制程） */
 const FUNNEL_COLORS = ['#A855F7', '#818CF8', '#00D4FF', '#34D399', '#FFB84D', '#F87171', '#6B6B80'];
 
+/**
+ * FunnelChart 制程节点漏斗图组件
+ * 按产能占比从先进到成熟制程逐级展示晶圆厂产能分布
+ */
 export default function FunnelChart({
   title = '制程节点分布（产能占比）',
   data = DEFAULT_DATA,

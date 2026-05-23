@@ -1,11 +1,19 @@
-/** @file ComparisonMatrix.tsx - Foundry comparison matrix with sortable columns. */
+/**
+ * @file ComparisonMatrix.tsx
+ * @description 晶圆代工厂商对比矩阵组件。支持按多列排序的可排序表格，
+ *   包含公司、营收、市场份额、先进节点、全球各区域晶圆厂数量和产能等维度。
+ *   使用 framer-motion 实现入场动画。
+ * @dependencies framer-motion, lucide-react, ./data
+ */
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 import { comparisonData, type SortKey } from './data';
 
+/** 缓出指数动画曲线 */
 const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
+/** 从下向上淡入的动画变体 */
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
@@ -15,6 +23,11 @@ const fadeUp = {
   }),
 };
 
+/**
+ * 代工厂商对比矩阵组件
+ * 可排序表格，点击列头切换升序/降序
+ * @returns 对比矩阵表格
+ */
 export function ComparisonMatrix() {
   const [sortKey, setSortKey] = useState<SortKey>('company');
   const [sortAsc, setSortAsc] = useState(true);

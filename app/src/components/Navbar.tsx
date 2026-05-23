@@ -1,9 +1,8 @@
 /**
  * @file Navbar.tsx
- * @description Top navigation bar with responsive design, language switcher
- * (zh/en/ja/ko), data freshness status banner, compare badge counter,
- * and mobile hamburger menu. Includes data staleness detection logic.
- *
+ * @description 顶部导航栏组件。支持响应式设计、语言切换器（zh/en/ja/ko）、
+ *   数据新鲜度状态横幅、对比徽章计数器和移动端汉堡菜单。
+ *   内置数据过期检测和 body 滚动锁定逻辑。
  * @dependencies react-router-dom, framer-motion, react-i18next, lucide-react,
  *               @/context/CompareContext
  */
@@ -14,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { Menu, X, GitCompareArrows, CheckCircle, AlertTriangle, Settings } from 'lucide-react';
 import { useCompare } from '@/context/CompareContext';
 
+/** 支持的语言列表 */
 const languages = [
   { code: 'zh', label: '中文' },
   { code: 'en', label: 'English' },
@@ -21,16 +21,25 @@ const languages = [
   { code: 'ko', label: '한국어' },
 ];
 
+/** 缓出指数级动画曲线（用于 menu 动画） */
 const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
-/** Parse a quarter string like "2024-Q4" into { year, quarter } */
+/**
+ * 解析季度字符串如 "2024-Q4" 为 { year, quarter }
+ * @param qStr - 季度字符串
+ * @returns { year, quarter } 或 null
+ */
 function parseQuarter(qStr: string): { year: number; quarter: number } | null {
   const match = qStr.match(/(\d{4})-Q(\d)/);
   if (!match) return null;
   return { year: parseInt(match[1]), quarter: parseInt(match[2]) };
 }
 
-/** Check if the data quarter is "fresh" (within 1 quarter of the current date) */
+/**
+ * 检查数据是否"新鲜"（距离当前日期不超过1个季度）
+ * @param lastUpdateStr - 最后更新日期字符串
+ * @returns 是否新鲜
+ */
 function isDataFresh(lastUpdateStr: string): boolean {
   const parsed = parseQuarter(lastUpdateStr);
   if (!parsed) return true; // can't parse → assume fresh

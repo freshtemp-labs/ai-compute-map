@@ -1,22 +1,33 @@
 /**
  * @file GaugeDashboard.tsx
- * @description Dashboard with gauge charts showing key AI compute indicators.
- * Uses ECharts gauge series.
+ * @description 仪表盘组件，展示 AI 算力关键指标（数据中心能耗、EUV部署量、产能利用率、可再生能源占比）。
+ * 使用 ECharts gauge 系列实现半圆进度仪表。
+ *
+ * @dependencies echarts-for-react
  */
 import ReactECharts from 'echarts-for-react';
 
+/** 仪表盘数据项 */
 interface GaugeItem {
+  /** 指标名称 */
   name: string;
+  /** 当前值 */
   value: number;
+  /** 最大值 */
   max: number;
+  /** 单位 */
   unit: string;
+  /** 指示颜色 */
   color: string;
 }
 
+/** 仪表盘组件属性 */
 interface GaugeDashboardProps {
+  /** 仪表数据数组 */
   gauges?: GaugeItem[];
 }
 
+/** 默认仪表数据：全球数据中心能耗、EUV部署量、产能利用率、可再生能源占比 */
 const DEFAULT_GAUGES: GaugeItem[] = [
   { name: '全球数据中心能耗', value: 485, max: 1000, unit: 'TWh', color: '#A855F7' },
   { name: 'EUV 光刻机部署量', value: 418, max: 600, unit: '台', color: '#00D4FF' },
@@ -24,7 +35,12 @@ const DEFAULT_GAUGES: GaugeItem[] = [
   { name: '可再生能源占比', value: 42, max: 100, unit: '%', color: '#FFB84D' },
 ];
 
+/**
+ * GaugeDashboard AI算力关键指标仪表盘组件
+ * 以2x4网格展示多个半圆进度仪表
+ */
 export default function GaugeDashboard({ gauges = DEFAULT_GAUGES }: GaugeDashboardProps) {
+  /** 生成单个仪表图 ECharts 配置 */
   const makeGaugeOption = (item: GaugeItem) => ({
     backgroundColor: 'transparent',
     series: [

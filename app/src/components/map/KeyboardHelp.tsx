@@ -8,11 +8,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * KeyboardHelp 组件属性
+ */
 interface KeyboardHelpProps {
+  /** 对话框是否打开 */
   isOpen: boolean;
+  /** 关闭对话框回调 */
   onClose: () => void;
 }
 
+/**
+ * 键盘快捷键帮助对话框
+ * 显示地图导航可用的键盘快捷键列表
+ * @param isOpen - 对话框是否打开
+ * @param onClose - 关闭回调
+ * @returns 快捷键帮助对话框 JSX 元素
+ */
 export default function KeyboardHelp({ isOpen, onClose }: KeyboardHelpProps) {
   const { t } = useTranslation('map');
   const shortcuts = [

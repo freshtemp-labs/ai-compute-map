@@ -1,3 +1,17 @@
+/**
+ * @file components/PageSkeleton.tsx
+ * @description 页面加载骨架屏组件。包含两个导出的骨架屏：
+ *   MapPageSkeleton - 地图页专用（含世界地图形状和大洲占位）
+ *   PageSkeleton - 通用页面（含面包屑、标题、统计网格、内容区域）
+ *   通过 tailwind animate-pulse 实现动画效果。
+ * @dependencies 无（纯 CSS/Tailwind）
+ */
+
+/**
+ * 地图页面骨架屏
+ * 模拟地图区域形状、搜索栏、图层面板、图例和缩放控件
+ * @returns 地图骨架屏 JSX
+ */
 export function MapPageSkeleton() {
   return (
     <div className="relative w-full" style={{ height: 'calc(100dvh - 3.5rem)', minHeight: 'calc(100dvh - 3.5rem)' }}>
@@ -55,6 +69,11 @@ export function MapPageSkeleton() {
   );
 }
 
+/**
+ * 通用页面骨架屏
+ * 模拟面包屑导航、页面标题、描述文字、统计卡片网格和内容容器
+ * @returns 通用页面骨架屏 JSX
+ */
 export function PageSkeleton() {
   return (
     <div className="min-h-screen">

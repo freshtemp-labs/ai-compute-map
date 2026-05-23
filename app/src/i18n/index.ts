@@ -1,8 +1,8 @@
 /**
  * @file i18n/index.ts
- * @description i18next configuration supporting 4 languages (zh, en, ja, ko)
- * with 9 namespaces (common, home, map, supplyChain, foundries, datacenters,
- * sources, history, developers). Default language is Chinese (zh).
+ * @description i18next 国际化配置，支持 4 种语言（zh, en, ja, ko）
+ * 9 个命名空间（common, home, map, supplyChain, foundries, datacenters,
+ * sources, history, developers, settings）。默认语言为中文（zh）。
  *
  * @dependencies i18next, react-i18next, i18next-browser-languagedetector
  */
@@ -10,7 +10,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Chinese (default)
+// ─── 中文（默认语言）───
 import zhCommon from './locales/zh/common.json';
 import zhHome from './locales/zh/home.json';
 import zhMap from './locales/zh/map.json';
@@ -22,7 +22,7 @@ import zhHistory from './locales/zh/history.json';
 import zhDevelopers from './locales/zh/developers.json';
 import zhSettings from './locales/zh/settings.json';
 
-// English
+// ─── 英文 ───
 import enCommon from './locales/en/common.json';
 import enHome from './locales/en/home.json';
 import enMap from './locales/en/map.json';
@@ -34,7 +34,7 @@ import enHistory from './locales/en/history.json';
 import enDevelopers from './locales/en/developers.json';
 import enSettings from './locales/en/settings.json';
 
-// Japanese
+// ─── 日文 ───
 import jaCommon from './locales/ja/common.json';
 import jaHome from './locales/ja/home.json';
 import jaMap from './locales/ja/map.json';
@@ -46,7 +46,7 @@ import jaHistory from './locales/ja/history.json';
 import jaDevelopers from './locales/ja/developers.json';
 import jaSettings from './locales/ja/settings.json';
 
-// Korean
+// ─── 韩文 ───
 import koCommon from './locales/ko/common.json';
 import koHome from './locales/ko/home.json';
 import koMap from './locales/ko/map.json';
@@ -58,7 +58,9 @@ import koHistory from './locales/ko/history.json';
 import koDevelopers from './locales/ko/developers.json';
 import koSettings from './locales/ko/settings.json';
 
+/** i18next 资源对象，按语言和命名空间组织翻译资源 */
 const resources = {
+  /** 中文资源 */
   zh: {
     common: zhCommon,
     home: zhHome,
@@ -71,6 +73,7 @@ const resources = {
     developers: zhDevelopers,
     settings: zhSettings,
   },
+  /** 英文资源 */
   en: {
     common: enCommon,
     home: enHome,
@@ -83,6 +86,7 @@ const resources = {
     developers: enDevelopers,
     settings: enSettings,
   },
+  /** 日文资源 */
   ja: {
     common: jaCommon,
     home: jaHome,
@@ -95,6 +99,7 @@ const resources = {
     developers: jaDevelopers,
     settings: jaSettings,
   },
+  /** 韩文资源 */
   ko: {
     common: koCommon,
     home: koHome,
@@ -109,21 +114,31 @@ const resources = {
   },
 };
 
+/** 初始化 i18next，配置语言检测和回退策略 */
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources,
+    /** 回退语言：中文 */
     fallbackLng: 'zh',
+    /** 默认语言：中文 */
     lng: 'zh',
+    /** 语言检测配置 */
     detection: {
+      /** 检测顺序：先查 localStorage，再查浏览器 navigator */
       order: ['localStorage', 'navigator'],
+      /** 语言缓存位置 */
       caches: ['localStorage'],
     },
+    /** 插值配置 */
     interpolation: {
+      /** 不转义 HTML 值（React 已处理 XSS） */
       escapeValue: false,
     },
+    /** 命名空间列表 */
     ns: ['common', 'home', 'map', 'supplyChain', 'foundries', 'datacenters', 'sources', 'history', 'developers', 'settings'],
+    /** 默认命名空间 */
     defaultNS: 'common',
   });
 

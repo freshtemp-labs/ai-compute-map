@@ -37,6 +37,10 @@ const STATUS_COLORS = {
 
 // ─── Component ─────────────────────────────────────────────────
 
+/**
+ * 数据来源参考页面组件
+ * 列出所有数据源及分级(Tier1-3)、状态和筛选功能
+ */
 export default function SourcesPage() {
   const { t } = useTranslation(['sources', 'common']);
   const [tierFilter, setTierFilter] = useState('all');

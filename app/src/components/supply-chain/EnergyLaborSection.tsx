@@ -1,9 +1,17 @@
-/** @file EnergyLaborSection.tsx - Energy supply and labor data section for supply chain. */
+/**
+ * @file EnergyLaborSection.tsx
+ * @description 能源供应与劳动力数据展示区域。
+ * 以可排序表格展示各国/地区的能源指数、劳动力成本指数、
+ * 电网稳定性和政策评分等半导体制造选址关键指标。
+ *
+ * @dependencies react, framer-motion
+ */
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
+/** 淡入上升动画变体配置 */
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
@@ -12,16 +20,25 @@ const fadeUp = {
   }),
 };
 
+/** 能源与劳动力数据行结构 */
 interface EnergyRow {
+  /** 国家/地区名称 */
   country: string;
+  /** 能源供应指数（0-100） */
   energyIndex: number;
+  /** 劳动力成本指数（相对全球平均） */
   laborCostIndex: number;
+  /** 电网稳定性评级 */
   gridStability: 'High' | 'Medium' | 'Low';
+  /** 政策支持评分（0-100） */
   policyScore: number;
+  /** 平均能源成本 */
   energyCost: string;
+  /** 关键亮点 */
   highlights: string;
 }
 
+/** 各国/地区能源与劳动力数据 */
 const energyData: EnergyRow[] = [
   { country: 'Iceland', energyIndex: 98, laborCostIndex: 72, gridStability: 'High', policyScore: 85, energyCost: '$0.04/kWh', highlights: 'Geothermal surplus' },
   { country: 'Norway', energyIndex: 95, laborCostIndex: 88, gridStability: 'High', policyScore: 80, energyCost: '$0.05/kWh', highlights: 'Hydroelectric dominated' },
@@ -39,18 +56,33 @@ const energyData: EnergyRow[] = [
 
 type SortKey = 'country' | 'energyIndex' | 'laborCostIndex' | 'gridStability' | 'policyScore';
 
+/**
+ * 获取电网稳定性对应的文本颜色类名
+ * @param s - 电网稳定性评级
+ * @returns Tailwind 颜色类名
+ */
 const gridColor = (s: string) => {
   if (s === 'High') return 'text-success';
   if (s === 'Medium') return 'text-warning';
   return 'text-danger';
 };
 
+/**
+ * 获取电网稳定性对应的指示点颜色
+ * @param s - 电网稳定性评级
+ * @returns 十六进制颜色值
+ */
 const gridDot = (s: string) => {
   if (s === 'High') return '#22C55E';
   if (s === 'Medium') return '#F59E0B';
   return '#EF4444';
 };
 
+/**
+ * 能源与劳动力供应区域组件
+ * 以可排序表格展示全球半导体制造选址的关键能源和劳动力指标
+ * @returns 能源劳动力数据区域 JSX 元素
+ */
 export default function EnergyLaborSection() {
   const [sortKey, setSortKey] = useState<SortKey>('energyIndex');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');

@@ -7,10 +7,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Legend 组件属性
+ */
 interface LegendProps {
+  /** 各图层设施数量统计 */
   counts: { supply: number; foundry: number; datacenter: number };
 }
 
+/** 图层图例配置：颜色、形状、描述 */
 const layers = [
   {
     key: 'supply' as const,
@@ -38,18 +43,26 @@ const layers = [
   },
 ];
 
+/** 设施状态颜色配置 */
 const statusItems = [
   { label: 'Operational', color: '#22C55E' },
   { label: 'Construction', color: '#F59E0B' },
   { label: 'Planned', color: '#3B82F6' },
 ];
 
+/** 数据来源层级颜色配置 */
 const tierItems = [
   { label: 'Tier 1', desc: 'Official reports', color: '#22C55E' },
   { label: 'Tier 2', desc: 'Industry analysis', color: '#3B82F6' },
   { label: 'Tier 3', desc: 'Modeled estimates', color: '#F59E0B' },
 ];
 
+/**
+ * 地图图例组件
+ * 显示图层颜色、形状、设施数量统计，支持展开/折叠
+ * @param counts - 各图层设施数量统计
+ * @returns 图例面板 JSX 元素
+ */
 export default function Legend({ counts }: LegendProps) {
   const { t } = useTranslation('map');
   const [collapsed, setCollapsed] = useState(false);
@@ -150,6 +163,12 @@ export default function Legend({ counts }: LegendProps) {
   );
 }
 
+/**
+ * 形状点图标子组件
+ * 在图例中根据形状类型渲染对应的图形（菱形/方形/圆形）
+ * @param color - 形状的填充颜色
+ * @param shape - 形状类型：diamond/sqaure/circle
+ */
 function ShapeDot({ color, shape }: { color: string; shape: string }) {
   if (shape === 'diamond') {
     return (

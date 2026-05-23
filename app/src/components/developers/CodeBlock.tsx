@@ -1,4 +1,10 @@
-/** @file CodeBlock.tsx - Syntax-highlighted code block component using Prism.js. */
+/**
+ * @file components/developers/CodeBlock.tsx
+ * @description 基于 Prism.js 的语法高亮代码块组件。
+ *   支持 bash/typescript/javascript/python/go/rust/json/yaml 八种语言。
+ *   自带一键复制按钮（带动画反馈），仿 macOS 窗口样式。
+ * @dependencies react-syntax-highlighter, framer-motion, lucide-react
+ */
 import { useState, useCallback } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
@@ -13,6 +19,7 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Check, Copy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+/** 注册 Prism 语言支持 */
 SyntaxHighlighter.registerLanguage('bash', bash);
 SyntaxHighlighter.registerLanguage('typescript', typescript);
 SyntaxHighlighter.registerLanguage('javascript', javascript);
@@ -22,13 +29,19 @@ SyntaxHighlighter.registerLanguage('rust', rust);
 SyntaxHighlighter.registerLanguage('json', json);
 SyntaxHighlighter.registerLanguage('yaml', yaml);
 
+/** CodeBlock 组件 Props */
 interface CodeBlockProps {
+  /** 代码文本 */
   code: string;
+  /** 编程语言标识 */
   language: string;
+  /** 文件名（显示在标题栏） */
   filename?: string;
+  /** 是否显示行号 */
   showLineNumbers?: boolean;
 }
 
+/** 自定义 One Dark 主题，适配暗色背景 */
 const customOneDark = {
   ...oneDark,
   'pre[class*="language-"]': {
@@ -49,6 +62,15 @@ const customOneDark = {
   },
 };
 
+/**
+ * 语法高亮代码块组件
+ * 使用 Prism.js 进行语法着色，提供一键复制功能
+ * @param code - 代码文本
+ * @param language - 编程语言
+ * @param filename - 文件名（可选，显示在标题栏）
+ * @param showLineNumbers - 是否显示行号
+ * @returns 代码块组件
+ */
 export default function CodeBlock({ code, language, filename, showLineNumbers = true }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
 

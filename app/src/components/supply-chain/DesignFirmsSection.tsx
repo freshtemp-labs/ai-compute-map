@@ -1,8 +1,15 @@
-/** @file DesignFirmsSection.tsx - Semiconductor design firms and EDA tools section. */
+/**
+ * @file DesignFirmsSection.tsx
+ * @description 半导体设计公司与 EDA 工具展示区域。
+ * 展示 NVIDIA 等重点企业的营收、产品和供应链依赖关系。
+ *
+ * @dependencies framer-motion
+ */
 import { motion } from 'framer-motion';
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
+/** 淡入上升动画变体配置 */
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
@@ -11,6 +18,7 @@ const fadeUp = {
   }),
 };
 
+/** 半导体设计公司数据：包含营收、产品线、供应链依赖等信息 */
 const designFirms = [
   {
     name: 'NVIDIA', hq: 'Santa Clara, USA', revenue: '$60.9B', segment: 'GPU / AI Accelerator',
@@ -62,6 +70,12 @@ const designFirms = [
   },
 ];
 
+/**
+ * 设计公司展示区域组件
+ * 展示全球主要半导体设计公司和 EDA 工具供应商信息，
+ * NVIDIA 作为重点企业展示详细信息，其余公司以卡片网格排列
+ * @returns 设计公司展示区域 JSX 元素
+ */
 export default function DesignFirmsSection() {
   const nvidia = designFirms.find((f) => f.name === 'NVIDIA')!;
   const others = designFirms.filter((f) => f.name !== 'NVIDIA');

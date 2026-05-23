@@ -61,6 +61,10 @@ const STATUS_COLORS = {
 
 // ─── Component ─────────────────────────────────────────────────
 
+/**
+ * 数据中心分析页面组件
+ * 提供设施列表、PUE对比、区域分布、能耗组合可视化、排序、拖拽排序和批量选择
+ */
 export default function DataCentersPage() {
   const { t } = useTranslation(['datacenters', 'common']);
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -102,6 +106,7 @@ export default function DataCentersPage() {
   })), []);
 
   // Batch selection handlers
+  // 批量选择处理：切换单个设施的选择状态
   const toggleSelect = useCallback((id: number) => {
     setSelectedIds((prev) => {
       const next = new Set(prev);
@@ -120,6 +125,7 @@ export default function DataCentersPage() {
   }, []);
 
   // Drag handlers
+  // 拖拽排序处理器
   const handleDragStart = (idx: number) => {
     dragItem.current = idx;
   };
@@ -128,6 +134,10 @@ export default function DataCentersPage() {
     dragOverItem.current = idx;
   };
 
+  /**
+   * 拖拽结束时重新排列列表
+   * 在orderedData中交换源和目标元素位置
+   */
   const handleDragEnd = () => {
     if (dragItem.current === null || dragOverItem.current === null) return;
     const newList = [...orderedData];

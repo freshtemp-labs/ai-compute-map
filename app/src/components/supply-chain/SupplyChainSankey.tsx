@@ -7,23 +7,35 @@
  */
 import ReactECharts from 'echarts-for-react';
 
+/** 桑基图节点颜色常量：原材料(amber)、晶圆厂(cyan)、数据中心(purple) */
 const SANKEY_COLORS = {
   source: '#FFB84D',
   foundry: '#00D4FF',
   datacenter: '#A855F7',
 };
 
+/** 桑基图节点数据结构 */
 interface SankeyNode {
+  /** 节点名称 */
   name: string;
+  /** 节点样式 */
   itemStyle?: { color: string };
 }
 
+/** 桑基图连线数据结构 */
 interface SankeyLink {
+  /** 源节点名称 */
   source: string;
+  /** 目标节点名称 */
   target: string;
+  /** 流量值 */
   value: number;
 }
 
+/**
+ * SupplyChainSankey 供应链流向桑基图组件
+ * 展示从稀土/光刻机/EDA → 晶圆代工厂 → 云端算力中心的供应链流向关系
+ */
 export default function SupplyChainSankey() {
   const nodes: SankeyNode[] = [
     // Raw materials / sources

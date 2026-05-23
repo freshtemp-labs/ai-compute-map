@@ -1,13 +1,17 @@
 /**
  * @file Footer.tsx
- * @description Global footer component with quick links, data source links,
- * community links, and license information. Supports i18n for all text.
- *
+ * @description 全局页脚组件。包含快捷链接、数据来源链接、社区链接和版权信息。
+ *   所有文本支持 i18n 国际化。
  * @dependencies react-router-dom, react-i18next
  */
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * 全局页脚组件
+ * 四栏布局：品牌介绍 / 快捷导航 / 数据来源 / 社区
+ * @returns 页脚 JSX
+ */
 export default function Footer() {
   const { t } = useTranslation('common');
 

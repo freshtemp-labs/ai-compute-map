@@ -1,24 +1,35 @@
 /**
  * @file components/ExportPdfButton.tsx
- * @description Reusable PDF export button with progress indicator.
- * Captures the current page content and generates a downloadable PDF.
+ * @description 可复用的 PDF 导出按钮组件，带进度条指示器。
+ *   捕获指定 DOM 元素的内容并生成可下载的 PDF 报告。
+ * @dependencies lucide-react, @/utils/exportPdf
  */
 
 import { useState, useCallback } from 'react';
 import { FileDown, Loader2 } from 'lucide-react';
 import { exportToPdf } from '@/utils/exportPdf';
 
+/** ExportPdfButton 组件 Props */
 interface ExportPdfButtonProps {
-  /** CSS selector or ref for the element to capture */
+  /** 要截取的 DOM 元素 ref */
   targetRef: React.RefObject<HTMLElement | null>;
-  /** Output filename */
+  /** 导出文件名 */
   filename?: string;
-  /** Button label text */
+  /** 按钮标签文本 */
   label?: string;
-  /** Additional CSS classes */
+  /** 额外 CSS 类名 */
   className?: string;
 }
 
+/**
+ * PDF 导出按钮组件
+ * 点击后捕获 targetRef 指向的 DOM 元素，生成 PDF 并触发浏览器下载
+ * @param targetRef - 截取目标的 ref
+ * @param filename - 输出 PDF 文件名
+ * @param label - 按钮显示文本
+ * @param className - 额外样式
+ * @returns PDF 导出按钮
+ */
 export default function ExportPdfButton({
   targetRef,
   filename = 'ai-compute-map-report',

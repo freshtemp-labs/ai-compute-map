@@ -1,10 +1,19 @@
-/** @file LithographySection.tsx - Semiconductor lithography equipment section. */
+/**
+ * @file LithographySection.tsx
+ * @description 半导体光刻设备展示区域。
+ * 包含全球光刻市场饼图、ASML 营收拆分堆叠柱状图、
+ * 厂商卡片和光刻技术路线图表格。
+ *
+ * @dependencies react, framer-motion, echarts-for-react
+ */
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ReactEChartsCore from 'echarts-for-react';
 
+/** 缓出指数动画贝塞尔曲线配置 */
 const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
+/** 淡入上升动画变体配置 */
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
@@ -13,13 +22,14 @@ const fadeUp = {
   }),
 };
 
-/* ── data ── */
+/** 光刻市场数据：各厂商的设备出货量、市场份额和营收 */
 const lithoMarket = [
   { name: 'ASML', units: 418, share: 61.2, revenue: 23.5, color: '#00D4FF' },
   { name: 'Canon', units: 233, share: 34.1, revenue: 1.65, color: '#FFB84D' },
   { name: 'Nikon', units: 32, share: 4.7, revenue: 1.25, color: '#6B6B80' },
 ];
 
+/** 光刻技术路线图表格数据 */
 const techTable = [
   { tech: 'EUV', leader: 'ASML', share: '100%', price: '€1.9B/unit', node: '≤7nm' },
   { tech: 'ArFi', leader: 'ASML', share: '97.7%', price: '€0.74B/unit', node: '7–16nm' },
@@ -28,6 +38,7 @@ const techTable = [
   { tech: 'i-line', leader: 'Canon', share: '~70%', price: '€0.02B/unit', node: '≥90nm' },
 ];
 
+/** ASML 各技术线年度营收数据（$B） */
 const asmlRevenue = [
   { year: '2020', euv: 9.0, arfi: 5.5, arf: 2.0, krf: 3.5, iline: 1.5, metrology: 2.5 },
   { year: '2021', euv: 12.5, arfi: 6.2, arf: 2.3, krf: 3.8, iline: 1.6, metrology: 2.8 },
@@ -36,7 +47,11 @@ const asmlRevenue = [
   { year: '2024', euv: 24.0, arfi: 8.2, arf: 2.8, krf: 4.3, iline: 1.8, metrology: 3.8 },
 ];
 
-/* ── ECharts: donut ── */
+/**
+ * 生成全球光刻市场份额环形饼图配置
+ * 展示 ASML/Canon/Nikon 的设备出货量占比
+ * @returns ECharts 环形饼图配置对象
+ */
 function getDonutOption() {
   return {
     backgroundColor: 'transparent',
@@ -102,7 +117,11 @@ function getDonutOption() {
   };
 }
 
-/* ── ECharts: stacked bar (ASML revenue) ── */
+/**
+ * 生成 ASML 各技术线营收堆叠柱状图配置
+ * 展示 2020-2024 年 EUV/ArFi/ArF/KrF/i-line/Metrology 的营收趋势
+ * @returns ECharts 堆叠柱状图配置对象
+ */
 function getAsmlRevenueOption() {
   const years = asmlRevenue.map((d) => d.year);
   return {
@@ -155,9 +174,15 @@ function getAsmlRevenueOption() {
   };
 }
 
+/**
+ * LithographySection 半导体光刻设备展示组件
+ * 包含光刻市场环形饼图、ASML营收拆分柱状图、
+ * 可切换的厂商详情卡片与光刻技术路线图表格
+ */
 export default function LithographySection() {
   const [activeCompany, setActiveCompany] = useState<'ASML' | 'Canon' | 'Nikon'>('ASML');
 
+  /** 厂商详情数据映射：名称、出货量、营收、业务重点、详情列表、品牌色 */
   const companies: Record<string, { name: string; units: number; revenue: string; focus: string; details: string[]; color: string }> = {
     ASML: {
       name: 'ASML Holding', units: 418, revenue: '$23.5B', focus: 'EUV Monopoly — Advanced Nodes',
@@ -178,7 +203,7 @@ export default function LithographySection() {
 
   return (
     <section id="lithography" className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-bg-base">
-      {/* Section label */}
+      {/* Section label — 光刻设备区域标签 */}
       <motion.div
         initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -190,7 +215,7 @@ export default function LithographySection() {
 
       <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-        {/* Donut chart */}
+        {/* Donut chart — 全球光刻市场份额环形图 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
@@ -204,7 +229,7 @@ export default function LithographySection() {
           </div>
         </motion.div>
 
-        {/* ASML revenue stacked bar */}
+        {/* ASML revenue stacked bar — ASML营收拆分堆叠柱状图 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
@@ -219,7 +244,7 @@ export default function LithographySection() {
         </motion.div>
       </div>
 
-      {/* Company cards row */}
+      {/* Company cards row — 厂商对比卡片行 */}
       <div className="max-w-[1440px] mx-auto mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
         {(Object.keys(companies) as Array<'ASML' | 'Canon' | 'Nikon'>).map((key, i) => {
           const c = companies[key];
@@ -266,7 +291,7 @@ export default function LithographySection() {
         })}
       </div>
 
-      {/* Technology table */}
+      {/* Technology table — 光刻技术路线图表格 */}
       <motion.div
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}

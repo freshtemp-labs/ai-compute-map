@@ -1,21 +1,34 @@
 /**
  * @file data/newsData.ts
- * @description Static news/dynamics data related to AI compute infrastructure.
- * Each entry contains title, date, source, summary, and tags for filtering.
+ * @description AI算力基础设施相关的静态新闻/动态数据。
+ * 每条数据包含标题(中英文)、日期、来源、摘要(中英文)和标签用于分类筛选。
+ *
+ * @dependencies 无外部依赖
  */
 
+/** 新闻条目数据结构 */
 export interface NewsItem {
+  /** 唯一标识 */
   id: string;
+  /** 英文标题 */
   title: string;
+  /** 中文标题 */
   titleZh: string;
+  /** 发布日期 */
   date: string;
+  /** 来源媒体 */
   source: string;
+  /** 英文摘要 */
   summary: string;
+  /** 中文摘要 */
   summaryZh: string;
+  /** 分类标签 */
   tags: string[];
+  /** 原文链接 */
   url?: string;
 }
 
+/** 新闻筛选标签常量（全部/数据中心/晶圆代工/供应链/政策/投资/能源/AI芯片/光刻/稀土） */
 export const NEWS_TAGS = [
   '全部',
   '数据中心',
@@ -29,8 +42,10 @@ export const NEWS_TAGS = [
   '稀土',
 ] as const;
 
+/** 新闻标签类型 */
 export type NewsTag = typeof NEWS_TAGS[number];
 
+/** AI算力基础设施新闻数据集（15条，2024-12至2025-05） */
 export const newsData: NewsItem[] = [
   {
     id: 'n1',

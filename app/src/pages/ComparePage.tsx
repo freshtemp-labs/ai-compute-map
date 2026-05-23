@@ -18,6 +18,10 @@ import type { ComparePin } from '@/context/CompareContext';
 import { useMapData } from '@/components/map/useMapData';
 import { LAYER_COLORS } from '@/constants/layerColors';
 
+/**
+ * 设施对比页面组件
+ * 选择2-3个设施进行多维度对比，含搜索侧边栏、雷达图和对比表格
+ */
 export default function ComparePage() {
   const { t } = useTranslation(['common', 'map']);
   const { comparePins, removeComparePin, clearCompare, addComparePin } = useCompare();

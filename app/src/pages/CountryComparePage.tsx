@@ -19,7 +19,7 @@ import {
 } from '@/data/mockData';
 
 // ── Types ────────────────────────────────────────────────────────────
-
+/** 国家统计接口，包含各维度的算力指标 */
 interface CountryStats {
   country: string;
   region: string;
@@ -31,6 +31,10 @@ interface CountryStats {
 
 // ── Helpers ──────────────────────────────────────────────────────────
 
+/**
+ * 计算所有国家的统计指标
+ * 汇总数据中心、芯片厂和供应链节点数量
+ */
 function computeCountryStats(): CountryStats[] {
   const map = new Map<string, CountryStats>();
 
@@ -71,6 +75,11 @@ function computeCountryStats(): CountryStats[] {
   return Array.from(map.values()).sort((a, b) => b.totalPowerMW - a.totalPowerMW);
 }
 
+/**
+ * 根据供应链实体名称推断所属国家
+ * @param name - 实体名称
+ * @returns 国家名称或null
+ */
 function inferCountryFromSupplyChain(name: string): string | null {
   const lower = name.toLowerCase();
   if (lower.includes('china') || lower.includes('inner mongolia') || lower.includes('sichuan') || lower.includes('anhui') || lower.includes('beijing') || lower.includes('shanghai') || lower.includes('shenzhen') || lower.includes('shanghai micro') || lower.includes('huawei')) return 'China';
@@ -116,6 +125,10 @@ const COUNTRY_COLORS = ['#00D4FF', '#FFB84D', '#A855F7', '#4ADE80', '#F87171'];
 
 // ── Component ────────────────────────────────────────────────────────
 
+/**
+ * 国家对比页面组件
+ * 选择2-3个国家横向对比数据中心、功率、芯片厂和供应链节点数
+ */
 export default function CountryComparePage() {
   const allStats = useMemo(() => computeCountryStats(), []);
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
@@ -139,6 +152,10 @@ export default function CountryComparePage() {
     [allStats, selectedCountries]
   );
 
+  /**
+   * 切换国家选择，最多3个
+   * @param country - 国家名称
+   */
   function toggleCountry(country: string) {
     setSelectedCountries((prev) => {
       if (prev.includes(country)) return prev.filter((c) => c !== country);

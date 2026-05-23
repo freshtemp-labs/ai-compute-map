@@ -9,23 +9,37 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import type { LayerType } from '@/types';
 
+/**
+ * LayerToggle 组件属性
+ */
 interface LayerToggleProps {
+  /** 各图层激活状态 */
   activeLayers: Record<LayerType, boolean>;
+  /** 图层切换回调 */
   onToggle: (layer: LayerType) => void;
 }
 
+/** 图层配置：颜色和图层键的映射 */
 const layerConfig: { key: LayerType; color: string }[] = [
   { key: 'supply', color: '#FFB84D' },
   { key: 'foundry', color: '#00D4FF' },
   { key: 'datacenter', color: '#A855F7' },
 ];
 
+/** 图层键到 i18n 翻译键的映射 */
 const layerLabels: Record<LayerType, string> = {
   supply: 'map:layerToggle.supplyChain',
   foundry: 'map:layerToggle.foundry',
   datacenter: 'map:layerToggle.dataCenter',
 };
 
+/**
+ * 图层切换组件
+ * 在地图上提供供应链、晶圆厂、数据中心三个图层的切换按钮
+ * @param activeLayers - 各图层激活状态
+ * @param onToggle - 图层切换回调
+ * @returns 图层切换按钮组 JSX 元素
+ */
 export default function LayerToggle({ activeLayers, onToggle }: LayerToggleProps) {
   const { t } = useTranslation('map');
   return (

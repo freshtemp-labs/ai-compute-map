@@ -1,23 +1,35 @@
 /**
  * @file TrendChart.tsx
- * @description Line chart showing installed capacity trends over time.
- * Uses ECharts for rendering.
+ * @description 趋势折线图组件，展示全球数据中心装机容量随时间的变化趋势。
+ * 支持实际数据与预测数据的混合展示，使用 ECharts 渲染。
+ *
+ * @dependencies echarts-for-react
  */
 import ReactECharts from 'echarts-for-react';
 
+/** 趋势数据点 */
 interface TrendDataPoint {
+  /** 年份标签 */
   year: string;
+  /** 装机容量 */
   capacity: number;
+  /** 是否为预测值 */
   projected?: boolean;
 }
 
+/** 趋势图组件属性 */
 interface TrendChartProps {
+  /** 图表标题 */
   title?: string;
+  /** 趋势数据数组 */
   data?: TrendDataPoint[];
+  /** 数据单位 */
   unit?: string;
+  /** 折线颜色 */
   color?: string;
 }
 
+/** 默认趋势数据：2020-2030年全球数据中心装机容量（TWh），含预测值(E标记) */
 const DEFAULT_DATA: TrendDataPoint[] = [
   { year: '2020', capacity: 250 },
   { year: '2021', capacity: 290 },
@@ -32,6 +44,10 @@ const DEFAULT_DATA: TrendDataPoint[] = [
   { year: '2030E', capacity: 945, projected: true },
 ];
 
+/**
+ * TrendChart 装机容量趋势折线图组件
+ * 展示历史数据与预测数据，含最大值标注与均值参考线
+ */
 export default function TrendChart({
   title = '全球数据中心装机容量趋势',
   data = DEFAULT_DATA,

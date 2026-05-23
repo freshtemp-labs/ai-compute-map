@@ -1,9 +1,16 @@
-/** @file FoundryCharts.tsx - ECharts visualizations for foundry capacity and revenue data. */
+/**
+ * @file FoundryCharts.tsx
+ * @description 晶圆代工数据可视化图表组件集合。
+ *   包含市场占比环形图、营收趋势图、产能预测图、GAA 制程对比雷达图。
+ *   所有图表使用 ECharts 渲染，memo 优化防止重复渲染。
+ * @dependencies echarts-for-react, memo (react), ./data
+ */
 import { memo } from 'react';
 import ReactEChartsCore from 'echarts-for-react';
 import { foundryMarketData, revenueTrendData } from './data';
 
-/* ── Donut Chart ── */
+/* ── 市场占比环形图 ── */
+/** 晶圆代工市场份额环形图，中央显示总市场规模 */
 export const DonutChart = memo(function DonutChart() {
   const option = {
     tooltip: {
@@ -72,7 +79,8 @@ export const DonutChart = memo(function DonutChart() {
   return <ReactEChartsCore option={option} style={{ height: 320 }} notMerge={true} lazyUpdate={true} />;
 });
 
-/* ── Revenue Trend Chart ── */
+/* ── 营收趋势图 ── */
+/** 主要代工厂商历年营收趋势折线图（TSMC, Samsung, Intel, SMIC） */
 export const RevenueTrendChart = memo(function RevenueTrendChart() {
   const option = {
     tooltip: {
@@ -114,7 +122,8 @@ export const RevenueTrendChart = memo(function RevenueTrendChart() {
   return <ReactEChartsCore option={option} style={{ height: 280 }} notMerge={true} lazyUpdate={true} />;
 });
 
-/* ── Capacity Projection Chart ── */
+/* ── 产能预测图 ── */
+/** 先进制程产能堆叠面积图，含 2024-2030 年预测 */
 export const CapacityProjectionChart = memo(function CapacityProjectionChart() {
   const option = {
     tooltip: {
@@ -156,7 +165,8 @@ export const CapacityProjectionChart = memo(function CapacityProjectionChart() {
   return <ReactEChartsCore option={option} style={{ height: 300 }} notMerge={true} lazyUpdate={true} />;
 });
 
-/* ── GAA Comparison Radar Chart ── */
+/* ── GAA 对比雷达图 ── */
+/** Samsung 3nm GAA 与 TSMC 3nm FinFET 五维对比雷达图 */
 export const GaaComparisonChart = memo(function GaaComparisonChart() {
   const option = {
     tooltip: {

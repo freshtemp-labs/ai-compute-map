@@ -9,8 +9,9 @@
  */
 import type { DataPoint, Facility, DataCenter, KPI, SourceReference, LayerInfo, Company, DataCenterEntry, SupplyChainEntry, SourceEntry } from '@/types';
 
-// ─── Page-specific datasets (single source of truth) ────────────
+// ─── 页面级数据集（单一数据源）────────────────────────────
 
+/** 地图图层信息：基础层(供应链)、封装工厂层、算力中心层 */
 export const layers: LayerInfo[] = [
   {
     type: 'supply',
@@ -47,6 +48,7 @@ export const layers: LayerInfo[] = [
   },
 ];
 
+/** 关键绩效指标(KPI)数据：数据中心能耗、EUV出货量、稀土配额、代工营收、2030预测 */
 export const kpis: KPI[] = [
   {
     id: 'kpi-1',
@@ -105,6 +107,7 @@ export const kpis: KPI[] = [
   },
 ];
 
+/** 半导体/数据中心公司列表（含供应链、代工、云厂商，共20家） */
 export const companies: Company[] = [
   { id: 'c1', name: 'ASML Holding', ticker: 'ASML', country: 'Netherlands', layer: 'supply', marketShare: 85.2, revenue: 27.6, revenueUnit: '$B' },
   { id: 'c2', name: 'Applied Materials', ticker: 'AMAT', country: 'USA', layer: 'supply', marketShare: 16.8, revenue: 26.5, revenueUnit: '$B' },
@@ -128,6 +131,7 @@ export const companies: Company[] = [
   { id: 'c20', name: 'NTT Global', country: 'Japan', layer: 'datacenter', marketShare: 3.5, revenue: 4.8, revenueUnit: '$B' },
 ];
 
+/** 供应链数据点：稀土矿场、光刻厂商、设计公司、材料供应商等40+点位 */
 export const supplyChainData: DataPoint[] = [
   // Rare Earth Mines
   { id: 'sc1', name: 'Bayan Obo Mine', layer: 'supply', lat: 41.7667, lng: 109.9833, value: 48000, unit: 'tonnes RE', category: 'Rare Earth Mine', sourceTier: 1, sourceName: 'USGS Mineral Commodity Summaries', lastUpdated: '2024-01-15', confidence: 0.95 },
@@ -178,6 +182,7 @@ export const supplyChainData: DataPoint[] = [
   { id: 'sc40', name: 'Amkor Chandler AZ', layer: 'supply', lat: 33.3062, lng: -111.8413, value: 15000, unit: 'package units', category: 'OSAT', sourceTier: 1, sourceName: 'Amkor 10-K', lastUpdated: '2024-02-18', confidence: 0.90 },
 ];
 
+/** 晶圆代工厂数据：TSMC、Samsung、Intel、SMIC、GlobalFoundries、UMC等27座晶圆厂 */
 export const fabricationFacilities: Facility[] = [
   // TSMC
   { id: 'f1', name: 'Fab 12 (Gigafab)', company: 'TSMC', lat: 24.9714, lng: 121.0043, country: 'Taiwan', city: 'Hsinchu', layer: 'foundry', type: '300mm Fab', status: 'operational', capacity: '240K WPM', processNode: '3nm-28nm', yearEstablished: 2000, employees: 18000, sourceTier: 1, lastUpdated: '2024-03-15' },
@@ -215,6 +220,7 @@ export const fabricationFacilities: Facility[] = [
   { id: 'f27', name: 'Vanguard Tainan', company: 'Vanguard International', lat: 22.9997, lng: 120.2270, country: 'Taiwan', city: 'Tainan', layer: 'foundry', type: '200mm Fab', status: 'operational', capacity: '35K WPM', processNode: '90nm-1um', yearEstablished: 1994, employees: 3000, sourceTier: 2, lastUpdated: '2024-01-20' },
 ];
 
+/** 全球数据中心数据：AWS/Azure/GCP/Meta/Oracle等50+设施，含功率/PUE/运营状态 */
 export const dataCenters: DataCenter[] = [
   // North America
   { id: 'dc1', name: 'AWS US-East-1 (N. Virginia)', provider: 'Amazon Web Services', lat: 38.9517, lng: -77.4481, country: 'USA', city: 'Ashburn', region: 'North America', powerCapacity: 1200, powerUnit: 'MW', pue: 1.15, yearOperational: 2006, status: 'operational', cloudProviders: ['AWS'], sourceTier: 1, lastUpdated: '2024-03-15' },
@@ -274,6 +280,7 @@ export const dataCenters: DataCenter[] = [
   { id: 'dc50', name: 'Equinix LD5 (London)', provider: 'Equinix', lat: 51.5074, lng: -0.1278, country: 'UK', city: 'London', region: 'Europe', powerCapacity: 30, powerUnit: 'MW', pue: 1.32, yearOperational: 2004, status: 'operational', cloudProviders: ['Multi-tenant'], sourceTier: 1, lastUpdated: '2024-03-05' },
 ];
 
+/** 数据来源引用：年报、政府调查、行业报告、SEC文件等10条 */
 export const sourceReferences: SourceReference[] = [
   { id: 'sr1', name: 'ASML Annual Report 2024', tier: 1, type: 'Annual Report', url: 'https://www.asml.com/investors', lastUpdated: '2024-02-14', description: 'Annual financial and operational report from ASML Holding' },
   { id: 'sr2', name: 'TSMC Annual Report 2024', tier: 1, type: 'Annual Report', url: 'https://investor.tsmc.com', lastUpdated: '2024-03-15', description: 'TSMC annual report including capacity and revenue data' },
@@ -287,8 +294,9 @@ export const sourceReferences: SourceReference[] = [
   { id: 'sr10', name: 'Data Center Knowledge', tier: 2, type: 'Industry Publication', url: 'https://www.datacenterknowledge.com', lastUpdated: '2024-03-18', description: 'Data center industry news and facility tracking' },
 ];
 
-// ─── Page-specific datasets (single source of truth) ────────────
+// ─── 页面表格专用数据集 ────────────────────────────────
 
+/** 数据中心设施表格数据：20条记录含提供商/国家/功率/PUE/能源结构 */
 export const facilitiesData: DataCenterEntry[] = [
   { id: 1, name: 'AWS US-East-1', provider: 'Amazon (AWS)', country: 'USA', region: 'North America', powerMW: 180, pue: 1.12, year: 2006, status: 'Operational', energyMix: '50% renewable', layer: 'dataCenter' },
   { id: 2, name: 'Microsoft Boydton', provider: 'Microsoft', country: 'USA', region: 'North America', powerMW: 150, pue: 1.15, year: 2010, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
@@ -312,6 +320,7 @@ export const facilitiesData: DataCenterEntry[] = [
   { id: 20, name: 'Switch LAS VEGAS 10', provider: 'Switch', country: 'USA', region: 'North America', powerMW: 55, pue: 1.20, year: 2015, status: 'Operational', energyMix: '100% renewable', layer: 'dataCenter' },
 ];
 
+/** 供应链表格数据：14条记录含稀土/光刻/设计/能源各领域 */
 export const supplyChainTableData: SupplyChainEntry[] = [
   { id: 1, name: 'Inner Mongolia Rare Earth', type: 'rare-earth', country: 'China', keyMetric: 'Annual Production', value: '140,000 t', source: 'Ministry of Industry 2025', tier: 'tier1', updated: '2025-01' },
   { id: 2, name: 'Lynas Rare Earths', type: 'rare-earth', country: 'Australia', keyMetric: 'Capacity', value: '35,000 t/year', source: 'Annual Report 2024', tier: 'tier1', updated: '2024-12' },
@@ -329,6 +338,7 @@ export const supplyChainTableData: SupplyChainEntry[] = [
   { id: 14, name: 'Shanghai Micro Electronics', type: 'lithography', country: 'China', keyMetric: 'Node Demo', value: '90nm achieved', source: 'Industry sources', tier: 'tier3', updated: '2024-06' },
 ];
 
+/** 数据源表格数据：20条记录含年报/政府/行业分析/估算，含可信度分层 */
 export const sourcesTableData: SourceEntry[] = [
   { id: 1, name: 'TSMC Annual Report 2024', category: 'Financial', tier: 'tier1', layer: 'Foundry', dataPoints: 120, lastUpdated: '2025-01-15', status: 'active', url: 'https://investor.tsmc.com', description: 'Official audited financial statements from TSMC' },
   { id: 2, name: 'ASML Q4 2024 Earnings', category: 'Financial', tier: 'tier1', layer: 'Supply Chain', dataPoints: 85, lastUpdated: '2025-01-29', status: 'active', url: 'https://asml.com/investors', description: 'ASML quarterly earnings and unit shipments' },

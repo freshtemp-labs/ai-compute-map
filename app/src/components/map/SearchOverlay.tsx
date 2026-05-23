@@ -11,19 +11,36 @@ import { Search, X, MapPin as MapPinIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { MapPin } from './useMapData';
 
+/**
+ * SearchOverlay 组件属性
+ */
 interface SearchOverlayProps {
+  /** 所有可搜索的标注点 */
   pins: MapPin[];
+  /** 选中搜索结果回调 */
   onSelect: (pin: MapPin) => void;
+  /** 搜索面板是否打开 */
   isOpen: boolean;
+  /** 关闭搜索面板回调 */
   onClose: () => void;
 }
 
+/** 图层颜色映射 */
 const layerColors: Record<string, string> = {
   supply: '#FFB84D',
   foundry: '#00D4FF',
   datacenter: '#A855F7',
 };
 
+/**
+ * 全屏搜索覆盖层组件
+ * 支持在所有图层中搜索设施，支持键盘导航和防抖搜索
+ * @param pins - 所有标注点数据
+ * @param onSelect - 选中搜索结果回调
+ * @param isOpen - 搜索面板是否打开
+ * @param onClose - 关闭搜索面板回调
+ * @returns 搜索覆盖层 JSX 元素
+ */
 export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: SearchOverlayProps) {
   const { t } = useTranslation('map');
   const [query, setQuery] = useState('');
@@ -31,12 +48,14 @@ export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: Searc
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
+  // 打开时自动聚焦搜索输入框
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [isOpen]);
 
+  // 根据搜索关键词过滤标注点（匹配名称、城市、国家、类别、公司、供应商）
   const results = useMemo(() => {
     if (!query.trim()) return [];
     const q = query.toLowerCase();
@@ -55,6 +74,10 @@ export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: Searc
     setActiveIndex(0);
   }, [query]);
 
+  /**
+   * 键盘导航处理
+   * 支持上下箭头选择、Enter 确认、Escape 关闭
+   */
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
@@ -72,6 +95,9 @@ export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: Searc
     }
   };
 
+  /**
+   * 选中搜索结果并关闭搜索面板
+   */
   const handleSelect = (pin: MapPin) => {
     onSelect(pin);
     setQuery('');
