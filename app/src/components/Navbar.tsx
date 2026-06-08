@@ -1,10 +1,11 @@
 /**
  * @file Navbar.tsx
- * @description 顶部导航栏组件。支持响应式设计、语言切换器（zh/en/ja/ko）、
+ * @description 顶部导航栏组件。支持响应式设计、语言切换器（zh/en/ja/ko/ar）、
  *   数据新鲜度状态横幅、对比徽章计数器和移动端汉堡菜单。
  *   内置数据过期检测和 body 滚动锁定逻辑。
+ *   阿拉伯语（ar）支持 RTL 布局自动切换。
  * @dependencies react-router-dom, framer-motion, react-i18next, lucide-react,
- *               @/context/CompareContext
+ *               @/context/CompareContext, @/i18n (RTL_LANGUAGES, isRTL)
  */
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -12,6 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Menu, X, GitCompareArrows, CheckCircle, AlertTriangle, Settings } from 'lucide-react';
 import { useCompare } from '@/context/CompareContext';
+import { isRTL } from '@/i18n';
 
 /** 支持的语言列表 */
 const languages = [
@@ -19,6 +21,7 @@ const languages = [
   { code: 'en', label: 'English' },
   { code: 'ja', label: '日本語' },
   { code: 'ko', label: '한국어' },
+  { code: 'ar', label: 'العربية' },
 ];
 
 /** 缓出指数级动画曲线（用于 menu 动画） */
@@ -105,6 +108,9 @@ export default function Navbar() {
   const handleLangChange = useCallback((code: string) => {
     i18n.changeLanguage(code);
     setLangMenuOpen(false);
+    // 设置 RTL/LTR 方向
+    document.documentElement.dir = isRTL(code) ? 'rtl' : 'ltr';
+    document.documentElement.lang = code;
   }, [i18n]);
 
   const currentLang = languages.find(l => l.code === i18n.language) || languages[0];

@@ -1,0 +1,73 @@
+{
+  "breadcrumb": "مصادر البيانات",
+  "pageTitle": "الشفافية بالتصميم",
+  "pageSubtitle": "كل نقطة بيانات تعود إلى أصلها. منهجية التحقق لدينا مفتوحة للمراجعة من الأقران.",
+  "trustStats": {
+    "tier1": "مصادر المستوى الأول",
+    "avgSources": "متوسط المصادر/نقطة",
+    "timestamped": "100% بتوقيت"
+  },
+  "liveBadge": "جميع المقاييس محدّثة في الوقت الفعلي",
+  "sections": {
+    "sourceCatalog": "فهرس المصادر",
+    "tier1Label": "أساسي",
+    "tier2Label": "ثانوي",
+    "tier3Label": "ثالثي",
+    "tier1Desc": "التقارير الرسمية، البيانات الحكومية، البيانات المالية المدققة",
+    "tier2Desc": "تحليلات الصناعة، شركات البحث المرموقة",
+    "tier3Desc": "تقديرات نمذجية، توقعات، بيانات مُستنتجة",
+    "searchPlaceholder": "البحث في المصادر...",
+    "allTiers": "جميع المستويات",
+    "allStatus": "جميع الحالات",
+    "active": "نشط",
+    "pending": "قيد الانتظار",
+    "stale": "قديم",
+    "tableHeaders": {
+      "name": "اسم المصدر",
+      "category": "الفئة",
+      "tier": "المستوى",
+      "layer": "الطبقة",
+      "dataPoints": "نقاط البيانات",
+      "lastUpdated": "آخر تحديث",
+      "status": "الحالة"
+    },
+    "crossVerification": "محرك التحقق المتبادل",
+    "steps": {
+      "ingestion": "استيعاب البيانات",
+      "sourceMatching": "مطابقة المصادر",
+      "discrepancy": "كشف التناقضات",
+      "publication": "النشر"
+    },
+    "verificationStats": {
+      "pointsVerified": "النقاط التي تم التحقق منها اليوم",
+      "pendingReview": "قيد المراجعة",
+      "discrepancies": "التناقضات المكتشفة",
+      "avgTime": "متوسط وقت التحقق",
+      "tier1Sources": "مصادر المستوى الأول",
+      "avgSourcesPerPoint": "متوسط المصادر/نقطة",
+      "discrepancyRate": "معدل التناقض"
+    },
+    "recentVerifications": "التحققات الأخيرة",
+    "methodology": "المنهجية",
+    "sectionsM": {
+      "powerConsumption": "منهجية قياس استهلاك الطاقة",
+      "marketShare": "حساب حصة السوق",
+      "geolocation": "التحقق من الإحداثيات الجغرافية",
+      "capacityUtilization": "تقدير استخدام السعة",
+      "currencyConversion": "تحويل العملات والوحدات",
+      "confidenceScoring": "نظام تسجيل مستوى الثقة"
+    },
+    "historicalData": "أرشيف البيانات التاريخية",
+    "archiveStats": {
+      "firstSnapshot": "أول لقطة",
+      "totalSnapshots": "إجمالي اللقطات",
+      "dataPointsTracked": "نقاط البيانات المُتتبّعة",
+      "storageSize": "حجم التخزين"
+    },
+    "accessOptions": {
+      "timeMachine": "آلة الزمن",
+      "comparePeriods": "مقارنة الفترات",
+      "bulkExport": "تصدير جماعي"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "breadcrumb": "طبقة مصانع التصنيع",
+  "pageTitle": "مشهد مصانع أشباه الموصلات",
+  "pageSubtitle": "سعة التصنيع العالمية، ريادة عقد العملية، وديناميكيات التوسع عبر مصنعي الشرائح في العالم.",
+  "stats": {
+    "fabsTracked": "مصانع مُتتبّعة",
+    "tsmcShare": "حصة TSMC",
+    "marketSize": "حجم السوق",
+    "updated": "آخر تحديث"
+  },
+  "sections": {
+    "marketOverview": "نظرة عامة على السوق",
+    "marketShare": "حصة سوق مصانع التصنيع 2024",
+    "revenueTrend": "اتجاه الإيرادات (مليار دولار)",
+    "tsmcRevenue": "إيرادات TSMC",
+    "samsungFoundry": "سامسونج للتصنيع",
+    "intelTarget": "إنتل للتصنيع (الهدف)",
+    "smicRevenue": "إيرادات SMIC",
+    "tsmcDeepDive": "TSMC · أشباه الموصلات التايوانية",
+    "tsmcSubtitle": "أكبر مصنع تصنيع مستقل مُتخصّص في العالم",
+    "fabLocations": "مواقع المصانع",
+    "processTimeline": "الجدول الزمني لعمليات التصنيع",
+    "capacityByNode": "السعة حسب العقدة",
+    "globalExpansion": "خطة التوسع العالمي",
+    "samsung": "إلكترونيات سامسونج · التصنيع",
+    "gaaComparison": "مقارنة GAA و FinFET",
+    "intel": "إنتل للتصنيع",
+    "smic": "SMIC",
+    "matureNode": "متخصصو العقد الناضجة",
+    "comparisonMatrix": "مصفوفة المقارنة",
+    "capacityProjection": "توقعات السعة (ألف وافر/شهر)"
+  },
+  "tableHeaders": {
+    "company": "الشركة",
+    "revenue": "الإيرادات",
+    "share": "الحصة",
+    "node": "العقدة المتقدمة",
+    "fabs": "المصانع",
+    "usaFabs": "مصانع الولايات المتحدة",
+    "chinaFabs": "مصانع الصين",
+    "europeFabs": "مصانع أوروبا",
+    "capacity": "السعة/شهر",
+    "customers": "العملاء الرئيسيون"
+  },
+  "status": {
+    "active": "نشط",
+    "new": "جديد",
+    "building": "قيد البناء",
+    "planned": "مخطط"
+  }
+}

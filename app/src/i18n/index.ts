@@ -1,8 +1,9 @@
 /**
  * @file i18n/index.ts
- * @description i18next 国际化配置，支持 4 种语言（zh, en, ja, ko）
- * 9 个命名空间（common, home, map, supplyChain, foundries, datacenters,
+ * @description i18next 国际化配置，支持 5 种语言（zh, en, ja, ko, ar）
+ * 10 个命名空间（common, home, map, supplyChain, foundries, datacenters,
  * sources, history, developers, settings）。默认语言为中文（zh）。
+ * 阿拉伯语（ar）支持 RTL（从右到左）布局。
  *
  * @dependencies i18next, react-i18next, i18next-browser-languagedetector
  */
@@ -58,6 +59,28 @@ import koHistory from './locales/ko/history.json';
 import koDevelopers from './locales/ko/developers.json';
 import koSettings from './locales/ko/settings.json';
 
+// ─── 阿拉伯文（RTL）───
+import arCommon from './locales/ar/common.json';
+import arHome from './locales/ar/home.json';
+import arMap from './locales/ar/map.json';
+import arSupplyChain from './locales/ar/supplyChain.json';
+import arFoundries from './locales/ar/foundries.json';
+import arDatacenters from './locales/ar/datacenters.json';
+import arSources from './locales/ar/sources.json';
+import arHistory from './locales/ar/history.json';
+import arDevelopers from './locales/ar/developers.json';
+import arSettings from './locales/ar/settings.json';
+
+/** RTL 语言列表 */
+export const RTL_LANGUAGES = ['ar'];
+
+/**
+ * 检查给定语言是否为 RTL 语言
+ * @param lng - 语言代码
+ * @returns 是否为 RTL 语言
+ */
+export const isRTL = (lng: string): boolean => RTL_LANGUAGES.includes(lng);
+
 /** i18next 资源对象，按语言和命名空间组织翻译资源 */
 const resources = {
   /** 中文资源 */
@@ -111,6 +134,19 @@ const resources = {
     history: koHistory,
     developers: koDevelopers,
     settings: koSettings,
+  },
+  /** 阿拉伯文资源（RTL） */
+  ar: {
+    common: arCommon,
+    home: arHome,
+    map: arMap,
+    supplyChain: arSupplyChain,
+    foundries: arFoundries,
+    datacenters: arDatacenters,
+    sources: arSources,
+    history: arHistory,
+    developers: arDevelopers,
+    settings: arSettings,
   },
 };
 

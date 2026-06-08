@@ -1,0 +1,96 @@
+{
+  "brand": "خريطة الحوسبة بالذكاء الاصطناعي",
+  "nav": {
+    "map": "الخريطة",
+    "supplyChain": "سلسلة التوريد",
+    "foundries": "مصانع التصنيع",
+    "dataCenters": "مراكز البيانات",
+    "compare": "المقارنة",
+    "sources": "مصادر البيانات",
+    "history": "التاريخ",
+    "developers": "واجهة برمجة التطبيقات والوثائق",
+    "news": "الأخبار",
+    "settings": "الإعدادات"
+  },
+  "status": {
+    "live": "مباشر",
+    "online": "متصل",
+    "offline": "غير متصل",
+    "syncing": "جارٍ المزامنة"
+  },
+  "actions": {
+    "explore": "استكشاف الخريطة",
+    "viewDocs": "عرض الوثائق",
+    "search": "بحث",
+    "filter": "تصفية",
+    "export": "تصدير",
+    "copy": "نسخ",
+    "close": "إغلاق",
+    "learnMore": "اعرف المزيد",
+    "viewAll": "عرض الكل",
+    "refresh": "تحديث",
+    "switchLanguage": "تغيير اللغة"
+  },
+  "layers": {
+    "supplyChain": "سلسلة التوريد",
+    "supplyChainDesc": "العناصر النادرة، الليثوغرافيا، التصميم",
+    "foundry": "مصانع التصنيع",
+    "foundryDesc": "TSMC، سامسونج، إنتل",
+    "dataCenter": "مراكز البيانات",
+    "dataCenterDesc": "مراكز البيانات العالمية، استهلاك الطاقة"
+  },
+  "data": {
+    "lastSynced": "آخر مزامنة",
+    "nextRefresh": "التحديث التالي",
+    "dataPoints": "نقاط البيانات",
+    "sources": "المصادر",
+    "verified": "تم التحقق",
+    "pending": "قيد الانتظار"
+  },
+  "dataStatus": {
+    "banner": "المصادر: IEA / ASML / التقارير السنوية للشركات / USGS | آخر تحديث: 2024-Q4",
+    "sources": "المصادر: IEA / ASML / التقارير السنوية للشركات / USGS",
+    "lastUpdate": "آخر تحديث: 2024-Q4",
+    "freshness": "حداثة البيانات",
+    "fresh": "البيانات محدّثة",
+    "stale": "قد تكون البيانات قديمة"
+  },
+  "footer": {
+    "tagline": "تصور فوري للبنية التحتية العالمية للذكاء الاصطناعي",
+    "quickLinks": "روابط سريعة",
+    "dataSources": "مصادر البيانات",
+    "community": "المجتمع",
+    "license": "مرخص بموجب CC BY-SA 4.0",
+    "github": "GitHub",
+    "contributors": "المساهمون"
+  },
+  "time": {
+    "minutesAgo": "منذ {{count}} دقيقة",
+    "hoursAgo": "منذ {{count}} ساعة",
+    "daysAgo": "منذ {{count}} يوم",
+    "justNow": "الآن"
+  },
+  "sourceTiers": {
+    "tier1": "المستوى الأول",
+    "tier1Desc": "التقارير الرسمية",
+    "tier2": "المستوى الثاني",
+    "tier2Desc": "تحليلات الصناعة",
+    "tier3": "المستوى الثالث",
+    "tier3Desc": "تقديرات نمذجية"
+  },
+  "breadcrumb": {
+    "home": "الرئيسية"
+  },
+  "export": {
+    "title": "تصدير كـ PNG",
+    "fullpage": "الصفحة كاملة",
+    "mapOnly": "الخريطة فقط",
+    "chartsOnly": "المخططات فقط"
+  },
+  "a11y": {
+    "skipToContent": "انتقل إلى المحتوى الرئيسي",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "chartDesc": "مخطط: {{title}}"
+  }
+}

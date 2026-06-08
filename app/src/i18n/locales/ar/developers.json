@@ -1,0 +1,68 @@
+{
+  "breadcrumb": "المطورون",
+  "pageTitle": "ابنِ على خريطة الحوسبة",
+  "pageSubtitle": "واجهة برمجة تطبيقات RESTful، مخططات مُصنّعة، بيانات مفتوحة. مجانية للبحث والاستخدام غير التجاري.",
+  "badges": {
+    "openapi": "OpenAPI 3.0",
+    "typescript": "أنواع TypeScript",
+    "noKey": "لا حاجة لمفتاح API",
+    "license": "CC BY-SA 4.0"
+  },
+  "gettingStarted": {
+    "apiKey": "***",
+    "free": "مجاني، بدون مفتاح",
+    "rateLimits": "حدود المعدل",
+    "perHour": "1,000 / ساعة",
+    "baseUrl": "العنوان الأساسي",
+    "auth": "المصادقة",
+    "bearer": "***"
+  },
+  "apiReference": {
+    "title": "مرجع واجهة البرمجة",
+    "baseUrl": "العنوان الأساسي"
+  },
+  "queryParams": "معلمات الاستعلام",
+  "required": "مطلوب",
+  "optional": "اختياري",
+  "noParams": "لا توجد معلمات استعلام مطلوبة.",
+  "response": "الاستجابة",
+  "codeExamples": "أمثلة على الشيفرة",
+  "typescriptTypes": "أنواع TypeScript",
+  "showTypes": "إظهار جميع الأنواع",
+  "hideTypes": "إخفاء الأنواع",
+  "sdks": "أدوات SDK",
+  "pythonSdk": "Python SDK",
+  "jsSdk": "JavaScript / TypeScript SDK",
+  "cliTool": "أداة سطر الأوامر",
+  "install": "تثبيت",
+  "features": "الميزات",
+  "viewOnGithub": "عرض على GitHub",
+  "contributing": {
+    "title": "المساهمة",
+    "subtitle": "هذا المشروع يرحب بالمطورين البشريين والذكاء الاصطناعي على حد سواء.",
+    "prWorkflow": "سير عمل طلبات السحب",
+    "waysToContribute": "طرق المساهمة",
+    "data": "البيانات",
+    "code": "الشيفرة",
+    "docs": "الوثائق",
+    "issues": "المشكلات",
+    "aiAssisted": "المساهمات بمساعدة الذكاء الاصطناعي",
+    "setup": "الإعداد"
+  },
+  "systemArchitecture": "هندسة النظام",
+  "architectureDesc": "تتدفق البيانات من المصادر الأولية عبر التحقق والتخزين والتخزين المؤقت وأخيراً إلى طبقات واجهة البرمجة والواجهة الأمامية.",
+  "components": {
+    "dataSources": "مصادر البيانات",
+    "ingestion": "خط أنابيب الاستيعاب",
+    "verification": "محرك التحقق",
+    "database": "PostgreSQL + TimescaleDB",
+    "cache": "ذاكرة التخزين المؤقت Redis",
+    "apiLayer": "طبقة واجهة البرمجة",
+    "frontend": "الواجهة الأمامية (React)",
+    "mapEngine": "محرك الخريطة",
+    "charts": "المخططات (ECharts)",
+    "export": "خدمة التصدير"
+  },
+  "techStack": "مجموعة التقنيات",
+  "dataRefresh": "دورة تحديث البيانات"
+}
