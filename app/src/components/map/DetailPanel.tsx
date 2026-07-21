@@ -2,11 +2,13 @@
  * @file DetailPanel.tsx
  * @description Slide-out detail panel for a selected map pin, showing facility
  * information, supply chain relations, and data source attribution.
+ * On mobile (<768px), renders as a bottom sheet with drag-to-dismiss.
+ * On desktop, renders as a right-side slide-out panel.
  *
- * @dependencies react, @/components/map/useMapData, @/constants/layerColors
+ * @dependencies react, framer-motion, @/components/map/useMapData, @/constants/layerColors, @/hooks/use-mobile
  */
-import { useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { useMemo, useState, useCallback } from 'react';
+import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import { X, MapPin as MapPinIcon, ExternalLink, Crosshair, Database, GitBranch, GitCompareArrows, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +16,7 @@ import { toast } from 'sonner';
 import type { MapPin } from './useMapData';
 import { supplyChainData, fabricationFacilities, dataCenters } from '@/data/mockData';
 import { useCompare, MAX_COMPARE } from '@/context/CompareContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 /**
  * DetailPanel 组件属性
@@ -115,6 +118,7 @@ function getSupplyChainRelations(pin: MapPin): Relation[] {
 /**
  * 详情面板组件
  * 从右侧滑入显示选中设施的详细信息，包括关键指标、供应商链关系和数据来源
+ * 移动端从底部滑出，支持拖拽关闭
  * @param pin - 当前选中的标注点
  * @param onClose - 关闭面板回调
  * @param color - 标注点颜色标识
@@ -124,8 +128,21 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
   const { t } = useTranslation('map');
   const navigate = useNavigate();
   const { addComparePin, isInCompare } = useCompare();
+  const isMobile = useIsMobile();
 
   const relations = useMemo(() => pin ? getSupplyChainRelations(pin) : [], [pin]);
+
+  // Drag-to-dismiss for mobile bottom sheet
+  const y = useMotionValue(0);
+  const opacity = useTransform(y, [0, 200], [1, 0.5]);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleDragEnd = useCallback((_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    setIsDragging(false);
+    if (info.offset.y > 100 || info.velocity.y > 300) {
+      onClose();
+    }
+  }, [onClose]);
 
   /**
    * 根据数据来源层级获取对应的徽章颜色和标签
@@ -162,205 +179,289 @@ export default function DetailPanel({ pin, onClose, color }: DetailPanelProps) {
     }
   };
 
-  return (
-    <motion.div
-      key={pin.id}
-      initial={{ x: 420, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: 420, opacity: 0 }}
-      transition={{ duration: 0.4, ease: easeOutExpo }}
-      className="absolute top-0 right-0 bottom-0 w-[400px] sm:w-[420px] bg-[#111118] border-l border-[#1E1E28] z-30 flex flex-col overflow-hidden"
-      role="dialog"
-      aria-label={`${pin.name} - ${t('map:detailPanel.title')}`}
-      aria-modal="false"
-      style={{ boxShadow: '-8px 0 32px rgba(0,0,0,0.4)' }}
-    >
-      {/* Header */}
-      <div className="flex-shrink-0 p-5 border-b border-[#1E1E28]">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-2">
-            <span
-              className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-              style={{ backgroundColor: color }}
-            />
-            <span className="text-[11px] font-mono uppercase tracking-wider" style={{ color }}>
-              {layerLabel}
-            </span>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-1 rounded-md text-[#6B6B80] hover:text-[#E8E8EC] hover:bg-[#181820] transition-colors duration-200 cursor-pointer"
-            title={t('map:keyboard.close')}
-          >
-            <X size={18} />
-          </button>
-        </div>
-        <h2 className="text-heading-md text-[#E8E8EC] font-display mt-3 pr-6">{pin.name}</h2>
-        <div className="flex items-center gap-1.5 mt-1.5 text-body-sm text-[#9A9AAF]">
-          <MapPinIcon size={13} className="text-[#6B6B80] flex-shrink-0" />
-          <span>
-            {[pin.city, pin.country].filter(Boolean).join(', ') || t('map:detailPanel.location')}
-          </span>
-        </div>
+  // ── Shared content rendering ─────────────────────────────────────
+  const renderContent = () => (
+    <>
+      {/* Key Metrics Grid */}
+      <div className="grid grid-cols-2 gap-3">
+        <MetricCard
+          label={pin.layer === 'datacenter' ? t('map:facility.powerCapacity') : pin.layer === 'foundry' ? t('map:facility.capacity') : t('map:facility.production')}
+          value={typeof pin.value === 'number' ? pin.value.toLocaleString() : String(pin.value)}
+          unit={pin.unit || ''}
+          color={color}
+        />
+        {pin.pue && (
+          <MetricCard label={t('map:facility.pue')} value={String(pin.pue)} color={color} />
+        )}
+        {pin.processNode && (
+          <MetricCard label={t('map:facility.processNode')} value={pin.processNode} color={color} />
+        )}
+        {pin.powerCapacity && (
+          <MetricCard label={t('map:facility.powerMW')} value={String(pin.powerCapacity)} color={color} />
+        )}
+        {pin.yearEstablished && (
+          <MetricCard label={t('map:facility.yearEst')} value={String(pin.yearEstablished)} color={color} />
+        )}
+        {pin.yearOperational && (
+          <MetricCard label={t('map:facility.yearOper')} value={String(pin.yearOperational)} color={color} />
+        )}
+        {pin.employees && (
+          <MetricCard label={t('map:facility.employees')} value={pin.employees.toLocaleString()} color={color} />
+        )}
+        <MetricCard
+          label={t('map:facility.confidence')}
+          value={pin.confidence ? `${(pin.confidence * 100).toFixed(0)}%` : 'N/A'}
+          color={color}
+        />
       </div>
 
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto p-5 space-y-5">
-        {/* Key Metrics Grid */}
-        <div className="grid grid-cols-2 gap-3">
-          <MetricCard
-            label={pin.layer === 'datacenter' ? t('map:facility.powerCapacity') : pin.layer === 'foundry' ? t('map:facility.capacity') : t('map:facility.production')}
-            value={typeof pin.value === 'number' ? pin.value.toLocaleString() : String(pin.value)}
-            unit={pin.unit || ''}
-            color={color}
-          />
-          {pin.pue && (
-            <MetricCard label={t('map:facility.pue')} value={String(pin.pue)} color={color} />
-          )}
-          {pin.processNode && (
-            <MetricCard label={t('map:facility.processNode')} value={pin.processNode} color={color} />
-          )}
-          {pin.powerCapacity && (
-            <MetricCard label={t('map:facility.powerMW')} value={String(pin.powerCapacity)} color={color} />
-          )}
-          {pin.yearEstablished && (
-            <MetricCard label={t('map:facility.yearEst')} value={String(pin.yearEstablished)} color={color} />
-          )}
-          {pin.yearOperational && (
-            <MetricCard label={t('map:facility.yearOper')} value={String(pin.yearOperational)} color={color} />
-          )}
-          {pin.employees && (
-            <MetricCard label={t('map:facility.employees')} value={pin.employees.toLocaleString()} color={color} />
-          )}
-          <MetricCard
-            label={t('map:facility.confidence')}
-            value={pin.confidence ? `${(pin.confidence * 100).toFixed(0)}%` : 'N/A'}
-            color={color}
-          />
+      {/* Category / Type */}
+      {pin.category && (
+        <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
+          <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">{t('map:facility.category')}</span>
+          <p className="text-body-md text-[#E8E8EC] mt-1">{pin.category}</p>
         </div>
+      )}
 
-        {/* Category / Type */}
-        {pin.category && (
-          <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
-            <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">{t('map:facility.category')}</span>
-            <p className="text-body-md text-[#E8E8EC] mt-1">{pin.category}</p>
+      {pin.status && (
+        <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">{t('map:facility.status')}</span>
+            <StatusBadge status={pin.status} />
           </div>
-        )}
+        </div>
+      )}
 
-        {pin.status && (
-          <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">{t('map:facility.status')}</span>
-              <StatusBadge status={pin.status} />
-            </div>
-          </div>
-        )}
+      {/* Provider / Company */}
+      {(pin.provider || pin.company) && (
+        <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
+          <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">
+            {pin.layer === 'datacenter' ? t('map:facility.provider') : t('map:facility.company')}
+          </span>
+          <p className="text-body-md text-[#E8E8EC] mt-1">{pin.provider || pin.company}</p>
+        </div>
+      )}
 
-        {/* Provider / Company */}
-        {(pin.provider || pin.company) && (
-          <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
+      {/* Supply Chain Relationships */}
+      {relations.length > 0 && (
+        <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
+          <div className="flex items-center gap-1.5 mb-3">
+            <GitBranch size={13} className="text-[#6B6B80]" />
             <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">
-              {pin.layer === 'datacenter' ? t('map:facility.provider') : t('map:facility.company')}
+              {t('map:facility.supplyChain', 'Supply Chain Relations')}
             </span>
-            <p className="text-body-md text-[#E8E8EC] mt-1">{pin.provider || pin.company}</p>
           </div>
-        )}
+          <div className="space-y-2.5">
+            {relations.map((rel, i) => {
+              const relColor = rel.type === 'upstream' ? '#FFB84D' : rel.type === 'downstream' ? '#00D4FF' : '#9A9AAF';
+              const relLabel = rel.type === 'upstream' ? t('map:facility.upstream', 'UPSTREAM') : rel.type === 'downstream' ? t('map:facility.downstream', 'DOWNSTREAM') : t('map:facility.peer', 'PEER');
+              return (
+                <div key={i} className="flex items-start gap-2">
+                  <span
+                    className="text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded mt-0.5 flex-shrink-0"
+                    style={{ color: relColor, backgroundColor: relColor + '15', border: `1px solid ${relColor}30` }}
+                  >
+                    {relLabel}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-[12px] text-[#E8E8EC] truncate">{rel.name}</p>
+                    <p className="text-[10px] text-[#6B6B80]">{rel.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
-        {/* Supply Chain Relationships */}
-        {relations.length > 0 && (
-          <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28]">
-            <div className="flex items-center gap-1.5 mb-3">
-              <GitBranch size={13} className="text-[#6B6B80]" />
-              <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">
-                {t('map:facility.supplyChain', 'Supply Chain Relations')}
+      {/* Source Info */}
+      <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28] space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">{t('map:facility.dataSource')}</span>
+          <span
+            className="text-[10px] font-mono px-1.5 py-0.5 rounded border"
+            style={{ color: tier.color, borderColor: tier.color }}
+          >
+            {tier.label}
+          </span>
+        </div>
+        <p className="text-body-sm text-[#9A9AAF]">{pin.sourceName}</p>
+        <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#6B6B80]">
+          <Database size={11} />
+          <span>{t('map:facility.updatedLabel')} {pin.lastUpdated}</span>
+        </div>
+        <button
+          className="flex items-center gap-1.5 mt-1 text-[12px] font-medium transition-colors duration-200 hover:opacity-80 cursor-pointer"
+          style={{ color }}
+          onClick={() => {
+            if (pin.sourceName) {
+              window.open(`https://www.google.com/search?q=${encodeURIComponent(pin.sourceName)}`, '_blank');
+            }
+          }}
+        >
+          <Crosshair size={12} />
+          {t('map:facility.crossVerify')}
+        </button>
+      </div>
+    </>
+  );
+
+  // ── Shared footer rendering ──────────────────────────────────────
+  const renderFooter = (mobile = false) => (
+    <div className={`flex-shrink-0 border-t border-[#1E1E28] bg-[#111118] space-y-2 ${mobile ? 'p-3' : 'p-4'}`}>
+      {/* Compare Button */}
+      <button
+        onClick={handleAddToCompare}
+        className={`w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-[12px] font-mono transition-all duration-200 cursor-pointer ${
+          inCompare
+            ? 'bg-[#00D4FF15] border border-[#00D4FF30] text-[#00D4FF]'
+            : 'bg-[#181820] border border-[#2A2A3A] text-[#9A9AAF] hover:text-[#E8E8EC] hover:border-[#00D4FF]'
+        }`}
+      >
+        {inCompare ? <Check size={14} /> : <GitCompareArrows size={14} />}
+        {inCompare ? t('map:compare.alreadyInCompare') : t('map:compare.addToCompare')}
+      </button>
+
+      <div className="flex items-center justify-between">
+        <span className="text-mono-sm text-[#6B6B80]">
+          {pin.sourceTier ? `${pin.sourceTier} source${pin.sourceTier > 1 ? 's' : ''}` : t('map:facility.unknownSources')}
+        </span>
+        <button
+          onClick={() => {
+            const route = pin.layer === 'supply' ? '/supply-chain' : pin.layer === 'foundry' ? '/foundries' : '/datacenters';
+            navigate(route);
+          }}
+          className="flex items-center gap-1 text-[11px] font-mono text-[#9A9AAF] hover:text-[#00D4FF] transition-colors duration-200 cursor-pointer"
+        >
+          {t('map:facility.viewFullPage')}
+          <ExternalLink size={11} />
+        </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Mobile: Bottom Sheet */}
+      {isMobile ? (
+        <motion.div
+          key={pin.id}
+          initial={{ y: '100%' }}
+          animate={{ y: 0 }}
+          exit={{ y: '100%' }}
+          transition={{ duration: 0.35, ease: easeOutExpo }}
+          drag="y"
+          dragConstraints={{ top: 0 }}
+          dragElastic={0.2}
+          onDragStart={() => setIsDragging(true)}
+          onDragEnd={handleDragEnd}
+          style={{ y, opacity, boxShadow: '0 -8px 32px rgba(0,0,0,0.4)' }}
+          className="absolute bottom-0 left-0 right-0 h-[60vh] bg-[#111118] border-t border-[#1E1E28] z-30 flex flex-col overflow-hidden rounded-t-2xl"
+          role="dialog"
+          aria-label={`${pin.name} - ${t('map:detailPanel.title')}`}
+          aria-modal="false"
+        >
+          {/* Drag Handle */}
+          <div
+            className="flex-shrink-0 flex justify-center pt-3 pb-1 cursor-grab active:cursor-grabbing"
+            style={{ touchAction: 'none' }}
+          >
+            <div className="w-10 h-1 rounded-full bg-[#2A2A3A]" />
+          </div>
+
+          {/* Header */}
+          <div className="flex-shrink-0 px-4 pb-3 border-b border-[#1E1E28]">
+            <div className="flex items-start justify-between">
+              <div className="flex items-center gap-2">
+                <span
+                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: color }}
+                />
+                <span className="text-[11px] font-mono uppercase tracking-wider" style={{ color }}>
+                  {layerLabel}
+                </span>
+              </div>
+              <button
+                onClick={onClose}
+                className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-[#6B6B80] hover:text-[#E8E8EC] hover:bg-[#181820] transition-colors duration-200 cursor-pointer"
+                title={t('map:keyboard.close')}
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <h2 className="text-heading-md text-[#E8E8EC] font-display mt-2 pr-6">{pin.name}</h2>
+            <div className="flex items-center gap-1.5 mt-1 text-body-sm text-[#9A9AAF]">
+              <MapPinIcon size={13} className="text-[#6B6B80] flex-shrink-0" />
+              <span>
+                {[pin.city, pin.country].filter(Boolean).join(', ') || t('map:detailPanel.location')}
               </span>
             </div>
-            <div className="space-y-2.5">
-              {relations.map((rel, i) => {
-                const relColor = rel.type === 'upstream' ? '#FFB84D' : rel.type === 'downstream' ? '#00D4FF' : '#9A9AAF';
-                const relLabel = rel.type === 'upstream' ? t('map:facility.upstream', 'UPSTREAM') : rel.type === 'downstream' ? t('map:facility.downstream', 'DOWNSTREAM') : t('map:facility.peer', 'PEER');
-                return (
-                  <div key={i} className="flex items-start gap-2">
-                    <span
-                      className="text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded mt-0.5 flex-shrink-0"
-                      style={{ color: relColor, backgroundColor: relColor + '15', border: `1px solid ${relColor}30` }}
-                    >
-                      {relLabel}
-                    </span>
-                    <div className="min-w-0">
-                      <p className="text-[12px] text-[#E8E8EC] truncate">{rel.name}</p>
-                      <p className="text-[10px] text-[#6B6B80]">{rel.description}</p>
-                    </div>
-                  </div>
-                );
-              })}
+          </div>
+
+          {/* Content - scrollable area with overscroll containment */}
+          <div
+            className="flex-1 overflow-y-auto overscroll-contain px-4 py-3 space-y-4"
+            style={{ touchAction: isDragging ? 'none' : 'pan-y' }}
+          >
+            {renderContent()}
+          </div>
+
+          {/* Footer */}
+          {renderFooter(true)}
+        </motion.div>
+      ) : (
+        /* Desktop: Right Side Panel */
+        <motion.div
+          key={pin.id}
+          initial={{ x: 420, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 420, opacity: 0 }}
+          transition={{ duration: 0.4, ease: easeOutExpo }}
+          className="absolute top-0 right-0 bottom-0 w-[400px] sm:w-[420px] bg-[#111118] border-l border-[#1E1E28] z-30 flex flex-col overflow-hidden"
+          role="dialog"
+          aria-label={`${pin.name} - ${t('map:detailPanel.title')}`}
+          aria-modal="false"
+          style={{ boxShadow: '-8px 0 32px rgba(0,0,0,0.4)' }}
+        >
+          {/* Header */}
+          <div className="flex-shrink-0 p-5 border-b border-[#1E1E28]">
+            <div className="flex items-start justify-between">
+              <div className="flex items-center gap-2">
+                <span
+                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: color }}
+                />
+                <span className="text-[11px] font-mono uppercase tracking-wider" style={{ color }}>
+                  {layerLabel}
+                </span>
+              </div>
+              <button
+                onClick={onClose}
+                className="p-1 rounded-md text-[#6B6B80] hover:text-[#E8E8EC] hover:bg-[#181820] transition-colors duration-200 cursor-pointer"
+                title={t('map:keyboard.close')}
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <h2 className="text-heading-md text-[#E8E8EC] font-display mt-3 pr-6">{pin.name}</h2>
+            <div className="flex items-center gap-1.5 mt-1.5 text-body-sm text-[#9A9AAF]">
+              <MapPinIcon size={13} className="text-[#6B6B80] flex-shrink-0" />
+              <span>
+                {[pin.city, pin.country].filter(Boolean).join(', ') || t('map:detailPanel.location')}
+              </span>
             </div>
           </div>
-        )}
 
-        {/* Source Info */}
-        <div className="bg-[#181820] rounded-lg p-3 border border-[#1E1E28] space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono uppercase text-[#6B6B80] tracking-wider">{t('map:facility.dataSource')}</span>
-            <span
-              className="text-[10px] font-mono px-1.5 py-0.5 rounded border"
-              style={{ color: tier.color, borderColor: tier.color }}
-            >
-              {tier.label}
-            </span>
+          {/* Content */}
+          <div className="flex-1 overflow-y-auto p-5 space-y-5">
+            {renderContent()}
           </div>
-          <p className="text-body-sm text-[#9A9AAF]">{pin.sourceName}</p>
-          <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#6B6B80]">
-            <Database size={11} />
-            <span>{t('map:facility.updatedLabel')} {pin.lastUpdated}</span>
-          </div>
-          <button
-            className="flex items-center gap-1.5 mt-1 text-[12px] font-medium transition-colors duration-200 hover:opacity-80 cursor-pointer"
-            style={{ color }}
-            onClick={() => {
-              if (pin.sourceName) {
-                window.open(`https://www.google.com/search?q=${encodeURIComponent(pin.sourceName)}`, '_blank');
-              }
-            }}
-          >
-            <Crosshair size={12} />
-            {t('map:facility.crossVerify')}
-          </button>
-        </div>
-      </div>
 
-      {/* Footer */}
-      <div className="flex-shrink-0 p-4 border-t border-[#1E1E28] bg-[#111118] space-y-2">
-        {/* Compare Button */}
-        <button
-          onClick={handleAddToCompare}
-          className={`w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-[12px] font-mono transition-all duration-200 cursor-pointer ${
-            inCompare
-              ? 'bg-[#00D4FF15] border border-[#00D4FF30] text-[#00D4FF]'
-              : 'bg-[#181820] border border-[#2A2A3A] text-[#9A9AAF] hover:text-[#E8E8EC] hover:border-[#00D4FF]'
-          }`}
-        >
-          {inCompare ? <Check size={14} /> : <GitCompareArrows size={14} />}
-          {inCompare ? t('map:compare.alreadyInCompare') : t('map:compare.addToCompare')}
-        </button>
-
-        <div className="flex items-center justify-between">
-          <span className="text-mono-sm text-[#6B6B80]">
-            {pin.sourceTier ? `${pin.sourceTier} source${pin.sourceTier > 1 ? 's' : ''}` : t('map:facility.unknownSources')}
-          </span>
-          <button
-            onClick={() => {
-              const route = pin.layer === 'supply' ? '/supply-chain' : pin.layer === 'foundry' ? '/foundries' : '/datacenters';
-              navigate(route);
-            }}
-            className="flex items-center gap-1 text-[11px] font-mono text-[#9A9AAF] hover:text-[#00D4FF] transition-colors duration-200 cursor-pointer"
-          >
-            {t('map:facility.viewFullPage')}
-            <ExternalLink size={11} />
-          </button>
-        </div>
-      </div>
-    </motion.div>
+          {/* Footer */}
+          {renderFooter(false)}
+        </motion.div>
+      )}
+    </>
   );
 }
 

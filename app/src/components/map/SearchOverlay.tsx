@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, MapPin as MapPinIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { MapPin } from './useMapData';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 /**
  * SearchOverlay 组件属性
@@ -43,6 +44,7 @@ const layerColors: Record<string, string> = {
  */
 export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: SearchOverlayProps) {
   const { t } = useTranslation('map');
+  const isMobile = useIsMobile();
   const [query, setQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -123,17 +125,17 @@ export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: Searc
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-20 left-1/2 -translate-x-1/2 w-full max-w-[600px] px-4 z-[61]"
+            className={`fixed left-1/2 -translate-x-1/2 w-full px-4 z-[61] ${isMobile ? 'top-4' : 'top-20'} ${isMobile ? '' : 'max-w-[600px]'}`}
           >
             <div className="bg-[#111118] border border-[#2A2A3A] rounded-lg shadow-[0_24px_80px_rgba(0,0,0,0.6)] overflow-hidden">
               {/* Search Input */}
-              <div className="flex items-center gap-3 px-4 h-12 border-b border-[#1E1E28]">
+              <div className={`flex items-center gap-3 px-4 border-b border-[#1E1E28] ${isMobile ? 'h-14' : 'h-12'}`}>
                 <Search size={18} className="text-[#6B6B80] flex-shrink-0" />
                 <input
                   ref={inputRef}
                   type="text"
                   placeholder={t('map:search.placeholder')}
-                  className="flex-1 bg-transparent text-body-md text-[#E8E8EC] placeholder-[#6B6B80] outline-none"
+                  className={`flex-1 bg-transparent text-body-md text-[#E8E8EC] placeholder-[#6B6B80] outline-none ${isMobile ? 'text-[16px]' : ''}`}
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
@@ -141,7 +143,7 @@ export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: Searc
                 {query && (
                   <button
                     onClick={() => { setQuery(''); inputRef.current?.focus(); }}
-                    className="p-1 rounded text-[#6B6B80] hover:text-[#E8E8EC] transition-colors cursor-pointer"
+                    className={`p-1 rounded text-[#6B6B80] hover:text-[#E8E8EC] transition-colors cursor-pointer ${isMobile ? 'min-w-[44px] min-h-[44px] flex items-center justify-center' : ''}`}
                   >
                     <X size={14} />
                   </button>
@@ -166,7 +168,9 @@ export default function SearchOverlay({ pins, onSelect, isOpen, onClose }: Searc
                           key={pin.id}
                           onClick={() => handleSelect(pin)}
                           onMouseEnter={() => setActiveIndex(index)}
-                          className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors duration-100 cursor-pointer ${
+                          className={`w-full flex items-center gap-3 text-left transition-colors duration-100 cursor-pointer ${
+                            isMobile ? 'px-4 py-4 min-h-[56px]' : 'px-4 py-3'
+                          } ${
                             isActive ? 'bg-[#181820]' : 'hover:bg-[#181820]/50'
                           }`}
                         >

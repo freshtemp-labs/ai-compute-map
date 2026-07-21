@@ -1,0 +1,96 @@
+{
+  "brand": "AI COMPUTE MAP",
+  "nav": {
+    "map": "Mapa",
+    "supplyChain": "Cadena de suministro",
+    "foundries": "Fundidoras",
+    "dataCenters": "Centros de datos",
+    "compare": "Comparar",
+    "sources": "Fuentes de datos",
+    "history": "Historial",
+    "developers": "API y Docs",
+    "news": "Noticias",
+    "settings": "Configuración"
+  },
+  "status": {
+    "live": "En vivo",
+    "online": "En línea",
+    "offline": "Fuera de línea",
+    "syncing": "Sincronizando"
+  },
+  "actions": {
+    "explore": "Explorar el mapa",
+    "viewDocs": "Ver documentación",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "export": "Exportar",
+    "copy": "Copiar",
+    "close": "Cerrar",
+    "learnMore": "Más información",
+    "viewAll": "Ver todo",
+    "refresh": "Actualizar",
+    "switchLanguage": "Cambiar idioma"
+  },
+  "layers": {
+    "supplyChain": "Cadena de suministro",
+    "supplyChainDesc": "Tierras raras, litografía, diseño",
+    "foundry": "Fundidora",
+    "foundryDesc": "TSMC, Samsung, Intel",
+    "dataCenter": "Centro de datos",
+    "dataCenterDesc": "CD globales, consumo energético"
+  },
+  "data": {
+    "lastSynced": "Última sincronización",
+    "nextRefresh": "Próxima actualización",
+    "dataPoints": "Puntos de datos",
+    "sources": "Fuentes",
+    "verified": "Verificado",
+    "pending": "Pendiente"
+  },
+  "dataStatus": {
+    "banner": "Fuentes: IEA / ASML / Informes corporativos / USGS | Última actualización: 2024-Q4",
+    "sources": "Fuentes: IEA / ASML / Informes corporativos / USGS",
+    "lastUpdate": "Última actualización: 2024-Q4",
+    "freshness": "Actualidad de los datos",
+    "fresh": "Los datos están actualizados",
+    "stale": "Los datos pueden estar desactualizados"
+  },
+  "footer": {
+    "tagline": "Visualización en tiempo real de la infraestructura global de IA",
+    "quickLinks": "Enlaces rápidos",
+    "dataSources": "Fuentes de datos",
+    "community": "Comunidad",
+    "license": "Licenciado bajo CC BY-SA 4.0",
+    "github": "GitHub",
+    "contributors": "Contribuidores"
+  },
+  "time": {
+    "minutesAgo": "hace {{count}} min",
+    "hoursAgo": "hace {{count}} h",
+    "daysAgo": "hace {{count}} días",
+    "justNow": "Ahora mismo"
+  },
+  "sourceTiers": {
+    "tier1": "Nivel 1",
+    "tier1Desc": "Informes oficiales",
+    "tier2": "Nivel 2",
+    "tier2Desc": "Análisis sectorial",
+    "tier3": "Nivel 3",
+    "tier3Desc": "Estimaciones modeladas"
+  },
+  "breadcrumb": {
+    "home": "Inicio"
+  },
+  "export": {
+    "title": "Exportar como PNG",
+    "fullpage": "Página completa",
+    "mapOnly": "Solo mapa",
+    "chartsOnly": "Solo gráficos"
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido principal",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "chartDesc": "Gráfico: {{title}}"
+  }
+}

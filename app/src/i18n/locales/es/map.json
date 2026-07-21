@@ -1,0 +1,113 @@
+{
+  "search": {
+    "placeholder": "Buscar instalaciones, ubicaciones, empresas...",
+    "highlighted": "Ubicación resaltada en el mapa"
+  },
+  "detailPanel": {
+    "title": "Detalles de la instalación",
+    "location": "Ubicación",
+    "coordinates": "Coordenadas",
+    "layer": "Capa",
+    "metrics": "Métricas clave",
+    "source": "Fuente de datos"
+  },
+  "layerToggle": {
+    "supplyChain": "Cadena de suministro",
+    "foundry": "Fundidoras",
+    "dataCenter": "Centros de datos"
+  },
+  "legend": {
+    "title": "Leyenda",
+    "pinSize": "Tamaño del pin = importancia",
+    "supplyDesc": "Tierras raras, litografía, materiales, IP de diseño",
+    "foundryDesc": "TSMC, Samsung, Intel, SMIC, GlobalFoundries",
+    "dcDesc": "CD en la nube, colocación, instalaciones hyperscale"
+  },
+  "keyboard": {
+    "title": "Atajos de teclado",
+    "layer1": "Alternar cadena de suministro",
+    "layer2": "Alternar fundidora",
+    "layer3": "Alternar centro de datos",
+    "zoomIn": "Acercar",
+    "zoomOut": "Alejar",
+    "close": "Cerrar panel",
+    "search": "Buscar",
+    "reset": "Restablecer vista",
+    "showHelp": "Mostrar/Ocultar ayuda"
+  },
+  "status": {
+    "operational": "Operativo",
+    "construction": "En construcción",
+    "planned": "Planificado",
+    "expansion": "Expansión"
+  },
+  "facility": {
+    "powerCapacity": "Capacidad eléctrica",
+    "capacity": "Capacidad",
+    "production": "Producción",
+    "pue": "PUE",
+    "processNode": "Nodo de proceso",
+    "powerMW": "Potencia (MW)",
+    "yearEst": "Año de fundación",
+    "yearOper": "Año de operación",
+    "employees": "Empleados",
+    "confidence": "Confianza",
+    "category": "Categoría",
+    "status": "Estado",
+    "provider": "Proveedor",
+    "company": "Empresa",
+    "dataSource": "Fuente de datos",
+    "crossVerify": "Verificar fuentes cruzadas",
+    "viewFullPage": "Ver página completa",
+    "tier": "Nivel de fuente",
+    "unknown": "Desconocido",
+    "updatedLabel": "Actualizado:",
+    "unknownSources": "Fuentes desconocidas",
+    "noResults": "No se encontraron resultados para \"{{query}}\"",
+    "typeToSearch": "Escribe para buscar entre {{count}} puntos de datos",
+    "supplyChain": "Relaciones de cadena de suministro",
+    "upstream": "Río arriba",
+    "downstream": "Río abajo",
+    "peer": "Par"
+  },
+  "compare": {
+    "addToCompare": "Agregar a comparación",
+    "alreadyInCompare": "Ya está en la lista de comparación",
+    "maxReached": "Máximo {{count}} instalaciones para comparar",
+    "addedSuccess": "Agregado a la lista de comparación",
+    "cluster": {
+      "title": "Clúster",
+      "items": "{{count}} instalaciones",
+      "zoomIn": "Clic para acercar"
+    },
+    "selectTitle": "Selecciona 2-3 instalaciones para comparar",
+    "selectDesc": "Elige instalaciones de la barra lateral para ver una comparación lado a lado de capacidad, tecnología, ubicación y más.",
+    "radarTitle": "Comparación de rendimiento",
+    "tableTitle": "Comparación detallada",
+    "metric": "Métrica",
+    "type": "Tipo",
+    "location": "Ubicación"
+  },
+  "a11y": {
+    "mapRegion": "Mapa mundial interactivo que muestra la infraestructura de computación IA",
+    "mapControls": "Controles del mapa",
+    "switchTo2D": "Cambiar a mapa 2D",
+    "switchTo3D": "Cambiar a globo 3D",
+    "switchToHeatmap": "Cambiar a vista de mapa de calor",
+    "switchToMarkers": "Cambiar a vista de marcadores",
+    "keyboardHelp": "Atajos de teclado",
+    "dataTableSection": "Tabla de datos de instalaciones para lectores de pantalla",
+    "dataTableTitle": "Datos de instalaciones del mapa de computación IA",
+    "dataTableDesc": "Esta tabla contiene {{count}} instalaciones en las categorías de cadena de suministro, fundidora y centro de datos.",
+    "dataTableLabel": "Lista completa de instalaciones de computación IA",
+    "dataTableCaption": "Instalaciones de infraestructura de computación IA — {{count}} entradas",
+    "colName": "Nombre",
+    "colCategory": "Categoría",
+    "colLayer": "Capa",
+    "colLocation": "Ubicación",
+    "colValue": "Valor",
+    "colStatus": "Estado",
+    "colSource": "Fuente de datos",
+    "colUpdated": "Última actualización"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "pageTitle": "Benutzereinstellungen",
+  "pageSubtitle": "Konfigurieren Sie die Standard-Kartenansicht, Sichtbarkeit der Schichten und Oberflächeneinstellungen. Einstellungen werden automatisch im lokalen Browser gespeichert.",
+  "breadcrumb": "Einstellungen",
+  "sections": {
+    "zoom": "Standard-Zoomstufe",
+    "zoomDesc": "Standard-Zoomstufe beim Laden der Karte festlegen (1-10)",
+    "layers": "Standardmäßig sichtbare Schichten",
+    "layersDesc": "Wählen Sie, welche Schichten beim Laden der Karte sichtbar sind",
+    "language": "Spracheinstellung",
+    "languageDesc": "Anzeigesprache der Oberfläche auswählen",
+    "theme": "Thema-Modus",
+    "themeDesc": "Farbthema der Oberfläche wählen",
+    "reset": "Einstellungen zurücksetzen",
+    "resetDesc": "Alle Einstellungen auf Standardwerte zurücksetzen",
+    "cache": "Daten-Cache-Status",
+    "cacheDesc": "Der localStorage-Cache läuft nach 24 Stunden automatisch ab. Cache-Treffer überspringen die Neuverarbeitung.",
+    "performance": "Leistungsüberwachung",
+    "performanceDesc": "Seitenladezeiten und Ausführungszeiten wichtiger Operationen mit der Performance API überwachen.",
+    "dataQuality": "Datenqualitätsüberwachung",
+    "dataQualityDesc": "Echtzeitüberwachung der Datenintegrität, -konsistenz und -aktualität zur Gewährleistung zuverlässiger Datenquellen."
+  },
+  "theme": {
+    "dark": "Dunkler Modus",
+    "light": "Heller Modus"
+  },
+  "actions": {
+    "reset": "Zurücksetzen",
+    "clearCache": "Cache leeren",
+    "clearMetrics": "Einträge löschen",
+    "refresh": "Aktualisieren"
+  },
+  "cache": {
+    "entries": "Cache-Einträge",
+    "size": "Cache-Größe",
+    "hitRate": "Trefferquote"
+  },
+  "performance": {
+    "pageLoad": "Ladezeit der Seite",
+    "domLoaded": "DOM-Inhalt geladen",
+    "fcp": "First Contentful Paint",
+    "lcp": "Largest Contentful Paint",
+    "customMetrics": "Benutzerdefinierte Operationsaufzeichnungen"
+  }
+}

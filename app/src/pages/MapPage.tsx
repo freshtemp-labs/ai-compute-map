@@ -32,6 +32,7 @@ import HeatmapLayer from '@/components/map/HeatmapLayer';
 import ScreenReaderDataTable from '@/components/map/ScreenReaderDataTable';
 import ExportPngButton from '@/components/ExportPngButton';
 import { MapPageSkeleton } from '@/components/PageSkeleton';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const GlobeView = lazy(() => import('@/components/map/GlobeView'));
 
@@ -45,6 +46,7 @@ type ViewMode = 'markers' | 'heatmap';
 export default function MapPage() {
   const { t } = useTranslation('map');
   const { pins } = useMapData();
+  const isMobile = useIsMobile();
   const [mapLoading, setMapLoading] = useState(true);
   const [activeLayers, setActiveLayers] = useState<Record<LayerType, boolean>>({
     supply: true,
@@ -210,10 +212,12 @@ export default function MapPage() {
       </div>
 
       {/* Search Bar - Floating at top */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
+      <div className={`absolute top-4 left-1/2 -translate-x-1/2 z-20 ${isMobile ? 'w-[calc(100%-2rem)]' : ''}`}>
         <button
           onClick={() => setSearchOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[#111118] border border-[#1E1E28] rounded-full text-[#6B6B80] hover:text-[#E8E8EC] hover:border-[#2A2A3A] transition-all duration-200 shadow-lg cursor-pointer min-w-[280px]"
+          className={`flex items-center gap-2 bg-[#111118] border border-[#1E1E28] rounded-full text-[#6B6B80] hover:text-[#E8E8EC] hover:border-[#2A2A3A] transition-all duration-200 shadow-lg cursor-pointer ${
+            isMobile ? 'px-4 py-3 min-h-[48px] w-full' : 'px-4 py-2.5 min-w-[280px]'
+          }`}
         >
           <Search size={15} />
           <span className="text-body-sm flex-1 text-left">{t('search.placeholder')}</span>
@@ -234,7 +238,7 @@ export default function MapPage() {
       </div>
 
       {/* Zoom Controls - Bottom right */}
-      <div className="absolute bottom-6 right-6 z-20 flex flex-col gap-1" role="toolbar" aria-label={t('map:a11y.mapControls', 'Map controls')}>
+      <div className={`absolute bottom-6 right-6 z-20 flex flex-col gap-1`} role="toolbar" aria-label={t('map:a11y.mapControls', 'Map controls')}>
         {/* 3D View Toggle */}
         <ZoomButton
           onClick={() => { setIs3DView(!is3DView); if (!is3DView) setViewMode('markers'); }}
@@ -297,7 +301,9 @@ export default function MapPage() {
         <ExportPngButton />
         <button
           onClick={() => setKeyboardHelpOpen(true)}
-          className="w-9 h-9 flex items-center justify-center bg-[#111118] border border-[#1E1E28] rounded-lg text-[#6B6B80] hover:text-[#E8E8EC] hover:border-[#2A2A3A] transition-all duration-200 shadow-lg cursor-pointer"
+          className={`flex items-center justify-center bg-[#111118] border border-[#1E1E28] rounded-lg text-[#6B6B80] hover:text-[#E8E8EC] hover:border-[#2A2A3A] transition-all duration-200 shadow-lg cursor-pointer ${
+            isMobile ? 'w-11 h-11 min-w-[44px] min-h-[44px]' : 'w-9 h-9'
+          }`}
           title="Keyboard shortcuts (?)"
           aria-label={t('map:a11y.keyboardHelp', 'Keyboard shortcuts')}>
           <HelpCircle size={15} />
@@ -351,10 +357,13 @@ export default function MapPage() {
 }
 
 function ZoomButton({ children, onClick, title, ...rest }: { children: React.ReactNode; onClick: () => void; title: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  const isMobile = useIsMobile();
   return (
     <button
       onClick={onClick}
-      className="w-9 h-9 flex items-center justify-center bg-[#111118] border border-[#1E1E28] rounded-lg text-[#9A9AAF] hover:text-[#E8E8EC] hover:bg-[#181820] hover:border-[#2A2A3A] transition-all duration-200 shadow-md cursor-pointer"
+      className={`flex items-center justify-center bg-[#111118] border border-[#1E1E28] rounded-lg text-[#9A9AAF] hover:text-[#E8E8EC] hover:bg-[#181820] hover:border-[#2A2A3A] transition-all duration-200 shadow-md cursor-pointer ${
+        isMobile ? 'w-11 h-11 min-w-[44px] min-h-[44px]' : 'w-9 h-9'
+      }`}
       title={title}
       {...rest}
     >

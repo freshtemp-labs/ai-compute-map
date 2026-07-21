@@ -1,0 +1,68 @@
+{
+  "breadcrumb": "Entwickler",
+  "pageTitle": "Auf der Rechenkarte aufbauen",
+  "pageSubtitle": "RESTful-API, typisierte Schemas, offene Daten. Kostenlos für Forschung und nicht-kommerzielle Nutzung.",
+  "badges": {
+    "openapi": "OpenAPI 3.0",
+    "typescript": "TypeScript-Typen",
+    "noKey": "Kein API-Schlüssel erforderlich",
+    "license": "CC BY-SA 4.0"
+  },
+  "gettingStarted": {
+    "apiKey": "API-Schlüssel",
+    "free": "Kostenlos, kein Schlüssel",
+    "rateLimits": "Ratenlimits",
+    "perHour": "1.000 / Stunde",
+    "baseUrl": "Basis-URL",
+    "auth": "Authentifizierung",
+    "bearer": "Bearer-Token"
+  },
+  "apiReference": {
+    "title": "API-Referenz",
+    "baseUrl": "Basis-URL"
+  },
+  "queryParams": "Abfrageparameter",
+  "required": "Erforderlich",
+  "optional": "Optional",
+  "noParams": "Keine Abfrageparameter erforderlich.",
+  "response": "Antwort",
+  "codeExamples": "Codebeispiele",
+  "typescriptTypes": "TypeScript-Typen",
+  "showTypes": "Alle Typen anzeigen",
+  "hideTypes": "Typen ausblenden",
+  "sdks": "SDKs und Tools",
+  "pythonSdk": "Python-SDK",
+  "jsSdk": "JavaScript / TypeScript-SDK",
+  "cliTool": "CLI-Tool",
+  "install": "Installieren",
+  "features": "Funktionen",
+  "viewOnGithub": "Auf GitHub anzeigen",
+  "contributing": {
+    "title": "Mitwirken",
+    "subtitle": "Dieses Projekt heißt sowohl menschliche als auch KI-Entwickler willkommen.",
+    "prWorkflow": "Pull-Request-Workflow",
+    "waysToContribute": "Möglichkeiten zum Mitwirken",
+    "data": "Daten",
+    "code": "Code",
+    "docs": "Dokumentation",
+    "issues": "Issues",
+    "aiAssisted": "KI-unterstützte Beiträge",
+    "setup": "Einrichtung"
+  },
+  "systemArchitecture": "Systemarchitektur",
+  "architectureDesc": "Daten fließen von Rohquellen durch Validierung, Speicherung und Caching zu den API- und Frontend-Schichten.",
+  "components": {
+    "dataSources": "Datenquellen",
+    "ingestion": "Aufnahme-Pipeline",
+    "verification": "Verifizierungs-Engine",
+    "database": "PostgreSQL + TimescaleDB",
+    "cache": "Redis-Cache",
+    "apiLayer": "API-Schicht",
+    "frontend": "Frontend (React)",
+    "mapEngine": "Karten-Engine",
+    "charts": "Diagramme (ECharts)",
+    "export": "Export-Dienst"
+  },
+  "techStack": "Technologie-Stack",
+  "dataRefresh": "Datenaktualisierungszyklus"
+}

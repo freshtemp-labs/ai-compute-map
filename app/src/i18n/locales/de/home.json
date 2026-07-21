@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "title": "GLOBALE KI-RECHENKARTE",
+    "subtitle": "Echtzeit-Infrastruktur-Intelligenz entlang der gesamten KI-Lieferkette",
+    "betaBadge": "v1.0 OFFENE BETA"
+  },
+  "kpi": {
+    "globalDcPower": "Globale Rechenzentrumsleistung",
+    "euvUnits": "EUV-Lithografieeinheiten",
+    "chinaReQuota": "Chinas Seltene-Erden-Quote",
+    "tsmcRevenue": "TSMC-Umsatz",
+    "projected2030": "Prognostizierte DC-Leistung 2030",
+    "dataPoints": "Datenpunkte",
+    "totalPins": "Gesamte Datenpunkte",
+    "supplyNodes": "Lieferketten-Knoten",
+    "foundryFabs": "Fabriken",
+    "dataCenters": "Rechenzentren",
+    "totalPower": "Gesamte DC-Leistung",
+    "operational": "Betriebsbereite RZ",
+    "construction": "Im Bau"
+  },
+  "dashboard": {
+    "title": "Live-Datenübersicht",
+    "regionDist": "Rechenzentrumsverteilung nach Region",
+    "categoryDist": "Lieferkette nach Kategorie"
+  },
+  "layers": {
+    "title": "Drei Schichten der KI-Infrastruktur",
+    "subtitle": "Von Rohstoffen bis zu den Chips, die die KI der Welt antreiben",
+    "layer1Title": "Lieferketten-Schicht",
+    "layer1Desc": "Seltene Erden, Lithografie, Chip-Design",
+    "layer2Title": "Fabrik-Schicht",
+    "layer2Desc": "TSMC-, Samsung-, Intel-Fabriken",
+    "layer3Title": "Rechenzentrums-Schicht",
+    "layer3Desc": "Globale Rechenzentren, Stromverbrauch"
+  },
+  "livePreview": {
+    "title": "Globale Live-Abdeckung",
+    "subtitle": "Verfolgung von 50+ Ländern, 1.200+ Einrichtungen",
+    "badge": "Live-Daten"
+  },
+  "verification": {
+    "title": "Verifiziert. Kreuzreferenziert. Transparent.",
+    "subtitle": "Jeder Datenpunkt lässt sich auf seine Ursprungsquelle zurückführen",
+    "point1": "Stufe-1-Quellenverifizierung",
+    "point2": "Kreuzreferenz-Engine",
+    "point3": "Volle Quellentransparenz"
+  },
+  "openSource": {
+    "title": "Von Entwicklern für Entwickler gebaut",
+    "subtitle": "Offene API, Open-Source-Daten, für Forscher und Entwickler gebaut",
+    "cta": "API-Dokumentation anzeigen"
+  }
+}

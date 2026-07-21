@@ -1,6 +1,6 @@
 /**
  * @file i18n/index.ts
- * @description i18next 国际化配置，支持 5 种语言（zh, en, ja, ko, ar）
+ * @description i18next 国际化配置，支持 8 种语言（zh, en, ja, ko, ar, fr, de, es）
  * 10 个命名空间（common, home, map, supplyChain, foundries, datacenters,
  * sources, history, developers, settings）。默认语言为中文（zh）。
  * 阿拉伯语（ar）支持 RTL（从右到左）布局。
@@ -70,6 +70,42 @@ import arSources from './locales/ar/sources.json';
 import arHistory from './locales/ar/history.json';
 import arDevelopers from './locales/ar/developers.json';
 import arSettings from './locales/ar/settings.json';
+
+// ─── 法文 ───
+import frCommon from './locales/fr/common.json';
+import frHome from './locales/fr/home.json';
+import frMap from './locales/fr/map.json';
+import frSupplyChain from './locales/fr/supplyChain.json';
+import frFoundries from './locales/fr/foundries.json';
+import frDatacenters from './locales/fr/datacenters.json';
+import frSources from './locales/fr/sources.json';
+import frHistory from './locales/fr/history.json';
+import frDevelopers from './locales/fr/developers.json';
+import frSettings from './locales/fr/settings.json';
+
+// ─── 德文 ───
+import deCommon from './locales/de/common.json';
+import deHome from './locales/de/home.json';
+import deMap from './locales/de/map.json';
+import deSupplyChain from './locales/de/supplyChain.json';
+import deFoundries from './locales/de/foundries.json';
+import deDatacenters from './locales/de/datacenters.json';
+import deSources from './locales/de/sources.json';
+import deHistory from './locales/de/history.json';
+import deDevelopers from './locales/de/developers.json';
+import deSettings from './locales/de/settings.json';
+
+// ─── 西文 ───
+import esCommon from './locales/es/common.json';
+import esHome from './locales/es/home.json';
+import esMap from './locales/es/map.json';
+import esSupplyChain from './locales/es/supplyChain.json';
+import esFoundries from './locales/es/foundries.json';
+import esDatacenters from './locales/es/datacenters.json';
+import esSources from './locales/es/sources.json';
+import esHistory from './locales/es/history.json';
+import esDevelopers from './locales/es/developers.json';
+import esSettings from './locales/es/settings.json';
 
 /** RTL 语言列表 */
 export const RTL_LANGUAGES = ['ar'];
@@ -147,6 +183,45 @@ const resources = {
     history: arHistory,
     developers: arDevelopers,
     settings: arSettings,
+  },
+  /** 法文资源 */
+  fr: {
+    common: frCommon,
+    home: frHome,
+    map: frMap,
+    supplyChain: frSupplyChain,
+    foundries: frFoundries,
+    datacenters: frDatacenters,
+    sources: frSources,
+    history: frHistory,
+    developers: frDevelopers,
+    settings: frSettings,
+  },
+  /** 德文资源 */
+  de: {
+    common: deCommon,
+    home: deHome,
+    map: deMap,
+    supplyChain: deSupplyChain,
+    foundries: deFoundries,
+    datacenters: deDatacenters,
+    sources: deSources,
+    history: deHistory,
+    developers: deDevelopers,
+    settings: deSettings,
+  },
+  /** 西文资源 */
+  es: {
+    common: esCommon,
+    home: esHome,
+    map: esMap,
+    supplyChain: esSupplyChain,
+    foundries: esFoundries,
+    datacenters: esDatacenters,
+    sources: esSources,
+    history: esHistory,
+    developers: esDevelopers,
+    settings: esSettings,
   },
 };
 

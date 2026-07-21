@@ -26,6 +26,11 @@ const layerConfig: { key: LayerType; color: string }[] = [
   { key: 'datacenter', color: '#A855F7' },
 ];
 
+/** 子图层配置：在父图层下显示的子图层 */
+const subLayerConfig: { parent: LayerType; label: string; color: string }[] = [
+  { parent: 'supply', label: 'Rare Earth', color: '#FFB84D' },
+];
+
 /** 图层键到 i18n 翻译键的映射 */
 const layerLabels: Record<LayerType, string> = {
   supply: 'map:layerToggle.supplyChain',
@@ -70,6 +75,14 @@ export default function LayerToggle({ activeLayers, onToggle }: LayerToggleProps
               style={{ backgroundColor: color }}
             />
             <span className="hidden md:inline">{label}</span>
+            {/* Rare Earth sub-indicator for supply layer */}
+            {key === 'supply' && isActive && subLayerConfig.filter(s => s.parent === key).length > 0 && (
+              <span
+                className="w-1.5 h-1.5 rotate-45 flex-shrink-0 ml-0.5"
+                style={{ backgroundColor: '#FFB84D', opacity: 0.7 }}
+                title="Rare Earth data included"
+              />
+            )}
           </motion.button>
         );
       })}

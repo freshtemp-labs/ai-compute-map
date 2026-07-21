@@ -1,0 +1,40 @@
+{
+  "breadcrumb": "Cadena de suministro",
+  "pageTitle": "Fundamentos de la cadena de suministro de IA",
+  "pageSubtitle": "Elementos de tierras raras, sistemas de litografía y diseño de semiconductores — la infraestructura aguas arriba que habilita toda la computación de IA.",
+  "stats": {
+    "dataPoints": "Puntos de datos",
+    "countries": "Países",
+    "tier1Sources": "Fuentes de nivel 1",
+    "lastUpdated": "Última actualización"
+  },
+  "sections": {
+    "rareEarth": "Panel de tierras raras",
+    "lithography": "Equipamiento de litografía",
+    "designFirms": "Empresas de diseño",
+    "energyLabor": "Energía y mano de obra"
+  },
+  "dataset": {
+    "title": "Conjunto de datos completo de la cadena de suministro",
+    "subtitle": "Busca y filtra el conjunto completo de datos de la cadena de suministro — minas de tierras raras, equipamiento de litografía, empresas de diseño y fuentes de energía.",
+    "searchPlaceholder": "Buscar entidades...",
+    "typeAll": "Todos los tipos",
+    "typeRareEarth": "Tierras raras",
+    "typeLithography": "Litografía",
+    "typeDesign": "Diseño",
+    "typeEnergy": "Energía",
+    "countryAll": "Todos los países",
+    "exportCSV": "Exportar CSV",
+    "exportJSON": "Exportar JSON",
+    "tableHeaders": {
+      "entity": "Nombre de la entidad",
+      "type": "Tipo",
+      "country": "País",
+      "keyMetric": "Métrica clave",
+      "value": "Valor",
+      "source": "Fuente",
+      "tier": "Nivel",
+      "updated": "Actualizado"
+    }
+  }
+}

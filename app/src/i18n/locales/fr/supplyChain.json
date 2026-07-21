@@ -1,0 +1,40 @@
+{
+  "breadcrumb": "Chaîne d'approvisionnement",
+  "pageTitle": "Fondations de la chaîne d'approvisionnement IA",
+  "pageSubtitle": "Éléments de terres rares, systèmes de lithographie et conception de semi-conducteurs — l'infrastructure amont qui permet tout le calcul IA.",
+  "stats": {
+    "dataPoints": "Points de données",
+    "countries": "Pays",
+    "tier1Sources": "Sources de niveau 1",
+    "lastUpdated": "Dernière mise à jour"
+  },
+  "sections": {
+    "rareEarth": "Tableau de bord des terres rares",
+    "lithography": "Équipement de lithographie",
+    "designFirms": "Entreprises de conception",
+    "energyLabor": "Énergie et main-d'œuvre"
+  },
+  "dataset": {
+    "title": "Jeu de données complet de la chaîne d'approvisionnement",
+    "subtitle": "Recherchez et filtrez l'ensemble des données de la chaîne d'approvisionnement — mines de terres rares, équipement de lithographie, entreprises de conception et sources d'énergie.",
+    "searchPlaceholder": "Rechercher des entités...",
+    "typeAll": "Tous les types",
+    "typeRareEarth": "Terres rares",
+    "typeLithography": "Lithographie",
+    "typeDesign": "Conception",
+    "typeEnergy": "Énergie",
+    "countryAll": "Tous les pays",
+    "exportCSV": "Exporter CSV",
+    "exportJSON": "Exporter JSON",
+    "tableHeaders": {
+      "entity": "Nom de l'entité",
+      "type": "Type",
+      "country": "Pays",
+      "keyMetric": "Indicateur clé",
+      "value": "Valeur",
+      "source": "Source",
+      "tier": "Niveau",
+      "updated": "Mis à jour"
+    }
+  }
+}

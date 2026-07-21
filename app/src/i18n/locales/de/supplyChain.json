@@ -1,0 +1,40 @@
+{
+  "breadcrumb": "Lieferkette",
+  "pageTitle": "KI-Lieferketten-Grundlagen",
+  "pageSubtitle": "Seltene Erden, Lithografiesysteme und Halbleiterdesign — die Upstream-Infrastruktur, die den gesamten KI-Betrieb ermöglicht.",
+  "stats": {
+    "dataPoints": "Datenpunkte",
+    "countries": "Länder",
+    "tier1Sources": "Stufe-1-Quellen",
+    "lastUpdated": "Letzte Aktualisierung"
+  },
+  "sections": {
+    "rareEarth": "Seltene-Erden-Dashboard",
+    "lithography": "Lithografieausrüstung",
+    "designFirms": "Designunternehmen",
+    "energyLabor": "Energie und Arbeitskräfte"
+  },
+  "dataset": {
+    "title": "Vollständiger Lieferketten-Datensatz",
+    "subtitle": "Durchsuchen und filtern Sie den vollständigen Lieferketten-Datensatz — Seltene-Erden-Minen, Lithografieausrüstung, Designunternehmen und Energiequellen.",
+    "searchPlaceholder": "Entitäten suchen...",
+    "typeAll": "Alle Typen",
+    "typeRareEarth": "Seltene Erden",
+    "typeLithography": "Lithografie",
+    "typeDesign": "Design",
+    "typeEnergy": "Energie",
+    "countryAll": "Alle Länder",
+    "exportCSV": "CSV exportieren",
+    "exportJSON": "JSON exportieren",
+    "tableHeaders": {
+      "entity": "Entitätsname",
+      "type": "Typ",
+      "country": "Land",
+      "keyMetric": "Kennzahl",
+      "value": "Wert",
+      "source": "Quelle",
+      "tier": "Stufe",
+      "updated": "Aktualisiert"
+    }
+  }
+}

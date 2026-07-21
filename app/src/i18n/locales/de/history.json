@@ -1,0 +1,13 @@
+{
+  "pageTitle": "Verlauf",
+  "pageSubtitle": "Historische Daten-Zeitachse, Vergleichswerkzeuge und zeitliche Wiedergabe der KI-Infrastrukturentwicklung.",
+  "comingSoon": "Demnächst verfügbar",
+  "timeline": {
+    "title": "Zeitachse"
+  },
+  "compare": "Vergleichen",
+  "trendTitle": "KI-Infrastruktur-Wachstumstrend",
+  "dataNote": "Daten: IEA Global Energy Review, TrendForce, Unternehmensberichte. Werte 2026-2030 sind prognostizierte Schätzungen.",
+  "regionDist": "Rechenzentrumsverteilung nach Region",
+  "yearlyData": "Jährliche Datenzusammenfassung"
+}

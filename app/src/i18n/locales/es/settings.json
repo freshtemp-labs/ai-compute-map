@@ -1,0 +1,45 @@
+{
+  "pageTitle": "Preferencias de usuario",
+  "pageSubtitle": "Configura la vista predeterminada del mapa, visibilidad de capas y preferencias de interfaz. La configuración se guarda automáticamente en el navegador local.",
+  "breadcrumb": "Configuración",
+  "sections": {
+    "zoom": "Nivel de zoom predeterminado",
+    "zoomDesc": "Establecer el nivel de zoom predeterminado al cargar el mapa (1-10)",
+    "layers": "Capas visibles por defecto",
+    "layersDesc": "Elegir qué capas son visibles al cargar el mapa",
+    "language": "Preferencia de idioma",
+    "languageDesc": "Seleccionar el idioma de visualización de la interfaz",
+    "theme": "Modo de tema",
+    "themeDesc": "Elegir el tema de color de la interfaz",
+    "reset": "Restablecer configuración",
+    "resetDesc": "Restaurar toda la configuración a sus valores predeterminados",
+    "cache": "Estado de caché de datos",
+    "cacheDesc": "El caché de localStorage expira automáticamente después de 24 horas. Los aciertos de caché omiten el reprocesamiento.",
+    "performance": "Monitoreo de rendimiento",
+    "performanceDesc": "Monitorear tiempos de carga de página y tiempos de ejecución de operaciones clave usando la API Performance.",
+    "dataQuality": "Monitoreo de calidad de datos",
+    "dataQualityDesc": "Monitoreo en tiempo real de la integridad, consistencia y actualidad de los datos para garantizar fuentes de datos confiables."
+  },
+  "theme": {
+    "dark": "Modo oscuro",
+    "light": "Modo claro"
+  },
+  "actions": {
+    "reset": "Restablecer",
+    "clearCache": "Vaciar caché",
+    "clearMetrics": "Borrar registros",
+    "refresh": "Actualizar"
+  },
+  "cache": {
+    "entries": "Entradas de caché",
+    "size": "Tamaño de caché",
+    "hitRate": "Tasa de aciertos"
+  },
+  "performance": {
+    "pageLoad": "Tiempo de carga de página",
+    "domLoaded": "Contenido DOM cargado",
+    "fcp": "First Contentful Paint",
+    "lcp": "Largest Contentful Paint",
+    "customMetrics": "Registros de operaciones personalizadas"
+  }
+}

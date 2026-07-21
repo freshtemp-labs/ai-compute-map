@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { supplyChainTableData } from '@/data/mockData';
 import SupplyChainSankey from '@/components/supply-chain/SupplyChainSankey';
+import RareEarthLayer from '@/components/map/RareEarthLayer';
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
@@ -178,6 +179,19 @@ export default function SupplyChainPage() {
           <div className="mt-6">
             {/* 桑基图组件：展示从原材料→制造→算力中心的供应链流向 */}
             <SupplyChainSankey />
+          </div>
+        </div>
+      </section>
+
+      {/* Rare Earth Map Visualization */}
+      <section className="px-6 py-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-section text-text-primary">稀土矿区地图 — Rare Earth Mining Map</h2>
+          <p className="text-sm text-text-secondary mt-2">
+            全球稀土矿开采、加工、精炼供应链流向可视化
+          </p>
+          <div className="mt-6">
+            <RareEarthLayer height="500px" />
           </div>
         </div>
       </section>

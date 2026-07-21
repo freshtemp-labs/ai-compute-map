@@ -1,0 +1,55 @@
+{
+  "breadcrumb": "Couche centre de données",
+  "pageTitle": "Infrastructure de calcul IA mondiale",
+  "pageSubtitle": "200+ centres de données dans le monde — consommation électrique, prévisions de capacité et l'infrastructure énergétique alimentant la révolution de l'IA.",
+  "stats": {
+    "facilities": "200+ installations",
+    "power2025": "485,4 TWh (2025)",
+    "projected2030": "945 TWh (2030)",
+    "liveUpdates": "Mises à jour en direct"
+  },
+  "sections": {
+    "powerConsumption": "Projection de la consommation électrique",
+    "regionalCapacity": "Capacité régionale (GW)",
+    "metrics": "Indicateurs clés",
+    "regionalDeepDive": "Analyses régionales approfondies",
+    "northAmerica": "Amérique du Nord",
+    "china": "Chine",
+    "europe": "Europe",
+    "asiaPacific": "Asie-Pacifique",
+    "powerSustainability": "Énergie et durabilité",
+    "pue": "PUE vs Capacité électrique",
+    "energyMix": "Comparaison du mix énergétique",
+    "providerBreakdown": "Répartition par fournisseur cloud",
+    "providerCapacity": "Capacité par fournisseur (MW)",
+    "capacityForecast": "Modèle de prévision de capacité (2025-2030)",
+    "aiGrowthRate": "Ajuster le taux de croissance IA",
+    "modelParameters": "Paramètres du modèle",
+    "dataset": "Jeu de données complet",
+    "facilitiesTable": "Principales installations",
+    "facility": "Installation",
+    "provider": "Fournisseur",
+    "country": "Pays",
+    "region": "Région",
+    "powerMW": "Puissance (MW)",
+    "pueLabel": "PUE",
+    "year": "Année",
+    "apiPreview": "Aperçu de l'API",
+    "exportCSV": "Exporter CSV",
+    "exportJSON": "Exporter JSON",
+    "viewApiDocs": "Voir la documentation de l'API",
+    "copy": "Copier",
+    "status": "Statut"
+  },
+  "statusLabels": {
+    "operational": "Opérationnel",
+    "underConstruction": "En construction",
+    "planned": "Planifié"
+  },
+  "regions": {
+    "na": "Amérique du Nord",
+    "china": "Chine",
+    "europe": "Europe",
+    "apac": "Asie-Pacifique"
+  }
+}

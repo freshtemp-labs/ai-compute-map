@@ -1,0 +1,55 @@
+{
+  "breadcrumb": "Capa de centros de datos",
+  "pageTitle": "Infraestructura global de computación IA",
+  "pageSubtitle": "200+ centros de datos en todo el mundo — consumo energético, previsiones de capacidad y la infraestructura energética que impulsa la revolución de la IA.",
+  "stats": {
+    "facilities": "200+ instalaciones",
+    "power2025": "485,4 TWh (2025)",
+    "projected2030": "945 TWh (2030)",
+    "liveUpdates": "Actualizaciones en vivo"
+  },
+  "sections": {
+    "powerConsumption": "Proyección de consumo energético",
+    "regionalCapacity": "Capacidad regional (GW)",
+    "metrics": "Métricas clave",
+    "regionalDeepDive": "Análisis regional profundo",
+    "northAmerica": "Norteamérica",
+    "china": "China",
+    "europe": "Europa",
+    "asiaPacific": "Asia-Pacífico",
+    "powerSustainability": "Energía y sostenibilidad",
+    "pue": "PUE vs Capacidad eléctrica",
+    "energyMix": "Comparación de matriz energética",
+    "providerBreakdown": "Desglose por proveedor cloud",
+    "providerCapacity": "Capacidad por proveedor (MW)",
+    "capacityForecast": "Modelo de previsión de capacidad (2025-2030)",
+    "aiGrowthRate": "Ajustar tasa de crecimiento de IA",
+    "modelParameters": "Parámetros del modelo",
+    "dataset": "Conjunto de datos completo",
+    "facilitiesTable": "Principales instalaciones",
+    "facility": "Instalación",
+    "provider": "Proveedor",
+    "country": "País",
+    "region": "Región",
+    "powerMW": "Potencia (MW)",
+    "pueLabel": "PUE",
+    "year": "Año",
+    "apiPreview": "Vista previa de la API",
+    "exportCSV": "Exportar CSV",
+    "exportJSON": "Exportar JSON",
+    "viewApiDocs": "Ver documentación de la API",
+    "copy": "Copiar",
+    "status": "Estado"
+  },
+  "statusLabels": {
+    "operational": "Operativo",
+    "underConstruction": "En construcción",
+    "planned": "Planificado"
+  },
+  "regions": {
+    "na": "Norteamérica",
+    "china": "China",
+    "europe": "Europa",
+    "apac": "Asia-Pacífico"
+  }
+}

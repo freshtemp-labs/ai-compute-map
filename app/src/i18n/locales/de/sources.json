@@ -1,0 +1,73 @@
+{
+  "breadcrumb": "Datenquellen",
+  "pageTitle": "Transparenz durch Design",
+  "pageSubtitle": "Jeder Datenpunkt lässt sich auf seinen Ursprung zurückführen. Unsere Verifizierungsmethodik steht zur Peer-Review offen.",
+  "trustStats": {
+    "tier1": "Stufe-1-Quellen",
+    "avgSources": "Ø Quellen/Punkt",
+    "timestamped": "100 % zeitgestempelt"
+  },
+  "liveBadge": "Alle Kennzahlen in Echtzeit aktualisiert",
+  "sections": {
+    "sourceCatalog": "Quellenkatalog",
+    "tier1Label": "Primär",
+    "tier2Label": "Sekundär",
+    "tier3Label": "Tertiär",
+    "tier1Desc": "Offizielle Berichte, Regierungsdaten, geprüfte Finanzdaten",
+    "tier2Desc": "Branchenanalysen, renommierte Forschungsunternehmen",
+    "tier3Desc": "Modellierte Schätzungen, Prognosen, abgeleitete Daten",
+    "searchPlaceholder": "Quellen suchen...",
+    "allTiers": "Alle Stufen",
+    "allStatus": "Alle Status",
+    "active": "Aktiv",
+    "pending": "Ausstehend",
+    "stale": "Veraltet",
+    "tableHeaders": {
+      "name": "Quellenname",
+      "category": "Kategorie",
+      "tier": "Stufe",
+      "layer": "Schicht",
+      "dataPoints": "Datenpunkte",
+      "lastUpdated": "Letzte Aktualisierung",
+      "status": "Status"
+    },
+    "crossVerification": "Kreuzverifizierungs-Engine",
+    "steps": {
+      "ingestion": "Datenaufnahme",
+      "sourceMatching": "Quellenabgleich",
+      "discrepancy": "Abweichungserkennung",
+      "publication": "Veröffentlichung"
+    },
+    "verificationStats": {
+      "pointsVerified": "Heute verifizierte Punkte",
+      "pendingReview": "Ausstehende Überprüfung",
+      "discrepancies": "Gefundene Abweichungen",
+      "avgTime": "Ø Verifizierungszeit",
+      "tier1Sources": "Stufe-1-Quellen",
+      "avgSourcesPerPoint": "Ø Quellen/Punkt",
+      "discrepancyRate": "Abweichungsrate"
+    },
+    "recentVerifications": "Aktuelle Verifizierungen",
+    "methodology": "Methodik",
+    "sectionsM": {
+      "powerConsumption": "Stromverbrauchs-Methodik",
+      "marketShare": "Marktanteilsberechnung",
+      "geolocation": "Geografische Koordinatenverifizierung",
+      "capacityUtilization": "Kapazitätsauslastungsschätzung",
+      "currencyConversion": "Währungs- und Einheitenumrechnung",
+      "confidenceScoring": "Konfidenz-Bewertungssystem"
+    },
+    "historicalData": "Historisches Datenarchiv",
+    "archiveStats": {
+      "firstSnapshot": "Erster Schnappschuss",
+      "totalSnapshots": "Gesamte Schnappschüsse",
+      "dataPointsTracked": "Verfolgte Datenpunkte",
+      "storageSize": "Speichergröße"
+    },
+    "accessOptions": {
+      "timeMachine": "Zeitmaschine",
+      "comparePeriods": "Zeiträume vergleichen",
+      "bulkExport": "Massenexport"
+    }
+  }
+}

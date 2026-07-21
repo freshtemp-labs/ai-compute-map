@@ -1,0 +1,13 @@
+{
+  "pageTitle": "Historial",
+  "pageSubtitle": "Cronología de datos históricos, herramientas de comparación y reproducción temporal del desarrollo de la infraestructura de IA.",
+  "comingSoon": "Próximamente",
+  "timeline": {
+    "title": "Cronología"
+  },
+  "compare": "Comparar",
+  "trendTitle": "Tendencia de crecimiento de infraestructura de IA",
+  "dataNote": "Datos: IEA Global Energy Review, TrendForce, informes corporativos. Los valores 2026-2030 son pronósticos proyectados.",
+  "regionDist": "Distribución de centros de datos por región",
+  "yearlyData": "Resumen de datos anuales"
+}

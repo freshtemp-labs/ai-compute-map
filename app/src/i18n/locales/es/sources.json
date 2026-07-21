@@ -1,0 +1,73 @@
+{
+  "breadcrumb": "Fuentes de datos",
+  "pageTitle": "Transparencia por diseño",
+  "pageSubtitle": "Cada punto de datos se remonta a su origen. Nuestra metodología de verificación está abierta a revisión por pares.",
+  "trustStats": {
+    "tier1": "Fuentes de nivel 1",
+    "avgSources": "Prom. fuentes/punto",
+    "timestamped": "100 % con marca temporal"
+  },
+  "liveBadge": "Todas las métricas actualizadas en tiempo real",
+  "sections": {
+    "sourceCatalog": "Catálogo de fuentes",
+    "tier1Label": "Primaria",
+    "tier2Label": "Secundaria",
+    "tier3Label": "Terciaria",
+    "tier1Desc": "Informes oficiales, datos gubernamentales, estados financieros auditados",
+    "tier2Desc": "Análisis sectorial, firmas de investigación acreditadas",
+    "tier3Desc": "Estimaciones modeladas, proyecciones, datos inferidos",
+    "searchPlaceholder": "Buscar fuentes...",
+    "allTiers": "Todos los niveles",
+    "allStatus": "Todos los estados",
+    "active": "Activo",
+    "pending": "Pendiente",
+    "stale": "Desactualizado",
+    "tableHeaders": {
+      "name": "Nombre de la fuente",
+      "category": "Categoría",
+      "tier": "Nivel",
+      "layer": "Capa",
+      "dataPoints": "Puntos de datos",
+      "lastUpdated": "Última actualización",
+      "status": "Estado"
+    },
+    "crossVerification": "Motor de verificación cruzada",
+    "steps": {
+      "ingestion": "Ingesta de datos",
+      "sourceMatching": "Coincidencia de fuentes",
+      "discrepancy": "Detección de discrepancias",
+      "publication": "Publicación"
+    },
+    "verificationStats": {
+      "pointsVerified": "Puntos verificados hoy",
+      "pendingReview": "Revisión pendiente",
+      "discrepancies": "Discrepancias encontradas",
+      "avgTime": "Tiempo prom. de verificación",
+      "tier1Sources": "Fuentes de nivel 1",
+      "avgSourcesPerPoint": "Prom. fuentes/punto",
+      "discrepancyRate": "Tasa de discrepancia"
+    },
+    "recentVerifications": "Verificaciones recientes",
+    "methodology": "Metodología",
+    "sectionsM": {
+      "powerConsumption": "Metodología de consumo energético",
+      "marketShare": "Cálculo de participación de mercado",
+      "geolocation": "Verificación de coordenadas geográficas",
+      "capacityUtilization": "Estimación de utilización de capacidad",
+      "currencyConversion": "Conversión de monedas y unidades",
+      "confidenceScoring": "Sistema de puntuación de confianza"
+    },
+    "historicalData": "Archivo de datos históricos",
+    "archiveStats": {
+      "firstSnapshot": "Primera instantánea",
+      "totalSnapshots": "Total de instantáneas",
+      "dataPointsTracked": "Puntos de datos rastreados",
+      "storageSize": "Tamaño de almacenamiento"
+    },
+    "accessOptions": {
+      "timeMachine": "Máquina del tiempo",
+      "comparePeriods": "Comparar períodos",
+      "bulkExport": "Exportación masiva"
+    }
+  }
+}

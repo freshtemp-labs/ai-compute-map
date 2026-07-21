@@ -1,0 +1,51 @@
+{
+  "breadcrumb": "Couche fonderie",
+  "pageTitle": "Paysage des fonderies de semi-conducteurs",
+  "pageSubtitle": "Capacité de fabrication mondiale, leadership technologique et dynamique d'expansion des fabricants de puces mondiaux.",
+  "stats": {
+    "fabsTracked": "Fonderies suivies",
+    "tsmcShare": "Part de TSMC",
+    "marketSize": "Taille du marché",
+    "updated": "Mis à jour"
+  },
+  "sections": {
+    "marketOverview": "Aperçu du marché",
+    "marketShare": "Part de marché des fonderies 2024",
+    "revenueTrend": "Tendance des revenus (G$)",
+    "tsmcRevenue": "Revenus de TSMC",
+    "samsungFoundry": "Samsung Foundry",
+    "intelTarget": "Intel Foundry (objectif)",
+    "smicRevenue": "Revenus de SMIC",
+    "tsmcDeepDive": "TSMC · Taiwan Semiconductor",
+    "tsmcSubtitle": "Plus grande fonderie indépendante dédiée au monde",
+    "fabLocations": "Emplacements des fonderies",
+    "processTimeline": "Chronologie des nœuds de processus",
+    "capacityByNode": "Capacité par nœud",
+    "globalExpansion": "Plan d'expansion mondiale",
+    "samsung": "Samsung Electronics · Fonderie",
+    "gaaComparison": "Comparaison GAA vs FinFET",
+    "intel": "Intel Foundry",
+    "smic": "SMIC",
+    "matureNode": "Spécialistes des nœuds matures",
+    "comparisonMatrix": "Matrice de comparaison",
+    "capacityProjection": "Projection de capacité (K wafers/mois)"
+  },
+  "tableHeaders": {
+    "company": "Entreprise",
+    "revenue": "Revenus",
+    "share": "Part",
+    "node": "Nœud avancé",
+    "fabs": "Fonderies",
+    "usaFabs": "Fonderies USA",
+    "chinaFabs": "Fonderies Chine",
+    "europeFabs": "Fonderies Europe",
+    "capacity": "Capacité/mois",
+    "customers": "Clients clés"
+  },
+  "status": {
+    "active": "Actif",
+    "new": "Nouveau",
+    "building": "En construction",
+    "planned": "Planifié"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "title": "MAPA GLOBAL DE COMPUTACIÓN IA",
+    "subtitle": "Inteligencia de infraestructura en tiempo real a lo largo de la cadena de suministro de IA",
+    "betaBadge": "v1.0 BETA ABIERTA"
+  },
+  "kpi": {
+    "globalDcPower": "Potencia global de centros de datos",
+    "euvUnits": "Unidades de litografía EUV",
+    "chinaReQuota": "Cuota de tierras raras de China",
+    "tsmcRevenue": "Ingresos de TSMC",
+    "projected2030": "Potencia CD proyectada 2030",
+    "dataPoints": "puntos de datos",
+    "totalPins": "Total de puntos de datos",
+    "supplyNodes": "Nodos de cadena de suministro",
+    "foundryFabs": "Fundidoras",
+    "dataCenters": "Centros de datos",
+    "totalPower": "Potencia total de CD",
+    "operational": "CD operativos",
+    "construction": "En construcción"
+  },
+  "dashboard": {
+    "title": "Resumen de datos en vivo",
+    "regionDist": "Distribución de centros de datos por región",
+    "categoryDist": "Cadena de suministro por categoría"
+  },
+  "layers": {
+    "title": "Tres capas de la infraestructura de IA",
+    "subtitle": "Desde materias primas hasta los chips que impulsan la IA del mundo",
+    "layer1Title": "Capa de cadena de suministro",
+    "layer1Desc": "Tierras raras, litografía, diseño de chips",
+    "layer2Title": "Capa de fundidoras",
+    "layer2Desc": "Fundidoras TSMC, Samsung, Intel",
+    "layer3Title": "Capa de centros de datos",
+    "layer3Desc": "CD globales, consumo energético"
+  },
+  "livePreview": {
+    "title": "Cobertura global en vivo",
+    "subtitle": "Rastreando 50+ países, 1.200+ instalaciones",
+    "badge": "Datos en vivo"
+  },
+  "verification": {
+    "title": "Verificado. Cruzado. Transparente.",
+    "subtitle": "Cada punto de datos se remonta a su fuente original",
+    "point1": "Verificación de fuentes de nivel 1",
+    "point2": "Motor de referencia cruzada",
+    "point3": "Transparencia total de fuentes"
+  },
+  "openSource": {
+    "title": "Construido para desarrolladores, por desarrolladores",
+    "subtitle": "API abierta, datos de código abierto, construido para investigadores y desarrolladores",
+    "cta": "Ver documentación de la API"
+  }
+}

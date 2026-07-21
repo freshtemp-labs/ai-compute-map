@@ -1,0 +1,113 @@
+{
+  "search": {
+    "placeholder": "Rechercher des installations, emplacements, entreprises...",
+    "highlighted": "Emplacement mis en surbrillance sur la carte"
+  },
+  "detailPanel": {
+    "title": "Détails de l'installation",
+    "location": "Emplacement",
+    "coordinates": "Coordonnées",
+    "layer": "Couche",
+    "metrics": "Indicateurs clés",
+    "source": "Source de données"
+  },
+  "layerToggle": {
+    "supplyChain": "Chaîne d'approvisionnement",
+    "foundry": "Fonderies",
+    "dataCenter": "Centres de données"
+  },
+  "legend": {
+    "title": "Légende",
+    "pinSize": "Taille du marqueur = importance",
+    "supplyDesc": "Terres rares, lithographie, matériaux, IP de conception",
+    "foundryDesc": "TSMC, Samsung, Intel, SMIC, GlobalFoundries",
+    "dcDesc": "DC cloud, colocation, installations hyperscale"
+  },
+  "keyboard": {
+    "title": "Raccourcis clavier",
+    "layer1": "Basculer chaîne d'approvisionnement",
+    "layer2": "Basculer fonderie",
+    "layer3": "Basculer centre de données",
+    "zoomIn": "Zoom avant",
+    "zoomOut": "Zoom arrière",
+    "close": "Fermer le panneau",
+    "search": "Rechercher",
+    "reset": "Réinitialiser la vue",
+    "showHelp": "Afficher/Masquer l'aide"
+  },
+  "status": {
+    "operational": "Opérationnel",
+    "construction": "En construction",
+    "planned": "Planifié",
+    "expansion": "Expansion"
+  },
+  "facility": {
+    "powerCapacity": "Capacité électrique",
+    "capacity": "Capacité",
+    "production": "Production",
+    "pue": "PUE",
+    "processNode": "Nœud de processus",
+    "powerMW": "Puissance (MW)",
+    "yearEst": "Année de création",
+    "yearOper": "Année d'exploitation",
+    "employees": "Employés",
+    "confidence": "Confiance",
+    "category": "Catégorie",
+    "status": "Statut",
+    "provider": "Fournisseur",
+    "company": "Entreprise",
+    "dataSource": "Source de données",
+    "crossVerify": "Vérifier les sources",
+    "viewFullPage": "Voir la page complète",
+    "tier": "Niveau de source",
+    "unknown": "Inconnu",
+    "updatedLabel": "Mis à jour :",
+    "unknownSources": "Sources inconnues",
+    "noResults": "Aucun résultat trouvé pour \"{{query}}\"",
+    "typeToSearch": "Tapez pour rechercher parmi {{count}} points de données",
+    "supplyChain": "Relations de la chaîne d'approvisionnement",
+    "upstream": "Amont",
+    "downstream": "Aval",
+    "peer": "Pair"
+  },
+  "compare": {
+    "addToCompare": "Ajouter à la comparaison",
+    "alreadyInCompare": "Déjà dans la liste de comparaison",
+    "maxReached": "Maximum {{count}} installations pour la comparaison",
+    "addedSuccess": "Ajouté à la liste de comparaison",
+    "cluster": {
+      "title": "Groupe",
+      "items": "{{count}} installations",
+      "zoomIn": "Cliquez pour zoomer"
+    },
+    "selectTitle": "Sélectionnez 2-3 installations à comparer",
+    "selectDesc": "Choisissez des installations dans la barre latérale pour voir une comparaison côte à côte de la capacité, de la technologie, de l'emplacement, etc.",
+    "radarTitle": "Comparaison des performances",
+    "tableTitle": "Comparaison détaillée",
+    "metric": "Indicateur",
+    "type": "Type",
+    "location": "Emplacement"
+  },
+  "a11y": {
+    "mapRegion": "Carte interactive du monde montrant l'infrastructure de calcul IA",
+    "mapControls": "Contrôles de la carte",
+    "switchTo2D": "Passer en carte 2D",
+    "switchTo3D": "Passer en globe 3D",
+    "switchToHeatmap": "Passer en vue carte thermique",
+    "switchToMarkers": "Passer en vue marqueurs",
+    "keyboardHelp": "Raccourcis clavier",
+    "dataTableSection": "Tableau de données des installations pour lecteurs d'écran",
+    "dataTableTitle": "Données des installations de la carte IA",
+    "dataTableDesc": "Ce tableau contient {{count}} installations dans les catégories chaîne d'approvisionnement, fonderie et centre de données.",
+    "dataTableLabel": "Liste complète des installations de calcul IA",
+    "dataTableCaption": "Installations d'infrastructure de calcul IA — {{count}} entrées",
+    "colName": "Nom",
+    "colCategory": "Catégorie",
+    "colLayer": "Couche",
+    "colLocation": "Emplacement",
+    "colValue": "Valeur",
+    "colStatus": "Statut",
+    "colSource": "Source de données",
+    "colUpdated": "Dernière mise à jour"
+  }
+}

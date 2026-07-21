@@ -1,0 +1,96 @@
+{
+  "brand": "AI COMPUTE MAP",
+  "nav": {
+    "map": "Karte",
+    "supplyChain": "Lieferkette",
+    "foundries": "Fabriken",
+    "dataCenters": "Rechenzentren",
+    "compare": "Vergleichen",
+    "sources": "Datenquellen",
+    "history": "Verlauf",
+    "developers": "API & Docs",
+    "news": "Nachrichten",
+    "settings": "Einstellungen"
+  },
+  "status": {
+    "live": "Live",
+    "online": "Online",
+    "offline": "Offline",
+    "syncing": "Synchronisierung"
+  },
+  "actions": {
+    "explore": "Karte erkunden",
+    "viewDocs": "Dokumentation anzeigen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "export": "Exportieren",
+    "copy": "Kopieren",
+    "close": "Schließen",
+    "learnMore": "Mehr erfahren",
+    "viewAll": "Alle anzeigen",
+    "refresh": "Aktualisieren",
+    "switchLanguage": "Sprache wechseln"
+  },
+  "layers": {
+    "supplyChain": "Lieferkette",
+    "supplyChainDesc": "Seltene Erden, Lithografie, Design",
+    "foundry": "Fabrik",
+    "foundryDesc": "TSMC, Samsung, Intel",
+    "dataCenter": "Rechenzentrum",
+    "dataCenterDesc": "Globale Rechenzentren, Stromverbrauch"
+  },
+  "data": {
+    "lastSynced": "Letzte Synchronisierung",
+    "nextRefresh": "Nächste Aktualisierung",
+    "dataPoints": "Datenpunkte",
+    "sources": "Quellen",
+    "verified": "Verifiziert",
+    "pending": "Ausstehend"
+  },
+  "dataStatus": {
+    "banner": "Quellen: IEA / ASML / Unternehmensberichte / USGS | Letzte Aktualisierung: 2024-Q4",
+    "sources": "Quellen: IEA / ASML / Unternehmensberichte / USGS",
+    "lastUpdate": "Letzte Aktualisierung: 2024-Q4",
+    "freshness": "Datenaktualität",
+    "fresh": "Daten sind aktuell",
+    "stale": "Daten können veraltet sein"
+  },
+  "footer": {
+    "tagline": "Echtzeit-Visualisierung der globalen KI-Infrastruktur",
+    "quickLinks": "Schnelllinks",
+    "dataSources": "Datenquellen",
+    "community": "Community",
+    "license": "Lizenziert unter CC BY-SA 4.0",
+    "github": "GitHub",
+    "contributors": "Mitwirkende"
+  },
+  "time": {
+    "minutesAgo": "vor {{count}} Min.",
+    "hoursAgo": "vor {{count}} Std.",
+    "daysAgo": "vor {{count}} Tagen",
+    "justNow": "Gerade eben"
+  },
+  "sourceTiers": {
+    "tier1": "Stufe 1",
+    "tier1Desc": "Offizielle Berichte",
+    "tier2": "Stufe 2",
+    "tier2Desc": "Branchenanalysen",
+    "tier3": "Stufe 3",
+    "tier3Desc": "Modellierte Schätzungen"
+  },
+  "breadcrumb": {
+    "home": "Startseite"
+  },
+  "export": {
+    "title": "Als PNG exportieren",
+    "fullpage": "Ganze Seite",
+    "mapOnly": "Nur Karte",
+    "chartsOnly": "Nur Diagramme"
+  },
+  "a11y": {
+    "skipToContent": "Zum Hauptinhalt springen",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "chartDesc": "Diagramm: {{title}}"
+  }
+}

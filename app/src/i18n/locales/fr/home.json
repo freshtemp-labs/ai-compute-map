@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "title": "CARTE MONDIALE DE L'IA",
+    "subtitle": "Intelligence d'infrastructure en temps réel sur toute la chaîne d'approvisionnement IA",
+    "betaBadge": "v1.0 BÊTA OUVERTE"
+  },
+  "kpi": {
+    "globalDcPower": "Puissance mondiale des centres de données",
+    "euvUnits": "Unités de lithographie EUV",
+    "chinaReQuota": "Quota de terres rares de la Chine",
+    "tsmcRevenue": "Revenus de TSMC",
+    "projected2030": "Puissance DC projetée 2030",
+    "dataPoints": "points de données",
+    "totalPins": "Total des points de données",
+    "supplyNodes": "Nœuds de la chaîne d'approvisionnement",
+    "foundryFabs": "Fonderies",
+    "dataCenters": "Centres de données",
+    "totalPower": "Puissance DC totale",
+    "operational": "DC opérationnels",
+    "construction": "En construction"
+  },
+  "dashboard": {
+    "title": "Aperçu des données en direct",
+    "regionDist": "Distribution des centres de données par région",
+    "categoryDist": "Chaîne d'approvisionnement par catégorie"
+  },
+  "layers": {
+    "title": "Trois couches de l'infrastructure IA",
+    "subtitle": "Des matières premières aux puces qui alimentent l'IA mondiale",
+    "layer1Title": "Couche chaîne d'approvisionnement",
+    "layer1Desc": "Terres rares, lithographie, conception de puces",
+    "layer2Title": "Couche fonderie",
+    "layer2Desc": "Fonderies TSMC, Samsung, Intel",
+    "layer3Title": "Couche centre de données",
+    "layer3Desc": "Centres de données mondiaux, consommation électrique"
+  },
+  "livePreview": {
+    "title": "Couverture mondiale en direct",
+    "subtitle": "Suivi de 50+ pays, 1 200+ installations",
+    "badge": "Données en direct"
+  },
+  "verification": {
+    "title": "Vérifié. Recoupé. Transparent.",
+    "subtitle": "Chaque point de données remonte à sa source d'origine",
+    "point1": "Vérification des sources de niveau 1",
+    "point2": "Moteur de recoupement",
+    "point3": "Transparence totale des sources"
+  },
+  "openSource": {
+    "title": "Conçu par des développeurs, pour des développeurs",
+    "subtitle": "API ouverte, données open-source, conçu pour les chercheurs et développeurs",
+    "cta": "Voir la documentation de l'API"
+  }
+}

@@ -184,6 +184,7 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
         wheelY: 'zoom',
         panX: 'rotateX',
         panY: 'translateY',
+        pinchZoom: true,
         background: am5.Rectangle.new(root, {
           fill: am5.color(0x0A0A0F),
           fillOpacity: 1,
@@ -197,19 +198,16 @@ export default function AmChartsMap({ pins, activeLayers, onPinClick, selectedPi
     zoomControl.homeButton.set('visible', true);
     chart.set('zoomControl', zoomControl);
 
-    // Style zoom control buttons
-    zoomControl.plusButton.get('background')!.setAll({
+    // Style zoom control buttons for touch-friendly interaction
+    const buttonStyle = {
       fill: am5.color(0x111118),
       stroke: am5.color(0x2A2A3A),
-    });
-    zoomControl.minusButton.get('background')!.setAll({
-      fill: am5.color(0x111118),
-      stroke: am5.color(0x2A2A3A),
-    });
-    zoomControl.homeButton!.get('background')!.setAll({
-      fill: am5.color(0x111118),
-      stroke: am5.color(0x2A2A3A),
-    });
+      width: 44,
+      height: 44,
+    };
+    zoomControl.plusButton.get('background')!.setAll(buttonStyle);
+    zoomControl.minusButton.get('background')!.setAll(buttonStyle);
+    zoomControl.homeButton!.get('background')!.setAll(buttonStyle);
 
     // Country polygons
     const polygonSeries = chart.series.push(

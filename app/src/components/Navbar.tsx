@@ -22,6 +22,9 @@ const languages = [
   { code: 'ja', label: '日本語' },
   { code: 'ko', label: '한국어' },
   { code: 'ar', label: 'العربية' },
+  { code: 'fr', label: 'Français' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'es', label: 'Español' },
 ];
 
 /** 缓出指数级动画曲线（用于 menu 动画） */

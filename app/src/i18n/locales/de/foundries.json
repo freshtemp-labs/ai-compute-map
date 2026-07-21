@@ -1,0 +1,51 @@
+{
+  "breadcrumb": "Fabrik-Schicht",
+  "pageTitle": "Halbleiter-Fabrikenlandschaft",
+  "pageSubtitle": "Globale Fertigungskapazität, Prozessknoten-Führerschaft und Expansionsdynamik der weltweiten Chip-Hersteller.",
+  "stats": {
+    "fabsTracked": "Verfolgte Fabriken",
+    "tsmcShare": "TSMC-Anteil",
+    "marketSize": "Marktgröße",
+    "updated": "Aktualisiert"
+  },
+  "sections": {
+    "marketOverview": "Marktübersicht",
+    "marketShare": "Fabrik-Marktanteil 2024",
+    "revenueTrend": "Umsatzentwicklung (Mrd. $)",
+    "tsmcRevenue": "TSMC-Umsatz",
+    "samsungFoundry": "Samsung Foundry",
+    "intelTarget": "Intel Foundry (Ziel)",
+    "smicRevenue": "SMIC-Umsatz",
+    "tsmcDeepDive": "TSMC · Taiwan Semiconductor",
+    "tsmcSubtitle": "Größte dedizierte unabhängige Fabrik der Welt",
+    "fabLocations": "Fabrikstandorte",
+    "processTimeline": "Prozessknoten-Zeitachse",
+    "capacityByNode": "Kapazität nach Knoten",
+    "globalExpansion": "Globaler Expansionsplan",
+    "samsung": "Samsung Electronics · Foundry",
+    "gaaComparison": "GAA vs FinFET Vergleich",
+    "intel": "Intel Foundry",
+    "smic": "SMIC",
+    "matureNode": "Mature-Node-Spezialisten",
+    "comparisonMatrix": "Vergleichsmatrix",
+    "capacityProjection": "Kapazitätsprojektion (K Wafer/Monat)"
+  },
+  "tableHeaders": {
+    "company": "Unternehmen",
+    "revenue": "Umsatz",
+    "share": "Anteil",
+    "node": "Fortgeschrittener Knoten",
+    "fabs": "Fabriken",
+    "usaFabs": "USA-Fabriken",
+    "chinaFabs": "China-Fabriken",
+    "europeFabs": "Europa-Fabriken",
+    "capacity": "Kapazität/Monat",
+    "customers": "Schlüsselkunden"
+  },
+  "status": {
+    "active": "Aktiv",
+    "new": "Neu",
+    "building": "Im Bau",
+    "planned": "Geplant"
+  }
+}

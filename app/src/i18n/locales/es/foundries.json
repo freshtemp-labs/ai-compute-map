@@ -1,0 +1,51 @@
+{
+  "breadcrumb": "Capa de fundidoras",
+  "pageTitle": "Panorama de fundidoras de semiconductores",
+  "pageSubtitle": "Capacidad de fabricación global, liderazgo en nodos de proceso y dinámica de expansión de los fabricantes de chips del mundo.",
+  "stats": {
+    "fabsTracked": "Fundidoras rastreadas",
+    "tsmcShare": "Participación de TSMC",
+    "marketSize": "Tamaño del mercado",
+    "updated": "Actualizado"
+  },
+  "sections": {
+    "marketOverview": "Resumen del mercado",
+    "marketShare": "Participación de mercado de fundidoras 2024",
+    "revenueTrend": "Tendencia de ingresos ($B)",
+    "tsmcRevenue": "Ingresos de TSMC",
+    "samsungFoundry": "Samsung Foundry",
+    "intelTarget": "Intel Foundry (objetivo)",
+    "smicRevenue": "Ingresos de SMIC",
+    "tsmcDeepDive": "TSMC · Taiwan Semiconductor",
+    "tsmcSubtitle": "La fundidora independiente dedicada más grande del mundo",
+    "fabLocations": "Ubicaciones de fundidoras",
+    "processTimeline": "Cronología de nodos de proceso",
+    "capacityByNode": "Capacidad por nodo",
+    "globalExpansion": "Plan de expansión global",
+    "samsung": "Samsung Electronics · Foundry",
+    "gaaComparison": "Comparación GAA vs FinFET",
+    "intel": "Intel Foundry",
+    "smic": "SMIC",
+    "matureNode": "Especialistas en nodos maduros",
+    "comparisonMatrix": "Matriz de comparación",
+    "capacityProjection": "Proyección de capacidad (K wafers/mes)"
+  },
+  "tableHeaders": {
+    "company": "Empresa",
+    "revenue": "Ingresos",
+    "share": "Participación",
+    "node": "Nodo avanzado",
+    "fabs": "Fundidoras",
+    "usaFabs": "Fundidoras en EE.UU.",
+    "chinaFabs": "Fundidoras en China",
+    "europeFabs": "Fundidoras en Europa",
+    "capacity": "Capacidad/mes",
+    "customers": "Clientes clave"
+  },
+  "status": {
+    "active": "Activo",
+    "new": "Nuevo",
+    "building": "En construcción",
+    "planned": "Planificado"
+  }
+}

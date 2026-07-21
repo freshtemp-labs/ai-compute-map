@@ -1,0 +1,55 @@
+{
+  "breadcrumb": "Rechenzentrums-Schicht",
+  "pageTitle": "Globale KI-Recheninfrastruktur",
+  "pageSubtitle": "200+ Rechenzentren weltweit — Stromverbrauch, Kapazitätsprognosen und die Energieinfrastruktur, die die KI-Revolution antreibt.",
+  "stats": {
+    "facilities": "200+ Einrichtungen",
+    "power2025": "485,4 TWh (2025)",
+    "projected2030": "945 TWh (2030)",
+    "liveUpdates": "Live-Updates"
+  },
+  "sections": {
+    "powerConsumption": "Stromverbrauchsprognose",
+    "regionalCapacity": "Regionale Kapazität (GW)",
+    "metrics": "Kennzahlen",
+    "regionalDeepDive": "Regionale Tiefenanalysen",
+    "northAmerica": "Nordamerika",
+    "china": "China",
+    "europe": "Europa",
+    "asiaPacific": "Asien-Pazifik",
+    "powerSustainability": "Energie und Nachhaltigkeit",
+    "pue": "PUE vs Stromkapazität",
+    "energyMix": "Energiemix-Vergleich",
+    "providerBreakdown": "Cloud-Anbieter-Aufschlüsselung",
+    "providerCapacity": "Anbieter-Kapazität (MW)",
+    "capacityForecast": "Kapazitätsprognosemodell (2025-2030)",
+    "aiGrowthRate": "KI-Wachstumsrate anpassen",
+    "modelParameters": "Modellparameter",
+    "dataset": "Vollständiger Datensatz",
+    "facilitiesTable": "Wichtige Einrichtungen",
+    "facility": "Einrichtung",
+    "provider": "Anbieter",
+    "country": "Land",
+    "region": "Region",
+    "powerMW": "Leistung (MW)",
+    "pueLabel": "PUE",
+    "year": "Jahr",
+    "apiPreview": "API-Vorschau",
+    "exportCSV": "CSV exportieren",
+    "exportJSON": "JSON exportieren",
+    "viewApiDocs": "API-Dokumentation anzeigen",
+    "copy": "Kopieren",
+    "status": "Status"
+  },
+  "statusLabels": {
+    "operational": "Betriebsbereit",
+    "underConstruction": "Im Bau",
+    "planned": "Geplant"
+  },
+  "regions": {
+    "na": "Nordamerika",
+    "china": "China",
+    "europe": "Europa",
+    "apac": "Asien-Pazifik"
+  }
+}

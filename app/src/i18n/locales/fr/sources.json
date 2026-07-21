@@ -1,0 +1,73 @@
+{
+  "breadcrumb": "Sources de données",
+  "pageTitle": "Transparence par conception",
+  "pageSubtitle": "Chaque point de données remonte à son origine. Notre méthodologie de vérification est ouverte à l'examen par les pairs.",
+  "trustStats": {
+    "tier1": "Sources de niveau 1",
+    "avgSources": "Moy. sources/point",
+    "timestamped": "100 % horodaté"
+  },
+  "liveBadge": "Toutes les métriques mises à jour en temps réel",
+  "sections": {
+    "sourceCatalog": "Catalogue des sources",
+    "tier1Label": "Primaire",
+    "tier2Label": "Secondaire",
+    "tier3Label": "Tertiaire",
+    "tier1Desc": "Rapports officiels, données gouvernementales, états financiers audités",
+    "tier2Desc": "Analyses sectorielles, cabinets de recherche réputés",
+    "tier3Desc": "Estimations modélisées, projections, données inférées",
+    "searchPlaceholder": "Rechercher des sources...",
+    "allTiers": "Tous les niveaux",
+    "allStatus": "Tous les statuts",
+    "active": "Actif",
+    "pending": "En attente",
+    "stale": "Obsolète",
+    "tableHeaders": {
+      "name": "Nom de la source",
+      "category": "Catégorie",
+      "tier": "Niveau",
+      "layer": "Couche",
+      "dataPoints": "Points de données",
+      "lastUpdated": "Dernière mise à jour",
+      "status": "Statut"
+    },
+    "crossVerification": "Moteur de vérification croisée",
+    "steps": {
+      "ingestion": "Ingestion de données",
+      "sourceMatching": "Correspondance des sources",
+      "discrepancy": "Détection d'écarts",
+      "publication": "Publication"
+    },
+    "verificationStats": {
+      "pointsVerified": "Points vérifiés aujourd'hui",
+      "pendingReview": "En attente de révision",
+      "discrepancies": "Écarts trouvés",
+      "avgTime": "Temps moyen de vérification",
+      "tier1Sources": "Sources de niveau 1",
+      "avgSourcesPerPoint": "Moy. sources/point",
+      "discrepancyRate": "Taux d'écart"
+    },
+    "recentVerifications": "Vérifications récentes",
+    "methodology": "Méthodologie",
+    "sectionsM": {
+      "powerConsumption": "Méthodologie de consommation électrique",
+      "marketShare": "Calcul de la part de marché",
+      "geolocation": "Vérification des coordonnées géographiques",
+      "capacityUtilization": "Estimation de l'utilisation de la capacité",
+      "currencyConversion": "Conversion de devises et d'unités",
+      "confidenceScoring": "Système de notation de confiance"
+    },
+    "historicalData": "Archive de données historiques",
+    "archiveStats": {
+      "firstSnapshot": "Premier instantané",
+      "totalSnapshots": "Total des instantanés",
+      "dataPointsTracked": "Points de données suivis",
+      "storageSize": "Taille de stockage"
+    },
+    "accessOptions": {
+      "timeMachine": "Machine temporelle",
+      "comparePeriods": "Comparer les périodes",
+      "bulkExport": "Export en masse"
+    }
+  }
+}

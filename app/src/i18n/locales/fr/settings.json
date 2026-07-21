@@ -1,0 +1,45 @@
+{
+  "pageTitle": "Préférences utilisateur",
+  "pageSubtitle": "Configurez la vue par défaut de la carte, la visibilité des couches et les préférences d'interface. Les paramètres sont automatiquement sauvegardés dans le navigateur local.",
+  "breadcrumb": "Paramètres",
+  "sections": {
+    "zoom": "Niveau de zoom par défaut",
+    "zoomDesc": "Définir le niveau de zoom par défaut au chargement de la carte (1-10)",
+    "layers": "Couches visibles par défaut",
+    "layersDesc": "Choisir quelles couches sont visibles au chargement de la carte",
+    "language": "Préférence de langue",
+    "languageDesc": "Sélectionner la langue d'affichage de l'interface",
+    "theme": "Mode de thème",
+    "themeDesc": "Choisir le thème de couleur de l'interface",
+    "reset": "Réinitialiser les paramètres",
+    "resetDesc": "Restaurer tous les paramètres à leurs valeurs par défaut",
+    "cache": "État du cache de données",
+    "cacheDesc": "Le cache localStorage expire automatiquement après 24 heures. Les accès au cache évitent le retraitement.",
+    "performance": "Surveillance des performances",
+    "performanceDesc": "Surveiller le temps de chargement et les temps d'exécution des opérations clés à l'aide de l'API Performance.",
+    "dataQuality": "Surveillance de la qualité des données",
+    "dataQualityDesc": "Surveillance en temps réel de l'intégrité, de la cohérence et de l'actualité des données pour garantir des sources fiables."
+  },
+  "theme": {
+    "dark": "Mode sombre",
+    "light": "Mode clair"
+  },
+  "actions": {
+    "reset": "Réinitialiser",
+    "clearCache": "Vider le cache",
+    "clearMetrics": "Effacer les enregistrements",
+    "refresh": "Actualiser"
+  },
+  "cache": {
+    "entries": "Entrées du cache",
+    "size": "Taille du cache",
+    "hitRate": "Taux de réussite"
+  },
+  "performance": {
+    "pageLoad": "Temps de chargement",
+    "domLoaded": "Contenu DOM chargé",
+    "fcp": "First Contentful Paint",
+    "lcp": "Largest Contentful Paint",
+    "customMetrics": "Enregistrements d'opérations personnalisées"
+  }
+}

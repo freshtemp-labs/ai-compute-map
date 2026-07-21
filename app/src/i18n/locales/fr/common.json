@@ -1,0 +1,96 @@
+{
+  "brand": "AI COMPUTE MAP",
+  "nav": {
+    "map": "Carte",
+    "supplyChain": "Chaîne d'approvisionnement",
+    "foundries": "Fonderies",
+    "dataCenters": "Centres de données",
+    "compare": "Comparer",
+    "sources": "Sources de données",
+    "history": "Historique",
+    "developers": "API & Docs",
+    "news": "Actualités",
+    "settings": "Paramètres"
+  },
+  "status": {
+    "live": "En direct",
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "syncing": "Synchronisation"
+  },
+  "actions": {
+    "explore": "Explorer la carte",
+    "viewDocs": "Voir la documentation",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "export": "Exporter",
+    "copy": "Copier",
+    "close": "Fermer",
+    "learnMore": "En savoir plus",
+    "viewAll": "Tout afficher",
+    "refresh": "Actualiser",
+    "switchLanguage": "Changer de langue"
+  },
+  "layers": {
+    "supplyChain": "Chaîne d'approvisionnement",
+    "supplyChainDesc": "Terres rares, lithographie, conception",
+    "foundry": "Fonderie",
+    "foundryDesc": "TSMC, Samsung, Intel",
+    "dataCenter": "Centre de données",
+    "dataCenterDesc": "Centres de données mondiaux, consommation électrique"
+  },
+  "data": {
+    "lastSynced": "Dernière synchronisation",
+    "nextRefresh": "Prochaine actualisation",
+    "dataPoints": "Points de données",
+    "sources": "Sources",
+    "verified": "Vérifié",
+    "pending": "En attente"
+  },
+  "dataStatus": {
+    "banner": "Sources : IEA / ASML / Rapports d'entreprises / USGS | Dernière mise à jour : 2024-Q4",
+    "sources": "Sources : IEA / ASML / Rapports d'entreprises / USGS",
+    "lastUpdate": "Dernière mise à jour : 2024-Q4",
+    "freshness": "Fraîcheur des données",
+    "fresh": "Les données sont à jour",
+    "stale": "Les données peuvent être obsolètes"
+  },
+  "footer": {
+    "tagline": "Visualisation en temps réel de l'infrastructure IA mondiale",
+    "quickLinks": "Liens rapides",
+    "dataSources": "Sources de données",
+    "community": "Communauté",
+    "license": "Sous licence CC BY-SA 4.0",
+    "github": "GitHub",
+    "contributors": "Contributeurs"
+  },
+  "time": {
+    "minutesAgo": "il y a {{count}} min",
+    "hoursAgo": "il y a {{count}} h",
+    "daysAgo": "il y a {{count}} jours",
+    "justNow": "À l'instant"
+  },
+  "sourceTiers": {
+    "tier1": "Niveau 1",
+    "tier1Desc": "Rapports officiels",
+    "tier2": "Niveau 2",
+    "tier2Desc": "Analyses sectorielles",
+    "tier3": "Niveau 3",
+    "tier3Desc": "Estimations modélisées"
+  },
+  "breadcrumb": {
+    "home": "Accueil"
+  },
+  "export": {
+    "title": "Exporter en PNG",
+    "fullpage": "Page complète",
+    "mapOnly": "Carte uniquement",
+    "chartsOnly": "Graphiques uniquement"
+  },
+  "a11y": {
+    "skipToContent": "Aller au contenu principal",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "chartDesc": "Graphique : {{title}}"
+  }
+}

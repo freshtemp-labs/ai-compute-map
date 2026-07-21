@@ -1,0 +1,68 @@
+{
+  "breadcrumb": "Développeurs",
+  "pageTitle": "Construire sur la carte de calcul",
+  "pageSubtitle": "API RESTful, schémas typés, données ouvertes. Gratuit pour la recherche et l'usage non commercial.",
+  "badges": {
+    "openapi": "OpenAPI 3.0",
+    "typescript": "Types TypeScript",
+    "noKey": "Aucune clé API requise",
+    "license": "CC BY-SA 4.0"
+  },
+  "gettingStarted": {
+    "apiKey": "Clé API",
+    "free": "Gratuit, sans clé",
+    "rateLimits": "Limites de débit",
+    "perHour": "1 000 / heure",
+    "baseUrl": "URL de base",
+    "auth": "Authentification",
+    "bearer": "Jeton Bearer"
+  },
+  "apiReference": {
+    "title": "Référence de l'API",
+    "baseUrl": "URL de base"
+  },
+  "queryParams": "Paramètres de requête",
+  "required": "Requis",
+  "optional": "Optionnel",
+  "noParams": "Aucun paramètre de requête requis.",
+  "response": "Réponse",
+  "codeExamples": "Exemples de code",
+  "typescriptTypes": "Types TypeScript",
+  "showTypes": "Afficher tous les types",
+  "hideTypes": "Masquer les types",
+  "sdks": "SDK et outils",
+  "pythonSdk": "SDK Python",
+  "jsSdk": "SDK JavaScript / TypeScript",
+  "cliTool": "Outil CLI",
+  "install": "Installer",
+  "features": "Fonctionnalités",
+  "viewOnGithub": "Voir sur GitHub",
+  "contributing": {
+    "title": "Contribuer",
+    "subtitle": "Ce projet accueille les développeurs humains et IA.",
+    "prWorkflow": "Flux de travail des pull requests",
+    "waysToContribute": "Façons de contribuer",
+    "data": "Données",
+    "code": "Code",
+    "docs": "Documentation",
+    "issues": "Issues",
+    "aiAssisted": "Contributions assistées par IA",
+    "setup": "Configuration"
+  },
+  "systemArchitecture": "Architecture du système",
+  "architectureDesc": "Les données circulent des sources brutes à travers la validation, le stockage, la mise en cache, et enfin vers les couches API et frontend.",
+  "components": {
+    "dataSources": "Sources de données",
+    "ingestion": "Pipeline d'ingestion",
+    "verification": "Moteur de vérification",
+    "database": "PostgreSQL + TimescaleDB",
+    "cache": "Cache Redis",
+    "apiLayer": "Couche API",
+    "frontend": "Frontend (React)",
+    "mapEngine": "Moteur de carte",
+    "charts": "Graphiques (ECharts)",
+    "export": "Service d'export"
+  },
+  "techStack": "Stack technologique",
+  "dataRefresh": "Cycle de rafraîchissement des données"
+}

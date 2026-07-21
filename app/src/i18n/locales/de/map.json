@@ -1,0 +1,113 @@
+{
+  "search": {
+    "placeholder": "Einrichtungen, Standorte, Unternehmen suchen...",
+    "highlighted": "Standort auf der Karte hervorgehoben"
+  },
+  "detailPanel": {
+    "title": "Einrichtungsdetails",
+    "location": "Standort",
+    "coordinates": "Koordinaten",
+    "layer": "Schicht",
+    "metrics": "Kennzahlen",
+    "source": "Datenquelle"
+  },
+  "layerToggle": {
+    "supplyChain": "Lieferkette",
+    "foundry": "Fabriken",
+    "dataCenter": "Rechenzentren"
+  },
+  "legend": {
+    "title": "Legende",
+    "pinSize": "Pin-Größe = Bedeutung",
+    "supplyDesc": "Seltene Erden, Lithografie, Materialien, Design-IP",
+    "foundryDesc": "TSMC, Samsung, Intel, SMIC, GlobalFoundries",
+    "dcDesc": "Cloud-RZ, Colocation, Hyperscale-Einrichtungen"
+  },
+  "keyboard": {
+    "title": "Tastenkürzel",
+    "layer1": "Lieferkette umschalten",
+    "layer2": "Fabrik umschalten",
+    "layer3": "Rechenzentrum umschalten",
+    "zoomIn": "Vergrößern",
+    "zoomOut": "Verkleinern",
+    "close": "Panel schließen",
+    "search": "Suchen",
+    "reset": "Ansicht zurücksetzen",
+    "showHelp": "Hilfe ein-/ausblenden"
+  },
+  "status": {
+    "operational": "Betriebsbereit",
+    "construction": "Im Bau",
+    "planned": "Geplant",
+    "expansion": "Erweiterung"
+  },
+  "facility": {
+    "powerCapacity": "Stromkapazität",
+    "capacity": "Kapazität",
+    "production": "Produktion",
+    "pue": "PUE",
+    "processNode": "Prozessknoten",
+    "powerMW": "Leistung (MW)",
+    "yearEst": "Gründungsjahr",
+    "yearOper": "Betriebsjahr",
+    "employees": "Mitarbeiter",
+    "confidence": "Konfidenz",
+    "category": "Kategorie",
+    "status": "Status",
+    "provider": "Anbieter",
+    "company": "Unternehmen",
+    "dataSource": "Datenquelle",
+    "crossVerify": "Quellen kreuzverifizieren",
+    "viewFullPage": "Ganze Seite anzeigen",
+    "tier": "Quellenstufe",
+    "unknown": "Unbekannt",
+    "updatedLabel": "Aktualisiert:",
+    "unknownSources": "Unbekannte Quellen",
+    "noResults": "Keine Ergebnisse für \"{{query}}\"",
+    "typeToSearch": "Tippen Sie, um in {{count}} Datenpunkten zu suchen",
+    "supplyChain": "Lieferkettenbeziehungen",
+    "upstream": "Upstream",
+    "downstream": "Downstream",
+    "peer": "Gleichrangig"
+  },
+  "compare": {
+    "addToCompare": "Zum Vergleich hinzufügen",
+    "alreadyInCompare": "Bereits in der Vergleichsliste",
+    "maxReached": "Maximal {{count}} Einrichtungen zum Vergleich",
+    "addedSuccess": "Zur Vergleichsliste hinzugefügt",
+    "cluster": {
+      "title": "Cluster",
+      "items": "{{count}} Einrichtungen",
+      "zoomIn": "Klicken zum Vergrößern"
+    },
+    "selectTitle": "2-3 Einrichtungen zum Vergleichen auswählen",
+    "selectDesc": "Wählen Sie Einrichtungen in der Seitenleiste, um einen Seitenvergleich von Kapazität, Technologie, Standort und mehr zu sehen.",
+    "radarTitle": "Leistungsvergleich",
+    "tableTitle": "Detaillierter Vergleich",
+    "metric": "Kennzahl",
+    "type": "Typ",
+    "location": "Standort"
+  },
+  "a11y": {
+    "mapRegion": "Interaktive Weltkarte mit KI-Recheninfrastruktur",
+    "mapControls": "Kartensteuerung",
+    "switchTo2D": "Zu 2D-Karte wechseln",
+    "switchTo3D": "Zu 3D-Globus wechseln",
+    "switchToHeatmap": "Zu Heatmap-Ansicht wechseln",
+    "switchToMarkers": "Zu Markierungsansicht wechseln",
+    "keyboardHelp": "Tastenkürzel",
+    "dataTableSection": "Einrichtungsdatentabelle für Screenreader",
+    "dataTableTitle": "KI-Rechenkartendaten",
+    "dataTableDesc": "Diese Tabelle enthält {{count}} Einrichtungen in den Kategorien Lieferkette, Fabrik und Rechenzentrum.",
+    "dataTableLabel": "Vollständige Liste der KI-Recheneinrichtungen",
+    "dataTableCaption": "KI-Recheninfrastruktur-Einrichtungen — {{count}} Einträge",
+    "colName": "Name",
+    "colCategory": "Kategorie",
+    "colLayer": "Schicht",
+    "colLocation": "Standort",
+    "colValue": "Wert",
+    "colStatus": "Status",
+    "colSource": "Datenquelle",
+    "colUpdated": "Letzte Aktualisierung"
+  }
+}

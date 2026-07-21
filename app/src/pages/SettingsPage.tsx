@@ -33,6 +33,10 @@ const LANGUAGES = [
   { code: 'en', label: 'English' },
   { code: 'ja', label: '日本語' },
   { code: 'ko', label: '한국어' },
+  { code: 'ar', label: 'العربية' },
+  { code: 'fr', label: 'Français' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'es', label: 'Español' },
 ];
 
 /**
@@ -218,7 +222,7 @@ export default function SettingsPage() {
               {t('settings:sections.languageDesc')}
             </p>
             {/* 语言切换按钮：2x2 网格布局，当前选中语言高亮显示 */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-4 gap-3">
               {LANGUAGES.map((lang) => (
                 <button
                   key={lang.code}
