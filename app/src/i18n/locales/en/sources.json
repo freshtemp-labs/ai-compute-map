@@ -7,7 +7,7 @@
     "avgSources": "Avg Sources/Point",
     "timestamped": "100% Timestamped"
   },
-  "liveBadge": "All metrics updated in real-time",
+  "liveBadge": "Coverage dates are shown for each source",
   "sections": {
     "sourceCatalog": "Source Catalog",
     "tier1Label": "Primary",

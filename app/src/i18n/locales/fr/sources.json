@@ -7,7 +7,7 @@
     "avgSources": "Moy. sources/point",
     "timestamped": "100 % horodaté"
   },
-  "liveBadge": "Toutes les métriques mises à jour en temps réel",
+  "liveBadge": "Les dates de couverture sont indiquées pour chaque source",
   "sections": {
     "sourceCatalog": "Catalogue des sources",
     "tier1Label": "Primaire",

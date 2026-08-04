@@ -8,7 +8,8 @@
  * @dependencies react, framer-motion, @/components/map/useMapData, @/constants/layerColors, @/hooks/use-mobile
  */
 import { useMemo, useState, useCallback } from 'react';
-import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
+import type { PanInfo } from 'framer-motion';
 import { X, MapPin as MapPinIcon, ExternalLink, Crosshair, Database, GitBranch, GitCompareArrows, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';

@@ -7,7 +7,7 @@
     "avgSources": "平均来源/点",
     "timestamped": "100%时间戳"
   },
-  "liveBadge": "所有指标实时更新",
+  "liveBadge": "每个数据源均标注覆盖日期",
   "sections": {
     "sourceCatalog": "来源目录",
     "tier1Label": "一级",

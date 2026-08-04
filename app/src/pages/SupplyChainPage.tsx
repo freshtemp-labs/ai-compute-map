@@ -12,6 +12,8 @@ import { useTranslation } from 'react-i18next';
 import { supplyChainTableData } from '@/data/mockData';
 import SupplyChainSankey from '@/components/supply-chain/SupplyChainSankey';
 import RareEarthLayer from '@/components/map/RareEarthLayer';
+import AIComputeObservationSection from '@/components/supply-chain/AIComputeObservationSection';
+import ComparableFundsSection from '@/components/supply-chain/ComparableFundsSection';
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
@@ -277,6 +279,10 @@ export default function SupplyChainPage() {
           </div>
         </div>
       </section>
+
+      <AIComputeObservationSection />
+
+      <ComparableFundsSection />
 
       {/* Full Dataset */}
       <section className="px-6 py-8 pb-16">

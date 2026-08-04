@@ -12,6 +12,7 @@ import ReactECharts from 'echarts-for-react';
 import type { EChartsOption } from 'echarts';
 import type { MapPin } from './useMapData';
 import type { LayerType } from '@/types';
+import '@/lib/registerWorldMap';
 
 /**
  * HeatmapLayer 组件属性
@@ -182,4 +183,3 @@ export default function HeatmapLayer({
     </div>
   );
 }
-

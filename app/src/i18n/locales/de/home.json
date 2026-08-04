@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "GLOBALE KI-RECHENKARTE",
-    "subtitle": "Echtzeit-Infrastruktur-Intelligenz entlang der gesamten KI-Lieferkette",
+    "subtitle": "Quellenbasierte Momentaufnahmen der Infrastruktur entlang der KI-Lieferkette",
     "betaBadge": "v1.0 OFFENE BETA"
   },
   "kpi": {
@@ -20,7 +20,7 @@
     "construction": "Im Bau"
   },
   "dashboard": {
-    "title": "Live-Datenübersicht",
+    "title": "Datenmomentaufnahme",
     "regionDist": "Rechenzentrumsverteilung nach Region",
     "categoryDist": "Lieferkette nach Kategorie"
   },
@@ -35,9 +35,9 @@
     "layer3Desc": "Globale Rechenzentren, Stromverbrauch"
   },
   "livePreview": {
-    "title": "Globale Live-Abdeckung",
+    "title": "Globale Momentaufnahme",
     "subtitle": "Verfolgung von 50+ Ländern, 1.200+ Einrichtungen",
-    "badge": "Live-Daten"
+    "badge": "Datenmomentaufnahme"
   },
   "verification": {
     "title": "Verifiziert. Kreuzreferenziert. Transparent.",
@@ -48,7 +48,7 @@
   },
   "openSource": {
     "title": "Von Entwicklern für Entwickler gebaut",
-    "subtitle": "Offene API, Open-Source-Daten, für Forscher und Entwickler gebaut",
-    "cta": "API-Dokumentation anzeigen"
+    "subtitle": "Offene Repository-Daten und eine geplante API-Roadmap",
+    "cta": "API-Roadmap anzeigen"
   }
 }

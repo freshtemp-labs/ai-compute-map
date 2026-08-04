@@ -8,19 +8,19 @@
     "compare": "Comparer",
     "sources": "Sources de données",
     "history": "Historique",
-    "developers": "API & Docs",
+    "developers": "Feuille de route API",
     "news": "Actualités",
     "settings": "Paramètres"
   },
   "status": {
-    "live": "En direct",
+    "live": "Instantané",
     "online": "En ligne",
     "offline": "Hors ligne",
     "syncing": "Synchronisation"
   },
   "actions": {
     "explore": "Explorer la carte",
-    "viewDocs": "Voir la documentation",
+    "viewDocs": "Voir la feuille de route API",
     "search": "Rechercher",
     "filter": "Filtrer",
     "export": "Exporter",
@@ -56,7 +56,7 @@
     "stale": "Les données peuvent être obsolètes"
   },
   "footer": {
-    "tagline": "Visualisation en temps réel de l'infrastructure IA mondiale",
+    "tagline": "Instantanés mondiaux des données d'infrastructure IA",
     "quickLinks": "Liens rapides",
     "dataSources": "Sources de données",
     "community": "Communauté",

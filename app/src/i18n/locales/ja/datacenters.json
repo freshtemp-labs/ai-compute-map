@@ -6,7 +6,7 @@
     "facilities": "200+施設",
     "power2025": "485.4 TWh (2025)",
     "projected2030": "945 TWh (2030)",
-    "liveUpdates": "ライブ更新"
+    "liveUpdates": "スナップショット状態"
   },
   "sections": {
     "powerConsumption": "電力消費予測",

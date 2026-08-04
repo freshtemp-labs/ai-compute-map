@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "CARTE MONDIALE DE L'IA",
-    "subtitle": "Intelligence d'infrastructure en temps réel sur toute la chaîne d'approvisionnement IA",
+    "subtitle": "Instantanés sourcés de l'infrastructure de la chaîne d'approvisionnement IA",
     "betaBadge": "v1.0 BÊTA OUVERTE"
   },
   "kpi": {
@@ -20,7 +20,7 @@
     "construction": "En construction"
   },
   "dashboard": {
-    "title": "Aperçu des données en direct",
+    "title": "Aperçu de l'instantané des données",
     "regionDist": "Distribution des centres de données par région",
     "categoryDist": "Chaîne d'approvisionnement par catégorie"
   },
@@ -35,9 +35,9 @@
     "layer3Desc": "Centres de données mondiaux, consommation électrique"
   },
   "livePreview": {
-    "title": "Couverture mondiale en direct",
+    "title": "Couverture mondiale de l'instantané",
     "subtitle": "Suivi de 50+ pays, 1 200+ installations",
-    "badge": "Données en direct"
+    "badge": "Instantané des données"
   },
   "verification": {
     "title": "Vérifié. Recoupé. Transparent.",
@@ -48,7 +48,7 @@
   },
   "openSource": {
     "title": "Conçu par des développeurs, pour des développeurs",
-    "subtitle": "API ouverte, données open-source, conçu pour les chercheurs et développeurs",
-    "cta": "Voir la documentation de l'API"
+    "subtitle": "Données ouvertes du dépôt et feuille de route d'une future API",
+    "cta": "Voir la feuille de route de l'API"
   }
 }

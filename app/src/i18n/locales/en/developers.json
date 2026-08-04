@@ -1,68 +1,27 @@
 {
   "breadcrumb": "Developers",
-  "pageTitle": "Build on the Compute Map",
-  "pageSubtitle": "RESTful API, typed schemas, open data. Free for research and non-commercial use.",
+  "pageTitle": "API roadmap",
+  "pageSubtitle": "A preview of possible interfaces for AI Compute Map data. These endpoints are a planning draft, not a live service.",
   "badges": {
-    "openapi": "OpenAPI 3.0",
-    "typescript": "TypeScript Types",
-    "noKey": "No API Key Required",
+    "planned": "Planned API",
+    "schema": "Draft schema",
+    "staticData": "Static data available",
     "license": "CC BY-SA 4.0"
   },
-  "gettingStarted": {
-    "apiKey": "API Key",
-    "free": "Free, no key",
-    "rateLimits": "Rate Limits",
-    "perHour": "1,000 / hour",
-    "baseUrl": "Base URL",
-    "auth": "Authentication",
-    "bearer": "Bearer token"
+  "status": {
+    "title": "The API is not online yet",
+    "body": "The current public release is a static website backed by versioned repository data. No API hostname, authentication flow, rate limit, SDK, or service-level commitment is currently offered.",
+    "availability": "Use the website or repository data today; treat every endpoint below as a proposal that may change."
   },
   "apiReference": {
-    "title": "API Reference",
-    "baseUrl": "Base URL"
+    "title": "Proposed endpoint outline",
+    "description": "This outline records a possible future interface for discussion. It is not an OpenAPI contract and cannot be called."
   },
-  "queryParams": "Query Parameters",
-  "required": "Required",
-  "optional": "Optional",
-  "noParams": "No query parameters required.",
-  "response": "Response",
-  "codeExamples": "Code Examples",
-  "typescriptTypes": "TypeScript Types",
-  "showTypes": "Show All Types",
-  "hideTypes": "Hide Types",
-  "sdks": "SDKs & Tools",
-  "pythonSdk": "Python SDK",
-  "jsSdk": "JavaScript / TypeScript SDK",
-  "cliTool": "CLI Tool",
-  "install": "Install",
-  "features": "Features",
-  "viewOnGithub": "View on GitHub",
+  "plannedLabel": "PLANNED",
+  "proposedParams": "Proposed parameters",
+  "viewRepository": "View repository on GitHub",
   "contributing": {
     "title": "Contributing",
-    "subtitle": "This project welcomes both human and AI developers.",
-    "prWorkflow": "Pull Request Workflow",
-    "waysToContribute": "Ways to Contribute",
-    "data": "Data",
-    "code": "Code",
-    "docs": "Docs",
-    "issues": "Issues",
-    "aiAssisted": "AI-Assisted Contributions",
-    "setup": "Setup"
-  },
-  "systemArchitecture": "System Architecture",
-  "architectureDesc": "Data flows from raw sources through validation, storage, caching, and finally to the API and frontend layers.",
-  "components": {
-    "dataSources": "Data Sources",
-    "ingestion": "Ingestion Pipeline",
-    "verification": "Verification Engine",
-    "database": "PostgreSQL + TimescaleDB",
-    "cache": "Redis Cache",
-    "apiLayer": "API Layer",
-    "frontend": "Frontend (React)",
-    "mapEngine": "Map Engine",
-    "charts": "Charts (ECharts)",
-    "export": "Export Service"
-  },
-  "techStack": "Tech Stack",
-  "dataRefresh": "Data refresh cycle"
+    "subtitle": "Contribute data sources, verification, documentation, or implementation ideas through the public repository."
+  }
 }

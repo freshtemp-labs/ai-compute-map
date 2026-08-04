@@ -7,7 +7,7 @@
     "avgSources": "Prom. fuentes/punto",
     "timestamped": "100 % con marca temporal"
   },
-  "liveBadge": "Todas las métricas actualizadas en tiempo real",
+  "liveBadge": "Las fechas de cobertura se muestran para cada fuente",
   "sections": {
     "sourceCatalog": "Catálogo de fuentes",
     "tier1Label": "Primaria",

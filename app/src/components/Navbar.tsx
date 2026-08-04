@@ -231,11 +231,10 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            {/* Live Status (desktop) */}
+            {/* Static snapshot status (desktop) */}
             <div className="hidden md:flex items-center gap-2">
               <span className="relative flex h-2 w-2">
-                <span className="animate-live-pulse absolute inline-flex h-full w-full rounded-full bg-live-pulse opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-live-pulse" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan" />
               </span>
               <span className="text-mono-sm text-text-muted">{t('status.live')}</span>
             </div>
@@ -342,11 +341,10 @@ export default function Navbar() {
                   </Link>
                 </div>
 
-                {/* Live Status (mobile) */}
+                {/* Static snapshot status (mobile) */}
                 <div className="pt-4 mt-4 border-t border-border-subtle flex items-center gap-2 px-4">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-live-pulse absolute inline-flex h-full w-full rounded-full bg-live-pulse opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-live-pulse" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan" />
                   </span>
                   <span className="text-mono-sm text-text-muted">{t('status.live')}</span>
                 </div>

@@ -1,68 +1,27 @@
 {
   "breadcrumb": "开发者",
-  "pageTitle": "基于计算地图构建",
-  "pageSubtitle": "RESTful API，类型化模式，开放数据。免费用于研究和非商业用途。",
+  "pageTitle": "API 路线图",
+  "pageSubtitle": "AI 算力地图未来可能提供的数据接口预览。这些端点目前只是规划草案，并非已上线服务。",
   "badges": {
-    "openapi": "OpenAPI 3.0",
-    "typescript": "TypeScript类型",
-    "noKey": "无需API密钥",
+    "planned": "规划中的 API",
+    "schema": "模式草案",
+    "staticData": "静态数据可用",
     "license": "CC BY-SA 4.0"
   },
-  "gettingStarted": {
-    "apiKey": "API密钥",
-    "free": "免费，无需密钥",
-    "rateLimits": "速率限制",
-    "perHour": "1,000 / 小时",
-    "baseUrl": "基础URL",
-    "auth": "认证",
-    "bearer": "Bearer令牌"
+  "status": {
+    "title": "API 尚未上线",
+    "body": "当前公开版本是由仓库内版本化数据驱动的静态网站。目前不提供 API 域名、认证流程、限流、SDK 或服务级别承诺。",
+    "availability": "现在可使用网站或仓库数据；以下端点均为可能变更的规划提案。"
   },
   "apiReference": {
-    "title": "API参考",
-    "baseUrl": "基础URL"
+    "title": "规划端点概览",
+    "description": "此概览只用于讨论未来可能的接口，既不是 OpenAPI 合约，也无法调用。"
   },
-  "queryParams": "查询参数",
-  "required": "必需",
-  "optional": "可选",
-  "noParams": "无需查询参数。",
-  "response": "响应",
-  "codeExamples": "代码示例",
-  "typescriptTypes": "TypeScript类型",
-  "showTypes": "显示所有类型",
-  "hideTypes": "隐藏类型",
-  "sdks": "SDK和工具",
-  "pythonSdk": "Python SDK",
-  "jsSdk": "JavaScript / TypeScript SDK",
-  "cliTool": "CLI工具",
-  "install": "安装",
-  "features": "特性",
-  "viewOnGithub": "在GitHub上查看",
+  "plannedLabel": "规划中",
+  "proposedParams": "拟议参数",
+  "viewRepository": "在 GitHub 查看仓库",
   "contributing": {
-    "title": "贡献",
-    "subtitle": "本项目欢迎人类和AI开发者。",
-    "prWorkflow": "Pull Request工作流",
-    "waysToContribute": "贡献方式",
-    "data": "数据",
-    "code": "代码",
-    "docs": "文档",
-    "issues": "问题",
-    "aiAssisted": "AI辅助贡献",
-    "setup": "设置"
-  },
-  "systemArchitecture": "系统架构",
-  "architectureDesc": "数据从原始来源流经验证、存储、缓存，最终到达API和前端层。",
-  "components": {
-    "dataSources": "数据来源",
-    "ingestion": "数据获取",
-    "verification": "验证引擎",
-    "database": "数据库",
-    "cache": "缓存",
-    "apiLayer": "API层",
-    "frontend": "前端",
-    "mapEngine": "地图引擎",
-    "charts": "图表",
-    "export": "导出服务"
-  },
-  "techStack": "技术栈",
-  "dataRefresh": "数据刷新周期"
+    "title": "参与贡献",
+    "subtitle": "欢迎通过公开仓库贡献数据来源、验证工作、文档或实现建议。"
+  }
 }

@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "MAPA GLOBAL DE COMPUTACIÓN IA",
-    "subtitle": "Inteligencia de infraestructura en tiempo real a lo largo de la cadena de suministro de IA",
+    "subtitle": "Instantáneas con fuentes de la infraestructura de la cadena de suministro de IA",
     "betaBadge": "v1.0 BETA ABIERTA"
   },
   "kpi": {
@@ -20,7 +20,7 @@
     "construction": "En construcción"
   },
   "dashboard": {
-    "title": "Resumen de datos en vivo",
+    "title": "Resumen de la instantánea de datos",
     "regionDist": "Distribución de centros de datos por región",
     "categoryDist": "Cadena de suministro por categoría"
   },
@@ -35,9 +35,9 @@
     "layer3Desc": "CD globales, consumo energético"
   },
   "livePreview": {
-    "title": "Cobertura global en vivo",
+    "title": "Cobertura global de la instantánea",
     "subtitle": "Rastreando 50+ países, 1.200+ instalaciones",
-    "badge": "Datos en vivo"
+    "badge": "Instantánea de datos"
   },
   "verification": {
     "title": "Verificado. Cruzado. Transparente.",
@@ -48,7 +48,7 @@
   },
   "openSource": {
     "title": "Construido para desarrolladores, por desarrolladores",
-    "subtitle": "API abierta, datos de código abierto, construido para investigadores y desarrolladores",
-    "cta": "Ver documentación de la API"
+    "subtitle": "Datos abiertos del repositorio y una futura hoja de ruta de la API",
+    "cta": "Ver hoja de ruta de la API"
   }
 }

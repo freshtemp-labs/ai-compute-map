@@ -8,19 +8,19 @@
     "compare": "Vergleichen",
     "sources": "Datenquellen",
     "history": "Verlauf",
-    "developers": "API & Docs",
+    "developers": "API-Roadmap",
     "news": "Nachrichten",
     "settings": "Einstellungen"
   },
   "status": {
-    "live": "Live",
+    "live": "Momentaufnahme",
     "online": "Online",
     "offline": "Offline",
     "syncing": "Synchronisierung"
   },
   "actions": {
     "explore": "Karte erkunden",
-    "viewDocs": "Dokumentation anzeigen",
+    "viewDocs": "API-Roadmap anzeigen",
     "search": "Suchen",
     "filter": "Filtern",
     "export": "Exportieren",
@@ -56,7 +56,7 @@
     "stale": "Daten können veraltet sein"
   },
   "footer": {
-    "tagline": "Echtzeit-Visualisierung der globalen KI-Infrastruktur",
+    "tagline": "Globale Datenmomentaufnahmen der KI-Infrastruktur",
     "quickLinks": "Schnelllinks",
     "dataSources": "Datenquellen",
     "community": "Community",

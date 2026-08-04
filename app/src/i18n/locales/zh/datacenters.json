@@ -6,7 +6,7 @@
     "facilities": "200+设施",
     "power2025": "485.4 TWh (2025)",
     "projected2030": "945 TWh (2030)",
-    "liveUpdates": "实时更新"
+    "liveUpdates": "快照状态"
   },
   "sections": {
     "powerConsumption": "电力消耗预测",

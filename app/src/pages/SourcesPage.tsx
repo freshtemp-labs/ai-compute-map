@@ -110,11 +110,10 @@ export default function SourcesPage() {
             ))}
           </div>
 
-          {/* 实时状态徽章：脉冲动画圆点 + 文本，表示数据源实时更新中 */}
+          {/* Static snapshot status and source-level freshness notice */}
           <div className="mt-4 flex items-center gap-2">
             <span className="relative flex h-2 w-2">
-              <span className="animate-live-pulse absolute inline-flex h-full w-full rounded-full bg-live-pulse opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-live-pulse" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan" />
             </span>
             <span className="text-mono-sm text-accent-cyan">{t('sources:liveBadge')}</span>
           </div>

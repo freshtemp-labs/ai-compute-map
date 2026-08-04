@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aicomputemap.org/schemas/daily-digest.schema.json",
+  "title": "AI Compute Map A股监控每日 Digest",
+  "description": "外部 agent（Hermes Agent / OpenClaw 等）执行 ashare-watchlist.json 后的每日输出契约。所有信号必须带证据等级与规则引用；物理口径优先（R1）。",
+  "type": "object",
+  "required": ["date", "agent", "manifestVersion", "coverage", "alerts", "itemSignals", "tierReviewCandidates", "dataGaps", "policyScan", "disclaimer"],
+  "properties": {
+    "date": { "type": "string", "format": "date", "description": "监控日期（Asia/Shanghai）" },
+    "agent": { "type": "string", "description": "执行 agent 标识，如 hermes-agent / openclaw" },
+    "manifestVersion": { "type": "string", "description": "使用的 watchlist manifest 版本" },
+    "coverage": {
+      "type": "object",
+      "required": ["tiersCovered", "itemsCovered", "lanesCovered"],
+      "properties": {
+        "tiersCovered": { "type": "array", "items": { "type": "string" }, "description": "当日覆盖的层级段，如 [\"A\",\"B\",\"C\"]" },
+        "itemsCovered": { "type": "integer", "description": "当日实际覆盖标的数" },
+        "lanesCovered": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "policyScan": {
+      "type": "object",
+      "required": ["scanned", "hits"],
+      "description": "R9：每日任务开始前的政策源扫描结果",
+      "properties": {
+        "scanned": { "type": "array", "items": { "type": "string" }, "description": "已扫描的政策源列表" },
+        "hits": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["source", "event", "affectedLanes", "severity"],
+            "properties": {
+              "source": { "type": "string" },
+              "event": { "type": "string" },
+              "affectedLanes": { "type": "array", "items": { "type": "string" } },
+              "affectedTickers": { "type": "array", "items": { "type": "string" } },
+              "severity": { "type": "string", "enum": ["P0"] }
+            }
+          }
+        }
+      }
+    },
+    "alerts": {
+      "type": "array",
+      "description": "触发 alertTriggers 的告警列表",
+      "items": {
+        "type": "object",
+        "required": ["severity", "triggerId", "lane", "tickers", "description", "evidenceTier", "evidenceRefs", "ruleRefs"],
+        "properties": {
+          "severity": { "type": "string", "enum": ["P0", "P1", "P2", "P3"] },
+          "triggerId": { "type": "string", "description": "对应 manifest alertTriggers 中的 id" },
+          "lane": { "type": "string" },
+          "tickers": { "type": "array", "items": { "type": "string" } },
+          "description": { "type": "string" },
+          "physicalMetric": {
+            "type": ["object", "null"],
+            "description": "R1：物理量口径。无物理量时填 null 并记入 dataGaps",
+            "properties": {
+              "metric": { "type": "string", "description": "如 energizedMW / 1.6T端口出货 / HBM堆叠产能 / 变压器交期周数" },
+              "value": { "type": ["number", "string"] },
+              "unit": { "type": "string" },
+              "period": { "type": "string" },
+              "powerStage": { "type": "string", "enum": ["planned", "secured", "interconnected", "energized", "firmITLoad"], "description": "R3：仅容量类指标需要" }
+            }
+          },
+          "workloadType": { "type": "string", "enum": ["training", "inference", "mixed"], "description": "R8：仅 IDC/EDG 赛道需要" },
+          "evidenceTier": { "type": "integer", "minimum": 1, "maximum": 6, "description": "R4：1=定期报告/公告 … 6=媒体" },
+          "evidenceRefs": { "type": "array", "items": { "type": "string" }, "description": "证据来源（公告编号/URL/文件名）" },
+          "ruleRefs": { "type": "array", "items": { "type": "string" }, "description": "适用的监控规则 id，如 [\"R1\",\"R4\"]" },
+          "recommendedAction": { "type": "string" }
+        }
+      }
+    },
+    "itemSignals": {
+      "type": "array",
+      "description": "当日覆盖标的的逐只信号（无异动标的可省略或标记 noSignal）",
+      "items": {
+        "type": "object",
+        "required": ["ticker", "name", "tier", "lanes", "signal"],
+        "properties": {
+          "ticker": { "type": "string" },
+          "name": { "type": "string" },
+          "tier": { "type": "string" },
+          "lanes": { "type": "array", "items": { "type": "string" } },
+          "signal": { "type": "string", "description": "当日信号摘要；无异动填 noSignal" },
+          "physicalMetric": { "type": ["object", "null"] },
+          "evidenceTier": { "type": ["integer", "null"], "minimum": 1, "maximum": 6 },
+          "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+          "ruleRefs": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "tierReviewCandidates": {
+      "type": "array",
+      "description": "R5：主题共识触发的层级复核候选，季度集中处理",
+      "items": {
+        "type": "object",
+        "required": ["ticker", "name", "currentLevel", "currentTier", "proposedDirection", "reason", "consensusSources"],
+        "properties": {
+          "ticker": { "type": "string" },
+          "name": { "type": "string" },
+          "currentLevel": { "type": "integer", "minimum": 1, "maximum": 25 },
+          "currentTier": { "type": "string" },
+          "proposedDirection": { "type": "string", "enum": ["upgrade", "downgrade", "review"] },
+          "reason": { "type": "string" },
+          "consensusSources": { "type": "array", "items": { "type": "string" }, "minItems": 2, "description": "R5：至少两个独立来源" }
+        }
+      }
+    },
+    "dataGaps": {
+      "type": "array",
+      "description": "R1/R4：无法取得合格证据或物理量的字段，明确标注缺口而非估算",
+      "items": {
+        "type": "object",
+        "required": ["subject", "field", "reason"],
+        "properties": {
+          "subject": { "type": "string", "description": "标的代码或赛道 id" },
+          "field": { "type": "string" },
+          "reason": { "type": "string" },
+          "neededEvidenceTier": { "type": "integer", "minimum": 1, "maximum": 6 }
+        }
+      }
+    },
+    "externalFundSignals": {
+      "type": "array",
+      "description": "R6/R7：外部机构信号（如 SALP 13F）只记事实，不做方向解读，必须带报告期",
+      "items": {
+        "type": "object",
+        "required": ["fund", "reportPeriod", "fact", "postPeriod"],
+        "properties": {
+          "fund": { "type": "string" },
+          "reportPeriod": { "type": "string" },
+          "fact": { "type": "string" },
+          "postPeriod": { "type": "boolean", "description": "R7：报告期后事件标记" }
+        }
+      }
+    },
+    "disclaimer": { "type": "string", "description": "固定文本：本 digest 为主题研究信号，不构成投资建议" }
+  }
+}

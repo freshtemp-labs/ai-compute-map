@@ -112,13 +112,12 @@ export default function FoundriesPage() {
               <div className="text-data-md text-text-primary font-mono">$230B+</div>
               <div className="text-mono-sm text-text-muted uppercase tracking-[0.04em] mt-1">Market Size</div>
             </div>
-            {/* 实时状态指示器：呼吸灯动画 + 更新时间 */}
+            {/* Static data snapshot status */}
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
-                <span className="animate-live-pulse absolute inline-flex h-full w-full rounded-full bg-live-pulse opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-live-pulse" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan" />
               </span>
-              <span className="text-mono-sm text-text-muted">Updated 2m ago</span>
+              <span className="text-mono-sm text-text-muted">Versioned data snapshot</span>
             </div>
           </div>
         </div>

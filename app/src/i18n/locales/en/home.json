@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "GLOBAL AI COMPUTE MAP",
-    "subtitle": "Real-time infrastructure intelligence across the AI supply chain",
+    "subtitle": "Source-attributed snapshots of infrastructure across the AI supply chain",
     "betaBadge": "v1.0 OPEN BETA"
   },
   "kpi": {
@@ -20,7 +20,7 @@
     "construction": "Under Construction"
   },
   "dashboard": {
-    "title": "Live Data Overview",
+    "title": "Data Snapshot Overview",
     "regionDist": "Data Center Distribution by Region",
     "categoryDist": "Supply Chain by Category"
   },
@@ -35,9 +35,9 @@
     "layer3Desc": "Global DCs, power consumption"
   },
   "livePreview": {
-    "title": "Live Global Coverage",
+    "title": "Global Snapshot Coverage",
     "subtitle": "Tracking 50+ countries, 1,200+ facilities",
-    "badge": "Live Data"
+    "badge": "Data Snapshot"
   },
   "verification": {
     "title": "Verified. Cross-Referenced. Transparent.",
@@ -48,7 +48,7 @@
   },
   "openSource": {
     "title": "Built for Developers, by Developers",
-    "subtitle": "Open API, open-source data, built for researchers and developers",
-    "cta": "View API Docs"
+    "subtitle": "Open repository data and a proposed future API roadmap",
+    "cta": "View API Roadmap"
   }
 }

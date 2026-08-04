@@ -1,68 +1,27 @@
 {
   "breadcrumb": "Desarrolladores",
-  "pageTitle": "Construye sobre el mapa de computación",
-  "pageSubtitle": "API RESTful, esquemas tipados, datos abiertos. Gratuito para investigación y uso no comercial.",
+  "pageTitle": "Hoja de ruta de la API",
+  "pageSubtitle": "Una vista previa de posibles interfaces para los datos de AI Compute Map. Estos endpoints son un borrador de planificación, no un servicio activo.",
   "badges": {
-    "openapi": "OpenAPI 3.0",
-    "typescript": "Tipos TypeScript",
-    "noKey": "Sin clave API requerida",
+    "planned": "API planificada",
+    "schema": "Esquema preliminar",
+    "staticData": "Datos estáticos disponibles",
     "license": "CC BY-SA 4.0"
   },
-  "gettingStarted": {
-    "apiKey": "Clave API",
-    "free": "Gratis, sin clave",
-    "rateLimits": "Límites de tasa",
-    "perHour": "1.000 / hora",
-    "baseUrl": "URL base",
-    "auth": "Autenticación",
-    "bearer": "Token Bearer"
+  "status": {
+    "title": "La API aún no está disponible",
+    "body": "La versión pública actual es un sitio estático basado en datos versionados del repositorio. Actualmente no se ofrece host de API, autenticación, límites de uso, SDK ni compromiso de nivel de servicio.",
+    "availability": "Usa por ahora el sitio web o los datos del repositorio; considera cada endpoint siguiente como una propuesta sujeta a cambios."
   },
   "apiReference": {
-    "title": "Referencia de la API",
-    "baseUrl": "URL base"
+    "title": "Esquema de endpoints propuestos",
+    "description": "Este esquema registra una posible interfaz futura para su discusión. No es un contrato OpenAPI y no se puede invocar."
   },
-  "queryParams": "Parámetros de consulta",
-  "required": "Requerido",
-  "optional": "Opcional",
-  "noParams": "No se requieren parámetros de consulta.",
-  "response": "Respuesta",
-  "codeExamples": "Ejemplos de código",
-  "typescriptTypes": "Tipos TypeScript",
-  "showTypes": "Mostrar todos los tipos",
-  "hideTypes": "Ocultar tipos",
-  "sdks": "SDKs y herramientas",
-  "pythonSdk": "SDK Python",
-  "jsSdk": "SDK JavaScript / TypeScript",
-  "cliTool": "Herramienta CLI",
-  "install": "Instalar",
-  "features": "Características",
-  "viewOnGithub": "Ver en GitHub",
+  "plannedLabel": "PLANIFICADO",
+  "proposedParams": "Parámetros propuestos",
+  "viewRepository": "Ver repositorio en GitHub",
   "contributing": {
     "title": "Contribuir",
-    "subtitle": "Este proyecto da la bienvenida tanto a desarrolladores humanos como de IA.",
-    "prWorkflow": "Flujo de trabajo de pull requests",
-    "waysToContribute": "Formas de contribuir",
-    "data": "Datos",
-    "code": "Código",
-    "docs": "Documentación",
-    "issues": "Issues",
-    "aiAssisted": "Contribuciones asistidas por IA",
-    "setup": "Configuración"
-  },
-  "systemArchitecture": "Arquitectura del sistema",
-  "architectureDesc": "Los datos fluyen desde fuentes crudas a través de validación, almacenamiento y caché, hasta las capas de API y frontend.",
-  "components": {
-    "dataSources": "Fuentes de datos",
-    "ingestion": "Pipeline de ingesta",
-    "verification": "Motor de verificación",
-    "database": "PostgreSQL + TimescaleDB",
-    "cache": "Caché Redis",
-    "apiLayer": "Capa API",
-    "frontend": "Frontend (React)",
-    "mapEngine": "Motor de mapa",
-    "charts": "Gráficos (ECharts)",
-    "export": "Servicio de exportación"
-  },
-  "techStack": "Stack tecnológico",
-  "dataRefresh": "Ciclo de actualización de datos"
+    "subtitle": "Contribuye con fuentes de datos, verificación, documentación o ideas de implementación mediante el repositorio público."
+  }
 }

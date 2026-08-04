@@ -2,7 +2,7 @@
  * Service Worker for AI Compute Map
  * Caches static assets for offline support.
  */
-const CACHE_NAME = 'ai-compute-map-v1';
+const CACHE_NAME = 'ai-compute-map-v2';
 const STATIC_ASSETS = [
   './',
   './index.html',

@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "GLOBAL AI COMPUTE MAP",
-    "subtitle": "实时AI供应链基础设施情报",
+    "subtitle": "可溯源的AI供应链基础设施数据快照",
     "betaBadge": "v1.0 OPEN BETA"
   },
   "kpi": {
@@ -20,7 +20,7 @@
     "construction": "建设中"
   },
   "dashboard": {
-    "title": "实时数据概览",
+    "title": "数据快照概览",
     "regionDist": "数据中心地区分布",
     "categoryDist": "供应链分类统计"
   },
@@ -35,9 +35,9 @@
     "layer3Desc": "全球数据中心、电力消耗"
   },
   "livePreview": {
-    "title": "实时全球覆盖",
+    "title": "全球快照覆盖",
     "subtitle": "追踪50+国家，1,200+设施",
-    "badge": "实时数据"
+    "badge": "数据快照"
   },
   "verification": {
     "title": "已验证。交叉引用。透明。",
@@ -48,7 +48,7 @@
   },
   "openSource": {
     "title": "开发者共建",
-    "subtitle": "开放API，开源数据，为研究人员和开发者而建",
-    "cta": "查看API文档"
+    "subtitle": "开放的仓库数据与未来API路线图",
+    "cta": "查看API路线图"
   }
 }

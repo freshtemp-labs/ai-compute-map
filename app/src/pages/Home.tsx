@@ -14,6 +14,7 @@ import * as echarts from 'echarts';
 import { layers, kpis, supplyChainData, fabricationFacilities, dataCenters } from '@/data/mockData';
 import { ShieldCheck, SquareStack, Archive } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import '@/lib/registerWorldMap';
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -32,24 +33,6 @@ function usePageTranslation() {
  */
 function HeroSection() {
   const { t } = usePageTranslation();
-  const [timeAgo, setTimeAgo] = useState({ minutes: 2, seconds: 34 });
-  const [progress, setProgress] = useState(62);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeAgo((prev) => {
-        let { minutes, seconds } = prev;
-        seconds += 1;
-        if (seconds >= 60) {
-          seconds = 0;
-          minutes += 1;
-        }
-        return { minutes, seconds };
-      });
-      setProgress((prev) => (prev >= 100 ? 0 : prev + 0.5));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section
@@ -60,7 +43,7 @@ function HeroSection() {
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: 'url(/hero-grid-bg.png)',
+          backgroundImage: `url(${import.meta.env.BASE_URL}hero-grid-bg.png)`,
           backgroundRepeat: 'repeat',
           backgroundSize: '512px 512px',
         }}
@@ -73,7 +56,7 @@ function HeroSection() {
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
       >
         <img
-          src="/earth-wireframe.png"
+          src={`${import.meta.env.BASE_URL}earth-wireframe.png`}
           alt=""
           loading="lazy"
           className="w-[600px] h-[600px] object-contain animate-globe-rotate opacity-60"
@@ -111,7 +94,7 @@ function HeroSection() {
           {t('home:hero.subtitle')}
         </motion.p>
 
-        {/* Data freshness bar */}
+        {/* Static snapshot status */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -119,26 +102,11 @@ function HeroSection() {
           className="flex items-center gap-2 mb-8"
         >
           <span className="relative flex h-2 w-2">
-            <span className="animate-live-pulse absolute inline-flex h-full w-full rounded-full bg-live-pulse opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-live-pulse" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan" />
           </span>
           <span className="text-mono-sm text-text-muted">
-            Last synced: {timeAgo.minutes} min {timeAgo.seconds} sec ago &middot; Next refresh in {5 - timeAgo.minutes % 5} min {60 - timeAgo.seconds} sec
+            {t('common:dataStatus.lastUpdate')}
           </span>
-        </motion.div>
-
-        {/* Progress bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.65, duration: 0.5 }}
-          className="w-64 h-1 bg-bg-surface rounded-full mb-10 overflow-hidden"
-        >
-          <motion.div
-            className="h-full bg-accent-cyan rounded-full"
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 1, ease: 'linear' }}
-          />
         </motion.div>
 
         {/* CTA Buttons */}
@@ -405,7 +373,7 @@ function KPIDashboard() {
             transition={{ duration: 0.5 }}
             className="text-heading-sm text-text-primary text-center mb-8"
           >
-            {t('home:dashboard.title', 'Live Data Overview')}
+            {t('home:dashboard.title', 'Data Snapshot Overview')}
           </motion.h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4 mb-10">
             {dynamicKpis.map((kpi, i) => (
@@ -600,7 +568,7 @@ function ThreeLayersSection() {
 }
 
 /* ================================================================
-   Section 4: Live Data Preview (Mini Map)
+   Section 4: Data Snapshot Preview (Mini Map)
    ================================================================ */
 /**
  * 迷你地图预览区域组件
@@ -682,14 +650,14 @@ function MiniMapSection() {
           >
             <h2 className="text-heading-lg text-text-primary mb-4">{t('home:livePreview.title')}</h2>
             <p className="text-body-md text-text-secondary max-w-[400px] leading-relaxed mb-6">
-              {t('home:livePreview.description')}
+              {t('home:livePreview.subtitle')}
             </p>
             <ul className="space-y-3 mb-6">
               {[
-                { text: t('home:livePreview.point1', '470+ geolocated data points'), color: '#FFB84D' },
-                { text: t('home:livePreview.point2', 'Cross-verified against 3+ sources each'), color: '#00D4FF' },
+                { text: t('home:livePreview.point1', `${supplyChainData.length + fabricationFacilities.length + dataCenters.length} geolocated data points`), color: '#FFB84D' },
+                { text: t('home:livePreview.point2', 'Source tiers and update dates recorded'), color: '#00D4FF' },
                 { text: t('home:livePreview.point3', 'Historical data back to 2019'), color: '#A855F7' },
-                { text: t('home:livePreview.point4', 'Open API for researchers and developers'), color: '#E8E8EC' },
+                { text: t('home:livePreview.point4', 'Versioned repository data for research and reuse'), color: '#E8E8EC' },
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-2.5">
                   <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
@@ -851,7 +819,7 @@ function OpenSourceCTASection() {
           transition={{ duration: 0.4, delay: 0.3 }}
           className="text-body-md text-text-secondary leading-relaxed mb-8"
         >
-          This project welcomes both human and AI contributors. Our API is RESTful, documented in OpenAPI 3.0, and our data schema is fully typed in TypeScript. Fork the repo, submit a PR, or use our data to build your own analysis tools.
+          This project welcomes both human and AI contributors. The site currently publishes static, source-attributed data; a REST API is documented as a future interface proposal and is not yet available. Fork the repo, submit a PR, or use the repository data in your own analysis tools.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -864,10 +832,10 @@ function OpenSourceCTASection() {
             to="/developers"
             className="px-8 py-3.5 bg-accent-cyan text-bg-base font-semibold rounded-lg text-body-md transition-all duration-200 hover:brightness-110 hover:-translate-y-0.5"
           >
-            Read the Docs
+            View API Roadmap
           </Link>
           <a
-            href="https://github.com"
+            href="https://github.com/freshtemp-labs/ai-compute-map"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-8 py-3.5 bg-bg-elevated text-text-primary border border-border-active rounded-lg text-body-md transition-all duration-200 hover:border-accent-cyan"
@@ -885,7 +853,7 @@ function OpenSourceCTASection() {
           transition={{ duration: 0.4, delay: 0.7 }}
           className="text-body-sm text-text-muted"
         >
-          Join 200+ contributors &middot; Available in 6 languages
+          Open to contributions &middot; Available in 8 languages
         </motion.p>
       </div>
     </section>

@@ -1937,7 +1937,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc73",
+    "id": "dc98",
     "name": "Azure Southeast Asia (Singapore)",
     "provider": "Microsoft Azure",
     "lat": 1.3521,
@@ -1958,7 +1958,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc74",
+    "id": "dc99",
     "name": "GCP Jakarta (asia-southeast2)",
     "provider": "Google Cloud",
     "lat": -6.2088,
@@ -1979,7 +1979,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc75",
+    "id": "dc100",
     "name": "AWS Mumbai (ap-south-1)",
     "provider": "Amazon Web Services",
     "lat": 19.0760,
@@ -2000,7 +2000,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc76",
+    "id": "dc101",
     "name": "Azure Central India",
     "provider": "Microsoft Azure",
     "lat": 22.7196,
@@ -2021,7 +2021,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc77",
+    "id": "dc102",
     "name": "AWS Bahrain (me-south-1)",
     "provider": "Amazon Web Services",
     "lat": 26.0667,
@@ -2042,7 +2042,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc78",
+    "id": "dc103",
     "name": "Azure UAE North",
     "provider": "Microsoft Azure",
     "lat": 25.2048,
@@ -2063,7 +2063,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc79",
+    "id": "dc104",
     "name": "GCP Doha (me-central1)",
     "provider": "Google Cloud",
     "lat": 25.2854,
@@ -2084,7 +2084,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc80",
+    "id": "dc105",
     "name": "Oracle Jeddah",
     "provider": "Oracle Cloud",
     "lat": 21.4858,
@@ -2105,7 +2105,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc81",
+    "id": "dc106",
     "name": "AWS São Paulo (sa-east-1)",
     "provider": "Amazon Web Services",
     "lat": -23.5505,
@@ -2126,7 +2126,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc82",
+    "id": "dc107",
     "name": "Azure Brazil South",
     "provider": "Microsoft Azure",
     "lat": -23.5505,
@@ -2147,7 +2147,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc83",
+    "id": "dc108",
     "name": "GCP São Paulo (southamerica-east1)",
     "provider": "Google Cloud",
     "lat": -23.5505,
@@ -2168,7 +2168,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc84",
+    "id": "dc109",
     "name": "AWS Santiago (sa-south-1)",
     "provider": "Amazon Web Services",
     "lat": -33.4489,
@@ -2189,7 +2189,7 @@
     "_fetcherVersion": "1.0.0"
   },
   {
-    "id": "dc85",
+    "id": "dc110",
     "name": "Azure Chile Central",
     "provider": "Microsoft Azure",
     "lat": -33.4489,

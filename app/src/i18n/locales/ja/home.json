@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "GLOBAL AI COMPUTE MAP",
-    "subtitle": "AIサプライチェーンのリアルタイムインフラ情報",
+    "subtitle": "AIサプライチェーン・インフラの出典付きデータスナップショット",
     "betaBadge": "v1.0 OPEN BETA"
   },
   "kpi": {
@@ -20,7 +20,7 @@
     "construction": "建設中"
   },
   "dashboard": {
-    "title": "リアルタイムデータ概要",
+    "title": "データスナップショット概要",
     "regionDist": "データセンター地域分布",
     "categoryDist": "サプライチェーンカテゴリ統計"
   },
@@ -35,9 +35,9 @@
     "layer3Desc": "世界のDC、電力消費"
   },
   "livePreview": {
-    "title": "リアルタイムグローバルカバレッジ",
+    "title": "グローバルスナップショットカバレッジ",
     "subtitle": "50カ国以上、1,200施設以上を追跡",
-    "badge": "ライブデータ"
+    "badge": "データスナップショット"
   },
   "verification": {
     "title": "検証済み。相互参照。透明性。",
@@ -48,7 +48,7 @@
   },
   "openSource": {
     "title": "開発者のために開発者が作る",
-    "subtitle": "オープンAPI、オープンデータ、研究者と開発者のために",
-    "cta": "APIドキュメントを見る"
+    "subtitle": "公開リポジトリデータと将来のAPIロードマップ",
+    "cta": "APIロードマップを見る"
   }
 }

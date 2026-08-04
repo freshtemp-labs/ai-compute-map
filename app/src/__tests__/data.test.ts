@@ -10,6 +10,10 @@ import {
   layers,
   kpis,
   companies,
+  situationalAwarenessObservations,
+  situationalAwarenessProfile,
+  comparableFundProfiles,
+  comparativeFundMonitoring,
 } from '@/data/mockData';
 
 // ── helpers ──────────────────────────────────────────────────────
@@ -47,6 +51,9 @@ describe('Data arrays are non-empty', () => {
     ['layers', layers],
     ['kpis', kpis],
     ['companies', companies],
+    ['situationalAwarenessObservations', situationalAwarenessObservations],
+    ['comparableFundProfiles', comparableFundProfiles],
+    ['comparativeFundMonitoring', comparativeFundMonitoring],
   ];
 
   for (const [name, arr] of cases) {
@@ -226,5 +233,81 @@ describe('companies integrity', () => {
 
   it('ids are unique', () => {
     assertUniqueIds(companies, 'companies');
+  });
+});
+
+// ── Situational Awareness LP observation framework ──────────────
+describe('Situational Awareness observation framework', () => {
+  it('has an auditable current 13F snapshot', () => {
+    expect(situationalAwarenessProfile.filingType).toBe('SEC Form 13F-HR');
+    expect(situationalAwarenessProfile.periodEnd).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(situationalAwarenessProfile.filingDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(situationalAwarenessProfile.reportedRows).toBeGreaterThan(0);
+    expect(situationalAwarenessProfile.distinctIssuers).toBeGreaterThan(0);
+    expect(situationalAwarenessProfile.reportedTableValueUsd).toBeGreaterThan(0);
+    expect(situationalAwarenessProfile.sourceUrl).toMatch(/^https:\/\//);
+    expect(situationalAwarenessProfile.disclosureLimit).toBeTruthy();
+    expect(situationalAwarenessProfile.statusNote).toBeTruthy();
+    expect(situationalAwarenessProfile.statusSourceUrl).toMatch(/^https:\/\//);
+  });
+
+  it('defines complete, source-linked observation items without duplicate ids', () => {
+    expect(situationalAwarenessObservations.length).toBeGreaterThanOrEqual(8);
+    assertUniqueIds(situationalAwarenessObservations, 'situationalAwarenessObservations');
+
+    for (const item of situationalAwarenessObservations) {
+      expect(item.title).toBeTruthy();
+      expect(['critical', 'high']).toContain(item.priority);
+      expect(['missing', 'partial']).toContain(item.coverage);
+      expect(['13F position', '13G/13D stake', 'company-confirmed private investment', 'reported private investment', 'thesis inference']).toContain(item.evidenceLevel);
+      expect(item.rationale).toBeTruthy();
+      expect(item.fundSignal).toBeTruthy();
+      expect(item.watchMetrics.length).toBeGreaterThanOrEqual(3);
+      expect(item.entities.length).toBeGreaterThan(0);
+      expect(item.sourceName).toBeTruthy();
+      expect(item.sourceUrl).toMatch(/^https:\/\//);
+      expect(item.asOf).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
+  });
+});
+
+// ── Comparable AI infrastructure fund framework ────────────────
+describe('Comparable fund monitoring framework', () => {
+  it('defines public, source-linked fund proxies with explicit non-overlap areas', () => {
+    expect(comparableFundProfiles.length).toBeGreaterThanOrEqual(4);
+    assertUniqueIds(comparableFundProfiles, 'comparableFundProfiles');
+
+    for (const fund of comparableFundProfiles) {
+      expect(fund.name).toBeTruthy();
+      expect(fund.vehicle).toBeTruthy();
+      expect(fund.comparability).toBeTruthy();
+      expect(fund.thesis).toBeTruthy();
+      expect(fund.overlapAreas.length).toBeGreaterThan(0);
+      expect(fund.nonOverlapAreas.length).toBeGreaterThan(0);
+      expect(fund.reportTitle).toBeTruthy();
+      expect(fund.reportUrl).toMatch(/^https:\/\//);
+      expect(fund.asOf).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
+  });
+
+  it('turns both consensus and non-overlap signals into auditable monitoring items', () => {
+    expect(comparativeFundMonitoring.length).toBeGreaterThanOrEqual(5);
+    assertUniqueIds(comparativeFundMonitoring, 'comparativeFundMonitoring');
+    expect(comparativeFundMonitoring.some((item) => item.relation === 'overlap')).toBe(true);
+    expect(comparativeFundMonitoring.some((item) => item.relation === 'non-overlap')).toBe(true);
+
+    const fundIds = new Set(comparableFundProfiles.map((fund) => fund.id));
+    for (const item of comparativeFundMonitoring) {
+      expect(item.title).toBeTruthy();
+      expect(['overlap', 'non-overlap']).toContain(item.relation);
+      expect(['critical', 'high']).toContain(item.priority);
+      expect(['missing', 'partial']).toContain(item.coverage);
+      expect(item.fundIds.length).toBeGreaterThan(0);
+      for (const fundId of item.fundIds) expect(fundIds.has(fundId)).toBe(true);
+      expect(item.fundSignal).toBeTruthy();
+      expect(item.watchMetrics.length).toBeGreaterThanOrEqual(3);
+      expect(item.sourceUrl).toMatch(/^https:\/\//);
+      expect(item.asOf).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
   });
 });

@@ -1,68 +1,27 @@
 {
   "breadcrumb": "開発者",
-  "pageTitle": "コンピュートマップ上に構築",
-  "pageSubtitle": "RESTful API、型付きスキーマ、オープンデータ。研究および非商用利用は無料です。",
+  "pageTitle": "API ロードマップ",
+  "pageSubtitle": "AI Compute Map データ向けに将来提供する可能性のあるインターフェースのプレビューです。これらのエンドポイントは計画案であり、稼働中のサービスではありません。",
   "badges": {
-    "openapi": "OpenAPI 3.0",
-    "typescript": "TypeScript型",
-    "noKey": "APIキー不要",
+    "planned": "計画中の API",
+    "schema": "スキーマ草案",
+    "staticData": "静的データ公開中",
     "license": "CC BY-SA 4.0"
   },
-  "gettingStarted": {
-    "apiKey": "APIキー",
-    "free": "無料、キー不要",
-    "rateLimits": "レート制限",
-    "perHour": "1,000 / 時",
-    "baseUrl": "ベースURL",
-    "auth": "認証",
-    "bearer": "Bearerトークン"
+  "status": {
+    "title": "API はまだ公開されていません",
+    "body": "現在の公開版は、リポジトリでバージョン管理されたデータを使う静的サイトです。API ホスト、認証、レート制限、SDK、サービスレベル保証は現在提供していません。",
+    "availability": "現時点ではサイトまたはリポジトリのデータをご利用ください。以下のエンドポイントは変更される可能性がある提案です。"
   },
   "apiReference": {
-    "title": "APIリファレンス",
-    "baseUrl": "ベースURL"
+    "title": "提案中のエンドポイント概要",
+    "description": "将来のインターフェースを議論するための概要です。OpenAPI 契約ではなく、呼び出すことはできません。"
   },
-  "queryParams": "クエリパラメータ",
-  "required": "必須",
-  "optional": "オプション",
-  "noParams": "クエリパラメータは不要です。",
-  "response": "レスポンス",
-  "codeExamples": "コード例",
-  "typescriptTypes": "TypeScript型",
-  "showTypes": "すべての型を表示",
-  "hideTypes": "型を非表示",
-  "sdks": "SDKとツール",
-  "pythonSdk": "Python SDK",
-  "jsSdk": "JavaScript / TypeScript SDK",
-  "cliTool": "CLIツール",
-  "install": "インストール",
-  "features": "機能",
-  "viewOnGithub": "GitHubで見る",
+  "plannedLabel": "計画中",
+  "proposedParams": "提案パラメーター",
+  "viewRepository": "GitHub でリポジトリを見る",
   "contributing": {
-    "title": "貢献",
-    "subtitle": "このプロジェクトは人間とAIの開発者の両方を歓迎します。",
-    "prWorkflow": "Pull Requestワークフロー",
-    "waysToContribute": "貢献方法",
-    "data": "データ",
-    "code": "コード",
-    "docs": "ドキュメント",
-    "issues": "課題",
-    "aiAssisted": "AI支援貢献",
-    "setup": "セットアップ"
-  },
-  "systemArchitecture": "システムアーキテクチャ",
-  "architectureDesc": "データは生ソースから検証、ストレージ、キャッシュを経て、最終的にAPIとフロントエンド層に流れます。",
-  "components": {
-    "dataSources": "データソース",
-    "ingestion": "データパイプライン",
-    "verification": "検証エンジン",
-    "database": "PostgreSQL + TimescaleDB",
-    "cache": "Redisキャッシュ",
-    "apiLayer": "API層",
-    "frontend": "フロントエンド（React）",
-    "mapEngine": "マップエンジン",
-    "charts": "チャート（ECharts）",
-    "export": "エクスポートサービス"
-  },
-  "techStack": "技術スタック",
-  "dataRefresh": "データ更新サイクル"
+    "title": "コントリビューション",
+    "subtitle": "公開リポジトリを通じて、データソース、検証、ドキュメント、実装案にご協力ください。"
+  }
 }

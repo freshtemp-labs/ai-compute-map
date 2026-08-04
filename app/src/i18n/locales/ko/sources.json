@@ -7,7 +7,7 @@
     "avgSources": "평균 출처/포인트",
     "timestamped": "100% 타임스탬프"
   },
-  "liveBadge": "모든 지표가 실시간으로 업데이트됨",
+  "liveBadge": "각 출처에 커버리지 날짜 표시",
   "sections": {
     "sourceCatalog": "출처 카탈로그",
     "tier1Label": "1차",

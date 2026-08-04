@@ -8,19 +8,19 @@
     "compare": "Compare",
     "sources": "Data Sources",
     "history": "History",
-    "developers": "API & Docs",
+    "developers": "API Roadmap",
     "news": "News",
     "settings": "Settings"
   },
   "status": {
-    "live": "Live",
+    "live": "Snapshot",
     "online": "Online",
     "offline": "Offline",
     "syncing": "Syncing"
   },
   "actions": {
     "explore": "Explore Map",
-    "viewDocs": "View Docs",
+    "viewDocs": "View API Roadmap",
     "search": "Search",
     "filter": "Filter",
     "export": "Export",
@@ -56,7 +56,7 @@
     "stale": "Data may be outdated"
   },
   "footer": {
-    "tagline": "Real-time Global AI Infrastructure Visualization",
+    "tagline": "Global AI infrastructure data snapshots",
     "quickLinks": "Quick Links",
     "dataSources": "Data Sources",
     "community": "Community",

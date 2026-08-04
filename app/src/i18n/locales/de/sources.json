@@ -7,7 +7,7 @@
     "avgSources": "Ø Quellen/Punkt",
     "timestamped": "100 % zeitgestempelt"
   },
-  "liveBadge": "Alle Kennzahlen in Echtzeit aktualisiert",
+  "liveBadge": "Abdeckungsdaten werden je Quelle angezeigt",
   "sections": {
     "sourceCatalog": "Quellenkatalog",
     "tier1Label": "Primär",

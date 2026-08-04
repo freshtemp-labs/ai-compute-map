@@ -7,7 +7,7 @@
     "avgSources": "متوسط المصادر/نقطة",
     "timestamped": "100% بتوقيت"
   },
-  "liveBadge": "جميع المقاييس محدّثة في الوقت الفعلي",
+  "liveBadge": "تُعرض تواريخ التغطية لكل مصدر",
   "sections": {
     "sourceCatalog": "فهرس المصادر",
     "tier1Label": "أساسي",

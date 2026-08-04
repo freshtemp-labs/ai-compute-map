@@ -88,7 +88,7 @@ export default function RareEarthLayer({ height = '500px' }: RareEarthLayerProps
 
   // Fetch rare earth data
   useEffect(() => {
-    fetch('/data/rare-earth.json')
+    fetch(`${import.meta.env.BASE_URL}data/rare-earth.json`)
       .then((res) => res.json())
       .then((data: RareEarthFacility[]) => {
         setFacilities(data);

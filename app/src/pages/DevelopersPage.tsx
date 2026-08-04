@@ -1,408 +1,85 @@
 /**
  * @file DevelopersPage.tsx
- * @description Developer documentation page with API reference, code examples
- * using Prism.js syntax highlighting, data format specifications, and
- * contribution guidelines.
- *
- * @dependencies react-i18next, react-syntax-highlighter, prismjs
+ * @description Public roadmap for a possible future API. The current release is
+ * a static website and does not expose a callable API service.
  */
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-// ─── Types ─────────────────────────────────────────────────────
-/** API端点文档接口 */
-interface EndpointDoc {
-  method: string;
+interface PlannedEndpoint {
+  method: 'GET';
   path: string;
   description: string;
-  /** 查询参数列表 */
-  params?: { name: string; type: string; required: boolean; description: string }[];
-  /** JSON响应示例 */
-  response?: string;
+  params?: string[];
 }
 
-// ─── Constants ─────────────────────────────────────────────────
-
-/**
- * API端点定义数组
- * 包含所有对外暴露的 REST API 端点文档，
- * 每个端点包含方法、路径、参数列表和响应示例。
- * 该数组用于自动生成页面上的交互式 API 参考文档区域。
- */
-const ENDPOINTS: EndpointDoc[] = [
-  { // ── 数据中心列表 ── 支持区域/供应商/功率多条件筛选与分页
+const PLANNED_ENDPOINTS: PlannedEndpoint[] = [
+  {
     method: 'GET',
     path: '/api/v1/data-centers',
-    description: 'List all data center facilities with optional filters',
-    params: [
-      { name: 'region', type: 'string', required: false, description: 'Filter by region (north-america, europe, asia-pacific, china)' },
-      { name: 'provider', type: 'string', required: false, description: 'Filter by cloud provider' },
-      { name: 'min_power', type: 'integer', required: false, description: 'Minimum power capacity in MW' },
-      { name: 'limit', type: 'integer', required: false, description: 'Maximum number of results (default: 50, max: 500)' },
-      { name: 'offset', type: 'integer', required: false, description: 'Pagination offset' },
-    ],
-    response: `{
-  "data": [
-    {
-      "id": "dc-us-east-1",
-      "name": "AWS US-East-1",
-      "provider": "Amazon Web Services",
-      "location": {
-        "country": "USA",
-        "region": "North America",
-        "coordinates": [38.9, -77.0]
-      },
-      "power_mw": 180,
-      "pue": 1.12,
-      "year_operational": 2006,
-      "status": "Operational",
-      "energy_mix": "50% renewable",
-      "last_updated": "2025-01-15T08:30:00Z",
-      "data_source": "AWS Sustainability Report 2024",
-      "tier": "tier1"
-    }
-  ],
-  "meta": {
-    "total": 200,
-    "limit": 50,
-    "offset": 0,
-    "timestamp": "2025-02-09T10:00:00Z"
-  }
-}`,
+    description: 'List data center facilities with optional region, provider, and power filters.',
+    params: ['region', 'provider', 'min_power', 'limit', 'offset'],
   },
-  { // ── 数据中心详情 ── 按ID获取单个数据中心的完整信息
+  {
     method: 'GET',
     path: '/api/v1/data-centers/:id',
-    description: 'Get detailed information about a specific data center',
-    params: [
-      { name: 'id', type: 'string', required: true, description: 'Data center identifier' },
-    ],
-    response: `{
-  "id": "dc-us-east-1",
-  "name": "AWS US-East-1",
-  "provider": "Amazon Web Services",
-  ...
-}`,
+    description: 'Return the proposed detail representation for one data center.',
+    params: ['id'],
   },
-  { // ── 供应链数据 ── 查询稀土/光刻/设计/能源等维度
+  {
     method: 'GET',
     path: '/api/v1/supply-chain',
-    description: 'Query supply chain data — rare earth, lithography, design firms',
-    params: [
-      { name: 'type', type: 'string', required: false, description: 'Entity type (rare-earth, lithography, design, energy)' },
-      { name: 'country', type: 'string', required: false, description: 'Filter by country' },
-      { name: 'limit', type: 'integer', required: false, description: 'Maximum results' },
-      { name: 'offset', type: 'integer', required: false, description: 'Pagination offset' },
-    ],
-    response: `{
-  "data": [...],
-  "meta": { "total": 1200, ... }
-}`,
+    description: 'Query the proposed rare-earth, lithography, design, and energy dataset.',
+    params: ['type', 'country', 'limit', 'offset'],
   },
-  { // ── 晶圆厂数据 ── 产能/营收/制程节点
+  {
     method: 'GET',
     path: '/api/v1/foundries',
-    description: 'Get foundry data including capacity, revenue, and process nodes',
-    response: `{
-  "data": [
-    {
-      "company": "TSMC",
-      "revenue_2024_usd": 90100000000,
-      "market_share_percent": 67.1,
-      "advanced_node": "2nm (2025)",
-      "fab_count": 6,
-      ...
-    }
-  ],
-  "meta": { "total": 14, ... }
-}`,
+    description: 'List proposed foundry capacity, revenue, and process-node fields.',
   },
-  { // ── 市场份额 ── 按季度返回各晶圆厂市场份额
+  {
     method: 'GET',
     path: '/api/v1/market-share',
-    description: 'Get foundry market share data by quarter',
-    response: `{
-  "quarters": ["Q1-2023", "Q2-2023", ...],
-  "foundries": {
-    "TSMC": [56.4, 57.1, ...],
-    "Samsung": [11.3, 11.8, ...],
-    ...
-  }
-}`,
+    description: 'Return a proposed quarterly foundry market-share series.',
   },
-  { // ── 电力消耗预测 ── 全球数据中心电力消耗的年度预估
+  {
     method: 'GET',
     path: '/api/v1/power-consumption',
-    description: 'Get global data center power consumption projections',
-    response: `{
-  "years": [2020, 2021, ..., 2030],
-  "power_twh": [250, 290, ..., 945],
-  "confidence_intervals": { ... }
-}`,
+    description: 'Return proposed data-center power-consumption projections.',
   },
-  { // ── 数据来源 ── 所有数据源的元信息与验证状态
+  {
     method: 'GET',
     path: '/api/v1/sources',
-    description: 'List all data sources with metadata and verification status',
-    params: [
-      { name: 'tier', type: 'string', required: false, description: 'Filter by source tier (tier1, tier2, tier3)' },
-      { name: 'status', type: 'string', required: false, description: 'Filter by status (active, pending, stale)' },
-    ],
-    response: `{
-  "data": [
-    {
-      "id": 1,
-      "name": "TSMC Annual Report 2024",
-      "tier": "tier1",
-      "status": "active",
-      ...
-    }
-  ]
-}`,
+    description: 'List source metadata and verification status.',
+    params: ['tier', 'status'],
   },
-  { // ── 全文搜索 ── 跨所有数据实体搜索
+  {
     method: 'GET',
     path: '/api/v1/search',
-    description: 'Full-text search across all entities',
-    params: [
-      { name: 'q', type: 'string', required: true, description: 'Search query (min 2 characters)' },
-      { name: 'layer', type: 'string', required: false, description: 'Limit to specific layer' },
-    ],
-    response: `{
-  "results": [...],
-  "total": 42,
-  "query": "TSMC"
-}`,
+    description: 'Search across the proposed public data representations.',
+    params: ['q', 'layer'],
   },
-  { // ── 数据导出 ── 以 CSV 或 JSON 格式导出完整数据集
+  {
     method: 'GET',
     path: '/api/v1/export',
-    description: 'Export full dataset in CSV or JSON format',
-    params: [
-      { name: 'format', type: 'string', required: false, description: 'Export format: csv or json (default: json)' },
-      { name: 'layer', type: 'string', required: false, description: 'Filter by layer' },
-    ],
-    response: `{
-  "download_url": "https://api.aicomputemap.org/exports/data-2025-01.json",
-  "expires_at": "2025-01-16T10:00:00Z",
-  "size_bytes": 12500000
-}`,
+    description: 'Describe a possible server-side CSV or JSON export endpoint.',
+    params: ['format', 'layer'],
   },
 ];
 
-// ─── Code Example Constants ───────────────────────────────────
-// 以下常量存储各语言/工具的代码示例字符串，
-// 通过 react-syntax-highlighter 渲染为语法高亮代码块
+const GITHUB_REPOSITORY = 'https://github.com/freshtemp-labs/ai-compute-map';
 
-/**
- * TypeScript 类型定义示例
- * 展示所有 API 返回数据对应的 TS 接口，用于类型安全的客户端调用
- */
-const TS_TYPES = `// ─── Core Types ────────────────────────────────────────────
-
-interface DataCenter {
-  id: string;
-  name: string;
-  provider: string;
-  location: {
-    country: string;
-    region: string;
-    coordinates: [number, number];
-  };
-  power_mw: number;
-  pue: number;
-  year_operational: number;
-  status: 'Operational' | 'Under Construction' | 'Planned';
-  energy_mix: string;
-  last_updated: string;
-  data_source: string;
-  tier: 'tier1' | 'tier2' | 'tier3';
-}
-
-interface SupplyChainEntity {
-  id: number;
-  name: string;
-  type: 'rare-earth' | 'lithography' | 'design' | 'energy';
-  country: string;
-  key_metric: string;
-  value: string;
-  source: string;
-  tier: 'tier1' | 'tier2' | 'tier3';
-  updated: string;
-}
-
-interface Foundry {
-  company: string;
-  revenue_2024_usd: number;
-  market_share_percent: number;
-  advanced_node: string;
-  fab_count: number;
-  usa_fabs: number;
-  china_fabs: number;
-  europe_fabs: number;
-  capacity_monthly_wafers: number;
-  key_customers: string[];
-}
-
-interface PowerConsumptionProjection {
-  years: number[];
-  power_twh: number[];
-  confidence_intervals: {
-    lower: number[];
-    upper: number[];
-  };
-}
-
-interface SourceEntry {
-  id: number;
-  name: string;
-  category: string;
-  tier: 'tier1' | 'tier2' | 'tier3';
-  layer: string;
-  data_points: number;
-  last_updated: string;
-  status: 'active' | 'pending' | 'stale';
-}
-
-interface SearchResult<T> {
-  results: T[];
-  total: number;
-  query: string;
-}
-
-interface PaginatedResponse<T> {
-  data: T[];
-  meta: {
-    total: number;
-    limit: number;
-    offset: number;
-    timestamp: string;
-  };
-}
-
-// ─── API Client ─────────────────────────────────────────────
-
-declare const API_BASE: string;
-
-function api<T>(path: string, init?: RequestInit): Promise<T>;
-
-// Usage:
-const dcs = await api<PaginatedResponse<DataCenter>>(
-  '/api/v1/data-centers?region=north-america&limit=10'
-);`;
-
-/**
- * Python SDK 调用示例
- * 演示如何使用 requests 库查询数据中心列表，支持可选筛选参数
- */
-const PYTHON_EXAMPLE = `import requests
-
-API_BASE = "https://api.aicomputemap.org"
-
-def get_data_centers(region=None, provider=None, limit=50):
-    params = {"limit": limit}
-    if region:
-        params["region"] = region
-    if provider:
-        params["provider"] = provider
-
-    resp = requests.get(
-        f"{API_BASE}/api/v1/data-centers",
-        params=params
-    )
-    resp.raise_for_status()
-    return resp.json()
-
-# Get all North American DCs
-data = get_data_centers(region="north-america")
-for dc in data["data"]:
-    print(f"{dc['name']}: {dc['power_mw']} MW")
-`;
-
-/**
- * JavaScript/ES 调用示例
- * 演示如何使用 fetch API 获取晶圆厂数据和市场份额
- */
-const JS_EXAMPLE = `const API_BASE = 'https://api.aicomputemap.org';
-
-async function getFoundries() {
-  const resp = await fetch(\`\${API_BASE}/api/v1/foundries\`);
-  const data = await resp.json();
-  return data.data;
-}
-
-// Get market share
-async function getMarketShare() {
-  const resp = await fetch(\`\${API_BASE}/api/v1/market-share\`);
-  return await resp.json();
-}
-
-// Usage
-const foundries = await getFoundries();
-console.log(foundries[0].company); // "TSMC"
-`;
-
-/**
- * cURL 命令行示例
- * 演示如何通过终端直接调用 API，包括 JSON 查询和 CSV 导出
- */
-const CURL_EXAMPLE = `# Get data centers
-curl "https://api.aicomputemap.org/api/v1/data-centers?limit=5" \\
-  -H "Accept: application/json"
-
-# Get supply chain
-curl "https://api.aicomputemap.org/api/v1/supply-chain?type=rare-earth" \\
-  -H "Accept: application/json"
-
-# Export CSV
-curl "https://api.aicomputemap.org/api/v1/export?format=csv" \\
-  -H "Accept: text/csv" \\
-  --output data.csv
-`;
-
-// ─── Component ─────────────────────────────────────────────────
-/**
- * 开发者文档页面组件
- * 展示API参考文档、代码示例(Python/JS/cURL)、TypeScript类型定义和贡献指南
- */
 export default function DevelopersPage() {
   const { t } = useTranslation(['developers', 'common']);
 
-  // ── 折叠/展开状态管理 ──
-  /** 当前展开的API端点索引，null 表示全部折叠；点击切换为相同索引时重新折叠 */
-  const [expandedEndpoint, setExpandedEndpoint] = useState<number | null>(null);
-  /** 是否显示 TypeScript 类型定义代码块 */
-  const [showTypes, setShowTypes] = useState(false);
-  /** 最近一次点击复制的端点索引，用于显示"已复制"反馈；2秒后自动重置为 null */
-  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-
-  /**
-   * 复制文本到剪贴板并显示短暂反馈
-   * 1. 调用 Clipboard API 写入文本
-   * 2. 设置 copiedIndex 标识当前被复制的端点
-   * 3. 2秒后自动清除反馈状态
-   * @param text - 要复制的文本
-   * @param index - 标识哪个端点被复制(用于显示反馈)
-   */
-  const copyToClipboard = (text: string, index: number) => {
-    // 忽略 Clipboard API 调用失败（可能因权限或环境不支持）
-    navigator.clipboard.writeText(text).catch(() => {});
-    setCopiedIndex(index);
-    // 2秒后清除复制反馈，恢复为默认"复制"按钮文本
-    setTimeout(() => setCopiedIndex(null), 2000);
-  };
-
   return (
     <div className="min-h-screen">
-      {/* Hero — 页面头部：面包屑导航 + 标题 + 特性标签 */}
       <header className="pt-28 pb-12 px-6">
         <div className="max-w-6xl mx-auto">
-          {/* 面包屑导航 */}
           <nav className="flex items-center gap-2 text-mono-sm text-text-muted mb-6">
-            <Link to="/" className="hover:text-accent-cyan transition-colors">{t('common:breadcrumb.home')}</Link>
+            <Link to="/" className="hover:text-accent-cyan transition-colors">
+              {t('common:breadcrumb.home')}
+            </Link>
             <span>/</span>
             <span className="text-text-secondary">{t('developers:breadcrumb')}</span>
           </nav>
@@ -412,272 +89,83 @@ export default function DevelopersPage() {
             {t('developers:pageSubtitle')}
           </p>
 
-          {/* Badges — API 特性徽章：OpenAPI规范/TS类型/无需密钥/开源协议 */}
           <div className="mt-6 flex flex-wrap gap-3">
             {[
-              { label: t('developers:badges.openapi'), color: 'border-emerald-500/30 text-emerald-400' },
-              { label: t('developers:badges.typescript'), color: 'border-sky-500/30 text-sky-400' },
-              { label: t('developers:badges.noKey'), color: 'border-amber-500/30 text-amber-400' },
+              { label: t('developers:badges.planned'), color: 'border-amber-500/30 text-amber-400' },
+              { label: t('developers:badges.schema'), color: 'border-sky-500/30 text-sky-400' },
+              { label: t('developers:badges.staticData'), color: 'border-emerald-500/30 text-emerald-400' },
               { label: t('developers:badges.license'), color: 'border-text-muted/30 text-text-muted' },
             ].map((badge) => (
-              <span key={badge.label} className={`px-3 py-1.5 rounded border ${badge.color} text-mono-sm`}>{badge.label}</span>
+              <span key={badge.label} className={`px-3 py-1.5 rounded border ${badge.color} text-mono-sm`}>
+                {badge.label}
+              </span>
             ))}
           </div>
         </div>
       </header>
 
-      {/* Getting Started — 快速入门：API密钥/基础URL/认证方式 */}
-      <section className="px-6 py-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-section text-text-primary">{t('common:actions.learnMore')}</h2>
-          <p className="text-sm text-text-secondary mt-2">Start using the API in minutes</p>
-
-          {/* 三列信息卡片 */}
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* API密钥 — 免费无需密钥 */}
-            <div className="p-5 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
-              <h3 className="text-sm font-medium text-text-primary mb-3">{t('developers:gettingStarted.apiKey')}</h3>
-              <p className="text-sm text-accent-cyan">{t('developers:gettingStarted.free')}</p>
-              <p className="text-mono-sm text-text-muted mt-2">{t('developers:gettingStarted.rateLimits')}: {t('developers:gettingStarted.perHour')}</p>
-            </div>
-            {/* 基础URL — API 根地址 */}
-            <div className="p-5 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
-              <h3 className="text-sm font-medium text-text-primary mb-3">{t('developers:gettingStarted.baseUrl')}</h3>
-              <code className="text-mono-sm text-accent-cyan">https://api.aicomputemap.org</code>
-            </div>
-            {/* 认证方式 — Bearer Token */}
-            <div className="p-5 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
-              <h3 className="text-sm font-medium text-text-primary mb-3">{t('developers:gettingStarted.auth')}</h3>
-              <p className="text-sm text-text-secondary">{t('developers:gettingStarted.bearer')}</p>
-            </div>
-          </div>
+      <section className="px-6 pb-8">
+        <div className="max-w-6xl mx-auto rounded-lg border border-amber-500/30 bg-amber-500/[0.05] p-6">
+          <h2 className="text-section text-text-primary">{t('developers:status.title')}</h2>
+          <p className="text-body text-text-secondary mt-3 max-w-3xl">{t('developers:status.body')}</p>
+          <p className="text-sm text-amber-300 mt-3">{t('developers:status.availability')}</p>
         </div>
       </section>
 
-      {/* API Reference — 交互式 API 文档：折叠面板展示所有端点 */}
       <section className="px-6 py-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-section text-text-primary">{t('developers:apiReference.title')}</h2>
-          <p className="text-sm text-text-muted mt-2">{t('developers:apiReference.baseUrl')}: <code className="text-accent-cyan">https://api.aicomputemap.org</code></p>
+          <p className="text-sm text-text-secondary mt-2 max-w-3xl">
+            {t('developers:apiReference.description')}
+          </p>
 
           <div className="mt-6 space-y-4">
-            {/* 遍历 ENDPOINTS 数组，每个端点渲染为可折叠的卡片 */}
-            {ENDPOINTS.map((ep, i) => (
-              <div key={i} className="rounded-lg border border-border-subtle overflow-hidden">
-                {/* 折叠面板头部 — 点击切换展开/折叠，箭头旋转动画 */}
-                <button
-                  onClick={() => setExpandedEndpoint(expandedEndpoint === i ? null : i)}
-                  className="w-full flex items-center gap-3 px-5 py-4 bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.04)] transition-colors text-left"
-                >
-                  {/* HTTP 方法徽章 — GET=绿 / POST=蓝 / 其他=琥珀色 */}
-                  <span className={`px-2 py-0.5 rounded text-mono-sm font-medium ${
-                    ep.method === 'GET' ? 'bg-emerald-500/10 text-emerald-400' :
-                    ep.method === 'POST' ? 'bg-sky-500/10 text-sky-400' :
-                    'bg-amber-500/10 text-amber-400'
-                  }`}>{ep.method}</span>
-                  <code className="text-sm text-accent-cyan">{ep.path}</code>
-                  <span className="flex-1 text-sm text-text-secondary truncate">{ep.description}</span>
-                  {/* 展开/折叠箭头 — 展开时旋转180度 */}
-                  <svg className={`w-4 h-4 text-text-muted transition-transform ${expandedEndpoint === i ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-
-                {/* 展开内容 — 仅在当前端点被选中时渲染 */}
-                {expandedEndpoint === i && (
-                  <div className="px-5 py-4 border-t border-border-subtle bg-[rgba(255,255,255,0.01)]">
-                    <p className="text-sm text-text-secondary mb-4">{ep.description}</p>
-
-                    {/* 查询参数表格 — 仅当端点定义了参数时显示 */}
-                    {ep.params && ep.params.length > 0 && (
-                      <div className="mb-4">
-                        <h4 className="text-xs font-semibold uppercase tracking-wider text-text-muted mb-2">{t('developers:queryParams')}</h4>
-                        <div className="space-y-2">
-                          {ep.params.map((p) => (
-                            <div key={p.name} className="flex items-start gap-3">
-                              <code className="text-mono-sm text-accent-cyan w-24 flex-shrink-0">{p.name}</code>
-                              {/* 必填=红色, 可选=灰色 */}
-                              <span className={`text-mono-sm ${p.required ? 'text-rose-400' : 'text-text-muted'}`}>{p.required ? t('developers:required') : t('developers:optional')}</span>
-                              <span className="text-mono-sm text-text-muted">{p.type}</span>
-                              <span className="text-sm text-text-secondary">{p.description}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* 无参数提示 — 端点没有查询参数时显示 */}
-                    {(!ep.params || ep.params.length === 0) && (
-                      <p className="text-sm text-text-muted mb-4">{t('developers:noParams')}</p>
-                    )}
-
-                    {/* 响应示例 — JSON格式高亮代码块，带一键复制按钮 */}
-                    {ep.response && (
-                      <div>
-                        <h4 className="text-xs font-semibold uppercase tracking-wider text-text-muted mb-2">{t('developers:response')}</h4>
-                        <div className="relative">
-                          <SyntaxHighlighter language="json" style={vscDarkPlus} customStyle={{ borderRadius: '8px', fontSize: '13px', background: 'rgba(10,10,15,0.8)' }}>
-                            {ep.response}
-                          </SyntaxHighlighter>
-                          {/* 复制按钮 — 点击后显示"复制!"反馈2秒 */}
-                          <button
-                            onClick={() => copyToClipboard(ep.response!, i)}
-                            className="absolute top-2 right-2 px-2 py-1 text-mono-sm text-text-muted hover:text-accent-cyan transition-colors"
-                          >
-                            {copiedIndex === i ? t('common:actions.copy') + '!' : t('common:actions.copy')}
-                          </button>
-                        </div>
-                      </div>
-                    )}
+            {PLANNED_ENDPOINTS.map((endpoint) => (
+              <article
+                key={endpoint.path}
+                className="rounded-lg border border-border-subtle bg-[rgba(255,255,255,0.02)] px-5 py-4"
+              >
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="px-2 py-0.5 rounded text-mono-sm font-medium bg-emerald-500/10 text-emerald-400">
+                    {endpoint.method}
+                  </span>
+                  <code className="text-sm text-accent-cyan">{endpoint.path}</code>
+                  <span className="text-mono-sm text-amber-400">{t('developers:plannedLabel')}</span>
+                </div>
+                <p className="text-sm text-text-secondary mt-3">{endpoint.description}</p>
+                {endpoint.params && (
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <span className="text-mono-sm text-text-muted">{t('developers:proposedParams')}:</span>
+                    {endpoint.params.map((param) => (
+                      <code key={param} className="px-2 py-0.5 rounded bg-bg-surface text-mono-sm text-text-secondary">
+                        {param}
+                      </code>
+                    ))}
                   </div>
                 )}
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Code Examples — 三列代码示例：Python / JavaScript / cURL */}
-      <section className="px-6 py-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-section text-text-primary">{t('developers:codeExamples')}</h2>
-
-          <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Python 代码示例 — requests 库调用数据中心 API */}
-            <div>
-              <h3 className="text-sm font-medium text-text-primary mb-3">{t('developers:pythonSdk')}</h3>
-              <div className="relative">
-                <SyntaxHighlighter language="python" style={vscDarkPlus} customStyle={{ borderRadius: '8px', fontSize: '12px', background: 'rgba(10,10,15,0.8)' }}>
-                  {PYTHON_EXAMPLE}
-                </SyntaxHighlighter>
-              </div>
-            </div>
-            {/* JavaScript 代码示例 — fetch API 调用晶圆厂数据 */}
-            <div>
-              <h3 className="text-sm font-medium text-text-primary mb-3">{t('developers:jsSdk')}</h3>
-              <div className="relative">
-                <SyntaxHighlighter language="javascript" style={vscDarkPlus} customStyle={{ borderRadius: '8px', fontSize: '12px', background: 'rgba(10,10,15,0.8)' }}>
-                  {JS_EXAMPLE}
-                </SyntaxHighlighter>
-              </div>
-            </div>
-            {/* cURL 命令行示例 — 终端直接调用 API */}
-            <div>
-              <h3 className="text-sm font-medium text-text-primary mb-3">{t('developers:cliTool')}</h3>
-              <div className="relative">
-                <SyntaxHighlighter language="bash" style={vscDarkPlus} customStyle={{ borderRadius: '8px', fontSize: '12px', background: 'rgba(10,10,15,0.8)' }}>
-                  {CURL_EXAMPLE}
-                </SyntaxHighlighter>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TypeScript Types — 可折叠的类型定义展示区域 */}
-      <section className="px-6 py-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-section text-text-primary">{t('developers:typescriptTypes')}</h2>
-            {/* 显示/隐藏 切换按钮 */}
-            <button
-              onClick={() => setShowTypes(!showTypes)}
-              className="px-3 py-1.5 text-mono-sm text-text-secondary border border-border-subtle rounded hover:border-accent-cyan transition-colors"
-            >
-              {showTypes ? t('developers:hideTypes') : t('developers:showTypes')}
-            </button>
-          </div>
-
-          {/* 仅在 showTypes 为 true 时渲染类型定义代码块 */}
-          {showTypes && (
-            <div className="mt-4">
-              <SyntaxHighlighter language="typescript" style={vscDarkPlus} customStyle={{ borderRadius: '8px', fontSize: '13px', background: 'rgba(10,10,15,0.8)' }}>
-                {TS_TYPES}
-              </SyntaxHighlighter>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* System Architecture — 系统架构组件图（图标+标签网格） */}
-      <section className="px-6 py-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-section text-text-primary">{t('developers:systemArchitecture')}</h2>
-          <p className="text-sm text-text-secondary mt-2">{t('developers:architectureDesc')}</p>
-
-          {/* 架构组件网格 — 2列(移动端)/4列(桌面端)，10个核心组件 */}
-          <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { label: t('developers:components.dataSources'), icon: '📡', color: 'border-amber-500/30' },
-              { label: t('developers:components.ingestion'), icon: '↓', color: 'border-sky-500/30' },
-              { label: t('developers:components.verification'), icon: '✓', color: 'border-emerald-500/30' },
-              { label: t('developers:components.database'), icon: '🗄', color: 'border-accent-cyan/30' },
-              { label: t('developers:components.cache'), icon: '⚡', color: 'border-amber-500/30' },
-              { label: t('developers:components.apiLayer'), icon: 'API', color: 'border-sky-500/30' },
-              { label: t('developers:components.frontend'), icon: '◈', color: 'border-emerald-500/30' },
-              { label: t('developers:components.mapEngine'), icon: '🗺', color: 'border-accent-cyan/30' },
-              { label: t('developers:components.charts'), icon: '◉', color: 'border-sky-500/30' },
-              { label: t('developers:components.export'), icon: '⇣', color: 'border-text-muted/30' },
-            ].map((comp) => (
-              <div key={comp.label} className={`p-4 rounded-lg bg-[rgba(255,255,255,0.02)] border ${comp.color} text-center`}>
-                <span className="text-2xl">{comp.icon}</span>
-                <p className="text-sm text-text-secondary mt-2">{comp.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contributing — 贡献指南：PR工作流 + 贡献方式 + GitHub链接 */}
       <section className="px-6 py-8 pb-16">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto text-center rounded-lg border border-border-subtle bg-[rgba(255,255,255,0.02)] p-8">
           <h2 className="text-section text-text-primary">{t('developers:contributing.title')}</h2>
-          <p className="text-body text-text-secondary mt-3">{t('developers:contributing.subtitle')}</p>
-
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* PR 工作流步骤 */}
-            <div className="p-5 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
-              <h3 className="text-sm font-medium text-text-primary mb-3">{t('developers:contributing.prWorkflow')}</h3>
-              <ol className="space-y-2 text-sm text-text-secondary list-decimal list-inside">
-                <li>Fork the repository</li>
-                <li>Create a feature branch</li>
-                <li>Make your changes with tests</li>
-                <li>Submit a pull request</li>
-              </ol>
-            </div>
-            {/* 四种贡献方式 */}
-            <div className="p-5 rounded-lg bg-[rgba(255,255,255,0.02)] border border-border-subtle">
-              <h3 className="text-sm font-medium text-text-primary mb-3">{t('developers:contributing.waysToContribute')}</h3>
-              <div className="space-y-2">
-                {[
-                  { label: t('developers:contributing.data'), desc: 'Add or verify data sources' },
-                  { label: t('developers:contributing.code'), desc: 'Fix bugs or add features' },
-                  { label: t('developers:contributing.docs'), desc: 'Improve documentation' },
-                  { label: t('developers:contributing.issues'), desc: 'Report bugs or request features' },
-                ].map((w) => (
-                  <div key={w.label} className="flex items-center gap-3">
-                    <span className="text-accent-cyan">{w.label}</span>
-                    <span className="text-mono-sm text-text-muted">{w.desc}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* GitHub 仓库链接按钮 */}
-          <div className="mt-8 text-center">
-            <a
-              href="https://github.com/aicomputemap"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-border-active text-text-primary rounded transition-all duration-200 hover:border-accent-cyan active:scale-[0.98]"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-              </svg>
-              {t('common:footer.github')}
-            </a>
-          </div>
+          <p className="text-body text-text-secondary mt-3 max-w-2xl mx-auto">
+            {t('developers:contributing.subtitle')}
+          </p>
+          <a
+            href={GITHUB_REPOSITORY}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 px-6 py-3 border border-border-active text-text-primary rounded transition-all duration-200 hover:border-accent-cyan active:scale-[0.98]"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            {t('developers:viewRepository')}
+          </a>
         </div>
       </section>
     </div>

@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "GLOBAL AI COMPUTE MAP",
-    "subtitle": "AI 공급망 인프라 실시간 인텔리전스",
+    "subtitle": "출처가 표시된 AI 공급망 인프라 데이터 스냅샷",
     "betaBadge": "v1.0 OPEN BETA"
   },
   "kpi": {
@@ -20,7 +20,7 @@
     "construction": "건설 중"
   },
   "dashboard": {
-    "title": "실시간 데이터 개요",
+    "title": "데이터 스냅샷 개요",
     "regionDist": "데이터센터 지역 분포",
     "categoryDist": "공급망 카테고리 통계"
   },
@@ -35,9 +35,9 @@
     "layer3Desc": "글로벌 DC, 전력 소비"
   },
   "livePreview": {
-    "title": "실시간 글로벌 커버리지",
+    "title": "글로벌 스냅샷 커버리지",
     "subtitle": "50개국 이상, 1,200개 시설 이상 추적",
-    "badge": "실시간 데이터"
+    "badge": "데이터 스냅샷"
   },
   "verification": {
     "title": "검증됨. 상호 참조. 투명성.",
@@ -48,7 +48,7 @@
   },
   "openSource": {
     "title": "개발자가 개발자를 위해 구축",
-    "subtitle": "오픈 API, 오픈 소스 데이터, 연구원과 개발자를 위해",
-    "cta": "API 문서 보기"
+    "subtitle": "공개 저장소 데이터와 향후 API 로드맵",
+    "cta": "API 로드맵 보기"
   }
 }

@@ -1,8 +1,10 @@
 # 🌐 AI Compute Map
 
-> AI 基础设施全球实时可视化平台 — Global AI Infrastructure Real-Time Visualization
+> **Public site:** https://freshtemp-labs.github.io/ai-compute-map/
 
-An interactive, multilingual dashboard that maps the global AI compute supply chain — from rare earth minerals and EUV lithography equipment to advanced foundries and hyperscale data centers.
+> AI 基础设施全球静态数据可视化 — Global AI Infrastructure Static Data Visualization
+
+An interactive, multilingual dashboard that maps versioned snapshots of the global AI compute supply chain — from rare earth minerals and EUV lithography equipment to advanced foundries and hyperscale data centers. It is a static site, not a real-time data feed.
 
 ## ✨ Features
 
@@ -27,13 +29,13 @@ An interactive, multilingual dashboard that maps the global AI compute supply ch
 - Interactive year slider with compare mode
 - Regional distribution pie chart
 
-### 🔌 Developer API
-- REST API documentation with interactive examples
-- JavaScript (fetch) and cURL code samples
-- Endpoint reference with parameters and response schemas
+### 🔌 API Roadmap
+- Proposed REST endpoint outline for community discussion
+- Clearly marked as a planning draft; no callable API service is currently available
+- Static, source-attributed repository data remains available for reuse
 
 ### 🌍 Internationalization (i18n)
-- 4 languages: 中文, English, 日本語, 한국어
+- 8 languages: 中文, English, 日本語, 한국어, العربية, Français, Deutsch, Español
 - Full key parity across all locale files
 - Browser language auto-detection
 
@@ -48,7 +50,7 @@ An interactive, multilingual dashboard that maps the global AI compute supply ch
 | **Data Centers** | Data center table with region/provider filters, power capacity metrics |
 | **History** | Year slider, multi-metric trend chart, compare mode, regional distribution |
 | **Sources** | Source reference table with tier badges and verification status |
-| **Developers** | API docs with syntax-highlighted code, interactive endpoint explorer |
+| **Developers** | Planned API outline, current availability notice, and contribution link |
 
 ## 🛠️ Tech Stack
 
@@ -101,7 +103,7 @@ app/
 │   │   ├── HistoryPage.tsx
 │   │   ├── SourcesPage.tsx
 │   │   └── DevelopersPage.tsx
-│   ├── data/             # Mock data & type definitions
+│   ├── data/             # Versioned static data & type definitions
 │   ├── i18n/locales/     # {zh,en,ja,ko}/{common,map,...}.json
 │   ├── hooks/            # Custom React hooks
 │   ├── lib/              # Utility functions
@@ -128,9 +130,9 @@ Test suites:
 - **data.test.ts** — Data integrity: unique IDs, valid coordinates, required fields
 - **i18n.test.ts** — Key parity across all 4 languages, no empty values, namespace consistency
 
-## 📦 API Reference
+## 📦 Planned API
 
-The Developers page documents a REST API with these endpoints:
+The Developers page records a possible future REST interface. The endpoint paths below are a planning draft and may change; there is no live API host, authentication flow, rate limit, SDK, or service-level commitment in the current release.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -140,7 +142,7 @@ The Developers page documents a REST API with these endpoints:
 | GET | `/api/v1/market-share` | Market share data by company |
 | GET | `/api/v1/export/csv` | Export filtered dataset as CSV |
 
-Base URL: `https://api.aicomputemap.org`
+For current access, use the public website or the versioned data in this repository.
 
 ## 📄 License
 
@@ -165,9 +167,14 @@ Under the following terms:
 
 ## 📊 Data Sources
 
-All data is sourced from public reports and industry analysis:
+The site bundles static snapshots sourced from public reports and industry analysis:
 - **Tier 1** — Official company reports, government filings
 - **Tier 2** — Industry analyst reports (TrendForce, Gartner, IDC)
 - **Tier 3** — Model-based estimates and projections
 
-Data is updated regularly. See the Sources page in the app for full attribution.
+This is not a real-time feed. Coverage dates vary by record; see the Sources page and each cited source for attribution and freshness.
+
+### Research overlays
+
+- [`research/situational-awareness-lp-2026-q1.md`](research/situational-awareness-lp-2026-q1.md) — SALP public-disclosure observation framework
+- [`research/ai-infrastructure-fund-comparison-2026-08.md`](research/ai-infrastructure-fund-comparison-2026-08.md) — comparable public fund/research lenses and non-overlapping monitoring lanes

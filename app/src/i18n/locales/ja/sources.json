@@ -7,7 +7,7 @@
     "avgSources": "平均ソース数/ポイント",
     "timestamped": "100%タイムスタンプ付き"
   },
-  "liveBadge": "すべての指標がリアルタイムで更新",
+  "liveBadge": "各ソースに対象日付を表示",
   "sections": {
     "sourceCatalog": "ソースカタログ",
     "tier1Label": "一次",

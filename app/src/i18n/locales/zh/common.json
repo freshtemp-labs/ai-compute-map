@@ -8,19 +8,19 @@
     "compare": "设施对比",
     "sources": "数据来源",
     "history": "历史数据",
-    "developers": "API & 文档",
+    "developers": "API 路线图",
     "news": "时事动态",
     "settings": "设置"
   },
   "status": {
-    "live": "实时",
+    "live": "数据快照",
     "online": "在线",
     "offline": "离线",
     "syncing": "同步中"
   },
   "actions": {
     "explore": "探索地图",
-    "viewDocs": "查看文档",
+    "viewDocs": "查看API路线图",
     "search": "搜索",
     "filter": "筛选",
     "export": "导出",
@@ -56,7 +56,7 @@
     "stale": "数据可能过期"
   },
   "footer": {
-    "tagline": "AI基础设施全球实时可视化",
+    "tagline": "AI基础设施全球数据快照",
     "quickLinks": "快速链接",
     "dataSources": "数据来源",
     "community": "社区",
